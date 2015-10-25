@@ -1,0 +1,53 @@
+<html>
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+</head>
+
+<body>
+
+<h2>Hello World!</h2>
+
+<img src="http://localhost:8080/laylamarques/ws/imagens/0000000000000000000000a3" alt=""/>
+
+<button onclick="makeRequest()">Make Request</button>
+
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<script>
+    var makeRequest = function () {
+        $.ajax({
+            url: 'ws/books/save-all',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify([
+                {
+                    id: 20,
+                    titulo: "Head First Java",
+                    author: {
+                        name: "Kathy Sierra"
+                    }
+                },
+                {
+                    id: 22,
+                    titulo: "Head First Java 2",
+                    author: {
+                        name: "Kathy Sierra"
+                    }
+                }
+            ]),
+
+            success: function (data) {
+                console.log(data);
+            },
+
+            error: function (xhr, status, err) {
+                alert(err);
+            }
+        });
+    };
+</script>
+
+</body>
+</html>
