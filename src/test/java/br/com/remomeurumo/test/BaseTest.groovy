@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response
 
 import static org.junit.Assert.*
 
+
 /**
  * @author bbviana
  */
