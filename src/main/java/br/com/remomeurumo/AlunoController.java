@@ -1,5 +1,6 @@
 package br.com.remomeurumo;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -11,7 +12,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
  * @author bbviana
  */
 @Path("alunos")
-@RequestScoped
+@ApplicationScoped
 @Produces(APPLICATION_JSON)
 public class AlunoController {
 
@@ -25,8 +26,9 @@ public class AlunoController {
     }
 
     @PUT
+    @Path("{id}")
     @Consumes(APPLICATION_JSON)
-    public Aluno update(Aluno aluno) {
+    public Aluno update(@PathParam("id") Long id, Aluno aluno) {
         return alunoDAO.update(aluno);
     }
 

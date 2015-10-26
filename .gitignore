@@ -34,3 +34,6 @@ rebel.xml
 .idea
 *.iml
 overlays/
+
+# HSQLDB
+/mem
