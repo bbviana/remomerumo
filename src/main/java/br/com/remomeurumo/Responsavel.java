@@ -13,10 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
- * @author bbviana
+ * @author jardim
  */
 @Entity
-public class Aluno implements Serializable {
+public class Responsavel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class Aluno implements Serializable {
 
     private String nome;
     
-    private Collection<Responsavel> responsaveis;
+    private Collection<Aluno> alunos;
 
     // region Object
 
@@ -55,15 +55,15 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
-    @ManyToMany(targetEntity=Responsavel.class, mappedBy="alunos")
-    @JoinTable(name="AlunoResponsavel" )
-	public Collection<Responsavel> getResponsaveis() {
-		return responsaveis;
+    @ManyToMany(targetEntity=Aluno.class, mappedBy="responsaveis")
+    //@JoinTable(name="AlunoResponsavel" )
+	public Collection<Aluno> getAlunos() {
+		return alunos;
 	}
 
-	public void setResponsaveis(Collection<Responsavel> responsaveis) {
-		this.responsaveis = responsaveis;
+	public void setAlunos(Collection<Aluno> alunos) {
+		this.alunos = alunos;
 	}
-
+    
     // endregion
 }
