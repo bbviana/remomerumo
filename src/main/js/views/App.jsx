@@ -1,34 +1,41 @@
 import React, {Component, PropTypes} from 'react'
 import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Table} from 'react-bootstrap';
-import {AlunosService} from '../services'
+import {AlunosController} from '../controllers'
 
 class App extends Component {
-    state = {
-        alunos: [],
-        aluno: {},
-        showForm: false
-    }
+    state = AlunosController.state
 
     componentDidMount(){
-        AlunosService.listen(this);
-        AlunosService.list();
+        AlunosController.listen(this);
+        AlunosController.list();
     }
 
     componentWillUnmount() {
-        AlunosService.unlisten(this);
+        AlunosController.unlisten(this);
     }
 
     render = ({alunos, aluno, showForm} = this.state) =>
-        <div style={s}>
+        <div style={s.app}>
             <Navbar fixedTop={true} fluid={true} inverse={true}>
                 <NavBrand><a href="#">Remo meu Rumo</a></NavBrand>
             </Navbar>
 
-            <AlunosTable alunos={alunos}/>
+            <Content>
+                <AlunosTable alunos={alunos}/>
+
+                <Button bsStyle="primary" onClick={AlunosController.blank}>
+                    <Glyphicon glyph="plus-sign"/> Novo Aluno
+                </Button>
+            </Content>
 
             <AlunoModal show={showForm} aluno={aluno}/>
         </div>
 }
+
+const Content = ({children}) =>
+	<div style={s.content}>
+        {children}
+	</div>
 
 const AlunosTable = ({alunos}) =>
     <Table striped hover>
@@ -36,6 +43,7 @@ const AlunosTable = ({alunos}) =>
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
+                <th>Endereço</th>
                 <th></th>
             </tr>
         </thead>
@@ -44,6 +52,7 @@ const AlunosTable = ({alunos}) =>
             <tr key={i}>
                 <td>{aluno.id}</td>
                 <td>{aluno.nome}</td>
+                <td>{aluno.endereco}</td>
                 <td>
                     <AlunoActions id={aluno.id}/>
                 </td>
@@ -54,35 +63,18 @@ const AlunosTable = ({alunos}) =>
 
 const AlunoActions = ({id}) =>
 	<div>
-        <Button bsStyle="link" onClick={() => AlunosService.find(id)}>
-            <Glyphicon glyph="pencil"/>
+        <Button bsStyle="link" onClick={() => AlunosController.load(id)}>
+            <Glyphicon glyph="edit"/>
         </Button>
 
-        <Button bsStyle="link">
-            <Glyphicon glyph="trash"/>
+        <Button bsStyle="link" onClick={() => AlunosController.remove(id)}>
+            <Glyphicon glyph="trash" />
         </Button>
 	</div>
 
-const AlunoModal = ({show, aluno}) =>
-    <Modal show={show} onHide={AlunosService.closeForm}>
-        <Modal.Header>
-            <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-            <AlunoForm aluno={aluno}/>
-        </Modal.Body>
-
-        <Modal.Footer>
-            <Button onClick={AlunosService.closeForm}>Cancelar</Button>
-            <Button bsStyle="primary">Salvar</Button>
-        </Modal.Footer>
-    </Modal>
-
-class AlunoForm extends Component {
-    constructor(props){
-        super(props);
-        this.state = this.props.aluno;
+class AlunoModal extends Component {
+    componentWillReceiveProps = ({aluno}) => {
+        this.state = aluno
     }
 
     handleChange = ({target}) => {
@@ -91,15 +83,47 @@ class AlunoForm extends Component {
         this.setState(newState);
     }
 
-    render = ({nome} = this.state) =>
-        <form>
-            <Input type="text" label="Nome" placeholder="Nome completo do aluno" name="nome" value={nome}
-                onChange={this.handleChange}/>
-        </form>
+    handleSave = (event) => {
+        event.preventDefault();
+        AlunosController.save(this.state);
+    }
+
+    render = ({show} = this.props) =>
+        <Modal show={show} onHide={AlunosController.closeForm}>
+            <Modal.Header>
+                <Modal.Title>Aluno</Modal.Title>
+            </Modal.Header>
+
+            <form onChange={this.handleChange} onSubmit={this.handleSave}>
+                <Modal.Body>
+                    <AlunoForm {...this.state}/>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button onClick={AlunosController.closeForm}>Cancelar</Button>
+                    <Button bsStyle="primary" type="submit">Salvar</Button>
+                </Modal.Footer>
+            </form>
+        </Modal>
 }
 
+const AlunoForm = ({nome, endereco}) =>
+    <div>
+        <Input type="text" label="Nome" placeholder="Nome completo do aluno"
+               name="nome" defaultValue={nome} autoFocus/>
+
+        <Input type="text" label="Endereço" placeholder="Rua, número"
+               name="endereco" defaultValue={endereco} />
+    </div>
+
 const s = {
-    paddingTop: 50
+    app: {
+        paddingTop: 50
+    },
+
+    content: {
+        padding: 20
+    }
 }
 
 export default App

@@ -38,7 +38,7 @@ public class AlunosController extends BaseController {
 
 	@GET
 	public List<Aluno> list() {
-		TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a", Aluno.class);
+		TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a ORDER BY nome", Aluno.class);
 		return query.getResultList();
 	}
 

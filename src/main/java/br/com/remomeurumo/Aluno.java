@@ -55,6 +55,15 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
     @ManyToMany(targetEntity=Responsavel.class, mappedBy="alunos")
     @JoinTable(name="AlunoResponsavel" )
 	public Collection<Responsavel> getResponsaveis() {
