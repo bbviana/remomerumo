@@ -15,11 +15,11 @@ import static org.junit.Assert.assertNull
  */
 class AlunosTest extends BaseTest {
 
-    private AlunoController controller
+    private AlunosController controller
 
     @Before
     void prepare() {
-        controller = this.instance(AlunoController)
+        controller = this.instance(AlunosController)
 
         populate(Aluno, [
                 [nome: "Aluno 1"],
@@ -32,7 +32,6 @@ class AlunosTest extends BaseTest {
         cleanDataBase()
     }
 
-    // [POST] /alunos
     @Test
     void "[POST] /alunos"() {
         Response response = target("alunos").request().post(Entity.json(new Aluno([nome: "Novo Aluno"])))

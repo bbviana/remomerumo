@@ -26,27 +26,32 @@ import javax.persistence.EntityTransaction;
 @Dependent
 public class TransactionInterceptor {
 
-    @Inject
-    private EntityManager em;
+	@Inject
+	private EntityManager em;
 
-    @AroundInvoke
-    public Object manageTransaction(InvocationContext ctx) throws Exception {
-        EntityTransaction transaction = em.getTransaction();
-        Object result = null;
+	@AroundInvoke
+	public Object manageTransaction(InvocationContext ctx) throws Exception {
+		EntityTransaction transaction = em.getTransaction();
+		Object result = null;
 
-        try {
-            System.out.println("tx:begin");
-            transaction.begin();
-            result = ctx.proceed();
-            transaction.commit();
-            System.out.println("tx:commit");
-        } catch (Exception e) {
-            System.out.println("tx:rollback");
-            transaction.rollback();
-            e.printStackTrace();
-        }
+		try {
+			execute(transaction::begin, !transaction.isActive());
 
-        return result;
-    }
+			result = ctx.proceed();
+
+			execute(transaction::commit, transaction.isActive());
+		} catch (Exception e) {
+			execute(transaction::rollback, transaction.isActive());
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	private static void execute(Runnable runnable, boolean condition) {
+		if (condition) {
+			runnable.run();
+		}
+	}
 
 }

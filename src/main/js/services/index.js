@@ -1,7 +1,5 @@
-import BackgroundService from './BackgroundService'
-import CategoryService from './CategoryService'
+import AlunosService from './AlunosService'
 
 export {
-    BackgroundService,
-    CategoryService
+    AlunosService
 }

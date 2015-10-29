@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import {GridCol} from '.'
-import {invariant} from '../utils'
+import {invariant} from '../helpers'
 
 class GridRow extends Component {
 

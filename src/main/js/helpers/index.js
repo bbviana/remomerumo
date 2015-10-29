@@ -1,9 +1,11 @@
 import ctx from './ctx'
 import invariant from './invariant'
-import xhr from './xhr'
+import m from './m'
+import Request from './Request'
 
 export {
     ctx,
     invariant,
-    xhr
+    m,
+    Request
 }

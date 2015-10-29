@@ -7,7 +7,7 @@ var notifier = require("node-notifier");
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 
-// var livereload = require('gulp-livereload');
+var livereload = require('gulp-livereload');
 
 var paths = {
     src: './src/main/js',
@@ -43,13 +43,13 @@ var build = function (watch) {
                 })
             })
             .pipe(source('bundle.js'))
-            .pipe(gulp.dest(paths.target))
-            // .pipe(livereload());
-            .pipe(connect.reload());
+            .pipe(gulp.dest(paths.target));
+            //.pipe(livereload());
+            //.pipe(connect.reload());
     };
 
     if (watch) {
-        // livereload.listen();
+        //livereload.listen();
 
         bundler = watchify(bundler);
 
@@ -77,4 +77,4 @@ gulp.task('webserver', function() {
 
 gulp.task('build', build.bind(this, false));
 gulp.task('watch', build.bind(this, true));
-gulp.task('default', ['webserver', 'watch']);
+gulp.task('default', ['watch']);
