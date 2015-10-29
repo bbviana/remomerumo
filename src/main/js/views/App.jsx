@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Table} from 'react-bootstrap';
+import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
 import {AlunosController} from '../controllers'
+import PagedTable from './PagedTable'
 
 class App extends Component {
     state = AlunosController.state
@@ -21,9 +22,9 @@ class App extends Component {
             </Navbar>
 
             <Content>
-                <AlunosTable alunos={alunos}/>
+                <AlunosTable list={alunos}/>
 
-                <Button bsStyle="primary" onClick={AlunosController.blank}>
+                <Button style={s.newButton} bsStyle="primary" onClick={AlunosController.blank}>
                     <Glyphicon glyph="plus-sign"/> Novo Aluno
                 </Button>
             </Content>
@@ -37,29 +38,32 @@ const Content = ({children}) =>
         {children}
 	</div>
 
-const AlunosTable = ({alunos}) =>
-    <Table striped hover>
-        <thead>
+class AlunosTable extends Component {
+    render = ({list} = this.props) =>
+        <Table striped hover>
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Endereço</th>
                 <th></th>
             </tr>
-        </thead>
-        <tbody>
-        {alunos.map((aluno, i) =>
-            <tr key={i}>
-                <td>{aluno.id}</td>
-                <td>{aluno.nome}</td>
-                <td>{aluno.endereco}</td>
-                <td>
-                    <AlunoActions id={aluno.id}/>
-                </td>
-            </tr>
-        )}
-        </tbody>
-    </Table>
+            </thead>
+            <tbody>
+            {list.map((aluno, i) =>
+                <tr key={i}>
+                    <td>{aluno.id}</td>
+                    <td>{aluno.nome}</td>
+                    <td>{aluno.endereco}</td>
+                    <td>
+                        <AlunoActions id={aluno.id}/>
+                    </td>
+                </tr>
+            )}
+            </tbody>
+        </Table>
+}
+AlunosTable = PagedTable(AlunosTable)
 
 const AlunoActions = ({id}) =>
 	<div>
@@ -123,6 +127,10 @@ const s = {
 
     content: {
         padding: 20
+    },
+
+    newButton: {
+        margin: 20
     }
 }
 

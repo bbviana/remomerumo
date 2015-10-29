@@ -8,9 +8,13 @@ class AlunosController extends Controller {
         showForm: false
     }
 
-    list = () => Request.get('/api/alunos/').then(alunos => this.dispatch({alunos, showForm: false}))
+    list = () => {
+        Request.get('/api/alunos/').then(alunos => this.dispatch({alunos, showForm: false}))
+    }
 
-    load = (id) => Request.get(`/api/alunos/${id}`).then(aluno => this.dispatch({aluno, showForm: true}))
+    load = (id) => {
+        Request.get(`/api/alunos/${id}`).then(aluno => this.dispatch({aluno, showForm: true}))
+    }
 
     save = (aluno) => {
         aluno.id ?
@@ -18,11 +22,17 @@ class AlunosController extends Controller {
             Request.post('/api/alunos', aluno).then(this.list)
     }
 
-    remove = (id) => confirm("Confirma remoção?") ? Request.delete(`/api/alunos/${id}`).then(this.list) : null
+    remove = (id) => {
+        confirm("Confirma remoção?") ? Request.delete(`/api/alunos/${id}`).then(this.list) : null
+    }
 
-    blank = () => this.dispatch({aluno: {}, showForm: true})
+    blank = () => {
+        this.dispatch({aluno: {}, showForm: true})
+    }
 
-    closeForm = () => this.dispatch({aluno: {}, showForm: false})
+    closeForm = () => {
+        this.dispatch({aluno: {}, showForm: false})
+    }
 }
 
 export default new AlunosController()
