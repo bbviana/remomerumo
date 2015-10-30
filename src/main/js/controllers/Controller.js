@@ -9,11 +9,11 @@ class Controller {
         this.listeners.delete(listener)
     }
 
-    dispatch(newData){
+    dispatch(newState){
         if(this.state){
-            Object.assign(this.state, newData);
+            Object.assign(this.state, newState);
         }
-        this.listeners.forEach(it => it.setState(newData))
+        this.listeners.forEach(it => it.setState(newState))
     }
 }
 
