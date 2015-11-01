@@ -27,7 +27,7 @@ import br.com.remomeurumo.persistence.Transactional;
 @Transactional
 @Path("responsaveis")
 @Produces(APPLICATION_JSON)
-public class ResponsavelController {
+public class ResponsaveisController {
 
 	@Inject
 	private EntityManager em;

@@ -10,7 +10,7 @@
  */
 package br.com.remomeurumo;
 
-import br.com.remomeurumo.persistence.Transactional;
+import static java.lang.String.format;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -20,7 +20,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import static java.lang.String.format;
+import br.com.remomeurumo.controller.AlunosController;
+import br.com.remomeurumo.persistence.Transactional;
 
 /**
  * @author bbviana

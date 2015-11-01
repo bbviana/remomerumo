@@ -1,6 +1,6 @@
 package br.com.remomeurumo
 
-import br.com.remomeurumo.controller.ResponsavelController;
+import br.com.remomeurumo.controller.ResponsaveisController;
 import br.com.remomeurumo.test.BaseTest
 
 import org.junit.After
@@ -17,11 +17,11 @@ import static org.junit.Assert.assertNull
  */
 class ResponsaveisTest extends BaseTest {
 
-    private ResponsavelController controller
+    private ResponsaveisController controller
 
     @Before
     void prepare() {
-        controller = this.instance(ResponsavelController)
+        controller = this.instance(ResponsaveisController)
 
         populate(Responsavel, [
                 [nome: "Responsavel 1"],
