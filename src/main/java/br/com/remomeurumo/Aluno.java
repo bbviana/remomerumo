@@ -37,7 +37,7 @@ public class Aluno extends Pessoa implements Serializable {
     
     
     @OneToMany(targetEntity=AlunoAtividade.class, mappedBy="aluno")
-    private Collection<AlunoAtividade> atividades;
+    private Collection<AlunoAtividade> alunoAtividades;
     
     @ManyToOne(targetEntity=GrupoAluno.class)
     @JoinTable(name="AlunoGrupoAluno" )
@@ -58,11 +58,11 @@ public class Aluno extends Pessoa implements Serializable {
 	}
 
 	public Collection<AlunoAtividade> getAlunoAtividades() {
-		return atividades;
+		return alunoAtividades;
 	}
 
-	public void setAlunoAtividades(Collection<AlunoAtividade> atividades) {
-		this.atividades = atividades;
+	public void setAlunoAtividades(Collection<AlunoAtividade> alunoAtividades) {
+		this.alunoAtividades = alunoAtividades;
 	}
 
 	public GrupoAluno getGrupo() {
@@ -94,4 +94,8 @@ public class Aluno extends Pessoa implements Serializable {
 		this.periodo = periodo;
 	}
 
+	public String getMatrAluno() {
+		return matrAluno;
+	}
+	
 }

@@ -10,15 +10,12 @@
  */
 package br.com.remomeurumo;
 
-import br.com.remomeurumo.persistence.Transactional;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import br.com.remomeurumo.persistence.Transactional;
 
 /**
  * @author bbviana
