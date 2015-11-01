@@ -1,9 +1,11 @@
 package br.com.remomeurumo.test
 
-import br.com.remomeurumo.JerseyConfig
-import br.com.remomeurumo.persistence.EntityManagerProducer
-import br.com.remomeurumo.persistence.TransactionalEntityManager
+import static org.junit.Assert.*
 import groovy.json.JsonSlurper
+
+import javax.ws.rs.core.Application
+import javax.ws.rs.core.Response
+
 import org.glassfish.jersey.test.JerseyTest
 import org.jboss.weld.context.RequestContext
 import org.jboss.weld.context.unbound.UnboundLiteral
@@ -11,11 +13,9 @@ import org.jboss.weld.environment.se.Weld
 import org.jboss.weld.environment.se.WeldContainer
 import org.junit.BeforeClass
 
-import javax.persistence.EntityManagerFactory
-import javax.ws.rs.core.Application
-import javax.ws.rs.core.Response
-
-import static org.junit.Assert.*
+import br.com.remomeurumo.JerseyConfig
+import br.com.remomeurumo.persistence.EntityManagerProducer
+import br.com.remomeurumo.persistence.TransactionalEntityManager
 
 
 /**
@@ -73,7 +73,7 @@ abstract class BaseTest extends JerseyTest {
 
     protected static void cleanDataBase() {
         println "Limpando Database..."
-        EntityManagerProducer.clearEntityManagerFactory()
+		EntityManagerProducer.clearEntityManagerFactory()
     }
     private void activateRequestScoped() {
         println "Ativando 'RequestContext' para permitir o uso de @RequestScoped..."

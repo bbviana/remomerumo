@@ -7,54 +7,73 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author bbviana
  */
 @Entity
-public class Aluno implements Serializable {
+public class Aluno extends Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-    @GeneratedValue
-    private Long id;
 
-    private String nome;
+	//Identficacoes
+    private String matrAluno;
     
-    private Collection<Responsavel> responsaveis;
+    private String escolaridade;
+    private String periodo;
+    
+    
+    //TODO: FOTO
+    //private String Foto;
 
-    // region Object
+    @ManyToMany(targetEntity=Responsavel.class)
+    @JoinTable(name="AlunoResponsavel" )
+    private Collection<Responsavel> responsaveis;
+    
+    
+    @OneToMany(targetEntity=AlunoAtividade.class, mappedBy="aluno")
+    private Collection<AlunoAtividade> atividades;
+    
+    @ManyToOne(targetEntity=GrupoAluno.class)
+    @JoinTable(name="AlunoGrupoAluno" )
+    private GrupoAluno grupo;
+    
 
     @Override
     public String toString() {
         return reflectionToString(this, SHORT_PREFIX_STYLE);
     }
 
-    // endregion
+	public Collection<Responsavel> getResponsaveis() {
+		return responsaveis;
+	}
 
-    // region Getters e Setters
+	public void setResponsaveis(Collection<Responsavel> responsaveis) {
+		this.responsaveis = responsaveis;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Collection<AlunoAtividade> getAlunoAtividades() {
+		return atividades;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setAlunoAtividades(Collection<AlunoAtividade> atividades) {
+		this.atividades = atividades;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public GrupoAluno getGrupo() {
+		return grupo;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setGrupo(GrupoAluno grupo) {
+		this.grupo = grupo;
+	}
 
+<<<<<<< HEAD
 	public String getEndereco() {
 		return endereco;
 	}
@@ -68,11 +87,30 @@ public class Aluno implements Serializable {
     @JoinTable(name="AlunoResponsavel" )
 	public Collection<Responsavel> getResponsaveis() {
 		return responsaveis;
+=======
+	public String getMatrAluno() {
+		return matrAluno;
+>>>>>>> Modelo geral
 	}
 
-	public void setResponsaveis(Collection<Responsavel> responsaveis) {
-		this.responsaveis = responsaveis;
+	public void setMatrAluno(String matrAluno) {
+		this.matrAluno = matrAluno;
 	}
 
-    // endregion
+	public String getEscolaridade() {
+		return escolaridade;
+	}
+
+	public void setEscolaridade(String escolaridade) {
+		this.escolaridade = escolaridade;
+	}
+
+	public String getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
+
 }

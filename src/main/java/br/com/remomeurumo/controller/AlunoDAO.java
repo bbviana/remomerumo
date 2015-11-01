@@ -1,44 +1,46 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.controller;
 
+import br.com.remomeurumo.Aluno;
 import br.com.remomeurumo.persistence.Transactional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import java.util.List;
 
 /**
- * @author jardim
+ * @author bbviana
  */
 @ApplicationScoped
 @Transactional
-public class ResponsavelDAO {
+public class AlunoDAO {
 
     @Inject
     private EntityManager em;
 
-    public Responsavel insert(Responsavel entity) {
+    public Aluno insert(Aluno entity) {
         em.persist(entity);
         return entity;
     }
 
-    public Responsavel update(Responsavel entity) {
+    public Aluno update(Aluno entity) {
         em.merge(entity);
         return entity;
     }
 
-    public List<Responsavel> list() {
-        TypedQuery<Responsavel> query = em.createQuery("SELECT a FROM Responsavel a", Responsavel.class);
+    public List<Aluno> list() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a", Aluno.class);
         return query.getResultList();
     }
 
-    public Responsavel find(Long id) {
-        return em.find(Responsavel.class, id);
+    public Aluno find(Long id) {
+        return em.find(Aluno.class, id);
     }
 
     public void remove(Long id) {
-        Responsavel entity = em.find(Responsavel.class, id);
+        Aluno entity = em.find(Aluno.class, id);
         em.remove(entity);
     }
 }
