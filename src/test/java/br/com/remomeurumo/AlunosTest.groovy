@@ -1,29 +1,25 @@
 package br.com.remomeurumo
 
-import br.com.remomeurumo.controller.AlunoController;
-import br.com.remomeurumo.test.BaseTest
+import static org.junit.Assert.assertNull
+
+import javax.ws.rs.client.Entity
+import javax.ws.rs.core.Response
 
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-import javax.ws.rs.client.Entity
-import javax.ws.rs.core.Response
-
-import static org.junit.Assert.assertNull
+import br.com.remomeurumo.controller.AlunosController
+import br.com.remomeurumo.test.BaseTest
 
 /**
  * @author bbviana
  */
 class AlunosTest extends BaseTest {
 
-<<<<<<< HEAD
     private AlunosController controller
-=======
-    private AlunoController controller
 	
 	private ArrayList<Aluno> alunos
->>>>>>> Modelo geral
 
     @Before
     void prepare() {

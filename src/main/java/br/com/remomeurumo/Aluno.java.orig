@@ -73,6 +73,25 @@ public class Aluno extends Pessoa implements Serializable {
 		this.grupo = grupo;
 	}
 
+<<<<<<< HEAD
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
+    @ManyToMany(targetEntity=Responsavel.class, mappedBy="alunos")
+    @JoinTable(name="AlunoResponsavel" )
+	public Collection<Responsavel> getResponsaveis() {
+		return responsaveis;
+=======
+	public String getMatrAluno() {
+		return matrAluno;
+>>>>>>> Modelo geral
+	}
 
 	public void setMatrAluno(String matrAluno) {
 		this.matrAluno = matrAluno;
