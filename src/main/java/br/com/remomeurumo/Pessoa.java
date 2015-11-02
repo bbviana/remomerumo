@@ -1,13 +1,12 @@
 package br.com.remomeurumo;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
-
-import java.io.Serializable;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
+
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 /**
  * @author jardim
@@ -18,55 +17,55 @@ public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue
-    private Long id;
+	@GeneratedValue
+	private Long id;
 
 	//Identficacoes
-    private String nome;
-    private String apelido;
-    private String naturalDe;
-    private String dtNasc;
+	private String nome;
+	private String apelido;
+	private String naturalDe;
+	private String dtNasc;
 
-    //Documentos
-    private String cpf;
-    private String rg;
-    
-    //Endereços
-    private String endereco;
-    private String telefone;
-    private String celular;
-    private String email;
-    
-    
-    //Medidas
-    private String sapato;
-    private String bermuda;
-    private String camiseta;
-    
-    //TODO: FOTO
-    //private String Foto;
+	//Documentos
+	private String cpf;
+	private String rg;
+
+	//Endereços
+	private String endereco;
+	private String telefone;
+	private String celular;
+	private String email;
 
 
-    @Override
-    public String toString() {
-        return reflectionToString(this, SHORT_PREFIX_STYLE);
-    }
+	//Medidas
+	private String sapato;
+	private String bermuda;
+	private String camiseta;
 
-    public Long getId() {
-        return id;
-    }
+	//TODO: FOTO
+	//private String Foto;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getNome() {
-        return nome;
-    }
+	@Override
+	public String toString() {
+		return reflectionToString(this, SHORT_PREFIX_STYLE);
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public String getApelido() {
 		return apelido;

@@ -1,16 +1,16 @@
 package br.com.remomeurumo
 
-import static org.junit.Assert.assertNull
-
-import javax.ws.rs.client.Entity
-import javax.ws.rs.core.Response
-
+import br.com.remomeurumo.controller.AlunosController
+import br.com.remomeurumo.test.BaseTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-import br.com.remomeurumo.controller.AlunosController
-import br.com.remomeurumo.test.BaseTest
+import javax.ws.rs.client.Entity
+import javax.ws.rs.core.Response
+
+import static org.junit.Assert.assertEquals
+import static org.junit.Assert.assertNull
 
 /**
  * @author bbviana
@@ -19,7 +19,7 @@ class AlunosTest extends BaseTest {
 
     private AlunosController controller
 
-    private ArrayList<Aluno> alunos
+    private List<Aluno> alunos
 
     @Before
     void prepare() {
@@ -67,8 +67,8 @@ class AlunosTest extends BaseTest {
  //   @Test
     void "[GET] /alunos"() {
         Response response = target("alunos").request().get()
-        List listJson = toJson(response)
-        compare(listJson, [
+        Object result = toJson(response)
+        compare(result.list as List, [
                 [id: alunos[0].id, nome: "Aluno 1"],
                 [id: alunos[1].id, nome: "Aluno 2"],
                 [id: alunos[2].id, nome: "Aluno 3"],
@@ -80,8 +80,8 @@ class AlunosTest extends BaseTest {
    // @Test
     void "[GET] /alunos?count=2"() {
         Response response = target("alunos").queryParam("count", "2").request().get()
-        List listJson = toJson(response)
-        compare(listJson, [
+        Object result = toJson(response)
+        compare(result.list as List, [
                 [id: alunos[0].id, nome: "Aluno 1"],
                 [id: alunos[1].id, nome: "Aluno 2"]
         ])
@@ -93,10 +93,44 @@ class AlunosTest extends BaseTest {
                 .queryParam("count", "2")
                 .queryParam("page", "2")
                 .request().get()
-        List listJson = toJson(response)
-        compare(listJson, [
+        Object result = toJson(response)
+        compare(result.list as List, [
                 [id: alunos[2].id, nome: "Aluno 3"],
                 [id: alunos[3].id, nome: "Aluno 4"]
+        ])
+    }
+
+    @Test
+    void "[GET] /alunos?search.nome=3"() {
+        Response response = target("alunos")
+                .queryParam("search.nome", "3")
+                .request().get()
+
+        Object result = toJson(response)
+
+        assertEquals 1, result.totalResults
+
+        compare(result.list as List, [
+                [id: alunos[2].id, nome: "Aluno 3"]
+        ])
+    }
+
+    @Test
+    void "[GET] /alunos?search.nome=LUNO"() {
+        Response response = target("alunos")
+                .queryParam("search.nome", "LUNO")
+                .request().get()
+
+        Object result = toJson(response)
+
+        assertEquals 5, result.totalResults
+
+        compare(result.list as List, [
+                [id: alunos[0].id, nome: "Aluno 1"],
+                [id: alunos[1].id, nome: "Aluno 2"],
+                [id: alunos[2].id, nome: "Aluno 3"],
+                [id: alunos[3].id, nome: "Aluno 4"],
+                [id: alunos[4].id, nome: "Aluno 5"]
         ])
     }
 

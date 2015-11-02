@@ -2,13 +2,19 @@ package br.com.remomeurumo.controller;
 
 import br.com.remomeurumo.Aluno;
 import br.com.remomeurumo.BaseController;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.*;
 import java.util.List;
+
+import static org.hibernate.criterion.MatchMode.ANYWHERE;
 
 /**
  * @author bbviana
@@ -43,21 +49,31 @@ public class AlunosController extends BaseController {
 	@GET
 	public ResultList<Aluno> list(
 			@QueryParam("count") Integer count,
-			@QueryParam("page") Integer page) {
+			@QueryParam("page") Integer page,
+			@QueryParam("search.nome") String nome) {
 
-		TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a ORDER BY nome", Aluno.class);
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Aluno.class);
+		Criteria countCriteria = session.createCriteria(Aluno.class);
+
+		criteria.addOrder(Order.asc("nome"));
 
 		if (count != null) {
-			query.setMaxResults(count);
+			criteria.setMaxResults(count);
 		}
 
 		if (count != null && page != null) {
-			query.setFirstResult((page - 1) * count);
+			criteria.setFirstResult((page - 1) * count);
 		}
 
-		List<Aluno> list = query.getResultList();
+		if (nome != null) {
+			criteria.add(Restrictions.ilike("nome", nome, ANYWHERE));
+			countCriteria.add(Restrictions.ilike("nome", nome, ANYWHERE));
+		}
 
-		Long totalResults = em.createQuery("SELECT count(a) FROM Aluno a", Long.class).getSingleResult();
+		List<Aluno> list = criteria.list();
+		Long totalResults = (Long) countCriteria.setProjection(Projections.rowCount()).uniqueResult();
+
 		return new ResultList<>(list, totalResults);
 	}
 
