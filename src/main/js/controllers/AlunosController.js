@@ -1,3 +1,5 @@
+export default new AtividadesController()
+
 import Controller from './Controller'
 import {Request} from '../helpers'
 
@@ -66,3 +68,4 @@ class AlunosController extends Controller {
 }
 
 export default new AlunosController()
+

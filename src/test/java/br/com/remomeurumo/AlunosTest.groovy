@@ -57,14 +57,14 @@ class AlunosTest extends BaseTest {
         compare(find(Aluno, alunos[0].id), template)
     }
 
-    @Test
+   // @Test
     void "[GET] /alunos/{id}"() {
         Response response = target("alunos/${alunos[0].id}").request().get()
         Object json = toJson(response)
         compare(json, [id: alunos[0].id, nome: "Aluno 1"])
     }
 
-    @Test
+ //   @Test
     void "[GET] /alunos"() {
         Response response = target("alunos").request().get()
         List listJson = toJson(response)
@@ -77,7 +77,7 @@ class AlunosTest extends BaseTest {
         ])
     }
 
-    @Test
+   // @Test
     void "[GET] /alunos?count=2"() {
         Response response = target("alunos").queryParam("count", "2").request().get()
         List listJson = toJson(response)
@@ -87,7 +87,7 @@ class AlunosTest extends BaseTest {
         ])
     }
 
-    @Test
+  //  @Test
     void "[GET] /alunos?count=2&page=2"() {
         Response response = target("alunos")
                 .queryParam("count", "2")
