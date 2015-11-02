@@ -1,7 +1,7 @@
-import App from './App'
+import Alunos from './Alunos'
 import Login from './Login'
 
 export {
-    App,
+    Alunos,
     Login
 }
