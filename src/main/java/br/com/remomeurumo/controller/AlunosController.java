@@ -74,7 +74,7 @@ public class AlunosController extends BaseController {
 		List<Aluno> list = criteria.list();
 		Long totalResults = (Long) countCriteria.setProjection(Projections.rowCount()).uniqueResult();
 
-		return new ResultList<>(list, totalResults);
+		return new ResultList<>(list, count, totalResults.intValue());
 	}
 
 	@DELETE

@@ -8,6 +8,7 @@ class AlunosController extends Controller {
         allAlunos: [],
         alunos: [],
         aluno: {},
+        search: {},
         showForm: false,
 
         currentPage: 1,
@@ -15,8 +16,8 @@ class AlunosController extends Controller {
         totalPages: 1
     }
 
-    list = (page) => {
-        Request.get('/api/alunos/', {count:5, page: page}).then(({list, totalPages}) =>
+    list = ({page, search = {}}) => {
+        Request.get('/api/alunos/', {count:this.state.pageSize, page: page, "search.nome": search.nome}).then(({list, totalPages}) =>
             this.dispatch({
                 alunos: list,
                 currentPage: page || 1,

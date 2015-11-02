@@ -1,16 +1,11 @@
 package br.com.remomeurumo;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 /**
  * @author bbviana
@@ -22,32 +17,32 @@ public class Aluno extends Pessoa implements Serializable {
 
 
 	//Identficacoes
-    private String matrAluno;
-    
-    private String escolaridade;
-    private String periodo;
-    
-    
-    //TODO: FOTO
-    //private String Foto;
+	private String matrAluno;
 
-    @ManyToMany(targetEntity=Responsavel.class)
-    @JoinTable(name="AlunoResponsavel" )
-    private Collection<Responsavel> responsaveis;
-    
-    
-    @OneToMany(targetEntity=AlunoAtividade.class, mappedBy="aluno")
-    private Collection<AlunoAtividade> alunoAtividades;
-    
-    @ManyToOne(targetEntity=GrupoAluno.class)
-    @JoinTable(name="AlunoGrupoAluno" )
-    private GrupoAluno grupo;
-    
+	private String escolaridade;
+	private String periodo;
 
-    @Override
-    public String toString() {
-        return reflectionToString(this, SHORT_PREFIX_STYLE);
-    }
+
+	//TODO: FOTO
+	//private String Foto;
+
+	@ManyToMany(targetEntity = Responsavel.class)
+	@JoinTable(name = "AlunoResponsavel")
+	private Collection<Responsavel> responsaveis;
+
+
+	@OneToMany(targetEntity = AlunoAtividade.class, mappedBy = "aluno")
+	private Collection<AlunoAtividade> alunoAtividades;
+
+	@ManyToOne(targetEntity = GrupoAluno.class)
+	@JoinTable(name = "AlunoGrupoAluno")
+	private GrupoAluno grupo;
+
+
+	@Override
+	public String toString() {
+		return reflectionToString(this, SHORT_PREFIX_STYLE);
+	}
 
 	public Collection<Responsavel> getResponsaveis() {
 		return responsaveis;
@@ -97,5 +92,5 @@ public class Aluno extends Pessoa implements Serializable {
 	public String getMatrAluno() {
 		return matrAluno;
 	}
-	
+
 }
