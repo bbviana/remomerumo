@@ -17,6 +17,7 @@ import java.util.List;
 @Path("alunos")
 public class AlunosController extends BaseController {
 
+
 	@Inject
 	private EntityManager em;
 
@@ -40,7 +41,10 @@ public class AlunosController extends BaseController {
 	}
 
 	@GET
-	public List<Aluno> list(@QueryParam("count") Integer count, @QueryParam("page") Integer page) {
+	public ResultList<Aluno> list(
+			@QueryParam("count") Integer count,
+			@QueryParam("page") Integer page) {
+
 		TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a ORDER BY nome", Aluno.class);
 
 		if (count != null) {
@@ -51,7 +55,10 @@ public class AlunosController extends BaseController {
 			query.setFirstResult((page - 1) * count);
 		}
 
-		return query.getResultList();
+		List<Aluno> list = query.getResultList();
+
+		Long totalResults = em.createQuery("SELECT count(a) FROM Aluno a", Long.class).getSingleResult();
+		return new ResultList<>(list, totalResults);
 	}
 
 	@DELETE

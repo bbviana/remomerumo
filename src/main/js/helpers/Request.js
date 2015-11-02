@@ -5,22 +5,15 @@ import xhr from 'superagent'
  * Request.post('/users', user).then(data => console.log(data))
  */
 class Request {
-    static get = url => promise("GET", url)
-    static post = (url, data) => promise("POST", url, data)
-    static put = (url, data) => promise("PUT", url, data)
-    static delete = url => promise("DELETE", url)
+    static get = (url, query) => promise(xhr.get(url).query(query))
+    static post = (url, data) => promise(xhr.post(url).send(data))
+    static put = (url, data) => promise(xhr.put(url).send(data))
+    static del = url => promise(xhr.del(url))
 }
 
-function promise(method, url, data){
+function promise(xhr){
     return new Promise((resolve, reject) => {
-        let request = xhr(method, url);
-
-        if(data){
-            // Content-Type: application/json é automatico
-            request.send(data);
-        }
-
-        request.end((err, res) => {
+        xhr.end((err, res) => {
             if(err){
                 reject(err);
             } else {

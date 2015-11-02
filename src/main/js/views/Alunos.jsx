@@ -87,7 +87,7 @@ class AlunosTable extends Component {
             <Pagination style={styles.pagination}
                         items={totalPages}
                         activePage={currentPage}
-                        onSelect={(event, selectedEvent) => AlunosController.goToPage(selectedEvent.eventKey)}/>
+                        onSelect={(event, selectedEvent) => AlunosController.list(selectedEvent.eventKey)}/>
         </div>
 }
 

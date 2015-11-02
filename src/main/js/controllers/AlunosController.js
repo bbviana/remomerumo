@@ -13,28 +13,33 @@ class AlunosController extends Controller {
         totalPages: 1
     }
 
-    list = () => {
-        Request.get('/api/alunos/').then(alunos => this.dispatch({
-            allAlunos: alunos,
-            alunos: paginate(alunos, this.state.pageSize, 1),
-            currentPage: 1,
-            showForm: false,
-            totalPages: totalPages(alunos, this.state.pageSize)
-        }))
+    list = (page) => {
+        Request.get('/api/alunos/', {count:5, page: page}).then(({list, totalPages}) =>
+            this.dispatch({
+                alunos: list,
+                currentPage: page || 1,
+                showForm: false,
+                totalPages: totalPages
+            }))
     }
 
     load = (id) => {
-        Request.get(`/api/alunos/${id}`).then(aluno => this.dispatch({aluno, showForm: true}))
+        Request.get(`/api/alunos/${id}`).then(aluno =>
+            this.dispatch({
+                aluno,
+                showForm: true
+            }))
     }
 
     save = (aluno) => {
         aluno.id ?
-            Request.put(`/api/alunos/${aluno.id}`, aluno).then(this.list):
-            Request.post('/api/alunos', aluno).then(this.list)
+            Request.put(`/api/alunos/${aluno.id}`, aluno).then(() => this.list()):
+            Request.post('/api/alunos', aluno).then(() => this.list())
     }
 
     remove = (id) => {
-        confirm("Confirma remoção?") ? Request.delete(`/api/alunos/${id}`).then(this.list) : null
+        if(confirm("Confirma remoção?"))
+            Request.del(`/api/alunos/${id}`).then(() => this.list())
     }
 
     filter = (searchQuery) => {
@@ -51,11 +56,6 @@ class AlunosController extends Controller {
         this.dispatch({alunos: alunosFiltered});
     }
 
-    goToPage = (page) => {
-        const alunos  = paginate(this.state.allAlunos, this.state.pageSize, page);
-        this.dispatch({alunos: alunos, currentPage: page});
-    }
-
     blank = () => {
         this.dispatch({aluno: {}, showForm: true})
     }
@@ -63,15 +63,6 @@ class AlunosController extends Controller {
     closeForm = () => {
         this.dispatch({aluno: {}, showForm: false})
     }
-}
-
-function paginate(array, pageSize, page) {
-    const firstIndex = (page - 1) * pageSize
-    return array.slice(firstIndex, firstIndex + pageSize);
-}
-
-function totalPages(array, pageSize){
-    return Math.ceil(array.length / pageSize);
 }
 
 export default new AlunosController()
