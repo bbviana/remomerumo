@@ -13,7 +13,7 @@ import org.jboss.weld.environment.se.Weld
 import org.jboss.weld.environment.se.WeldContainer
 import org.junit.BeforeClass
 
-import br.com.remomeurumo.JerseyConfig
+import br.com.remomeurumo.config.JerseyConfig
 import br.com.remomeurumo.persistence.EntityManagerProducer
 import br.com.remomeurumo.persistence.TransactionalEntityManager
 
@@ -75,6 +75,7 @@ abstract class BaseTest extends JerseyTest {
         println "Limpando Database..."
 		EntityManagerProducer.clearEntityManagerFactory()
     }
+
     private void activateRequestScoped() {
         println "Ativando 'RequestContext' para permitir o uso de @RequestScoped..."
         RequestContext requestContext = weldContainer.instance().select(RequestContext, UnboundLiteral.INSTANCE).get();
@@ -82,7 +83,7 @@ abstract class BaseTest extends JerseyTest {
     }
 
     private void deactivateRequestScoped() {
-        println "Desativando 'RequestContext' ..."
+        println "Desativando 'RequestContext'..."
         RequestContext requestContext = weldContainer.instance().select(RequestContext, UnboundLiteral.INSTANCE).get();
         requestContext.deactivate();
     }
@@ -140,24 +141,28 @@ abstract class BaseTest extends JerseyTest {
     }
 
     @SuppressWarnings("GroovyAssignabilityCheck")
-    static void compare(def bean, Map template) {
+    static void compare(def bean, Map template, def ignore = []) {
         if (bean == null) {
             fail "Null Object"
         }
-        template.forEach { String name, value ->
-            if (value instanceof Double || value instanceof BigDecimal) {
-                assertEquals(value as Double, bean[name] as Double, 0d)
-            } else if (value.getClass().isArray()) {
-                assertTrue(Arrays.equals(value, bean[name]))
-            } else {
-                assertEquals(value, bean[name])
+        template.each { String name, value ->
+            if(!ignore.contains(name)){
+                if (value instanceof Double || value instanceof BigDecimal) {
+                    assertEquals("property: ${name}", value as Double, bean[name] as Double, 0d)
+                } else if (value.getClass().isArray()) {
+                    assertTrue("property: ${name}", Arrays.equals(value, bean[name]))
+                } else {
+                    assertEquals("property: ${name}", value, bean[name])
+                }
             }
         }
     }
 
-    static void compare(List beans, List templates) {
+    static void compare(List beans, List templates, def ignore = []) {
         assertEquals "Listas possuem tamanhos diferentes", beans.size(), templates.size()
-        beans.eachWithIndex { bean, i -> compare(bean, templates[i] as Map) }
+        beans.eachWithIndex { bean, i ->
+            compare(bean, templates[i] as Map, ignore)
+        }
     }
 
     /**

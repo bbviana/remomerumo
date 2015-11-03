@@ -8,7 +8,7 @@
  * As informacoes contidas neste arquivo nao podem ser publicadas, e seu uso esta limitado de acordo
  * com os termos do contrato de licenca.
  */
-package br.com.remomeurumo;
+package br.com.remomeurumo.config;
 
 import static java.lang.String.format;
 
@@ -20,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
+import br.com.remomeurumo.Aluno;
 import br.com.remomeurumo.controller.AlunosController;
 import br.com.remomeurumo.persistence.Transactional;
 
