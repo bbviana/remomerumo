@@ -3,7 +3,6 @@ import {Request} from '../helpers'
 
 class AlunosController extends Controller {
     state = {
-        allAlunos: [],
         alunos: [],
         aluno: {},
         search: {},
@@ -18,8 +17,10 @@ class AlunosController extends Controller {
         Request.get('api/alunos/', {count:this.state.pageSize, page: page, "search.nome": search.nome}).then(({list, totalPages}) =>
             this.dispatch({
                 alunos: list,
-                currentPage: page || 1,
+                search: search,
                 showForm: false,
+
+                currentPage: page,
                 totalPages: totalPages
             }))
     }
@@ -27,7 +28,7 @@ class AlunosController extends Controller {
     load = (id) => {
         Request.get(`api/alunos/${id}`).then(aluno =>
             this.dispatch({
-                aluno,
+                aluno: aluno,
                 showForm: true
             }))
     }
@@ -41,20 +42,6 @@ class AlunosController extends Controller {
     remove = (id) => {
         if(confirm("Confirma remoção?"))
             Request.del(`api/alunos/${id}`).then(() => this.list({page: 1}))
-    }
-
-    filter = (searchQuery) => {
-        searchQuery = searchQuery || "";
-
-        const {allAlunos} = this.state; // equivale a "const allAlunos = this.state.allAlunos"
-
-        searchQuery =  searchQuery.toLowerCase().trim();
-        let alunosFiltered = allAlunos.filter(
-                aluno => aluno.nome.toLowerCase().indexOf(searchQuery) > -1
-        )
-
-        alunosFiltered = paginate(alunosFiltered, this.state.pageSize, 1);
-        this.dispatch({alunos: alunosFiltered});
     }
 
     blank = () => {

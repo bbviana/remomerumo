@@ -1,4 +1,4 @@
-import Alunos from './alunos/Alunos'
+import Alunos from './Alunos'
 import Login from './Login'
 
 export {
