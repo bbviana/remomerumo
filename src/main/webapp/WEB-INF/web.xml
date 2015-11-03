@@ -6,11 +6,6 @@
 
     <display-name>Remo meu Rumo</display-name>
 
-    <!--CDI: Weld-->
-    <listener>
-        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
-    </listener>
-
     <!--JAX-RS: Jersey-->
     <servlet>
         <servlet-name>Jersey Web Application</servlet-name>

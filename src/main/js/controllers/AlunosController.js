@@ -15,7 +15,7 @@ class AlunosController extends Controller {
     }
 
     list = ({page, search = {}}) => {
-        Request.get('/api/alunos/', {count:this.state.pageSize, page: page, "search.nome": search.nome}).then(({list, totalPages}) =>
+        Request.get('api/alunos/', {count:this.state.pageSize, page: page, "search.nome": search.nome}).then(({list, totalPages}) =>
             this.dispatch({
                 alunos: list,
                 currentPage: page || 1,
@@ -25,7 +25,7 @@ class AlunosController extends Controller {
     }
 
     load = (id) => {
-        Request.get(`/api/alunos/${id}`).then(aluno =>
+        Request.get(`api/alunos/${id}`).then(aluno =>
             this.dispatch({
                 aluno,
                 showForm: true
@@ -34,13 +34,13 @@ class AlunosController extends Controller {
 
     save = (aluno) => {
         aluno.id ?
-            Request.put(`/api/alunos/${aluno.id}`, aluno).then(() => this.list()):
-            Request.post('/api/alunos', aluno).then(() => this.list())
+            Request.put(`api/alunos/${aluno.id}`, aluno).then(() => this.list({page: 1})):
+            Request.post('api/alunos', aluno).then(() => this.list({page: 1}))
     }
 
     remove = (id) => {
         if(confirm("Confirma remoção?"))
-            Request.del(`/api/alunos/${id}`).then(() => this.list())
+            Request.del(`api/alunos/${id}`).then(() => this.list({page: 1}))
     }
 
     filter = (searchQuery) => {

@@ -1,21 +1,14 @@
 package br.com.remomeurumo.controller;
 
-import java.util.List;
+import br.com.remomeurumo.Atividade;
+import br.com.remomeurumo.BaseController;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
-
-import br.com.remomeurumo.Atividade;
-import br.com.remomeurumo.BaseController;
+import javax.ws.rs.*;
+import java.util.List;
 
 /**
  * @author jardim
@@ -48,7 +41,7 @@ public class AtividadesController extends BaseController {
 
 	@GET
 	public ResultList<Atividade> list(@QueryParam("count") Integer count,
-			@QueryParam("page") Integer page) {
+									  @QueryParam("page") Integer page) {
 
 		TypedQuery<Atividade> query = em.createQuery(
 				"SELECT a FROM Atividade a ORDER BY nome", Atividade.class);
@@ -63,9 +56,9 @@ public class AtividadesController extends BaseController {
 
 		List<Atividade> list = query.getResultList();
 
-		Long totalResults = em.createQuery("SELECT count(a) FROM Atividade a",
-				Long.class).getSingleResult();
-		return new ResultList<>(list, totalResults);
+		Integer totalResults = em.createQuery("SELECT count(a) FROM Atividade a",
+				Long.class).getSingleResult().intValue();
+		return new ResultList<>(list, 5, totalResults);
 	}
 
 	@DELETE
