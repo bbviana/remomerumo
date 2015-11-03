@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react'
-import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
 import {AlunosController} from '../controllers'
+import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
+import {Form} from '../components'
 
 class Alunos extends Component {
     state = AlunosController.state
 
     componentDidMount(){
-        AlunosController.listen(this);
-        AlunosController.list({page: 1});
+        AlunosController.listen(this); // escuta alterações do state de AlunosController e redesenha a tela
+        AlunosController.list(); // Busca inicial
     }
 
     componentWillUnmount() {
@@ -21,16 +22,19 @@ class Alunos extends Component {
             </Navbar>
 
             <Content>
-                <Busca value={this.state.search}/>
+                <Busca bean={this.state.search}/>
 
-                <Lista list={this.state.alunos} currentPage={this.state.currentPage} totalPages={this.state.totalPages}/>
+                <Lista list={this.state.alunos}
+                       currentPage={this.state.currentPage}
+                       totalPages={this.state.totalPages}
+                       pageSize={this.state.pageSize}/>
 
-                <Button style={styles.newButton} bsStyle="primary" onClick={AlunosController.blank}>
+                <Button style={styles.newButton} bsStyle="primary" onClick={() => AlunosController.load(null)}>
                     <Glyphicon glyph="plus-sign"/> Novo Aluno
                 </Button>
             </Content>
 
-            <Form show={this.state.showForm} aluno={this.state.aluno}/>
+            <Formulario show={this.state.showForm} bean={this.state.aluno}/>
         </div>
 }
 
@@ -41,46 +45,22 @@ const Content = (props) =>
 
 
 class Busca extends Component {
-    state = {
-        nome: null
-    }
-
-    componentWillReceiveProps = ({value}) => {
-        this.state = value
-    }
-
-    handleChange = ({target}) => {
-        const newState = {};
-        newState[target.name] = target.value;
-        this.setState(newState);
-    }
-
-    handleSubmit = event => {
-        event.preventDefault();
-        AlunosController.list({page: 1, search: this.state});
-    }
-
     searchButton = (
         <Button bsStyle="primary" type="submit">
             <Glyphicon glyph="search"/> Buscar
         </Button>
     )
 
-    render = () =>
-        <form style={styles.search} onChange={this.handleChange} onSubmit={this.handleSubmit}>
-            <Input type="text" placeholder="Buscar por nome do Aluno" buttonAfter={this.searchButton}
-                name="nome" defaultValue={this.state.nome}/>
-        </form>
+    render = ({bean} = this.props) =>
+        <Form style={styles.search} onChange={AlunosController.changeSearch} onSubmit={AlunosController.list}>
+            <Input type="text" placeholder="Buscar por nome do Aluno" autoComplete="off"
+                   buttonAfter={this.searchButton} name="nome" degaultValue={bean.nome}/>
+        </Form>
 
 }
 
-
 class Lista extends Component {
-    handleSelectPage = (event, selectedEvent) => {
-        AlunosController.list({page: selectedEvent.eventKey})
-    }
-
-    render = ({list, currentPage, totalPages} = this.props) =>
+    render = ({list, currentPage, totalPages, pageSize} = this.props) =>
         <div>
             <Table striped hover>
                 <thead>
@@ -105,13 +85,23 @@ class Lista extends Component {
                 </tbody>
             </Table>
 
-            <Pagination style={styles.pagination}
-                        items={totalPages}
-                        activePage={currentPage}
-                        onSelect={this.handleSelectPage}/>
+            <div>
+                <Pagination style={styles.pagination}
+                            items={totalPages}
+                            activePage={currentPage}
+                            onSelect={this.handleSelectPage}/>
+
+                <select style={styles.pageSize} className="form-control"
+                        value={pageSize}
+                        onChange={({target}) => AlunosController.list({pageSize:target.value})}>
+                    <option value="5" >5</option>
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
         </div>
 }
-
 
 
 const Acoes = ({id}) =>
@@ -127,42 +117,27 @@ const Acoes = ({id}) =>
 
 
 
-class Form extends Component {
-    componentWillReceiveProps = ({aluno}) => {
-        this.state = aluno
-    }
-
-    handleChange = ({target}) => {
-        const newState = {};
-        newState[target.name] = target.value;
-        this.setState(newState);
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        AlunosController.save(this.state);
-    }
-
-    render = ({show} = this.props) =>
+class Formulario extends Component {
+    render = ({show, bean} = this.props) =>
         <Modal show={show} onHide={AlunosController.closeForm}>
             <Modal.Header>
                 <Modal.Title>Aluno</Modal.Title>
             </Modal.Header>
 
-            <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+            <Form onChange={AlunosController.changeForm} onSubmit={AlunosController.save}>
                 <Modal.Body>
-                    <FormBody {...this.state}/>
+                    <FormularioContent {...bean}/>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button onClick={AlunosController.closeForm}>Cancelar</Button>
                     <Button bsStyle="primary" type="submit">Salvar</Button>
                 </Modal.Footer>
-            </form>
+            </Form>
         </Modal>
 }
 
-const FormBody = ({nome, endereco}) =>
+const FormularioContent = ({nome, endereco}) =>
     <div>
         <Input type="text" label="Nome" placeholder="Nome completo do aluno"
                name="nome" defaultValue={nome} autoFocus/>
@@ -170,6 +145,7 @@ const FormBody = ({nome, endereco}) =>
         <Input type="text" label="Endereço" placeholder="Rua, número"
                name="endereco" defaultValue={endereco} />
     </div>
+
 
 const styles = {
     app: {
@@ -182,6 +158,12 @@ const styles = {
 
     pagination: {
         float: 'right'
+    },
+
+    pageSize: {
+        float: 'right',
+        margin: 20,
+        width: 80
     },
 
     newButton: {

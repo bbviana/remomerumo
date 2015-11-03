@@ -13,43 +13,52 @@ class AlunosController extends Controller {
         totalPages: 1
     }
 
-    list = ({page, search = {}}) => {
-        Request.get('api/alunos/', {count:this.state.pageSize, page: page, "search.nome": search.nome}).then(({list, totalPages}) =>
+    list = (args = {}) => {
+        const page = args.page || 1;
+        const pageSize = args.pageSize || this.state.pageSize;
+
+        Request.get('api/alunos/', {count:pageSize, page: page, "search.nome": this.state.search.nome}).then(({list, totalPages}) =>
             this.dispatch({
                 alunos: list,
-                search: search,
                 showForm: false,
 
                 currentPage: page,
+                pageSize: pageSize,
                 totalPages: totalPages
             }))
     }
 
     load = (id) => {
-        Request.get(`api/alunos/${id}`).then(aluno =>
-            this.dispatch({
-                aluno: aluno,
-                showForm: true
-            }))
+        id ?
+            Request.get(`api/alunos/${id}`).then(aluno => this.dispatch({aluno: aluno, showForm: true})):
+            this.dispatch({aluno: {}, showForm: true})
     }
 
-    save = (aluno) => {
+    save = () => {
+        const {aluno} =  this.state;
         aluno.id ?
-            Request.put(`api/alunos/${aluno.id}`, aluno).then(() => this.list({page: 1})):
-            Request.post('api/alunos', aluno).then(() => this.list({page: 1}))
+            Request.put(`api/alunos/${aluno.id}`, aluno).then(() => this.list()):
+            Request.post('api/alunos', aluno).then(() => this.list())
     }
 
     remove = (id) => {
         if(confirm("Confirma remoção?"))
-            Request.del(`api/alunos/${id}`).then(() => this.list({page: 1}))
+            Request.del(`api/alunos/${id}`).then(() => this.list())
     }
 
-    blank = () => {
-        this.dispatch({aluno: {}, showForm: true})
-    }
 
     closeForm = () => {
         this.dispatch({aluno: {}, showForm: false})
+    }
+
+    changeForm = (newValue) => {
+        Object.assign(this.state.aluno, newValue);
+        this.emitChange();
+    }
+
+    changeSearch = (newValue) => {
+        Object.assign(this.state.search, newValue);
+        this.emitChange();
     }
 }
 
