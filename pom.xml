@@ -8,19 +8,6 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<dependencies>
-		<!--CDI-->
-		<dependency>
-			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet-core</artifactId>
-			<version>2.2.7.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.weld</groupId>
-			<artifactId>weld-core-impl</artifactId>
-			<version>2.2.7.Final</version>
-		</dependency>
-
-
 		<!--Servlet API-->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -41,10 +28,16 @@
 		</dependency>
 
 
+		<!--CDI-->
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet-core</artifactId>
+			<version>2.2.7.Final</version>
+		</dependency>
+
 		<!--JAX-RS: Jersey-->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
-			<!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core"  -->
 			<artifactId>jersey-container-servlet</artifactId>
 			<version>2.17</version>
 		</dependency>
@@ -53,6 +46,7 @@
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.17</version>
 		</dependency>
+		<!--  Necessário em ambiente JSE -->
 		<dependency>
 			<groupId>org.glassfish.jersey.ext.cdi</groupId>
 			<artifactId>jersey-cdi1x</artifactId>
@@ -76,24 +70,17 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.1.9.Final</version>
 		</dependency>
-		<!-- necessário para servidores nao jee-->
+		<!-- necessário para ambiente JSE-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator-cdi</artifactId>
 			<version>5.1.1.Final</version>
 		</dependency>
-		<!--não usar esta quando usar a de cima-->
-		<!--<dependency>-->
-		<!--<groupId>org.hibernate</groupId>-->
-		<!--<artifactId>hibernate-validator</artifactId>-->
-		<!--<version>4.3.1.Final</version>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901-1.jdbc4</version>
 		</dependency>
-
 
 		<!-- Commons -->
 		<!--Conflita com o CDI-->
@@ -166,30 +153,30 @@
 				</configuration>
 			</plugin>
 
-			<!-- Groovy -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 
+				<!-- Groovy -->
 				<configuration>
-					<compilerId>groovy-eclipse-compiler</compilerId>
+					<!--<compilerId>groovy-eclipse-compiler</compilerId>-->
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.groovy</groupId>
-						<artifactId>groovy-eclipse-compiler</artifactId>
-						<version>2.9.2-01</version>
-					</dependency>
-					<dependency>
-						<groupId>org.codehaus.groovy</groupId>
-						<artifactId>groovy-eclipse-batch</artifactId>
-						<version>2.4.3-01</version>
-					</dependency>
-				</dependencies>
+				<!--<dependencies>-->
+					<!--<dependency>-->
+						<!--<groupId>org.codehaus.groovy</groupId>-->
+						<!--<artifactId>groovy-eclipse-compiler</artifactId>-->
+						<!--<version>2.9.2-01</version>-->
+					<!--</dependency>-->
+					<!--<dependency>-->
+						<!--<groupId>org.codehaus.groovy</groupId>-->
+						<!--<artifactId>groovy-eclipse-batch</artifactId>-->
+						<!--<version>2.4.3-01</version>-->
+					<!--</dependency>-->
+				<!--</dependencies>-->
 			</plugin>
 		</plugins>
 	</build>

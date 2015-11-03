@@ -1,6 +1,4 @@
-# remomeurumo
-Remo Meu Rumo
-
+# Remo Meu Rumo
 
 ## Arquitetura
 
@@ -17,12 +15,11 @@ Remo Meu Rumo
 * JAX-RS, Jersey
 * Servlet 3.1
 * CDI
-* MongoDB, Morphia
+* Postgres
 * Tomcat 8
 
 ### Ambiente
 
-* IntelliJ
 * Gulp
 * Browserify
 * Babel (6to5)

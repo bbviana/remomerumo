@@ -10,11 +10,7 @@
  */
 package br.com.remomeurumo.persistence;
 
-import br.com.remomeurumo.persistence.Transactional;
-
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;

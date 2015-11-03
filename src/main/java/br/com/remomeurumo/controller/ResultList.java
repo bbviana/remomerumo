@@ -1,7 +1,10 @@
 package br.com.remomeurumo.controller;
 
+import com.google.common.base.Objects;
+
 import java.util.List;
 
+import static com.google.common.base.Objects.firstNonNull;
 import static java.lang.Integer.MAX_VALUE;
 
 /**
@@ -10,7 +13,7 @@ import static java.lang.Integer.MAX_VALUE;
 public class ResultList<T> {
 	private List<T> list;
 
-	private Integer pageSize = MAX_VALUE;
+	private Integer pageSize;
 
 	private Integer totalResults;
 
@@ -18,9 +21,9 @@ public class ResultList<T> {
 
 	public ResultList(List<T> list, Integer pageSize, Integer totalResults) {
 		this.list = list;
-		this.pageSize = pageSize;
+		this.pageSize = firstNonNull(pageSize, MAX_VALUE);
 		this.totalResults = totalResults;
-		this.totalPages = (int) Math.ceil((double) totalResults / pageSize);
+		this.totalPages = (int) Math.ceil((double) this.totalResults / this.pageSize);
 	}
 
 	public List<T> getList() {

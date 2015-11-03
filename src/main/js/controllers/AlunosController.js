@@ -1,5 +1,3 @@
-export default new AtividadesController()
-
 import Controller from './Controller'
 import {Request} from '../helpers'
 
