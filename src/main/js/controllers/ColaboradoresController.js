@@ -3,9 +3,9 @@ import {Request} from '../helpers'
 
 class ColaboradoresController extends Controller {
     state = {
-        allColaboradores: [],
         colaboradores: [],
         colaborador: {},
+        search: {},
         showForm: false,
 
         currentPage: 1,
@@ -13,56 +13,54 @@ class ColaboradoresController extends Controller {
         totalPages: 1
     }
 
-    list = (page) => {
-        Request.get('/api/colaboradores/', {count:5, page: page}).then(({list, totalPages}) =>
+    list = (args = {}) => {
+        const page = args.page || 1;
+        const pageSize = args.pageSize || this.state.pageSize;
+
+        Request.get('api/colaboradores/', {count:pageSize, page: page, "search.nome": this.state.search.nome}).then(({list, totalPages}) =>
             this.dispatch({
                 colaboradores: list,
-                currentPage: page || 1,
                 showForm: false,
+
+                currentPage: page,
+                pageSize: pageSize,
                 totalPages: totalPages
             }))
     }
 
     load = (id) => {
-        Request.get(`/api/colaboradores/${id}`).then(colaborador =>
-            this.dispatch({
-                colaborador,
-                showForm: true
-            }))
+        id ?
+            Request.get(`api/colaboradores/${id}`).then(colaborador => this.dispatch({colaborador: colaborador, showForm: true})):
+            this.dispatch({colaborador: {}, showForm: true})
     }
 
-    save = (colaborador) => {
+    save = () => {
+        const {colaborador} =  this.state;
         colaborador.id ?
-            Request.put(`/api/colaboradores/${colaborador.id}`, colaborador).then(() => this.list()):
-            Request.post('/api/colaboradores', colaborador).then(() => this.list())
+            Request.put(`api/colaboradores/${colaborador.id}`, colaborador).then(() => this.list()):
+            Request.post('api/colaboradores', colaborador).then(() => this.list())
     }
 
     remove = (id) => {
         if(confirm("Confirma remoção?"))
-            Request.del(`/api/colaboradores/${id}`).then(() => this.list())
+            Request.del(`api/colaboradores/${id}`).then(() => this.list())
     }
 
-    filter = (searchQuery) => {
-        searchQuery = searchQuery || "";
-
-        const {allColaboradores} = this.state; // equivale a "const allColaboradores = this.state.allColaboradores"
-
-        searchQuery =  searchQuery.toLowerCase().trim();
-        let colaboradoresFiltered = allColaboradores.filter(
-                colaborador => colaborador.nome.toLowerCase().indexOf(searchQuery) > -1
-        )
-
-        colaboradoresFiltered = paginate(colaboradoresFiltered, this.state.pageSize, 1);
-        this.dispatch({colaboradores: colaboradoresFiltered});
-    }
-
-    blank = () => {
-        this.dispatch({colaborador: {}, showForm: true})
-    }
 
     closeForm = () => {
         this.dispatch({colaborador: {}, showForm: false})
     }
+
+    changeForm = (newValue) => {
+        Object.assign(this.state.colaborador, newValue);
+        this.emitChange();
+    }
+
+    changeSearch = (newValue) => {
+        Object.assign(this.state.search, newValue);
+        this.emitChange();
+    }
 }
 
 export default new ColaboradoresController()
+

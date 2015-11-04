@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react'
-import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
 import {TipoAtividadesController} from '../controllers'
+import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
+import {Form} from '../components'
 
-class App extends Component {
+class TipoAtividades extends Component {
     state = TipoAtividadesController.state
 
     componentDidMount(){
-        TipoAtividadesController.listen(this);
-        TipoAtividadesController.list();
+        TipoAtividadesController.listen(this); // escuta alterações do state de TipoAtividadesController e redesenha a tela
+        TipoAtividadesController.list(); // Busca inicial
     }
 
     componentWillUnmount() {
@@ -21,16 +22,19 @@ class App extends Component {
             </Navbar>
 
             <Content>
-               <TipoAtividadesBusca />
+                <Busca bean={this.state.search}/>
 
-                <TipoAtividadesTable list={this.state.tipoAtividades} currentPage={this.state.currentPage} totalPages={this.state.totalPages}/>
+                <Lista list={this.state.tipoAtividades}
+                       currentPage={this.state.currentPage}
+                       totalPages={this.state.totalPages}
+                       pageSize={this.state.pageSize}/>
 
-                <Button style={styles.newButton} bsStyle="primary" onClick={TipoAtividadesController.blank}>
-                    <Glyphicon glyph="plus-sign"/> Novo TipoAtividade
+                <Button style={styles.newButton} bsStyle="primary" onClick={() => TipoAtividadesController.load(null)}>
+                    <Glyphicon glyph="plus-sign"/> Novo Atividade
                 </Button>
             </Content>
 
-            <TipoAtividadeModal show={this.state.showForm} tipoAtividade={this.state.tipoAtividade}/>
+            <Formulario show={this.state.showForm} bean={this.state.tipoAtividade}/>
         </div>
 }
 
@@ -39,35 +43,32 @@ const Content = (props) =>
         {props.children}
 	</div>
 
-class TipoAtividadesBusca extends Component {
 
-    handleSubmit(event){
-        event.preventDefault();
-        TipoAtividadesController.filter(event.target.value);
-    }
-
+class Busca extends Component {
     searchButton = (
         <Button bsStyle="primary" type="submit">
             <Glyphicon glyph="search"/> Buscar
         </Button>
     )
 
-    render = () =>
-        <form style={styles.search} onSubmit={this.handleSubmit} onChange={this.handleSubmit}>
-            <Input type="text" placeholder="Buscar por nome do TipoAtividade" buttonAfter={this.searchButton}/>
-        </form>
+    render = ({bean} = this.props) =>
+        <Form style={styles.search} onChange={TipoAtividadesController.changeSearch} onSubmit={TipoAtividadesController.list}>
+            <Input type="text" placeholder="Buscar por nome do Atividade" autoComplete="off"
+                   buttonAfter={this.searchButton} name="nome" degaultValue={bean.nome}/>
+        </Form>
+
 }
 
-class TipoAtividadesTable extends Component {
-    render = ({list, currentPage, totalPages} = this.props) =>
+class Lista extends Component {
+    render = ({list, currentPage, totalPages, pageSize} = this.props) =>
         <div>
             <Table striped hover>
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
                 {list.map((tipoAtividade, i) =>
@@ -75,22 +76,34 @@ class TipoAtividadesTable extends Component {
                         <td>{tipoAtividade.id}</td>
                         <td>{tipoAtividade.nome}</td>
                         <td>
-                            <TipoAtividadeActions id={tipoAtividade.id}/>
+                            <Acoes id={tipoAtividade.id}/>
                         </td>
                     </tr>
                 )}
                 </tbody>
             </Table>
 
-            <Pagination style={styles.pagination}
-                        items={totalPages}
-                        activePage={currentPage}
-                        onSelect={(event, selectedEvent) => TipoAtividadesController.list(selectedEvent.eventKey)}/>
+            <div>
+                <Pagination style={styles.pagination}
+                            items={totalPages}
+                            activePage={currentPage}
+                            onSelect={this.handleSelectPage}/>
+
+                <select style={styles.pageSize} className="form-control"
+                        value={pageSize}
+                        onChange={({target}) => TipoAtividadesController.list({pageSize:target.value})}>
+                    <option value="5" >5</option>
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
         </div>
 }
 
-const TipoAtividadeActions = ({id}) =>
-	<div>
+
+const Acoes = ({id}) =>
+    <div>
         <Button bsStyle="link" onClick={() => TipoAtividadesController.load(id)}>
             <Glyphicon glyph="edit"/>
         </Button>
@@ -98,49 +111,37 @@ const TipoAtividadeActions = ({id}) =>
         <Button bsStyle="link" onClick={() => TipoAtividadesController.remove(id)}>
             <Glyphicon glyph="trash" />
         </Button>
-	</div>
+    </div>
 
-class TipoAtividadeModal extends Component {
-    componentWillReceiveProps = ({tipoAtividade}) => {
-        this.state = tipoAtividade
-    }
 
-    handleChange = ({target}) => {
-        const newState = {};
-        newState[target.name] = target.value;
-        this.setState(newState);
-    }
 
-    handleSave = (event) => {
-        event.preventDefault();
-        TipoAtividadesController.save(this.state);
-    }
-
-    render = ({show} = this.props) =>
+class Formulario extends Component {
+    render = ({show, bean} = this.props) =>
         <Modal show={show} onHide={TipoAtividadesController.closeForm}>
             <Modal.Header>
-                <Modal.Title>TipoAtividade</Modal.Title>
+                <Modal.Title>Atividade</Modal.Title>
             </Modal.Header>
 
-            <form onChange={this.handleChange} onSubmit={this.handleSave}>
+            <Form onChange={TipoAtividadesController.changeForm} onSubmit={TipoAtividadesController.save}>
                 <Modal.Body>
-                    <TipoAtividadeForm {...this.state}/>
+                    <FormularioContent {...bean}/>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button onClick={TipoAtividadesController.closeForm}>Cancelar</Button>
                     <Button bsStyle="primary" type="submit">Salvar</Button>
                 </Modal.Footer>
-            </form>
+            </Form>
         </Modal>
 }
 
-const TipoAtividadeForm = ({nome}) =>
+const FormularioContent = ({nome}) =>
     <div>
-        <Input type="text" label="Nome" placeholder="Nome completo do Tipo de Atividade"
+        <Input type="text" label="Nome" placeholder="Nome completo do tipoAtividade"
                name="nome" defaultValue={nome} autoFocus/>
 
     </div>
+
 
 const styles = {
     app: {
@@ -151,12 +152,18 @@ const styles = {
         padding: 20
     },
 
-    newButton: {
-        margin: 20
-    },
-
     pagination: {
         float: 'right'
+    },
+
+    pageSize: {
+        float: 'right',
+        margin: 20,
+        width: 80
+    },
+
+    newButton: {
+        margin: 20
     },
 
     search: {
@@ -164,4 +171,4 @@ const styles = {
     }
 }
 
-export default App
+export default TipoAtividades

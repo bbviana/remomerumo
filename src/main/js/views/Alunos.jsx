@@ -67,7 +67,9 @@ class Lista extends Component {
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Endereço</th>
+                        <th>Email</th>
+                    	<th>Telefone</th>
+                   		<th>Celular</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -76,7 +78,9 @@ class Lista extends Component {
                     <tr key={i}>
                         <td>{aluno.id}</td>
                         <td>{aluno.nome}</td>
-                        <td>{aluno.endereco}</td>
+                        <td>{aluno.email}</td>
+                        <td>{aluno.telefone}</td>
+                        <td>{aluno.celular}</td>
                         <td>
                             <Acoes id={aluno.id}/>
                         </td>
@@ -137,13 +141,24 @@ class Formulario extends Component {
         </Modal>
 }
 
-const FormularioContent = ({nome, endereco}) =>
+const FormularioContent = ({nome, apelido ,naturalDe ,dtNasc ,cpf ,rg ,endereco ,telefone ,celular ,email ,sapato ,bermuda ,camiseta}) =>
     <div>
         <Input type="text" label="Nome" placeholder="Nome completo do aluno"
                name="nome" defaultValue={nome} autoFocus/>
 
-        <Input type="text" label="Endereço" placeholder="Rua, número"
-               name="endereco" defaultValue={endereco} />
+        <Input type="text" name="apelido" defaultValue={apelido} label="Apelido" placeholder="Apelido"  />
+		<Input type="text" name="naturalDe" defaultValue={naturalDe} label="Natural de" placeholder="Cidade - estado"  />
+		<Input type="text" name="dtNasc" defaultValue={dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  />
+		<Input type="text" name="cpf" defaultValue={cpf} label="CPF" placeholder="Documento CPF"  />
+		<Input type="text" name="rg" defaultValue={rg} label="RG" placeholder="Documento RG"  />
+		<Input type="text" name="endereco" defaultValue={endereco} label="Endereço" placeholder="Rua, número"  />
+		<Input type="text" name="telefone" defaultValue={telefone} label="Telefone" placeholder="Telefone Fixo"  />
+		<Input type="text" name="celular" defaultValue={celular} label="Celular" placeholder="Celular com ddd"  />
+		<Input type="text" name="email" defaultValue={email} label="Email" placeholder="Email para contato"  />
+		<Input type="text" name="sapato" defaultValue={sapato} label="Sapato" placeholder="Tamanho da sapato"  />
+		<Input type="text" name="bermuda" defaultValue={bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  />
+		<Input type="text" name="camiseta" defaultValue={camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  />
+  
     </div>
 
 

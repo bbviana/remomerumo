@@ -1,14 +1,22 @@
 package br.com.remomeurumo.controller;
 
-import br.com.remomeurumo.TipoAtividade;
-import br.com.remomeurumo.BaseController;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.*;
-import java.util.List;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+
+import br.com.remomeurumo.Atividade;
+import br.com.remomeurumo.BaseController;
+import br.com.remomeurumo.TipoAtividade;
 
 /**
  * @author bbviana
@@ -41,11 +49,11 @@ public class TipoAtividadesController extends BaseController {
 	}
 
 	@GET
-	public ResultList<TipoAtividade> list(
-			@QueryParam("count") Integer count,
-			@QueryParam("page") Integer page) {
+	public ResultList<TipoAtividade> list(@QueryParam("count") Integer count,
+									  @QueryParam("page") Integer page) {
 
-		TypedQuery<TipoAtividade> query = em.createQuery("SELECT a FROM TipoAtividade a ORDER BY nome", TipoAtividade.class);
+		TypedQuery<TipoAtividade> query = em.createQuery(
+				"SELECT a FROM TipoAtividade a ORDER BY nome", TipoAtividade.class);
 
 		if (count != null) {
 			query.setMaxResults(count);
@@ -57,8 +65,9 @@ public class TipoAtividadesController extends BaseController {
 
 		List<TipoAtividade> list = query.getResultList();
 
-		Long totalResults = em.createQuery("SELECT count(a) FROM TipoAtividade a", Long.class).getSingleResult();
-		return new ResultList<>(list, totalResults);
+		Integer totalResults = em.createQuery("SELECT count(a) FROM TipoAtividade a",
+				Long.class).getSingleResult().intValue();
+		return new ResultList<>(list, 5, totalResults);
 	}
 
 	@DELETE

@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react'
-import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
 import {ColaboradoresController} from '../controllers'
+import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
+import {Form} from '../components'
 
-class App extends Component {
+class Colaboradores extends Component {
     state = ColaboradoresController.state
 
     componentDidMount(){
-        ColaboradoresController.listen(this);
-        ColaboradoresController.list();
+        ColaboradoresController.listen(this); // escuta alterações do state de ColaboradoresController e redesenha a tela
+        ColaboradoresController.list(); // Busca inicial
     }
 
     componentWillUnmount() {
@@ -21,16 +22,19 @@ class App extends Component {
             </Navbar>
 
             <Content>
-               <ColaboradoresBusca />
+                <Busca bean={this.state.search}/>
 
-                <ColaboradoresTable list={this.state.colaboradores} currentPage={this.state.currentPage} totalPages={this.state.totalPages}/>
+                <Lista list={this.state.colaboradores}
+                       currentPage={this.state.currentPage}
+                       totalPages={this.state.totalPages}
+                       pageSize={this.state.pageSize}/>
 
-                <Button style={styles.newButton} bsStyle="primary" onClick={ColaboradoresController.blank}>
+                <Button style={styles.newButton} bsStyle="primary" onClick={() => ColaboradoresController.load(null)}>
                     <Glyphicon glyph="plus-sign"/> Novo Colaborador
                 </Button>
             </Content>
 
-            <ColaboradorModal show={this.state.showForm} colaborador={this.state.colaborador}/>
+            <Formulario show={this.state.showForm} bean={this.state.colaborador}/>
         </div>
 }
 
@@ -39,64 +43,73 @@ const Content = (props) =>
         {props.children}
 	</div>
 
-class ColaboradoresBusca extends Component {
 
-    handleSubmit(event){
-        event.preventDefault();
-        ColaboradoresController.filter(event.target.value);
-    }
-
+class Busca extends Component {
     searchButton = (
         <Button bsStyle="primary" type="submit">
             <Glyphicon glyph="search"/> Buscar
         </Button>
     )
 
-    render = () =>
-        <form style={styles.search} onSubmit={this.handleSubmit} onChange={this.handleSubmit}>
-            <Input type="text" placeholder="Buscar por nome do Colaborador" buttonAfter={this.searchButton}/>
-        </form>
+    render = ({bean} = this.props) =>
+        <Form style={styles.search} onChange={ColaboradoresController.changeSearch} onSubmit={ColaboradoresController.list}>
+            <Input type="text" placeholder="Buscar por nome do Aluno" autoComplete="off"
+                   buttonAfter={this.searchButton} name="nome" degaultValue={bean.nome}/>
+        </Form>
+
 }
 
-class ColaboradoresTable extends Component {
-    render = ({list, currentPage, totalPages} = this.props) =>
+class Lista extends Component {
+    render = ({list, currentPage, totalPages, pageSize} = this.props) =>
         <div>
             <Table striped hover>
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Celular</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                       	<th>Email</th>
+                    	<th>Telefone</th>
+                   		<th>Celular</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
                 {list.map((colaborador, i) =>
                     <tr key={i}>
                         <td>{colaborador.id}</td>
                         <td>{colaborador.nome}</td>
-                        <td>{colaborador.email}</td>
+                         <td>{colaborador.email}</td>
                         <td>{colaborador.telefone}</td>
                         <td>{colaborador.celular}</td>
                         <td>
-                            <ColaboradorActions id={colaborador.id}/>
+                            <Acoes id={colaborador.id}/>
                         </td>
                     </tr>
                 )}
                 </tbody>
             </Table>
 
-            <Pagination style={styles.pagination}
-                        items={totalPages}
-                        activePage={currentPage}
-                        onSelect={(event, selectedEvent) => ColaboradoresController.list(selectedEvent.eventKey)}/>
+            <div>
+                <Pagination style={styles.pagination}
+                            items={totalPages}
+                            activePage={currentPage}
+                            onSelect={this.handleSelectPage}/>
+
+                <select style={styles.pageSize} className="form-control"
+                        value={pageSize}
+                        onChange={({target}) => ColaboradoresController.list({pageSize:target.value})}>
+                    <option value="5" >5</option>
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
         </div>
 }
 
-const ColaboradorActions = ({id}) =>
-	<div>
+
+const Acoes = ({id}) =>
+    <div>
         <Button bsStyle="link" onClick={() => ColaboradoresController.load(id)}>
             <Glyphicon glyph="edit"/>
         </Button>
@@ -104,48 +117,36 @@ const ColaboradorActions = ({id}) =>
         <Button bsStyle="link" onClick={() => ColaboradoresController.remove(id)}>
             <Glyphicon glyph="trash" />
         </Button>
-	</div>
+    </div>
 
-class ColaboradorModal extends Component {
-    componentWillReceiveProps = ({colaborador}) => {
-        this.state = colaborador
-    }
 
-    handleChange = ({target}) => {
-        const newState = {};
-        newState[target.name] = target.value;
-        this.setState(newState);
-    }
 
-    handleSave = (event) => {
-        event.preventDefault();
-        ColaboradoresController.save(this.state);
-    }
-
-    render = ({show} = this.props) =>
+class Formulario extends Component {
+    render = ({show, bean} = this.props) =>
         <Modal show={show} onHide={ColaboradoresController.closeForm}>
             <Modal.Header>
-                <Modal.Title>Colaborador</Modal.Title>
+                <Modal.Title>Aluno</Modal.Title>
             </Modal.Header>
 
-            <form onChange={this.handleChange} onSubmit={this.handleSave}>
+            <Form onChange={ColaboradoresController.changeForm} onSubmit={ColaboradoresController.save}>
                 <Modal.Body>
-                    <ColaboradorForm {...this.state}/>
+                    <FormularioContent {...bean}/>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button onClick={ColaboradoresController.closeForm}>Cancelar</Button>
                     <Button bsStyle="primary" type="submit">Salvar</Button>
                 </Modal.Footer>
-            </form>
+            </Form>
         </Modal>
 }
 
-const ColaboradorForm = ({nome, apelido ,naturalDe ,dtNasc ,cpf ,rg ,endereco ,telefone ,celular ,email ,sapato ,bermuda ,camiseta}) =>
+const FormularioContent = ({nome, apelido ,naturalDe ,dtNasc ,cpf ,rg ,endereco ,telefone ,celular ,email ,sapato ,bermuda ,camiseta}) =>
     <div>
-        <Input type="text" label="Nome" placeholder="Nome completo do responsavel"
+        <Input type="text" label="Nome" placeholder="Nome completo do colaborador"
                name="nome" defaultValue={nome} autoFocus/>
-		<Input type="text" name="apelido" defaultValue={apelido} label="Apelido" placeholder="Apelido"  />
+
+        <Input type="text" name="apelido" defaultValue={apelido} label="Apelido" placeholder="Apelido"  />
 		<Input type="text" name="naturalDe" defaultValue={naturalDe} label="Natural de" placeholder="Cidade - estado"  />
 		<Input type="text" name="dtNasc" defaultValue={dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  />
 		<Input type="text" name="cpf" defaultValue={cpf} label="CPF" placeholder="Documento CPF"  />
@@ -159,6 +160,7 @@ const ColaboradorForm = ({nome, apelido ,naturalDe ,dtNasc ,cpf ,rg ,endereco ,t
 		<Input type="text" name="camiseta" defaultValue={camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  />
     </div>
 
+
 const styles = {
     app: {
         paddingTop: 50
@@ -168,12 +170,18 @@ const styles = {
         padding: 20
     },
 
-    newButton: {
-        margin: 20
-    },
-
     pagination: {
         float: 'right'
+    },
+
+    pageSize: {
+        float: 'right',
+        margin: 20,
+        width: 80
+    },
+
+    newButton: {
+        margin: 20
     },
 
     search: {
@@ -181,4 +189,4 @@ const styles = {
     }
 }
 
-export default App
+export default Colaboradores

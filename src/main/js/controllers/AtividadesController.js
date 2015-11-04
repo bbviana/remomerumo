@@ -3,9 +3,9 @@ import {Request} from '../helpers'
 
 class AtividadesController extends Controller {
     state = {
-        allAtividades: [],
         atividades: [],
         atividade: {},
+        search: {},
         showForm: false,
 
         currentPage: 1,
@@ -13,54 +13,54 @@ class AtividadesController extends Controller {
         totalPages: 1
     }
 
-    list = (page) => {
-        Request.get('/api/atividades/', {count:5, page: page}).then(({list, totalPages}) =>
+    list = (args = {}) => {
+        const page = args.page || 1;
+        const pageSize = args.pageSize || this.state.pageSize;
+
+        Request.get('api/atividades/', {count:pageSize, page: page, "search.nome": this.state.search.nome}).then(({list, totalPages}) =>
             this.dispatch({
                 atividades: list,
-                currentPage: page || 1,
                 showForm: false,
+
+                currentPage: page,
+                pageSize: pageSize,
                 totalPages: totalPages
             }))
     }
 
     load = (id) => {
-        Request.get(`/api/atividades/${id}`).then(atividade =>
-            this.dispatch({
-                atividade,
-                showForm: true
-            }))
+        id ?
+            Request.get(`api/atividades/${id}`).then(atividade => this.dispatch({atividade: atividade, showForm: true})):
+            this.dispatch({atividade: {}, showForm: true})
     }
 
-    save = (atividade) => {
+    save = () => {
+        const {atividade} =  this.state;
         atividade.id ?
-            Request.put(`/api/atividades/${atividade.id}`, atividade).then(() => this.list()):
-            Request.post('/api/atividades', atividade).then(() => this.list())
+            Request.put(`api/atividades/${atividade.id}`, atividade).then(() => this.list()):
+            Request.post('api/atividades', atividade).then(() => this.list())
     }
 
     remove = (id) => {
         if(confirm("Confirma remoção?"))
-            Request.del(`/api/atividades/${id}`).then(() => this.list())
+            Request.del(`api/atividades/${id}`).then(() => this.list())
     }
 
-    filter = (searchQuery) => {
-        searchQuery = searchQuery || "";
-
-        const {allAtividades} = this.state; // equivale a "const allAtividades = this.state.allAtividades"
-
-        searchQuery =  searchQuery.toLowerCase().trim();
-        let atividadesFiltered = allAtividades.filter(
-                atividade => atividade.nome.toLowerCase().indexOf(searchQuery) > -1
-        )
-
-        atividadesFiltered = paginate(atividadesFiltered, this.state.pageSize, 1);
-        this.dispatch({atividades: atividadesFiltered});
-    }
-
-    blank = () => {
-        this.dispatch({atividade: {}, showForm: true})
-    }
 
     closeForm = () => {
         this.dispatch({atividade: {}, showForm: false})
     }
+
+    changeForm = (newValue) => {
+        Object.assign(this.state.atividade, newValue);
+        this.emitChange();
+    }
+
+    changeSearch = (newValue) => {
+        Object.assign(this.state.search, newValue);
+        this.emitChange();
+    }
 }
+
+export default new AtividadesController()
+

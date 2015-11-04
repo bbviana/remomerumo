@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react'
-import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
 import {AtividadesController} from '../controllers'
+import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
+import {Form} from '../components'
 
-class App extends Component {
+class Atividades extends Component {
     state = AtividadesController.state
 
     componentDidMount(){
-        AtividadesController.listen(this);
-        AtividadesController.list();
+        AtividadesController.listen(this); // escuta alterações do state de AtividadesController e redesenha a tela
+        AtividadesController.list(); // Busca inicial
     }
 
     componentWillUnmount() {
@@ -21,16 +22,19 @@ class App extends Component {
             </Navbar>
 
             <Content>
-               <AtividadesBusca />
+                <Busca bean={this.state.search}/>
 
-                <AtividadesTable list={this.state.atividades} currentPage={this.state.currentPage} totalPages={this.state.totalPages}/>
+                <Lista list={this.state.atividades}
+                       currentPage={this.state.currentPage}
+                       totalPages={this.state.totalPages}
+                       pageSize={this.state.pageSize}/>
 
-                <Button style={styles.newButton} bsStyle="primary" onClick={AtividadesController.blank}>
+                <Button style={styles.newButton} bsStyle="primary" onClick={() => AtividadesController.load(null)}>
                     <Glyphicon glyph="plus-sign"/> Novo Atividade
                 </Button>
             </Content>
 
-            <AtividadeModal show={this.state.showForm} atividade={this.state.atividade}/>
+            <Formulario show={this.state.showForm} bean={this.state.atividade}/>
         </div>
 }
 
@@ -39,60 +43,67 @@ const Content = (props) =>
         {props.children}
 	</div>
 
-class AtividadesBusca extends Component {
 
-    handleSubmit(event){
-        event.preventDefault();
-        AtividadesController.filter(event.target.value);
-    }
-
+class Busca extends Component {
     searchButton = (
         <Button bsStyle="primary" type="submit">
             <Glyphicon glyph="search"/> Buscar
         </Button>
     )
 
-    render = () =>
-        <form style={styles.search} onSubmit={this.handleSubmit} onChange={this.handleSubmit}>
-            <Input type="text" placeholder="Buscar por nome do Atividade" buttonAfter={this.searchButton}/>
-        </form>
+    render = ({bean} = this.props) =>
+        <Form style={styles.search} onChange={AtividadesController.changeSearch} onSubmit={AtividadesController.list}>
+            <Input type="text" placeholder="Buscar por nome do Atividade" autoComplete="off"
+                   buttonAfter={this.searchButton} name="nome" degaultValue={bean.nome}/>
+        </Form>
+
 }
 
-class AtividadesTable extends Component {
-    render = ({list, currentPage, totalPages} = this.props) =>
+class Lista extends Component {
+    render = ({list, currentPage, totalPages, pageSize} = this.props) =>
         <div>
             <Table striped hover>
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
                 {list.map((atividade, i) =>
                     <tr key={i}>
                         <td>{atividade.id}</td>
                         <td>{atividade.nome}</td>
-                        <td>{atividade.endereco}</td>
                         <td>
-                            <AtividadeActions id={atividade.id}/>
+                            <Acoes id={atividade.id}/>
                         </td>
                     </tr>
                 )}
                 </tbody>
             </Table>
 
-            <Pagination style={styles.pagination}
-                        items={totalPages}
-                        activePage={currentPage}
-                        onSelect={(event, selectedEvent) => AtividadesController.list(selectedEvent.eventKey)}/>
+            <div>
+                <Pagination style={styles.pagination}
+                            items={totalPages}
+                            activePage={currentPage}
+                            onSelect={this.handleSelectPage}/>
+
+                <select style={styles.pageSize} className="form-control"
+                        value={pageSize}
+                        onChange={({target}) => AtividadesController.list({pageSize:target.value})}>
+                    <option value="5" >5</option>
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
         </div>
 }
 
-const AtividadeActions = ({id}) =>
-	<div>
+
+const Acoes = ({id}) =>
+    <div>
         <Button bsStyle="link" onClick={() => AtividadesController.load(id)}>
             <Glyphicon glyph="edit"/>
         </Button>
@@ -100,51 +111,37 @@ const AtividadeActions = ({id}) =>
         <Button bsStyle="link" onClick={() => AtividadesController.remove(id)}>
             <Glyphicon glyph="trash" />
         </Button>
-	</div>
+    </div>
 
-class AtividadeModal extends Component {
-    componentWillReceiveProps = ({atividade}) => {
-        this.state = atividade
-    }
 
-    handleChange = ({target}) => {
-        const newState = {};
-        newState[target.name] = target.value;
-        this.setState(newState);
-    }
 
-    handleSave = (event) => {
-        event.preventDefault();
-        AtividadesController.save(this.state);
-    }
-
-    render = ({show} = this.props) =>
+class Formulario extends Component {
+    render = ({show, bean} = this.props) =>
         <Modal show={show} onHide={AtividadesController.closeForm}>
             <Modal.Header>
                 <Modal.Title>Atividade</Modal.Title>
             </Modal.Header>
 
-            <form onChange={this.handleChange} onSubmit={this.handleSave}>
+            <Form onChange={AtividadesController.changeForm} onSubmit={AtividadesController.save}>
                 <Modal.Body>
-                    <AtividadeForm {...this.state}/>
+                    <FormularioContent {...bean}/>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button onClick={AtividadesController.closeForm}>Cancelar</Button>
                     <Button bsStyle="primary" type="submit">Salvar</Button>
                 </Modal.Footer>
-            </form>
+            </Form>
         </Modal>
 }
 
-const AtividadeForm = ({nome, endereco}) =>
+const FormularioContent = ({nome}) =>
     <div>
         <Input type="text" label="Nome" placeholder="Nome completo do atividade"
                name="nome" defaultValue={nome} autoFocus/>
 
-        <Input type="text" label="Endereço" placeholder="Rua, número"
-               name="endereco" defaultValue={endereco} />
     </div>
+
 
 const styles = {
     app: {
@@ -155,12 +152,18 @@ const styles = {
         padding: 20
     },
 
-    newButton: {
-        margin: 20
-    },
-
     pagination: {
         float: 'right'
+    },
+
+    pageSize: {
+        float: 'right',
+        margin: 20,
+        width: 80
+    },
+
+    newButton: {
+        margin: 20
     },
 
     search: {
@@ -168,4 +171,4 @@ const styles = {
     }
 }
 
-export default App
+export default Atividades

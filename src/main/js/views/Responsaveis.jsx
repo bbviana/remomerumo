@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react'
-import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
 import {ResponsaveisController} from '../controllers'
+import {Button, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Table} from 'react-bootstrap';
+import {Form} from '../components'
 
-class App extends Component {
+class Responsaveis extends Component {
     state = ResponsaveisController.state
 
     componentDidMount(){
-        ResponsaveisController.listen(this);
-        ResponsaveisController.list();
+        ResponsaveisController.listen(this); // escuta alterações do state de ResponsaveisController e redesenha a tela
+        ResponsaveisController.list(); // Busca inicial
     }
 
     componentWillUnmount() {
@@ -21,16 +22,19 @@ class App extends Component {
             </Navbar>
 
             <Content>
-               <ResponsaveisBusca />
+                <Busca bean={this.state.search}/>
 
-                <ResponsaveisTable list={this.state.responsaveis} currentPage={this.state.currentPage} totalPages={this.state.totalPages}/>
+                <Lista list={this.state.responsaveis}
+                       currentPage={this.state.currentPage}
+                       totalPages={this.state.totalPages}
+                       pageSize={this.state.pageSize}/>
 
-                <Button style={styles.newButton} bsStyle="primary" onClick={ResponsaveisController.blank}>
-                    <Glyphicon glyph="plus-sign"/> Novo Responsável
+                <Button style={styles.newButton} bsStyle="primary" onClick={() => ResponsaveisController.load(null)}>
+                    <Glyphicon glyph="plus-sign"/> Novo Responsavel
                 </Button>
             </Content>
 
-            <ResponsavelModal show={this.state.showForm} responsavel={this.state.responsavel}/>
+            <Formulario show={this.state.showForm} bean={this.state.responsavel}/>
         </div>
 }
 
@@ -39,60 +43,73 @@ const Content = (props) =>
         {props.children}
 	</div>
 
-class ResponsaveisBusca extends Component {
 
-    handleSubmit(event){
-        event.preventDefault();
-        ResponsaveisController.filter(event.target.value);
-    }
-
+class Busca extends Component {
     searchButton = (
         <Button bsStyle="primary" type="submit">
             <Glyphicon glyph="search"/> Buscar
         </Button>
     )
 
-    render = () =>
-        <form style={styles.search} onSubmit={this.handleSubmit} onChange={this.handleSubmit}>
-            <Input type="text" placeholder="Buscar por nome do Responsavel" buttonAfter={this.searchButton}/>
-        </form>
+    render = ({bean} = this.props) =>
+        <Form style={styles.search} onChange={ResponsaveisController.changeSearch} onSubmit={ResponsaveisController.list}>
+            <Input type="text" placeholder="Buscar por nome do Responsavel" autoComplete="off"
+                   buttonAfter={this.searchButton} name="nome" degaultValue={bean.nome}/>
+        </Form>
+
 }
 
-class ResponsaveisTable extends Component {
-    render = ({list, currentPage, totalPages} = this.props) =>
+class Lista extends Component {
+    render = ({list, currentPage, totalPages, pageSize} = this.props) =>
         <div>
             <Table striped hover>
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                    	<th>Telefone</th>
+                   		<th>Celular</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
                 {list.map((responsavel, i) =>
                     <tr key={i}>
                         <td>{responsavel.id}</td>
                         <td>{responsavel.nome}</td>
-                        <td>{responsavel.endereco}</td>
+                        <td>{responsavel.email}</td>
+                        <td>{responsavel.telefone}</td>
+                        <td>{responsavel.celular}</td>
                         <td>
-                            <ResponsavelActions id={responsavel.id}/>
+                            <Acoes id={responsavel.id}/>
                         </td>
                     </tr>
                 )}
                 </tbody>
             </Table>
 
-            <Pagination style={styles.pagination}
-                        items={totalPages}
-                        activePage={currentPage}
-                        onSelect={(event, selectedEvent) => ResponsaveisController.list(selectedEvent.eventKey)}/>
+            <div>
+                <Pagination style={styles.pagination}
+                            items={totalPages}
+                            activePage={currentPage}
+                            onSelect={this.handleSelectPage}/>
+
+                <select style={styles.pageSize} className="form-control"
+                        value={pageSize}
+                        onChange={({target}) => ResponsaveisController.list({pageSize:target.value})}>
+                    <option value="5" >5</option>
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
         </div>
 }
 
-const ResponsavelActions = ({id}) =>
-	<div>
+
+const Acoes = ({id}) =>
+    <div>
         <Button bsStyle="link" onClick={() => ResponsaveisController.load(id)}>
             <Glyphicon glyph="edit"/>
         </Button>
@@ -100,48 +117,36 @@ const ResponsavelActions = ({id}) =>
         <Button bsStyle="link" onClick={() => ResponsaveisController.remove(id)}>
             <Glyphicon glyph="trash" />
         </Button>
-	</div>
+    </div>
 
-class ResponsavelModal extends Component {
-    componentWillReceiveProps = ({responsavel}) => {
-        this.state = responsavel
-    }
 
-    handleChange = ({target}) => {
-        const newState = {};
-        newState[target.name] = target.value;
-        this.setState(newState);
-    }
 
-    handleSave = (event) => {
-        event.preventDefault();
-        ResponsaveisController.save(this.state);
-    }
-
-    render = ({show} = this.props) =>
+class Formulario extends Component {
+    render = ({show, bean} = this.props) =>
         <Modal show={show} onHide={ResponsaveisController.closeForm}>
             <Modal.Header>
                 <Modal.Title>Responsavel</Modal.Title>
             </Modal.Header>
 
-            <form onChange={this.handleChange} onSubmit={this.handleSave}>
+            <Form onChange={ResponsaveisController.changeForm} onSubmit={ResponsaveisController.save}>
                 <Modal.Body>
-                    <ResponsavelForm {...this.state}/>
+                    <FormularioContent {...bean}/>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button onClick={ResponsaveisController.closeForm}>Cancelar</Button>
                     <Button bsStyle="primary" type="submit">Salvar</Button>
                 </Modal.Footer>
-            </form>
+            </Form>
         </Modal>
 }
 
-const ResponsavelForm = ({nome, apelido ,naturalDe ,dtNasc ,cpf ,rg ,endereco ,telefone ,celular ,email ,sapato ,bermuda ,camiseta}) =>
+const FormularioContent = ({nome, apelido ,naturalDe ,dtNasc ,cpf ,rg ,endereco ,telefone ,celular ,email ,sapato ,bermuda ,camiseta}) =>
     <div>
         <Input type="text" label="Nome" placeholder="Nome completo do responsavel"
                name="nome" defaultValue={nome} autoFocus/>
-		<Input type="text" name="apelido" defaultValue={apelido} label="Apelido" placeholder="Apelido"  />
+
+        <Input type="text" name="apelido" defaultValue={apelido} label="Apelido" placeholder="Apelido"  />
 		<Input type="text" name="naturalDe" defaultValue={naturalDe} label="Natural de" placeholder="Cidade - estado"  />
 		<Input type="text" name="dtNasc" defaultValue={dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  />
 		<Input type="text" name="cpf" defaultValue={cpf} label="CPF" placeholder="Documento CPF"  />
@@ -153,7 +158,9 @@ const ResponsavelForm = ({nome, apelido ,naturalDe ,dtNasc ,cpf ,rg ,endereco ,t
 		<Input type="text" name="sapato" defaultValue={sapato} label="Sapato" placeholder="Tamanho da sapato"  />
 		<Input type="text" name="bermuda" defaultValue={bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  />
 		<Input type="text" name="camiseta" defaultValue={camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  />
+  
     </div>
+
 
 const styles = {
     app: {
@@ -164,12 +171,18 @@ const styles = {
         padding: 20
     },
 
-    newButton: {
-        margin: 20
-    },
-
     pagination: {
         float: 'right'
+    },
+
+    pageSize: {
+        float: 'right',
+        margin: 20,
+        width: 80
+    },
+
+    newButton: {
+        margin: 20
     },
 
     search: {
@@ -177,4 +190,4 @@ const styles = {
     }
 }
 
-export default App
+export default Responsaveis

@@ -3,9 +3,9 @@ import {Request} from '../helpers'
 
 class ResponsaveisController extends Controller {
     state = {
-        allResponsaveis: [],
         responsaveis: [],
         responsavel: {},
+        search: {},
         showForm: false,
 
         currentPage: 1,
@@ -13,56 +13,54 @@ class ResponsaveisController extends Controller {
         totalPages: 1
     }
 
-    list = (page) => {
-        Request.get('/api/responsaveis/', {count:5, page: page}).then(({list, totalPages}) =>
+    list = (args = {}) => {
+        const page = args.page || 1;
+        const pageSize = args.pageSize || this.state.pageSize;
+
+        Request.get('api/responsaveis/', {count:pageSize, page: page, "search.nome": this.state.search.nome}).then(({list, totalPages}) =>
             this.dispatch({
                 responsaveis: list,
-                currentPage: page || 1,
                 showForm: false,
+
+                currentPage: page,
+                pageSize: pageSize,
                 totalPages: totalPages
             }))
     }
 
     load = (id) => {
-        Request.get(`/api/responsaveis/${id}`).then(responsavel =>
-            this.dispatch({
-                responsavel,
-                showForm: true
-            }))
+        id ?
+            Request.get(`api/responsaveis/${id}`).then(responsavel => this.dispatch({responsavel: responsavel, showForm: true})):
+            this.dispatch({responsavel: {}, showForm: true})
     }
 
-    save = (responsavel) => {
+    save = () => {
+        const {responsavel} =  this.state;
         responsavel.id ?
-            Request.put(`/api/responsaveis/${responsavel.id}`, responsavel).then(() => this.list()):
-            Request.post('/api/responsaveis', responsavel).then(() => this.list())
+            Request.put(`api/responsaveis/${responsavel.id}`, responsavel).then(() => this.list()):
+            Request.post('api/responsaveis', responsavel).then(() => this.list())
     }
 
     remove = (id) => {
         if(confirm("Confirma remoção?"))
-            Request.del(`/api/responsaveis/${id}`).then(() => this.list())
+            Request.del(`api/responsaveis/${id}`).then(() => this.list())
     }
 
-    filter = (searchQuery) => {
-        searchQuery = searchQuery || "";
-
-        const {allResponsaveis} = this.state; // equivale a "const allResponsaveis = this.state.allResponsaveis"
-
-        searchQuery =  searchQuery.toLowerCase().trim();
-        let responsaveisFiltered = allResponsaveis.filter(
-                responsavel => responsavel.nome.toLowerCase().indexOf(searchQuery) > -1
-        )
-
-        responsaveisFiltered = paginate(responsaveisFiltered, this.state.pageSize, 1);
-        this.dispatch({responsaveis: responsaveisFiltered});
-    }
-
-    blank = () => {
-        this.dispatch({responsavel: {}, showForm: true})
-    }
 
     closeForm = () => {
         this.dispatch({responsavel: {}, showForm: false})
     }
+
+    changeForm = (newValue) => {
+        Object.assign(this.state.responsavel, newValue);
+        this.emitChange();
+    }
+
+    changeSearch = (newValue) => {
+        Object.assign(this.state.search, newValue);
+        this.emitChange();
+    }
 }
 
 export default new ResponsaveisController()
+
