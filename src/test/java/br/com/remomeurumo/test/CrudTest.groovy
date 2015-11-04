@@ -36,7 +36,7 @@ abstract class CrudTest extends BaseTest {
         }
     }
 
-    abstract void prepareCrud();
+    abstract void prepareCrud()
 
     @After
     void after() {
@@ -226,8 +226,8 @@ class Context {
     }
 
     void strategy(Closure closure) {
-        closure.setDelegate(this);
-        closure.call();
+        closure.setDelegate(this)
+        closure.call()
     }
 
     def data(Map filter) {

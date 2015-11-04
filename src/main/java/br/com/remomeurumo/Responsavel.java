@@ -13,19 +13,15 @@ import javax.persistence.ManyToMany;
  * @author jardim
  */
 @Entity
-public class Responsavel extends Pessoa implements Serializable {
+public class Responsavel extends Pessoa {
 
-	private static final long serialVersionUID = 1L;
-	
-    @ManyToMany(targetEntity=Aluno.class, mappedBy="responsaveis")
-    private Collection<Aluno> alunos;
+	@ManyToMany(targetEntity = Aluno.class, mappedBy = "responsaveis")
+	private Collection<Aluno> alunos;
 
-    // region Object
-
-    @Override
-    public String toString() {
-        return reflectionToString(this, SHORT_PREFIX_STYLE);
-    }
+	@Override
+	public String toString() {
+		return reflectionToString(this, SHORT_PREFIX_STYLE);
+	}
 
 	public Collection<Aluno> getAlunos() {
 		return alunos;

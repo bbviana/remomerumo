@@ -17,7 +17,7 @@ class Alunos extends Component {
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Telefone</th>
-                 <th>Celular</th>
+                <th>Celular</th>
             </tr>,
 
         body: (aluno) =>
@@ -33,21 +33,19 @@ class Alunos extends Component {
 
     formSchema = (aluno) =>
         <div>
-            <Input type="text" label="Nome" placeholder="Nome completo do aluno"
-               name="nome" defaultValue={nome} autoFocus/>
-
-        <Input type="text" name="apelido" defaultValue={apelido} label="Apelido" placeholder="Apelido"  />
-		<Input type="text" name="naturalDe" defaultValue={naturalDe} label="Natural de" placeholder="Cidade - estado"  />
-		<Input type="text" name="dtNasc" defaultValue={dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  />
-		<Input type="text" name="cpf" defaultValue={cpf} label="CPF" placeholder="Documento CPF"  />
-		<Input type="text" name="rg" defaultValue={rg} label="RG" placeholder="Documento RG"  />
-		<Input type="text" name="endereco" defaultValue={endereco} label="Endereço" placeholder="Rua, número"  />
-		<Input type="text" name="telefone" defaultValue={telefone} label="Telefone" placeholder="Telefone Fixo"  />
-		<Input type="text" name="celular" defaultValue={celular} label="Celular" placeholder="Celular com ddd"  />
-		<Input type="text" name="email" defaultValue={email} label="Email" placeholder="Email para contato"  />
-		<Input type="text" name="sapato" defaultValue={sapato} label="Sapato" placeholder="Tamanho da sapato"  />
-		<Input type="text" name="bermuda" defaultValue={bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  />
-		<Input type="text" name="camiseta" defaultValue={camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  />
+            <Input type="text" label="Nome" placeholder="Nome completo do aluno" name="nome" defaultValue={aluno.nome} autoFocus/>
+            <Input type="text" name="apelido" defaultValue={aluno.apelido} label="Apelido" placeholder="Apelido"  />
+            <Input type="text" name="naturalDe" defaultValue={aluno.naturalDe} label="Natural de" placeholder="Cidade - estado"  />
+            <Input type="text" name="dtNasc" defaultValue={aluno.dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  />
+            <Input type="text" name="cpf" defaultValue={aluno.cpf} label="CPF" placeholder="Documento CPF"  />
+            <Input type="text" name="rg" defaultValue={aluno.rg} label="RG" placeholder="Documento RG"  />
+            <Input type="text" name="endereco" defaultValue={aluno.endereco} label="Endereço" placeholder="Rua, número"  />
+            <Input type="text" name="telefone" defaultValue={aluno.telefone} label="Telefone" placeholder="Telefone Fixo"  />
+            <Input type="text" name="celular" defaultValue={aluno.celular} label="Celular" placeholder="Celular com ddd"  />
+            <Input type="text" name="email" defaultValue={aluno.email} label="Email" placeholder="Email para contato"  />
+            <Input type="text" name="sapato" defaultValue={aluno.sapato} label="Sapato" placeholder="Tamanho da sapato"  />
+            <Input type="text" name="bermuda" defaultValue={aluno.bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  />
+            <Input type="text" name="camiseta" defaultValue={aluno.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  />
         </div>
 
     render = () =>

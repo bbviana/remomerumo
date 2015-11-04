@@ -13,7 +13,7 @@ class AlunosTest extends CrudTest {
             cleanDataBaseAfterEachTest true
             url "alunos"
             entity Aluno
-            initialData(
+            initialData (
                     [nome: "Aluno 0"],
                     [nome: "Aluno 1"],
                     [nome: "Aluno 2"],

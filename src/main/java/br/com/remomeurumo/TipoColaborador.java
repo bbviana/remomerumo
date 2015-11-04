@@ -1,4 +1,4 @@
-package br.com.remomeurumo.tipo;
+package br.com.remomeurumo;
 
 public enum TipoColaborador {
 
