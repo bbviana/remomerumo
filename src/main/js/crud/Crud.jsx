@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Button, Col, Glyphicon, Input, Modal, Navbar, NavBrand, Pagination, Row, Table} from 'react-bootstrap';
+import {Button, Col, Glyphicon, Input, Modal, Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem, Pagination, Row, Table} from 'react-bootstrap';
 import {Form} from '../components'
 
 class Crud extends Component {
@@ -46,10 +46,21 @@ class Crud extends Component {
 
 const Header = () =>
     <Navbar fixedTop={true} fluid={true} inverse={true}>
-        <NavBrand>
-            <a href="#">Remo meu Rumo</a>
-        </NavBrand>
-    </Navbar>
+    	<NavBrand><a href="?login">Remo meu Rumo</a></NavBrand>
+    	<Nav right eventKey={0}> {/* This is the eventKey referenced */}
+	      <NavItem eventKey={1} href="?alunos"><Glyphicon glyph="fire" /></NavItem>
+	      <NavItem eventKey={2} href="?responsaveis"> <Glyphicon glyph="user" /></NavItem>
+	      <NavItem eventKey={2} href="?colaboradores"> <Glyphicon glyph="education" /></NavItem>
+	      <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">M
+	        <MenuItem eventKey="1" href="?atividades" ><Glyphicon glyph="send" />Atividade</MenuItem>
+	        <MenuItem eventKey="2"  href="?tipoatividades" ><Glyphicon glyph="pencil" />Tipo de Atividade</MenuItem>
+	        <MenuItem divider />
+	        <MenuItem eventKey="4">Separated link</MenuItem>
+	      </NavDropdown>
+	      <NavItem eventKey={2} href="?login"> <Glyphicon glyph="log-out" /></NavItem>
+	    </Nav>
+	 </Navbar>
+
 
 
 const Content = (props) =>
