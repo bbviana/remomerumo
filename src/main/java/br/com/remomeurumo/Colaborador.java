@@ -10,16 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import br.com.remomeurumo.tipo.TipoColaborador;
-
 /**
  * @author jardim
  */
 @Entity
 public class Colaborador extends Pessoa implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private TipoColaborador tipoColcaborador;
 
 	@ManyToMany(targetEntity = Atividade.class)

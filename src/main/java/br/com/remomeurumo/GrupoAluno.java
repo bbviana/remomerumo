@@ -17,45 +17,31 @@ import javax.persistence.OneToMany;
  * @author bbviana
  */
 @Entity
-public class GrupoAluno implements Serializable {
+public class GrupoAluno extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
+	private String nome;
 
-	@Id
-    @GeneratedValue
-    private Long id;
-
-    private String nome;
-
-    @OneToMany(targetEntity=Aluno.class, mappedBy="grupo")
-    private Collection<Aluno> alunos;
-    
-    
-    @ManyToMany(targetEntity=Atividade.class)
-    @JoinTable(name="AlunoAtividade" )
-    private Collection<Atividade> atividades;
+	@OneToMany(targetEntity = Aluno.class, mappedBy = "grupo")
+	private Collection<Aluno> alunos;
 
 
-    @Override
-    public String toString() {
-        return reflectionToString(this, SHORT_PREFIX_STYLE);
-    }
+	@ManyToMany(targetEntity = Atividade.class)
+	@JoinTable(name = "AlunoAtividade")
+	private Collection<Atividade> atividades;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Override
+	public String toString() {
+		return reflectionToString(this, SHORT_PREFIX_STYLE);
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public Collection<Aluno> getAlunos() {
 		return alunos;

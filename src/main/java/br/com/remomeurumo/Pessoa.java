@@ -1,9 +1,6 @@
 package br.com.remomeurumo;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
@@ -12,13 +9,7 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
  * @author jardim
  */
 @MappedSuperclass
-public class Pessoa implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
-	private Long id;
+public class Pessoa extends BaseEntity {
 
 	//Identficacoes
 	private String nome;
@@ -49,14 +40,6 @@ public class Pessoa implements Serializable {
 	@Override
 	public String toString() {
 		return reflectionToString(this, SHORT_PREFIX_STYLE);
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNome() {

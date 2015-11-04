@@ -1,6 +1,7 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -8,6 +9,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import javax.ws.rs.ext.ContextResolver;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static org.apache.commons.lang3.StringUtils.removeEnd;
 
 /**
  * @author bbviana
@@ -15,7 +17,8 @@ import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKN
 public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
-        packages(this.getClass().getPackage().getName());
+        String parentPackage = removeEnd(this.getClass().getPackage().getName(), ".config");
+        packages(parentPackage);
         register(MultiPartFeature.class); // file upload
         register(JacksonFeature.class);
         register(JacksonConfigurator.class);
