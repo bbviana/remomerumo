@@ -7,9 +7,12 @@ class CrudController extends Controller {
     }
 
     state = {
-        list: [],
-        form: {},
         search: {},
+
+        list: [],
+
+        form: {},
+        formAssociations: {},
         showForm: false,
 
         currentPage: 1,
@@ -27,29 +30,32 @@ class CrudController extends Controller {
         };
 
         Request.get(`api/${this.url}/`, query).then(
-            ({list, totalPages}) => this.dispatch({
-                list: list,
+            ({data, paging}) => this.dispatch({
+                list: data,
                 showForm: false,
 
-                currentPage: page,
-                pageSize: pageSize,
-                totalPages: totalPages
+                currentPage: paging.page,
+                pageSize: paging.pageSize,
+                totalPages: paging.totalPages
+            }))
+    }
+
+    blank = () => {
+        Request.get(`api/${this.url}/blank`).then(
+            ({data, associations}) => this.dispatch({
+                form: data,
+                formAssociations: associations,
+                showForm: true
             }))
     }
 
     load = (id) => {
-        if(id) {
-            Request.get(`api/${this.url}/${id}`).then(
-                form => this.dispatch({
-                form: form,
+        Request.get(`api/${this.url}/${id}`).then(
+            ({data, associations}) => this.dispatch({
+                form: data,
+                formAssociations: associations,
                 showForm: true
             }))
-        } else {
-            this.dispatch({
-                form: {},
-                showForm: true
-            })
-        }
     }
 
     save = () => {

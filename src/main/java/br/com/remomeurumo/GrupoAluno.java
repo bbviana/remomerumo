@@ -1,17 +1,15 @@
 package br.com.remomeurumo;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
-
-import java.io.Serializable;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import java.util.Collection;
+
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 /**
  * @author bbviana
@@ -23,7 +21,6 @@ public class GrupoAluno extends BaseEntity {
 
 	@OneToMany(targetEntity = Aluno.class, mappedBy = "grupo")
 	private Collection<Aluno> alunos;
-
 
 	@ManyToMany(targetEntity = Atividade.class)
 	@JoinTable(name = "AlunoAtividade")

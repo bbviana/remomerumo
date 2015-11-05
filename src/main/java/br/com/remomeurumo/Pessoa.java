@@ -33,6 +33,7 @@ public class Pessoa extends BaseEntity {
 	private String bermuda;
 	private String camiseta;
 
+
 	//TODO: FOTO
 	//private String Foto;
 

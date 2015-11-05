@@ -1,5 +1,8 @@
 package br.com.remomeurumo;
 
+import com.fasterxml.jackson.annotation.*;
+import com.google.gson.annotations.JsonAdapter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -23,14 +26,18 @@ public class Aluno extends Pessoa implements Serializable {
 	//TODO: FOTO
 	//private String Foto;
 
+	@JsonFilter("associationFilter")
 	@ManyToMany(targetEntity = Responsavel.class)
 	@JoinTable(name = "AlunoResponsavel")
 	private Collection<Responsavel> responsaveis;
 
 
+	@JsonFilter("associationFilter")
 	@OneToMany(targetEntity = AlunoAtividade.class, mappedBy = "aluno")
 	private Collection<AlunoAtividade> alunoAtividades;
 
+
+	@JsonFilter("associationFilter")
 	@ManyToOne(targetEntity = GrupoAluno.class)
 	@JoinTable(name = "AlunoGrupoAluno")
 	private GrupoAluno grupo;
@@ -89,5 +96,4 @@ public class Aluno extends Pessoa implements Serializable {
 	public String getMatrAluno() {
 		return matrAluno;
 	}
-
 }

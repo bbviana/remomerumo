@@ -1,7 +1,6 @@
 package br.com.remomeurumo.test
 
 import groovy.transform.ToString
-import junit.framework.Assert
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -9,7 +8,7 @@ import org.junit.Test
 import javax.ws.rs.client.Entity
 import javax.ws.rs.core.Response
 
-import static junit.framework.Assert.assertEquals
+import static br.com.remomeurumo.controller.Paging.DEFAULT_PAGE_SIZE
 import static junit.framework.Assert.assertNull
 import static junit.framework.Assert.assertTrue
 
@@ -64,7 +63,7 @@ abstract class CrudTest extends BaseTest {
 
             Response response = target(url).request().post(Entity.json(template))
 
-            Object json = toJson(response)
+            def json = toJson(response)
             template.id = (long) json.id
 
             compare(json, template)
@@ -86,7 +85,7 @@ abstract class CrudTest extends BaseTest {
             log "[PUT] /${url}/${from.id} ${to}"
 
             Response response = target("${url}/${from.id}").request().put(Entity.json(to))
-            Object json = toJson(response)
+            def json = toJson(response)
 
             compare(json, to)
             compare(find(entityClass, from.id), to)
@@ -103,9 +102,11 @@ abstract class CrudTest extends BaseTest {
             log "[GET] /${url}/${it.id}"
 
             Response response = target("${url}/${it.id}").request().get()
-            Object json = toJson(response)
+            def json = toJson(response)
+            println json
+            def element = json.data
 
-            compare(json, it, ["index"])
+            compare(element, it, ["index"])
         }
     }
 
@@ -117,9 +118,17 @@ abstract class CrudTest extends BaseTest {
         log "[GET] /${url}"
 
         Response response = target(url).request().get()
-        Object result = toJson(response)
+        def result = toJson(response)
+        List list = result.data
+        def paging = result.paging
 
-        compare(result.list as List, data, ["index"])
+        compare(list, data, ["index"])
+        compare(paging, [
+                currentPage : 1,
+                pageSize    : DEFAULT_PAGE_SIZE,
+                totalPages  : 1,
+                totalResults: data.size()
+        ])
     }
 
 
@@ -131,9 +140,17 @@ abstract class CrudTest extends BaseTest {
         log "[GET] /${url}?count=2"
 
         Response response = target(url).queryParam("count", "2").request().get()
-        Object result = toJson(response)
+        def result = toJson(response)
+        List list = result.data
+        def paging = result.paging
 
-        compare(result.list as List, data[0..1], ["index"])
+        compare(list, data[0..1], ["index"])
+        compare(paging, [
+                currentPage : 1,
+                pageSize    : 2,
+                totalPages  : Math.ceil((double) data.size() / 2),
+                totalResults: data.size()
+        ])
     }
 
     @Test
@@ -144,9 +161,17 @@ abstract class CrudTest extends BaseTest {
         log "[GET] /${url}?count=2&page=2"
 
         Response response = target(url).queryParam("count", "2").queryParam("page", "2").request().get()
-        Object result = toJson(response)
+        def result = toJson(response)
+        List list = result.data
+        def paging = result.paging
 
-        compare(result.list as List, data[2..3], ["index"])
+        compare(list, data[2..3], ["index"])
+        compare(paging, [
+                currentPage : 2,
+                pageSize    : 2,
+                totalPages  : Math.ceil((double) data.size() / 2),
+                totalResults: data.size()
+        ])
     }
 
 
@@ -155,22 +180,29 @@ abstract class CrudTest extends BaseTest {
         def url = ctx.url
         def searches = ctx.searches
 
-        searches.each {search ->
+        searches.each { search ->
             Map query = search.query
             List<Map> expected = search.expected
 
             log "[GET] /${url} query=${query}"
 
             def target = target("alunos")
-            query.each {name, value ->
+            query.each { name, value ->
                 target = target.queryParam(name as String, value)
             }
 
             Response response = target.request().get()
-            Object result = toJson(response)
+            def result = toJson(response)
+            List list = result.data
+            def paging = result.paging
 
-            assertEquals expected.size(), result.totalResults
-            compare(result.list as List, expected, ["index"])
+            compare(list, expected, ["index"])
+            compare(paging, [
+                    currentPage : 1,
+                    pageSize    : DEFAULT_PAGE_SIZE,
+                    totalPages  : 1,
+                    totalResults: expected.size()
+            ])
         }
     }
 

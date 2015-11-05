@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import {invariant} from '../helpers'
 
 /**
  * Form é um decorator para form com as seguintes funcionalidades:
@@ -18,18 +19,19 @@ class Form extends Component {
 }
 
 const decorateOnChange = (originalHander) => {
-    return (event) => {
-        const {target} = event;
-        const newValue = {};
-        newValue[target.name] = target.value;
-        originalHander(newValue);
+    return ({target}) => {
+        invariant(target.name, `Especifique o atributo 'name' no elemento ${target}`)
+
+        const newValue = {}
+        newValue[target.name] = target.value
+        originalHander(newValue)
     }
 }
 
 const decorateOnSubmit = (originalHander) => {
     return (event) => {
-        event.preventDefault();
-        originalHander(event);
+        event.preventDefault()
+        originalHander(event)
     }
 }
 

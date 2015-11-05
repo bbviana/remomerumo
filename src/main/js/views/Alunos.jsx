@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
+import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AlunosController} from '../controllers'
-import {Input} from 'react-bootstrap';
+import {Input} from 'react-bootstrap'
 
 class Alunos extends Component {
     componentDidMount = () => AlunosController.list() // Busca inicial
@@ -31,8 +32,24 @@ class Alunos extends Component {
             </tr>
     }
 
-    formSchema = (aluno) =>
+    formSchema = (aluno, {grupos = [], responsaveis = []}) =>
         <div>
+            <Input type="select" label="Grupo" name="grupo"
+                   defaultValue={id(aluno.grupo)} onChange={handleAssociationChange}>
+                <option value="">Selecione...</option>
+                {grupos.map((element, i) =>
+                    <option key={i} value={element.id}>{element.nome}</option>
+                )}
+            </Input>
+
+            <Input type="select" label="Responsáveis" name="responsaveis"
+                   defaultValue={ids(aluno.responsaveis)} onChange={handleAssociationChange} multiple>
+                <option value="">Selecione...</option>
+                {responsaveis.map((element, i) =>
+                    <option key={i} value={element.id}>{element.nome}</option>
+                )}
+            </Input>
+
             <Input type="text" label="Nome" placeholder="Nome completo do aluno" name="nome" defaultValue={aluno.nome} autoFocus/>
             <Input type="text" name="apelido" defaultValue={aluno.apelido} label="Apelido" placeholder="Apelido"  />
             <Input type="text" name="naturalDe" defaultValue={aluno.naturalDe} label="Natural de" placeholder="Cidade - estado"  />
@@ -55,5 +72,6 @@ class Alunos extends Component {
               listSchema={this.listSchema}
               formSchema={this.formSchema} />
 }
+
 
 export default Alunos
