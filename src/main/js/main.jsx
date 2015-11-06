@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Alunos, Login} from './views'
+import {Alunos, Login, Colaboradores, Responsaveis, Atividades} from './views'
 
 if(window.location.search === "?login"){
     // localhost:8080/?login

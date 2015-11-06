@@ -133,7 +133,7 @@ const PageSize = ({controller, pageSize}) =>
     </select>
 
 const Formulario = ({controller, schema, show, bean, title}) =>
-    <Modal show={show} onHide={controller.closeForm}>
+    <Modal show={show} onHide={controller.closeForm} bsSize="large">
         <Modal.Header>
             <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

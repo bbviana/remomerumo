@@ -43,7 +43,8 @@ var build = function (watch) {
                 })
             })
             .pipe(source('bundle.js'))
-            .pipe(gulp.dest(paths.target));
+            .pipe(gulp.dest(paths.target))
+            .pipe(gulp.dest("./target/remomeurumo/js"));
             //.pipe(livereload());
             //.pipe(connect.reload());
     };

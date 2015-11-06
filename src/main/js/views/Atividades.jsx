@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {AtividadesController} from '../controllers'
-import {Input} from 'react-bootstrap';
+import {Input, Row, Col, Grid} from 'react-bootstrap';
 
 class Atividades extends Component {
     componentDidMount = () => AtividadesController.list() // Busca inicial
@@ -21,15 +21,23 @@ class Atividades extends Component {
         body: (atividade) =>
             <tr>
                 <td>{atividade.id}</td>
-                <td>{atividade.Data}</td>
+                <td>{atividade.data}</td>
                 <td>{atividade.comentario}</td>
             </tr>
     }
 
     formSchema = (atividade) =>
         <div>
-            <Input type="text" label="Data" placeholder="Data" name="data" defaultValue={atividade.data} autoFocus/>
-            <Input type="text" name="comentario" defaultValue={atividade.comentario} label="Comentário" placeholder="Comentário"  />
+	        <Grid fluid="true">
+		        <Row className="show-grid">
+		          	<Col xs={12}><Input type="text" label="Data" placeholder="Data da aula" name="data" defaultValue={atividade.nome} autoFocus/></Col>
+		        </Row>
+		
+		        <Row className="show-grid">
+		        	<Col xs={12}><Input type="textarea" label="Comentário" name="comentario" defaultValue={atividade.comentario} placeholder="Comentário"  /></Col>
+		        </Row>
+		
+	      </Grid>
         </div>
 
     render = () =>
