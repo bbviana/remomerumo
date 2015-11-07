@@ -13,6 +13,8 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @Entity
 public class Aluno extends Pessoa implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	//Identficacoes
 	private String matrAluno;
 

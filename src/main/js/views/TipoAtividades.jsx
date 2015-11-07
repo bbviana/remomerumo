@@ -26,9 +26,9 @@ class TipoAtividades extends Component {
 
     formSchema = (tipoAtividade) =>
         <div>
-	        <Grid fluid="true">
+	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome completo do colaborador" name="nome" defaultValue={tipoAtividade.nome} autoFocus/></Col>
+		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome do Tipo de Atividade" name="nome" defaultValue={tipoAtividade.nome} autoFocus/></Col>
 		        </Row>
 	      </Grid>
         </div>

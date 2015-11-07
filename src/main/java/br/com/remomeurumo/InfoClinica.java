@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 @Entity
 public class InfoClinica extends BaseEntity {
 
+	private static final long serialVersionUID = 1L;
+
 	private String nome;
 
 	private String sigla;

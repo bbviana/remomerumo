@@ -11,6 +11,8 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @MappedSuperclass
 public class Pessoa extends BaseEntity {
 
+	private static final long serialVersionUID = 1L;
+	
 	//Identficacoes
 	private String nome;
 	private String apelido;

@@ -24,7 +24,6 @@ class Colaboradores extends Component {
             <tr>
                 <td>{colaborador.id}</td>
                 <td>{colaborador.nome}</td>
-                <td>{colaborador.endereco}</td>
 				<td>{colaborador.email}</td>
                 <td>{colaborador.telefone}</td>
                 <td>{colaborador.celular}</td>
@@ -33,7 +32,7 @@ class Colaboradores extends Component {
 
     formSchema = (colaborador) =>
         <div>
-	        <Grid fluid="true">
+	        <Grid fluid>
 		        <Row className="show-grid">
 		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome completo do colaborador" name="nome" defaultValue={colaborador.nome} autoFocus/></Col>
 		          	<Col xs={12} md={6}><Input type="text" name="apelido" defaultValue={colaborador.apelido} label="Apelido" placeholder="Apelido"  /></Col>

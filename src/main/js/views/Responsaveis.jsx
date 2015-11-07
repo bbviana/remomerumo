@@ -24,7 +24,6 @@ class Responsaveis extends Component {
             <tr>
                 <td>{responsavel.id}</td>
                 <td>{responsavel.nome}</td>
-                <td>{responsavel.endereco}</td>
 				<td>{responsavel.email}</td>
                 <td>{responsavel.telefone}</td>
                 <td>{responsavel.celular}</td>
@@ -33,7 +32,7 @@ class Responsaveis extends Component {
 
     formSchema = (responsavel) =>
         <div>
-	        <Grid fluid="true">
+	        <Grid fluid>
 		        <Row className="show-grid">
 		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome completo do responsavel" name="nome" defaultValue={responsavel.nome} autoFocus/></Col>
 		          	<Col xs={12} md={6}><Input type="text" name="apelido" defaultValue={responsavel.apelido} label="Apelido" placeholder="Apelido"  /></Col>

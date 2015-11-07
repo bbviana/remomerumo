@@ -10,6 +10,8 @@ import java.util.Collection;
 @Entity
 public class TipoAtividade extends BaseEntity {
 
+	private static final long serialVersionUID = 1L;
+
 	private String nome;
 
 	@ManyToMany(targetEntity = Atividade.class, mappedBy = "tipoAtividade")

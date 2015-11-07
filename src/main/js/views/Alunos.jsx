@@ -33,7 +33,7 @@ class Alunos extends Component {
 
     formSchema = (aluno) =>
         <div>
-	        <Grid fluid="true">
+	        <Grid fluid>
 		        <Row className="show-grid">
 		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome completo do aluno" name="nome" defaultValue={aluno.nome} autoFocus/></Col>
 		          	<Col xs={12} md={6}><Input type="text" name="apelido" defaultValue={aluno.apelido} label="Apelido" placeholder="Apelido"  /></Col>

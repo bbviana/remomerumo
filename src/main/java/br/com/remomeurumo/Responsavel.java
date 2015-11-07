@@ -3,7 +3,6 @@ package br.com.remomeurumo;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -15,6 +14,8 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Responsavel extends Pessoa {
 
+	private static final long serialVersionUID = 1L;
+	
 	@ManyToMany(targetEntity = Aluno.class, mappedBy = "responsaveis")
 	private Collection<Aluno> alunos;
 

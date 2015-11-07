@@ -51,11 +51,12 @@ const Header = () =>
 	      <NavItem eventKey={1} href="?alunos"><Glyphicon glyph="fire" /></NavItem>
 	      <NavItem eventKey={2} href="?responsaveis"> <Glyphicon glyph="user" /></NavItem>
 	      <NavItem eventKey={2} href="?colaboradores"> <Glyphicon glyph="education" /></NavItem>
-	      <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">M
-	        <MenuItem eventKey="1" href="?atividades" ><Glyphicon glyph="send" />Atividade</MenuItem>
-	        <MenuItem eventKey="2"  href="?tipoatividades" ><Glyphicon glyph="pencil" />Tipo de Atividade</MenuItem>
+	      <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
+	        <MenuItem eventKey="1" href="?atividades" ><Glyphicon glyph="send" />&nbsp;Atividade</MenuItem>
+	        <MenuItem eventKey="2"  href="?tipoatividades" ><Glyphicon glyph="pencil" />&nbsp;Tipo de Atividade</MenuItem>
 	        <MenuItem divider />
-	        <MenuItem eventKey="4">Separated link</MenuItem>
+	        <MenuItem eventKey="3" href="?avaliacoesClinicas" ><Glyphicon glyph="send" />&nbsp;Avaliação Clinica</MenuItem>
+	        <MenuItem eventKey="4"  href="?infoClinicas" ><Glyphicon glyph="pencil" />&nbsp;Informação Clinica</MenuItem>
 	      </NavDropdown>
 	      <NavItem eventKey={2} href="?login"> <Glyphicon glyph="log-out" /></NavItem>
 	    </Nav>

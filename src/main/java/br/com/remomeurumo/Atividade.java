@@ -1,6 +1,7 @@
 package br.com.remomeurumo;
 
 import javax.persistence.*;
+
 import java.util.Collection;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
@@ -12,8 +13,13 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @Entity
 public class Atividade extends BaseEntity {
 
-	private String data;
+	private static final long serialVersionUID = 1L;
 
+	private String data;
+	private String nome;
+
+	private String planejamento;
+	
 	private String comentario;
 
 	@ManyToOne(targetEntity = TipoAtividade.class)
@@ -37,6 +43,14 @@ public class Atividade extends BaseEntity {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+	
+	public String getPlanejamento() {
+		return planejamento;
+	}
+
+	public void setPlanejamento(String planejamento) {
+		this.planejamento = planejamento;
 	}
 
 	public Collection<AlunoAtividade> getAlunos() {
@@ -71,4 +85,12 @@ public class Atividade extends BaseEntity {
 		this.comentario = comentario;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 }

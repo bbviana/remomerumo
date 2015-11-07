@@ -3,12 +3,9 @@ package br.com.remomeurumo;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -18,6 +15,8 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class GrupoAluno extends BaseEntity {
+
+	private static final long serialVersionUID = 1L;
 
 	private String nome;
 
