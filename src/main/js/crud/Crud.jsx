@@ -43,10 +43,21 @@ class Crud extends Component {
 
 const Header = () =>
     <Navbar fixedTop={true} fluid={true} inverse={true}>
-        <NavBrand>
-            <a href="#">Remo meu Rumo</a>
-        </NavBrand>
-    </Navbar>
+    	<NavBrand><a href="?login">Remo meu Rumo</a></NavBrand>
+    	<Nav right eventKey={0}> {/* This is the eventKey referenced */}
+	      <NavItem eventKey={1} href="?alunos"><Glyphicon glyph="fire" /></NavItem>
+	      <NavItem eventKey={2} href="?responsaveis"> <Glyphicon glyph="user" /></NavItem>
+	      <NavItem eventKey={2} href="?colaboradores"> <Glyphicon glyph="education" /></NavItem>
+	      <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
+	        <MenuItem eventKey="1" href="?atividades" ><Glyphicon glyph="send" />&nbsp;Atividade</MenuItem>
+	        <MenuItem eventKey="2"  href="?tipoatividades" ><Glyphicon glyph="pencil" />&nbsp;Tipo de Atividade</MenuItem>
+	        <MenuItem divider />
+	        <MenuItem eventKey="3" href="?avaliacoesClinicas" ><Glyphicon glyph="send" />&nbsp;Avaliação Clinica</MenuItem>
+	        <MenuItem eventKey="4"  href="?infoClinicas" ><Glyphicon glyph="pencil" />&nbsp;Informação Clinica</MenuItem>
+	      </NavDropdown>
+	      <NavItem eventKey={2} href="?login"> <Glyphicon glyph="log-out" /></NavItem>
+	    </Nav>
+	 </Navbar>
 
 
 const Content = (props) =>

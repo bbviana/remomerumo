@@ -34,5 +34,21 @@ public class AlunoAtividade extends BaseEntity {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
+	
+	public Atividade getAtividade() {
+		return atividade;
+	}
+
+	public void setAtividade(Atividade atividade) {
+		this.atividade = atividade;
+	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
 
 }

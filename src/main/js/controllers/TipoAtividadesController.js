@@ -1,4 +1,4 @@
-import Controller from './Controller'
+import {Controller, Request} from '../helpers'
 import {CrudController} from '../crud'
 
 class TipoAtividadesController extends CrudController {
