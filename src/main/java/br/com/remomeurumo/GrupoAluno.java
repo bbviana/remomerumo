@@ -10,6 +10,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 /**
  * @author bbviana
  */
@@ -20,9 +22,9 @@ public class GrupoAluno extends BaseEntity {
 
 	private String nome;
 
+	@JsonFilter("associationFilter")
 	@OneToMany(targetEntity = Aluno.class, mappedBy = "grupo")
 	private Collection<Aluno> alunos;
-
 
 	@ManyToMany(targetEntity = Atividade.class)
 	@JoinTable(name = "AlunoAtividade")

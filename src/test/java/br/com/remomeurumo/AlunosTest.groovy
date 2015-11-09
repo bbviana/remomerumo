@@ -13,7 +13,18 @@ class AlunosTest extends CrudTest {
             cleanDataBaseAfterEachTest true
             url "alunos"
             entity Aluno
-            initialData (
+
+            def grupos = populate(GrupoAluno, [
+                [nome: "Grupo 1"],
+                [nome: "Grupo 2"],
+            ])
+
+            def responsaveis = populate(Responsavel, [
+                    [nome: "André"],
+                    [nome: "Paula"],
+            ])
+
+            initialData(
                     [nome: "Aluno 0"],
                     [nome: "Aluno 1"],
                     [nome: "Aluno 2"],

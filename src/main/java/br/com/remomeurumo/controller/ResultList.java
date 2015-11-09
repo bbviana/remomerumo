@@ -1,44 +1,26 @@
 package br.com.remomeurumo.controller;
 
-import com.google.common.base.Objects;
-
 import java.util.List;
-
-import static com.google.common.base.Objects.firstNonNull;
-import static java.lang.Integer.MAX_VALUE;
 
 /**
  * @author bbviana
  */
 public class ResultList<T> {
-	private List<T> list;
 
-	private Integer pageSize;
+	private List<T> data;
 
-	private Integer totalResults;
+	private Paging paging;
 
-	private Integer totalPages;
-
-	public ResultList(List<T> list, Integer pageSize, Integer totalResults) {
-		this.list = list;
-		this.pageSize = firstNonNull(pageSize, MAX_VALUE);
-		this.totalResults = totalResults;
-		this.totalPages = (int) Math.ceil((double) this.totalResults / this.pageSize);
+	public ResultList(List<T> data, Integer currentPage, Integer pageSize, Integer totalResults) {
+		this.data = data;
+		this.paging = new Paging(currentPage, pageSize, totalResults);
 	}
 
-	public List<T> getList() {
-		return list;
+	public List<T> getData() {
+		return data;
 	}
 
-	public Integer getPageSize() {
-		return pageSize;
-	}
-
-	public Integer getTotalResults() {
-		return totalResults;
-	}
-
-	public Integer getTotalPages() {
-		return totalPages;
+	public Paging getPaging() {
+		return paging;
 	}
 }

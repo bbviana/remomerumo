@@ -41,10 +41,46 @@ public class CrudController<T extends BaseEntity> {
 		return null;
 	}
 
+	////////////////////////////////////////////////////////////////////////////////
+	// CALLBACKS
+	////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Adicione associações nesta fase
+	 */
+	protected void postBlank(Result<T> result) {
+		// hook
+	}
+
+
+	/**
+	 * Adicione associações nesta fase
+	 */
+	protected void postLoad(Result<T> result) {
+		// hook
+	}
+
+	////////////////////////////////////////////////////////////////////////////////
+	// RESTFUL
+	////////////////////////////////////////////////////////////////////////////////
+
 	@POST
 	public T insert(T element) {
 		em.persist(element);
 		return element;
+	}
+
+	@GET
+	@Path("blank")
+	public Result<T> blank(){
+		try {
+			T instance = getType().newInstance();
+			Result<T> result = new Result<>(instance);
+			postBlank(result);
+			return result;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@PUT
@@ -56,8 +92,11 @@ public class CrudController<T extends BaseEntity> {
 
 	@GET
 	@Path("{id}")
-	public T get(@PathParam("id") Long id) {
-		return em.find(getType(), id);
+	public Result<T> get(@PathParam("id") Long id) {
+		T element = em.find(getType(), id);
+		Result<T> result = new Result<>(element);
+		postLoad(result);
+		return result;
 	}
 
 	@GET
@@ -66,7 +105,6 @@ public class CrudController<T extends BaseEntity> {
 			@QueryParam("count") Integer count,
 			@QueryParam("page") Integer page,
 			@QueryParam("search.nome") String nome) {
-
 
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(getType());
@@ -90,7 +128,7 @@ public class CrudController<T extends BaseEntity> {
 		List<T> list = criteria.list();
 		Long totalResults = (Long) countCriteria.setProjection(Projections.rowCount()).uniqueResult();
 
-		return new ResultList<>(list, count, totalResults.intValue());
+		return new ResultList<>(list, page, count, totalResults.intValue());
 	}
 
 	@DELETE
@@ -99,4 +137,12 @@ public class CrudController<T extends BaseEntity> {
 		T entity = em.find(getType(), id);
 		em.remove(entity);
 	}
+
+	@SuppressWarnings("unchecked")
+	protected <E> List<E> findAll(Class<? extends E> entityClass) {
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(entityClass);
+		return criteria.list();
+	}
+
 }

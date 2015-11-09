@@ -1,28 +1,16 @@
-/*
- * Copyright (c) 1999-2010 Touch Tecnologia e Informatica Ltda.
- *
- * R. Gomes de Carvalho, 1666, 3o. Andar, Vila Olimpia, Sao Paulo, SP, Brasil.
- *
- * Todos os direitos reservados.
- * Este software e confidencial e de propriedade da Touch Tecnologia e Informatica Ltda. (Informacao Confidencial)
- * As informacoes contidas neste arquivo nao podem ser publicadas, e seu uso esta limitado de acordo
- * com os termos do contrato de licenca.
- */
 package br.com.remomeurumo.config;
 
-import static java.lang.String.format;
+import br.com.remomeurumo.Aluno;
+import br.com.remomeurumo.GrupoAluno;
+import br.com.remomeurumo.Responsavel;
+import br.com.remomeurumo.persistence.Transactional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
-
-import br.com.remomeurumo.Aluno;
-import br.com.remomeurumo.controller.AlunosController;
-import br.com.remomeurumo.persistence.Transactional;
 
 /**
  * @author bbviana
@@ -35,25 +23,54 @@ public class Scenario {
 	@Inject
 	private EntityManager em;
 
-	@Inject
-	private AlunosController alunosController;
-
 	@GET
-	@Path("populate/alunos/{quantity}")
-	public Response populateAlunos(@PathParam("quantity") Integer quantity) {
-		for (int i = 0; i < quantity; i++) {
-			Aluno aluno = new Aluno();
-			aluno.setNome("Aluno " + i);
-			alunosController.insert(aluno);
-		}
-		return Response.ok(format("%s alunos foram criados no banco de dados", quantity)).build();
+	@Path("populate")
+	public Response populate() {
+		em.persist(aluno("Bruno"));
+		em.persist(aluno("Bruna"));
+		em.persist(aluno("Rafael"));
+		em.persist(aluno("Rafaela"));
+		em.persist(aluno("Sharon"));
+		em.persist(aluno("Marilia"));
+		em.persist(aluno("Paulo"));
+
+		em.persist(responsavel("André"));
+		em.persist(responsavel("Marta"));
+		em.persist(responsavel("Paula"));
+
+		em.persist(grupoAluno("Grupo 1"));
+		em.persist(grupoAluno("Grupo 2"));
+		em.persist(grupoAluno("Grupo 3"));
+		em.persist(grupoAluno("Grupo 4"));
+		em.persist(grupoAluno("Grupo 5"));
+
+		return Response.ok("Banco de dados populado com sucesso").build();
 	}
 
 	@GET
-	@Path("clear/alunos/")
-	public Response clearAlunos() {
+	@Path("clear")
+	public Response clear() {
 		em.createQuery("DELETE FROM Aluno").executeUpdate();
+		em.createQuery("DELETE FROM GrupoAluno").executeUpdate();
+		em.createQuery("DELETE FROM Responsavel").executeUpdate();
 		return Response.ok("Registros removidos").build();
 	}
 
+	private static Aluno aluno(String nome) {
+		Aluno aluno = new Aluno();
+		aluno.setNome(nome);
+		return aluno;
+	}
+
+	private static GrupoAluno grupoAluno(String nome) {
+		GrupoAluno grupoAluno = new GrupoAluno();
+		grupoAluno.setNome(nome);
+		return grupoAluno;
+	}
+
+	private static Responsavel responsavel(String nome) {
+		Responsavel responsavel = new Responsavel();
+		responsavel.setNome(nome);
+		return responsavel;
+	}
 }
