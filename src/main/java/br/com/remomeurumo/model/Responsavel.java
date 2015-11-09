@@ -1,4 +1,4 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
@@ -14,9 +14,7 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Responsavel extends Pessoa {
 
-	private static final long serialVersionUID = 1L;
-	
-	@ManyToMany(targetEntity = Aluno.class, mappedBy = "responsaveis")
+	@ManyToMany(mappedBy = "responsaveis")
 	private Collection<Aluno> alunos;
 
 	@Override
@@ -31,4 +29,6 @@ public class Responsavel extends Pessoa {
 	public void setAlunos(Collection<Aluno> alunos) {
 		this.alunos = alunos;
 	}
+
+	private static final long serialVersionUID = 1L;
 }

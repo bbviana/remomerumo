@@ -1,4 +1,4 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
@@ -16,11 +16,9 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Colaborador extends Pessoa implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
 	private TipoColaborador tipoColcaborador;
 
-	@ManyToMany(targetEntity = Atividade.class)
+	@ManyToMany
 	@JoinTable(name = "ColaboradorAtividade")
 	private Collection<Atividade> atividades;
 
@@ -45,4 +43,5 @@ public class Colaborador extends Pessoa implements Serializable {
 		this.atividades = atividades;
 	}
 
+	private static final long serialVersionUID = 1L;
 }

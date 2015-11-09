@@ -1,4 +1,6 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
+
+import br.com.remomeurumo.framework.BaseEntity;
 
 import javax.persistence.MappedSuperclass;
 
@@ -11,8 +13,6 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @MappedSuperclass
 public class Pessoa extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-	
 	//Identficacoes
 	private String nome;
 	private String apelido;
@@ -38,7 +38,6 @@ public class Pessoa extends BaseEntity {
 
 	//TODO: FOTO
 	//private String Foto;
-
 
 	@Override
 	public String toString() {
@@ -149,4 +148,5 @@ public class Pessoa extends BaseEntity {
 		this.camiseta = camiseta;
 	}
 
+	private static final long serialVersionUID = 1L;
 }

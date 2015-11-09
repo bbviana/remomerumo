@@ -1,8 +1,10 @@
 package br.com.remomeurumo.controller;
 
-import br.com.remomeurumo.Aluno;
-import br.com.remomeurumo.GrupoAluno;
-import br.com.remomeurumo.Responsavel;
+import br.com.remomeurumo.model.Aluno;
+import br.com.remomeurumo.model.GrupoAluno;
+import br.com.remomeurumo.model.Responsavel;
+import br.com.remomeurumo.framework.CrudController;
+import br.com.remomeurumo.framework.Result;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;

@@ -1,8 +1,11 @@
-package br.com.remomeurumo.controller;
+package br.com.remomeurumo.framework;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static br.com.remomeurumo.framework.Beans.property;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author bbviana
@@ -26,6 +29,10 @@ public class Result<T> {
 	}
 
 	public void addAssociation(String name, List<?> association) {
-		associations.put(name, association);
+		List<Association> associationBeans = association.stream().map(it ->
+				new Association(property(it, "id"), property(it, "nome")))
+				.collect(toList());
+
+		associations.put(name, associationBeans);
 	}
 }

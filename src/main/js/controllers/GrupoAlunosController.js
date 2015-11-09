@@ -6,5 +6,5 @@ class GrupoAlunosController extends CrudController {
         super("grupoAlunos")
     }
 }
-export default new GrupoAlunosController()
 
+export default new GrupoAlunosController()

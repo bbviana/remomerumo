@@ -1,8 +1,8 @@
 package br.com.remomeurumo.config;
 
-import br.com.remomeurumo.Aluno;
-import br.com.remomeurumo.GrupoAluno;
-import br.com.remomeurumo.Responsavel;
+import br.com.remomeurumo.model.Aluno;
+import br.com.remomeurumo.model.GrupoAluno;
+import br.com.remomeurumo.model.Responsavel;
 import br.com.remomeurumo.persistence.Transactional;
 
 import javax.enterprise.context.ApplicationScoped;

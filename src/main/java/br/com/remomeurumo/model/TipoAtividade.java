@@ -1,4 +1,6 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
+
+import br.com.remomeurumo.framework.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -10,11 +12,9 @@ import java.util.Collection;
 @Entity
 public class TipoAtividade extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
 	private String nome;
 
-	@ManyToMany(targetEntity = Atividade.class, mappedBy = "tipoAtividade")
+	@ManyToMany(mappedBy = "tipoAtividade")
 	private Collection<Atividade> atividades;
 
 	public String getNome() {
@@ -33,4 +33,5 @@ public class TipoAtividade extends BaseEntity {
 		this.atividades = atividades;
 	}
 
+	private static final long serialVersionUID = 1L;
 }

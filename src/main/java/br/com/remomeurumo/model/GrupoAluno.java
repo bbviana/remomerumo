@@ -1,4 +1,4 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
@@ -10,6 +10,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import br.com.remomeurumo.framework.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
@@ -18,18 +19,15 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 @Entity
 public class GrupoAluno extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
 	private String nome;
 
 	@JsonFilter("associationFilter")
-	@OneToMany(targetEntity = Aluno.class, mappedBy = "grupo")
+	@OneToMany(mappedBy = "grupo")
 	private Collection<Aluno> alunos;
 
-	@ManyToMany(targetEntity = Atividade.class)
+	@ManyToMany
 	@JoinTable(name = "AlunoAtividade")
 	private Collection<Atividade> atividades;
-
 
 	@Override
 	public String toString() {
@@ -60,4 +58,5 @@ public class GrupoAluno extends BaseEntity {
 		this.atividades = atividades;
 	}
 
+	private static final long serialVersionUID = 1L;
 }

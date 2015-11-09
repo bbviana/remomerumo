@@ -1,6 +1,7 @@
 package br.com.remomeurumo.controller;
 
-import br.com.remomeurumo.TipoAtividade;
+import br.com.remomeurumo.model.TipoAtividade;
+import br.com.remomeurumo.framework.CrudController;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;

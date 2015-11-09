@@ -1,7 +1,8 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
+
+import br.com.remomeurumo.framework.BaseEntity;
 
 import javax.persistence.*;
-
 import java.util.Collection;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
@@ -13,23 +14,22 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @Entity
 public class Atividade extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
 	private String data;
+
 	private String nome;
 
 	private String planejamento;
-	
+
 	private String comentario;
 
-	@ManyToOne(targetEntity = TipoAtividade.class)
+	@ManyToOne
 	@JoinTable(name = "AtividadeTipo")
 	private TipoAtividade tipoAtividade;
 
-	@OneToMany(targetEntity = AlunoAtividade.class, mappedBy = "atividade")
+	@OneToMany(mappedBy = "atividade")
 	private Collection<AlunoAtividade> alunos;
 
-	@ManyToMany(targetEntity = Colaborador.class, mappedBy = "atividades")
+	@ManyToMany(mappedBy = "atividades")
 	private Collection<Colaborador> colaboradores;
 
 	@Override
@@ -44,7 +44,7 @@ public class Atividade extends BaseEntity {
 	public void setData(String data) {
 		this.data = data;
 	}
-	
+
 	public String getPlanejamento() {
 		return planejamento;
 	}
@@ -92,5 +92,6 @@ public class Atividade extends BaseEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	private static final long serialVersionUID = 1L;
 }

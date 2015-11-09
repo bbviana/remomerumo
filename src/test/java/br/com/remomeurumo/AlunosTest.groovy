@@ -1,5 +1,8 @@
 package br.com.remomeurumo
 
+import br.com.remomeurumo.model.Aluno
+import br.com.remomeurumo.model.GrupoAluno
+import br.com.remomeurumo.model.Responsavel
 import br.com.remomeurumo.test.CrudTest
 
 /**

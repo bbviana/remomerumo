@@ -1,4 +1,6 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
+
+import br.com.remomeurumo.framework.BaseEntity;
 
 import javax.persistence.Entity;
 
@@ -7,8 +9,6 @@ import javax.persistence.Entity;
  */
 @Entity
 public class InfoClinica extends BaseEntity {
-
-	private static final long serialVersionUID = 1L;
 
 	private String nome;
 
@@ -30,4 +30,5 @@ public class InfoClinica extends BaseEntity {
 		this.sigla = sigla;
 	}
 
+	private static final long serialVersionUID = 1L;
 }

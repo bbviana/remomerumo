@@ -1,4 +1,6 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
+
+import br.com.remomeurumo.framework.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,15 +15,13 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @Entity
 public class AlunoAtividade extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
 	private String comentario;
 
-	@ManyToOne(targetEntity = Atividade.class)
+	@ManyToOne
 	@JoinColumn(name = "atividadeid")
 	private Atividade atividade;
 
-	@ManyToOne(targetEntity = Aluno.class)
+	@ManyToOne
 	@JoinColumn(name = "alunoid")
 	private Aluno aluno;
 
@@ -37,22 +37,6 @@ public class AlunoAtividade extends BaseEntity {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	
-	public Atividade getAtividade() {
-		return atividade;
-	}
-
-	public void setAtividade(Atividade atividade) {
-		this.atividade = atividade;
-	}
-
-	public Aluno getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
-	}
 
 	public Atividade getAtividade() {
 		return atividade;
@@ -70,4 +54,5 @@ public class AlunoAtividade extends BaseEntity {
 		this.aluno = aluno;
 	}
 
+	private static final long serialVersionUID = 1L;
 }

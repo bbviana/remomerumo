@@ -8,7 +8,7 @@ import org.junit.Test
 import javax.ws.rs.client.Entity
 import javax.ws.rs.core.Response
 
-import static br.com.remomeurumo.controller.Paging.DEFAULT_PAGE_SIZE
+import static br.com.remomeurumo.framework.Paging.DEFAULT_PAGE_SIZE
 import static junit.framework.Assert.assertNull
 import static junit.framework.Assert.assertTrue
 
@@ -186,7 +186,7 @@ abstract class CrudTest extends BaseTest {
 
             log "[GET] /${url} query=${query}"
 
-            def target = target("alunos")
+            def target = target(url)
             query.each { name, value ->
                 target = target.queryParam(name as String, value)
             }

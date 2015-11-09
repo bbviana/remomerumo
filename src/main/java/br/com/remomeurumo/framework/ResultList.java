@@ -1,4 +1,4 @@
-package br.com.remomeurumo.controller;
+package br.com.remomeurumo.framework;
 
 import java.util.List;
 

@@ -3,7 +3,8 @@ package br.com.remomeurumo.controller;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
-import br.com.remomeurumo.Colaborador;
+import br.com.remomeurumo.model.Colaborador;
+import br.com.remomeurumo.framework.CrudController;
 
 /**
  * @author jardim

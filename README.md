@@ -33,7 +33,126 @@
 
 # Desenvolvimento
 
-## Relacionamentos (Associações)
+## Crud
+
+Para criar um CRUD seguindo o framework:
+
+#### Entidade
+
+- Estender **BaseEntity**
+- Marcar Associações com **associationFilter**
+
+```java
+
+@Entity
+public class GrupoAluno extends BaseEntity {
+
+    private String nome;
+
+	@JsonFilter("associationFilter")
+	@OneToMany(mappedBy = "grupo")
+	private Collection<Aluno> alunos;
+
+}
+```
+
+#### Controller
+
+- Estender **CrudController**
+- Usar **@RequestScoped**
+- Carregar **relacionamentos** nos métodos **postBlank()** e **postLoad()**
+
+``` java
+@RequestScoped
+@Path("grupoAlunos")
+public class GrupoAlunosController extends CrudController<GrupoAluno> {
+
+	protected Class<GrupoAluno> getType() {
+		return GrupoAluno.class;
+	}
+
+	@Override
+	protected void postBlank(Result<GrupoAluno> result) {
+		result.addAssociation("alunos", findAll(Aluno.class));
+	}
+
+	@Override
+	protected void postLoad(Result<GrupoAluno> result) {
+		postBlank(result);
+	}
+}
+
+```
+
+#### Client-Controller (Javascript)
+
+- Estender **CrudController**
+- No contrutor, espcificar o **path**
+- **Exportar** uma instância (operador new)
+
+``` js
+import {Controller, Request} from '../helpers'
+import {CrudController} from '../crud'
+
+class GrupoAlunosController extends CrudController {
+    constructor(){
+        super("grupoAlunos")
+    }
+}
+
+export default new GrupoAlunosController()
+
+```
+
+#### Client-View (React)
+
+- **render()** deve devolver `<Crud />`
+
+```js
+import React, {Component, PropTypes} from 'react'
+import {Crud} from '../crud'
+import {GruppoAlunosController} from '../controllers'
+import {Input} from 'react-bootstrap'
+
+class GrupoAlunos extends Component {
+    componentDidMount = () => GrupoAlunosController.list()
+
+    searchSchema = (search) =>
+        <Input type="text" name="nome" degaultValue={search.nome}/>
+
+    listSchema = {
+        header: () =>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>,
+
+        body: (grupoAluno) =>
+            <tr>
+                <td>{grupoAluno.id}</td>
+                <td>{grupoAluno.nome}</td>
+            </tr>
+    }
+
+    formSchema = (grupoAluno) =>
+        <div>
+            <Input type="text" label="Nome" name="nome" defaultValue={grupoAluno.nome}/>
+        </div>
+
+    render = () =>
+        <Crud title="Grupo de Alunos"
+              controller={AlunosController}
+              searchSchema={this.searchSchema}
+              listSchema={this.listSchema}
+              formSchema={this.formSchema} />
+}
+
+
+export default GrupoAlunos
+
+```
+
+### Relacionamentos (Associações)
 
 Anote com **associationFilter** para que o json da Associação contenha apenas *id* e *nome*.
 
@@ -72,6 +191,17 @@ public class AlunosController extends CrudController<Aluno> {
 		postBlank(result);
 	}
 }
+```
+
+```
+{
+    data: {},
+    associations: {
+        grupos: [{id: 1, nome: 'Grupo 1'}],
+        responsaveis: [{id: 1, nome: 'Responsavel 1'}]
+    }
+}
+
 ```
 
 Na **view**:

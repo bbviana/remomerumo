@@ -8,22 +8,23 @@
  * As informacoes contidas neste arquivo nao podem ser publicadas, e seu uso esta limitado de acordo
  * com os termos do contrato de licenca.
  */
-package br.com.remomeurumo;
+package br.com.remomeurumo.framework;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 /**
  * @author bbviana
  */
-@MappedSuperclass
-public abstract class BaseEntity implements Serializable {
+public class Association implements Serializable {
 
-	@Id
-	@GeneratedValue
-	protected Long id;
+	private Long id;
+
+	private String nome;
+
+	public Association(Long id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 
 	public Long getId() {
 		return id;
@@ -31,6 +32,15 @@ public abstract class BaseEntity implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	private static final long serialVersionUID = 1L;

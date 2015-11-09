@@ -77,13 +77,13 @@ abstract class BaseTest extends JerseyTest {
     }
 
     private void activateRequestScoped() {
-        println "Ativando 'RequestContext' para permitir o uso de @RequestScoped..."
+//        println "Ativando 'RequestContext' para permitir o uso de @RequestScoped..."
         RequestContext requestContext = weldContainer.instance().select(RequestContext, UnboundLiteral.INSTANCE).get();
         requestContext.activate();
     }
 
     private void deactivateRequestScoped() {
-        println "Desativando 'RequestContext'..."
+//        println "Desativando 'RequestContext'..."
         RequestContext requestContext = weldContainer.instance().select(RequestContext, UnboundLiteral.INSTANCE).get();
         requestContext.deactivate();
     }

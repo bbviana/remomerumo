@@ -1,11 +1,10 @@
-package br.com.remomeurumo;
+package br.com.remomeurumo.model;
+
+import br.com.remomeurumo.framework.BaseEntity;
 
 import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * @author jardim
@@ -13,23 +12,19 @@ import javax.persistence.ManyToOne;
 @Entity
 public class AvaliacaoClinica extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
 	private String nome;
 
 	private String data;
 
 	private String comentario;
-	
-	@ManyToOne(targetEntity = TipoAtividade.class)
+
+	@ManyToMany
 	@JoinTable(name = "AvaliacaoInfoClinica")
 	private Collection<InfoClinica> infoClinicas;
-	
-	@ManyToOne(targetEntity = Aluno.class)
-	@JoinColumn(name = "alunoid")
+
+	@ManyToOne
 	private Aluno aluno;
 
-	
 	public String getNome() {
 		return nome;
 	}
@@ -69,5 +64,6 @@ public class AvaliacaoClinica extends BaseEntity {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-	
+
+	private static final long serialVersionUID = 1L;
 }

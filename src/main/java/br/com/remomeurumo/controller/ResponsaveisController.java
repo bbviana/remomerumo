@@ -1,6 +1,7 @@
 package br.com.remomeurumo.controller;
 
-import br.com.remomeurumo.Responsavel;
+import br.com.remomeurumo.model.Responsavel;
+import br.com.remomeurumo.framework.CrudController;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;

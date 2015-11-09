@@ -3,8 +3,10 @@ package br.com.remomeurumo.controller;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
-import br.com.remomeurumo.Aluno;
-import br.com.remomeurumo.GrupoAluno;
+import br.com.remomeurumo.model.Aluno;
+import br.com.remomeurumo.model.GrupoAluno;
+import br.com.remomeurumo.framework.CrudController;
+import br.com.remomeurumo.framework.Result;
 
 /**
  * @author bbviana

@@ -8,7 +8,7 @@
  * As informacoes contidas neste arquivo nao podem ser publicadas, e seu uso esta limitado de acordo
  * com os termos do contrato de licenca.
  */
-package br.com.remomeurumo.controller;
+package br.com.remomeurumo.framework;
 
 import static com.google.common.base.Objects.firstNonNull;
 
