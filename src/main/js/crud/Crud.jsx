@@ -59,7 +59,10 @@ const Header = () =>
                 <Glyphicon glyph="education"/>
             </NavItem>
             <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
-                <MenuItem eventKey="1" href="?atividades">
+		        <MenuItem eventKey="2" href="?grupoAlunos">
+		            <Glyphicon glyph="pencil"/> Grupo de Alunos
+		        </MenuItem>
+            	<MenuItem eventKey="1" href="?atividades">
                     <Glyphicon glyph="send"/> Atividade
                 </MenuItem>
                 <MenuItem eventKey="2" href="?tipoatividades">

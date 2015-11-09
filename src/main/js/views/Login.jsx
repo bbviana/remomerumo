@@ -1,11 +1,14 @@
 import React, {Component, PropTypes} from 'react'
+import {Image} from 'react-bootstrap';
 
 class Login extends Component {
     render = () =>
         <div style={s.app}>
             <div className="container">
                 <form style={s.form}>
-                    <h2>Login</h2>
+                <Image src="img/nav-logo-remo.png" responsive />
+                <Image src="img/nav-logo-instituto.png" responsive />
+                	<h2>Login</h2>
 
                     <label htmlFor="inputEmail" className="sr-only">Email</label>
                     <input type="email" id="inputEmail" className="form-control" placeholder="Email"

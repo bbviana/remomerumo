@@ -1,15 +1,16 @@
 package br.com.remomeurumo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import java.util.Collection;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
  * @author bbviana
@@ -19,6 +20,7 @@ public class GrupoAluno extends BaseEntity {
 
 	private String nome;
 
+	@JsonFilter("associationFilter")
 	@OneToMany(targetEntity = Aluno.class, mappedBy = "grupo")
 	private Collection<Aluno> alunos;
 
