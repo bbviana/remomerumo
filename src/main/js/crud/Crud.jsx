@@ -48,7 +48,7 @@ const Header = () =>
         <NavBrand>
             <a href="?login">Remo meu Rumo</a>
         </NavBrand>
-        <Nagitv right eventKey={0}> {/* This is the eventKey referenced */}
+        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
             <NavItem eventKey={1} href="?alunos">
                 <Glyphicon glyph="fire"/>
             </NavItem>
@@ -76,7 +76,7 @@ const Header = () =>
             <NavItem eventKey={2} href="?login">
                 <Glyphicon glyph="log-out"/>
             </NavItem>
-        </Nagitv>
+        </Nav>
     </Navbar>
 
 
