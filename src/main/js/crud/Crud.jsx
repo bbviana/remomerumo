@@ -60,20 +60,26 @@ const Header = () =>
             </NavItem>
             <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
 		        <MenuItem eventKey="2" href="?grupoAlunos">
-		            <Glyphicon glyph="pencil"/> Grupo de Alunos
+		            <Glyphicon glyph="window"/> Grupo de Alunos
 		        </MenuItem>
             	<MenuItem eventKey="1" href="?atividades">
-                    <Glyphicon glyph="send"/> Atividade
+                    <Glyphicon glyph="flag"/> Atividade
                 </MenuItem>
                 <MenuItem eventKey="2" href="?tipoatividades">
                     <Glyphicon glyph="pencil"/> Tipo de Atividade
                 </MenuItem>
                 <MenuItem divider/>
+                <MenuItem eventKey="3" href="?modeloAvaliacoesClinicas">
+                    <Glyphicon glyph="road"/> Modelo de Avaliação Clinica
+                </MenuItem>
+                <MenuItem eventKey="4" href="?tipoInfoClinicas">
+                    <Glyphicon glyph="tags"/> Tipo de Informação Clinica
+                </MenuItem>
                 <MenuItem eventKey="3" href="?avaliacoesClinicas">
                     <Glyphicon glyph="send"/> Avaliação Clinica
                 </MenuItem>
                 <MenuItem eventKey="4" href="?infoClinicas">
-                    <Glyphicon glyph="pencil"/> Informação Clinica
+                    <Glyphicon glyph="stats"/> Informação Clinica
                 </MenuItem>
             </NavDropdown>
             <NavItem eventKey={2} href="?login">

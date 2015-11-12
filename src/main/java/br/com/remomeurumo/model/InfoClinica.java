@@ -1,8 +1,12 @@
 package br.com.remomeurumo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import br.com.remomeurumo.framework.BaseEntity;
 
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
  * @author jardim
@@ -10,24 +14,40 @@ import javax.persistence.Entity;
 @Entity
 public class InfoClinica extends BaseEntity {
 
-	private String nome;
+	private String valor;
 
-	private String sigla;
+	@JsonFilter("associationFilter")
+	@ManyToOne
+	@JoinColumn(name = "tipoid")
+	private TipoInfoClinica tipo;
+	
+	@JsonFilter("associationFilter")
+	@ManyToOne
+	@JoinColumn(name = "avaliacaoid")
+	private AvaliacaoClinica avaliacao;
 
-	public String getNome() {
-		return nome;
+	public String getValor() {
+		return valor;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setValor(String valor) {
+		this.valor = valor;
 	}
 
-	public String getSigla() {
-		return sigla;
+	public TipoInfoClinica getTipo() {
+		return tipo;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setTipo(TipoInfoClinica tipo) {
+		this.tipo = tipo;
+	}
+
+	public AvaliacaoClinica getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(AvaliacaoClinica avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 	private static final long serialVersionUID = 1L;

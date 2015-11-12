@@ -3,6 +3,9 @@ package br.com.remomeurumo.model;
 import br.com.remomeurumo.framework.BaseEntity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 import java.util.Collection;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
@@ -22,13 +25,15 @@ public class Atividade extends BaseEntity {
 
 	private String comentario;
 
+	@JsonFilter("associationFilter")
 	@ManyToOne
-	@JoinTable(name = "AtividadeTipo")
+	@JoinColumn(name = "tipoid")
 	private TipoAtividade tipoAtividade;
 
 	@OneToMany(mappedBy = "atividade")
 	private Collection<AlunoAtividade> alunos;
 
+	@JsonFilter("associationFilter")
 	@ManyToMany(mappedBy = "atividades")
 	private Collection<Colaborador> colaboradores;
 

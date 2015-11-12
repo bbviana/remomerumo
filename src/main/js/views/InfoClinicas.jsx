@@ -7,22 +7,22 @@ class InfoClinicas extends Component {
     componentDidMount = () => InfoClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome da Informação Clinica" autoComplete="off"
-               name="nome" degaultValue={search.nome}/>
+        <Input type="text" placeholder="Buscar por valor da Informação Clinica" autoComplete="off"
+               name="valor" degaultValue={search.valor}/>
 
     listSchema = {
         header: () =>
             <tr>
                 <th>ID</th>
-                <th>Nome</th>
-                <th>Sigla</th>
+                <th>Valor</th>
+                <th>Tipo</th>
             </tr>,
 
         body: (infoClinica) =>
             <tr>
                 <td>{infoClinica.id}</td>
-                <td>{infoClinica.nome}</td>
-                <td>{infoClinica.sigla}</td>
+                <td>{infoClinica.valor}</td>
+                <td>{infoClinica.tipo}</td>
             </tr>
     }
 
@@ -30,10 +30,10 @@ class InfoClinicas extends Component {
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome completo da Informação Clinica" name="nome" defaultValue={infoClinica.nome} autoFocus/></Col>
+		          	<Col xs={12}><Input type="text" label="Valor" placeholder="Valor" name="valor" defaultValue={infoClinica.nome} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Sigla" placeholder="Sigla" name="sigla" defaultValue={infoClinica.sigla} autoFocus/></Col>
+		          	<Col xs={12}><Input type="text" label="Tipo" placeholder="Tipo" name="tipo" defaultValue={infoClinica.sigla} autoFocus/></Col>
 		        </Row>
 	      </Grid>
         </div>

@@ -6,32 +6,29 @@ import java.util.Collection;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 /**
  * @author jardim
  */
 @Entity
 public class AvaliacaoClinica extends BaseEntity {
 
-	private String nome;
-
 	private String data;
 
 	private String comentario;
+	
+	//TODO: ANexo a ficha clinica
 
-	@ManyToMany
-	@JoinTable(name = "AvaliacaoInfoClinica")
-	private Collection<InfoClinica> infoClinicas;
-
+	@JsonFilter("associationFilter")
 	@ManyToOne
+	@JoinColumn(name = "modeloid")
+	private ModeloAvaliacaoClinica modelo;
+	
+	@JsonFilter("associationFilter")
+	@ManyToOne
+	@JoinColumn(name = "alunoid")
 	private Aluno aluno;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 	public String getData() {
 		return data;
@@ -39,14 +36,6 @@ public class AvaliacaoClinica extends BaseEntity {
 
 	public void setData(String data) {
 		this.data = data;
-	}
-
-	public Collection<InfoClinica> getInfoClinicas() {
-		return infoClinicas;
-	}
-
-	public void setInfoClinicas(Collection<InfoClinica> infoClinicas) {
-		this.infoClinicas = infoClinicas;
 	}
 
 	public String getComentario() {
@@ -64,6 +53,16 @@ public class AvaliacaoClinica extends BaseEntity {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
+	
+	public ModeloAvaliacaoClinica getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(ModeloAvaliacaoClinica modelo) {
+		this.modelo = modelo;
+	}
+
+
 
 	private static final long serialVersionUID = 1L;
 }

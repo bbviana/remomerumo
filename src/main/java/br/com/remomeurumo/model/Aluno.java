@@ -22,6 +22,8 @@ public class Aluno extends Pessoa implements Serializable {
 	private String escolaridade;
 
 	private String periodo;
+	
+	private String observacoes;
 
 
 	//TODO: FOTO
@@ -38,7 +40,7 @@ public class Aluno extends Pessoa implements Serializable {
 
 	@JsonFilter("associationFilter")
 	@ManyToOne
-	@JoinTable(name = "AlunoGrupoAluno")
+	@JoinColumn(name = "grupoid")
 	private GrupoAluno grupo;
 
 	@Override
@@ -94,4 +96,13 @@ public class Aluno extends Pessoa implements Serializable {
 	public String getMatrAluno() {
 		return matrAluno;
 	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+	
 }

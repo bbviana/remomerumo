@@ -37,6 +37,28 @@ class Atividades extends Component {
 		        <Row className="show-grid">
 		        	<Col xs={12}><Input type="textarea" label="Comentário" name="comentario" defaultValue={atividade.comentario} placeholder="Comentário"  /></Col>
 		        </Row>
+		        <Row className="show-grid">	
+	        	<Col xs={12}>
+		        	<Input type="select" label="Atividade" name="tipoAtividade"
+			                defaultValue={id(atividade.tipoAtividade)} onChange={handleAssociationChange}>
+			            <option value="">Selecione...</option>
+			            {tipos.map((element, i) =>
+			                <option key={i} value={element.id}>{element.nome}</option>
+			            )}
+		            </Input>
+	            </Col>
+            </Row>
+            <Row className="show-grid">	
+	        	<Col xs={12}>
+	        	 <Input type="select" label="Colaborador" name="colaborador"
+	                   defaultValue={ids(atividade.colaboradores)} onChange={handleAssociationChange} multiple>
+	                <option value="">Selecione...</option>
+	                {colaboradores.map((element, i) =>
+	                    <option key={i} value={element.id}>{element.nome}</option>
+	                )}
+	            </Input>
+		        </Col>
+	        </Row>
 		
 	      </Grid>
         </div>

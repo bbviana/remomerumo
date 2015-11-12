@@ -26,12 +26,12 @@ if(window.location.search === "?login"){
 } else if(window.location.search === "?grupoAlunos") {
     // localhost:8080/?grupoAlunos
     ReactDOM.render(<GrupoAlunos />, document.getElementById("app"));
-} else if(window.location.search === "?tipoInfoClinicas") {
+} else if(window.location.search === "?infoClinicas") {
     // localhost:8080/?tipoInfoClinicas
-    ReactDOM.render(<TipoInfoClinicas />, document.getElementById("app"));
-} else if(window.location.search === "?modeloAvaliacoesClinicas") {
-    // localhost:8080/?modeloAvaliacoesClinicas
-    ReactDOM.render(<ModeloAvaliacoesClinicas />, document.getElementById("app"));
+    ReactDOM.render(<TipoInfoClinica />, document.getElementById("app"));
+} else if(window.location.search === "?grupoAlunos") {
+    // localhost:8080/?grupoAlunos
+    ReactDOM.render(<GrupoAlunos />, document.getElementById("app"));
 } else {
 	
     // localhost:8080/
