@@ -19,10 +19,6 @@ public class Aluno extends Pessoa implements Serializable {
 
 	private String matrAluno;
 
-	private String escolaridade;
-
-	private String periodo;
-	
 	private String observacoes;
 
 
@@ -75,22 +71,6 @@ public class Aluno extends Pessoa implements Serializable {
 
 	public void setMatrAluno(String matrAluno) {
 		this.matrAluno = matrAluno;
-	}
-
-	public String getEscolaridade() {
-		return escolaridade;
-	}
-
-	public void setEscolaridade(String escolaridade) {
-		this.escolaridade = escolaridade;
-	}
-
-	public String getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(String periodo) {
-		this.periodo = periodo;
 	}
 
 	public String getMatrAluno() {

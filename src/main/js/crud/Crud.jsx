@@ -50,17 +50,17 @@ const Header = () =>
         </NavBrand>
         <Nav right eventKey={0}> {/* This is the eventKey referenced */}
             <NavItem eventKey={1} href="?alunos">
-                <Glyphicon glyph="fire"/>
+                <Glyphicon glyph="fire"/> Alunos
             </NavItem>
             <NavItem eventKey={2} href="?responsaveis">
-                <Glyphicon glyph="user"/>
+                <Glyphicon glyph="user"/> Responsáveis
             </NavItem>
             <NavItem eventKey={2} href="?colaboradores">
-                <Glyphicon glyph="education"/>
+                <Glyphicon glyph="education"/> Colaboradores
             </NavItem>
             <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
 		        <MenuItem eventKey="2" href="?grupoAlunos">
-		            <Glyphicon glyph="window"/> Grupo de Alunos
+		            <Glyphicon glyph="link"/> Grupo de Alunos
 		        </MenuItem>
             	<MenuItem eventKey="1" href="?atividades">
                     <Glyphicon glyph="flag"/> Atividade
@@ -148,7 +148,7 @@ const PageSize = ({controller, pageSize}) =>
     </select>
 
 const FormSection = ({controller, schema, data, associations, show, title}) =>
-    <Modal show={show} onHide={controller.closeForm}>
+    <Modal show={show} onHide={controller.closeForm} bsSize="large">
         <Modal.Header>
             <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

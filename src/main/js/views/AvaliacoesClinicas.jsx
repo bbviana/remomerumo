@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
+import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AvaliacoesClinicasController} from '../controllers'
 import {Input, Row, Col, Grid} from 'react-bootstrap';
 
@@ -28,7 +29,7 @@ class AvaliacoesClinicas extends Component {
             </tr>
     }
 
-    formSchema = (avaliacaoClinica) =>
+    formSchema = (avaliacaoClinica, {modelos = [], alunos = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
@@ -44,7 +45,7 @@ class AvaliacoesClinicas extends Component {
 		          	<Col xs={12} md={6}><Input type="text" label="Data" placeholder="Data da Avaliacao" name="data" defaultValue={avaliacaoClinica.data} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
-		          	<Col xs={12}  md={6}>
+		          	<Col xs={12}>
 			          	<Input type="select" label="Aluno" name="aluno"
 			                defaultValue={id(avaliacaoClinica.aluno)} onChange={handleAssociationChange}>
 				            <option value="">Selecione...</option>
@@ -53,7 +54,6 @@ class AvaliacoesClinicas extends Component {
 				            )}
 			            </Input>
 		            </Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Data" placeholder="Data da Avaliacao" name="data" defaultValue={avaliacaoClinica.data} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
 	          		<Col xs={12}><Input type="textarea" label="Comentário" placeholder="Comentários da Avaliação" name="comentario" defaultValue={avaliacaoClinica.comentario} autoFocus/></Col>

@@ -26,7 +26,7 @@ public class GrupoAluno extends BaseEntity {
 	private Collection<Aluno> alunos;
 
 	@ManyToMany
-	@JoinTable(name = "AlunoAtividade")
+	@JoinTable(name = "GrupoAlunoAtividade")
 	private Collection<Atividade> atividades;
 
 	@Override

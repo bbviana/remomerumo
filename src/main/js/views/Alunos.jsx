@@ -46,8 +46,9 @@ class Alunos extends Component {
 	        </Row>
 	
 	        <Row className="show-grid">
-	        	<Col xs={12} md={6}><Input type="text" name="cpf" defaultValue={aluno.cpf} label="CPF" placeholder="Documento CPF"  /></Col>
-	        	<Col xs={12} md={6}><Input type="text" name="rg" defaultValue={aluno.rg} label="RG" placeholder="Documento RG"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="matrAluno" defaultValue={aluno.matrAluno} label="Número de Matricula" placeholder="Número da matricula do aluno"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="cpf" defaultValue={aluno.cpf} label="CPF" placeholder="Documento CPF"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="rg" defaultValue={aluno.rg} label="RG" placeholder="Documento RG"  /></Col>
 	        </Row>
 	        <Row className="show-grid">	
 	        	<Col xs={12}><Input type="text" name="endereco" defaultValue={aluno.endereco} label="Endereço" placeholder="Rua, número"  /></Col>
@@ -64,7 +65,7 @@ class Alunos extends Component {
 	        	<Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={aluno.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
 	        </Row>
 	        <Row className="show-grid">	
-	        	<Col xs={12}>
+	        	<Col xs={12} md={6}>
 		        	<Input type="select" label="Grupo" name="grupo"
 			                defaultValue={id(aluno.grupo)} onChange={handleAssociationChange}>
 			            <option value="">Selecione...</option>
@@ -73,8 +74,6 @@ class Alunos extends Component {
 			            )}
 		            </Input>
 	            </Col>
-            </Row>
-            <Row className="show-grid">	
 	        	<Col xs={12}>
 	        	 <Input type="select" label="Responsáveis" name="responsaveis"
 	                   defaultValue={ids(aluno.responsaveis)} onChange={handleAssociationChange} multiple>
@@ -85,6 +84,10 @@ class Alunos extends Component {
 	            </Input>
 		        </Col>
 	        </Row>
+	        <Row className="show-grid">	
+        		<Col xs={12}><Input type="textarea" name="observacoes" defaultValue={aluno.observacoes} label="Observações" placeholder="Detalhes relevantes sobre o aluno"  /></Col>
+        	</Row>
+	        
       </Grid>
         </div>
 

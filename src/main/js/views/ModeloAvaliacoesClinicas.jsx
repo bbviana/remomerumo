@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
+import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {ModeloAvaliacoesClinicasController} from '../controllers'
 import {Input, Row, Col, Grid} from 'react-bootstrap';
 
@@ -26,7 +27,7 @@ class ModeloAvaliacoesClinicas extends Component {
             </tr>
     }
 
-    formSchema = (modeloAvaliacaoClinica) =>
+    formSchema = (modeloAvaliacaoClinica, {tipoInfoClinicas = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
@@ -34,7 +35,7 @@ class ModeloAvaliacoesClinicas extends Component {
 		        </Row>
 		        <Row className="show-grid">	
 		        	<Col xs={12}>
-		        	 <Input type="select" label="Tipos de Informação Clinica" name="tipoInfoClinicas"
+		        	 <Input type="select" label="Tipos de Informação Clinica" name="modeloAvaliacoesClinicas"
 		                   defaultValue={ids(modeloAvaliacaoClinica.tipoInfoClinicas)} onChange={handleAssociationChange} multiple>
 		                <option value="">Selecione...</option>
 		                {tipoInfoClinicas.map((element, i) =>

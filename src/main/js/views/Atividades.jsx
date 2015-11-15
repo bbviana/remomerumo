@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
+import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AtividadesController} from '../controllers'
 import {Input, Row, Col, Grid} from 'react-bootstrap';
 
@@ -26,7 +27,7 @@ class Atividades extends Component {
             </tr>
     }
 
-    formSchema = (atividade) =>
+    formSchema = (atividade, {tipos = [], colaboradores = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">

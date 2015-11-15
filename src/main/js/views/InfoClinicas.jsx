@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
+import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {InfoClinicasController} from '../controllers'
 import {Input, Row, Col, Grid} from 'react-bootstrap';
 

@@ -48,7 +48,7 @@ class GrupoAlunos extends Component {
 
     render = () =>
         <Crud title="Grupo de Alunos"
-              controller={AlunosController}
+              controller={GruppoAlunosController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}
               formSchema={this.formSchema} />

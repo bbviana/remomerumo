@@ -3,7 +3,7 @@ import {CrudController} from '../crud'
 
 class TipoInfoClinicasController extends CrudController {
     constructor(){
-        super("TipoInfoClinicas")
+        super("tipoInfoClinicas")
     }
 }
 
