@@ -65,7 +65,7 @@ const Header = () =>
             	<MenuItem eventKey="1" href="?atividades">
                     <Glyphicon glyph="flag"/> Atividade
                 </MenuItem>
-                <MenuItem eventKey="2" href="?tipoatividades">
+                <MenuItem eventKey="2" href="?tipoAtividades">
                     <Glyphicon glyph="pencil"/> Tipo de Atividade
                 </MenuItem>
                 <MenuItem divider/>

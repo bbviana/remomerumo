@@ -33,7 +33,7 @@ class TipoInfoClinicas extends Component {
 		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome completo da Informação Clinica" name="nome" defaultValue={tipoInfoClinica.nome} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Sigla" placeholder="Sigla" name="sigla" defaultValue={tipoInfoClinica.sigla} autoFocus/></Col>
+		          	<Col xs={12}><Input type="text" label="Sigla" placeholder="Sigla" name="sigla" defaultValue={tipoInfoClinica.sigla}/></Col>
 		        </Row>
 	      </Grid>
         </div>

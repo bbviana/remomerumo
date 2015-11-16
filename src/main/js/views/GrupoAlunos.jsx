@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
-import {GruppoAlunosController} from '../controllers'
+import {GrupoAlunosController} from '../controllers'
 import {Input, Row, Col, Grid} from 'react-bootstrap';
 
 class GrupoAlunos extends Component {
@@ -37,7 +37,7 @@ class GrupoAlunos extends Component {
 	        	 <Input type="select" label="Alunos" name="alunos"
 	                   defaultValue={ids(grupoAluno.alunos)} onChange={handleAssociationChange} multiple>
 	                <option value="">Selecione...</option>
-	                {responsaveis.map((element, i) =>
+	                {alunos.map((element, i) =>
 	                    <option key={i} value={element.id}>{element.nome}</option>
 	                )}
 	            </Input>
@@ -48,7 +48,7 @@ class GrupoAlunos extends Component {
 
     render = () =>
         <Crud title="Grupo de Alunos"
-              controller={GruppoAlunosController}
+              controller={GrupoAlunosController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}
               formSchema={this.formSchema} />

@@ -7,7 +7,7 @@ class TipoAtividades extends Component {
     componentDidMount = () => TipoAtividadesController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do TipoAtividade" autoComplete="off"
+        <Input type="text" placeholder="Buscar por nome do Tipo de Atividade" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -34,7 +34,7 @@ class TipoAtividades extends Component {
         </div>
 
     render = () =>
-        <Crud title="TipoAtividade"
+        <Crud title="Tipo de Atividade"
               controller={TipoAtividadesController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}

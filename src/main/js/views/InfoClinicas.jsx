@@ -27,14 +27,22 @@ class InfoClinicas extends Component {
             </tr>
     }
 
-    formSchema = (infoClinica) =>
+    formSchema = (infoClinica, {tipos = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
 		          	<Col xs={12}><Input type="text" label="Valor" placeholder="Valor" name="valor" defaultValue={infoClinica.nome} autoFocus/></Col>
 		        </Row>
-		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Tipo" placeholder="Tipo" name="tipo" defaultValue={infoClinica.sigla} autoFocus/></Col>
+	          	 <Row className="show-grid">	
+			        	<Col xs={12}>
+				        	<Input type="select" label="Tipo" name="tipo"
+					                defaultValue={id(infoClinica.tipo)} onChange={handleAssociationChange}>
+					            <option value="">Selecione...</option>
+					            {tipos.map((element, i) =>
+					                <option key={i} value={element.id}>{element.nome}</option>
+					            )}
+				            </Input>
+			            </Col>  	
 		        </Row>
 	      </Grid>
         </div>

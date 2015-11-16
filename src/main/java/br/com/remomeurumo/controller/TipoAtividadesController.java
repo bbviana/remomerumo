@@ -10,7 +10,7 @@ import javax.ws.rs.Path;
  * @author bbviana
  */
 @RequestScoped
-@Path("tipoatividades")
+@Path("tipoAtividades")
 public class TipoAtividadesController extends CrudController<TipoAtividade> {
 
 	protected Class<TipoAtividade> getType() {
