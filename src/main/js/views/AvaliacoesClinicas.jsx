@@ -23,8 +23,8 @@ class AvaliacoesClinicas extends Component {
         body: (avaliacaoClinica) =>
             <tr>
                 <td>{avaliacaoClinica.id}</td>
-                <td>{avaliacaoClinica.modelo}</td>
-                <td>{avaliacaoClinica.aluno}</td>
+                <td>{avaliacaoClinica.modelo.nome}</td>
+                <td>{avaliacaoClinica.aluno.nome}</td>
                 <td>{avaliacaoClinica.data}</td>
             </tr>
     }
