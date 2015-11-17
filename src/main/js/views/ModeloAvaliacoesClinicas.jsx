@@ -19,7 +19,7 @@ class ModeloAvaliacoesClinicas extends Component {
                 <th>Descrição</th>
             </tr>,
 
-        body: (avaliacaoClinica) =>
+        body: (modeloAvaliacaoClinica) =>
             <tr>
                 <td>{modeloAvaliacaoClinica.id}</td>
                 <td>{modeloAvaliacaoClinica.nome}</td>
