@@ -8,7 +8,7 @@ class Alunos extends Component {
     componentDidMount = () => AlunosController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do Aluno" autoComplete="off"
+       <Input type="text" placeholder="Buscar por nome do Aluno" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {

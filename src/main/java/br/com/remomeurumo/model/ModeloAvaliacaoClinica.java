@@ -6,6 +6,8 @@ import java.util.Collection;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 /**
  * @author jardim
  */
@@ -16,6 +18,7 @@ public class ModeloAvaliacaoClinica extends BaseEntity {
 
 	private String descricao;
 
+	@JsonFilter("associationFilter")
 	@ManyToMany
 	@JoinTable(name = "ModeloAvalTipoInfoClinica")
 	private Collection<TipoInfoClinica> tipoInfoClinicas;

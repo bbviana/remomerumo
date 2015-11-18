@@ -16,7 +16,7 @@ class Crud extends Component {
 
     render = ({controller, searchSchema, listSchema, formSchema, title} = this.props) =>
         <div style={styles.app}>
-            <Header />
+            <Header label={title} />
 
             <Content>
                 <SearchSection controller={controller}
@@ -43,11 +43,14 @@ class Crud extends Component {
         </div>
 }
 
-const Header = () =>
+const Header = ({label}) =>
     <Navbar fixedTop fluid inverse>
         <NavBrand>
             <a href="?login">Remo meu Rumo</a>
         </NavBrand>
+        <Nav>
+        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; {label}</NavItem>
+        </Nav>
         <Nav right eventKey={0}> {/* This is the eventKey referenced */}
             <NavItem eventKey={1} href="?alunos">
                 <Glyphicon glyph="fire"/> Alunos
@@ -175,7 +178,7 @@ const SearchButton = () =>
 
 const NewButton = ({controller, label}) =>
     <Button style={styles.newButton} bsStyle="primary" onClick={() => controller.blank()}>
-        <Glyphicon glyph="plus-sign"/> Novo {label}
+        <Glyphicon glyph="plus-sign"/> Novo
     </Button>
 
 const EditButton = ({controller, id}) =>

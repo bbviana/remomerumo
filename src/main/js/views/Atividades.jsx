@@ -51,7 +51,7 @@ class Atividades extends Component {
             </Row>
             <Row className="show-grid">	
 	        	<Col xs={12}>
-	        	 <Input type="select" label="Colaborador" name="colaborador"
+	        	 <Input type="select" label="Colaborador" name="colaboradores"
 	                   defaultValue={ids(atividade.colaboradores)} onChange={handleAssociationChange} multiple>
 	                <option value="">Selecione...</option>
 	                {colaboradores.map((element, i) =>

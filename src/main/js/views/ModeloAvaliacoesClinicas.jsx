@@ -35,7 +35,7 @@ class ModeloAvaliacoesClinicas extends Component {
 		        </Row>
 		        <Row className="show-grid">	
 		        	<Col xs={12}>
-		        	 <Input type="select" label="Tipos de Informação Clinica" name="modeloAvaliacoesClinicas"
+		        	 <Input type="select" label="Tipos de Informação Clinica" name="tipoInfoClinicas"
 		                   defaultValue={ids(modeloAvaliacaoClinica.tipoInfoClinicas)} onChange={handleAssociationChange} multiple>
 		                <option value="">Selecione...</option>
 		                {tipoInfoClinicas.map((element, i) =>
