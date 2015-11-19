@@ -15,6 +15,7 @@ class Atividades extends Component {
         header: () =>
             <tr>
                 <th>ID</th>
+                <th>Nome</th>
                 <th>Data</th>
                 <th>Comentário</th>
             </tr>,
@@ -22,6 +23,7 @@ class Atividades extends Component {
         body: (atividade) =>
             <tr>
                 <td>{atividade.id}</td>
+                <td>{atividade.nome}</td>
                 <td>{atividade.data}</td>
                 <td>{atividade.comentario}</td>
             </tr>
@@ -32,7 +34,7 @@ class Atividades extends Component {
 	        <Grid fluid>
 		        <Row className="show-grid">
 		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome da Atividade" name="nome" defaultValue={atividade.nome} autoFocus/></Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Data" placeholder="Data da aula" name="data" defaultValue={atividade.nome} autoFocus/></Col>
+		          	<Col xs={12} md={6}><Input type="text" label="Data" placeholder="Data da aula" name="data" defaultValue={atividade.data}/></Col>
 		        </Row>
 		
 		        <Row className="show-grid">

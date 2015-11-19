@@ -27,7 +27,7 @@ class PlanejamentoGrupos extends Component {
             </tr>
     }
 
-    formSchema = (planejamentoGrupo) =>
+    formSchema = (planejamentoGrupo, {colaboradores=[], alunos=[], atividades=[], grupos=[]}) =>
         <div>
             <Grid fluid>
 	        <Row className="show-grid">
@@ -36,6 +36,50 @@ class PlanejamentoGrupos extends Component {
 	
             <Row className="show-grid">	
             <Col xs={12}><Input type="textarea" label="Comentários" placeholder="Comentários" name="comentario" defaultValue={planejamentoGrupo.comentario}/></Col>
+	        </Row>
+	        <Row className="show-grid">	
+	        	<Col xs={12}>
+	        	 <Input type="select" label="Grupo" name="grupo"
+	                   defaultValue={id(planejamentoGrupo.grupo)} onChange={handleAssociationChange}>
+	                <option value="">Selecione...</option>
+	                {grupos.map((element, i) =>
+	                    <option key={i} value={element.id}>{element.nome}</option>
+	                )}
+	            </Input>
+		        </Col>
+	        </Row>
+	        <Row className="show-grid">	
+        	<Col xs={12}>
+	        	 <Input type="select" label="Alunos" name="alunos"
+	                   defaultValue={ids(planejamentoGrupo.alunos)} onChange={handleAssociationChange} multiple>
+	                <option value="">Selecione...</option>
+	                {alunos.map((element, i) =>
+	                    <option key={i} value={element.id}>{element.nome}</option>
+	                )}
+	            </Input>
+		        </Col>
+	        </Row>
+	        <Row className="show-grid">	
+	        	<Col xs={12}>
+	        	 <Input type="select" label="Colaboradores" name="colaboradores"
+	                   defaultValue={ids(planejamentoGrupo.colaboradores)} onChange={handleAssociationChange} multiple>
+	                <option value="">Selecione...</option>
+	                {colaboradores.map((element, i) =>
+	                    <option key={i} value={element.id}>{element.nome}</option>
+	                )}
+	            </Input>
+		        </Col>
+		    </Row>
+		    <Row className="show-grid">	
+        	<Col xs={12}>
+	        	 <Input type="select" label="Atividade" name="atividades"
+	                   defaultValue={ids(planejamentoGrupo.atividades)} onChange={handleAssociationChange} multiple>
+	                <option value="">Selecione...</option>
+	                {atividades.map((element, i) =>
+	                    <option key={i} value={element.id}>{element.nome}</option>
+	                )}
+	            </Input>
+		        </Col>
 	        </Row>
       </Grid>
         </div>
