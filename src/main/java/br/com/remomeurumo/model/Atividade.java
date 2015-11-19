@@ -35,9 +35,8 @@ public class Atividade extends BaseEntity {
 	private Collection<AlunoAtividade> alunos;
 
 	@JsonFilter("associationFilter")
-	@ManyToOne
-	@JoinColumn(name = "AtividadePlanejamentoGrupos")
-	private PlanejamentoGrupo planejamentoGrupo;
+	@OneToMany(mappedBy = "atividade")
+	private Collection<PlanejamentoGrupo> planejamentoGrupos;
 
 	@Override
 	public String toString() {
@@ -83,13 +82,14 @@ public class Atividade extends BaseEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public PlanejamentoGrupo getPlanejamentoGrupo() {
-		return planejamentoGrupo;
+
+	public Collection<PlanejamentoGrupo> getPlanejamentoGrupos() {
+		return planejamentoGrupos;
 	}
 
-	public void setPlanejamentoGrupo(PlanejamentoGrupo planejamentoGrupo) {
-		this.planejamentoGrupo = planejamentoGrupo;
+	public void setPlanejamentoGrupos(
+			Collection<PlanejamentoGrupo> planejamentoGrupos) {
+		this.planejamentoGrupos = planejamentoGrupos;
 	}
 
 	private static final long serialVersionUID = 1L;

@@ -41,10 +41,10 @@ public class PlanejamentoGrupo extends BaseEntity {
 	private Collection<Colaborador> colaboradores;
 
 	@JsonFilter("associationFilter")
-	@ManyToMany(mappedBy="planejamentoGrupo")
-	private Collection<Atividade> atividades;
-	
-	
+	@ManyToOne
+	@JoinColumn(name = "atividadeid")
+	private Atividade atividade;
+
 	@Override
 	public String toString() {
 		return reflectionToString(this, SHORT_PREFIX_STYLE);
@@ -90,12 +90,12 @@ public class PlanejamentoGrupo extends BaseEntity {
 		this.colaboradores = colaboradores;
 	}
 
-	public Collection<Atividade> getAtividades() {
-		return atividades;
+	public Atividade getAtividade() {
+		return atividade;
 	}
 
-	public void setAtividades(Collection<Atividade> atividades) {
-		this.atividades = atividades;
+	public void setAtividade(Atividade atividade) {
+		this.atividade = atividade;
 	}
 
 	private static final long serialVersionUID = 1L;

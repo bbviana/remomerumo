@@ -53,39 +53,39 @@ const Header = ({label}) =>
         </Nav>
         <Nav right eventKey={0}> {/* This is the eventKey referenced */}
             <NavItem eventKey={1} href="?alunos">
-                <Glyphicon glyph="fire"/> Alunos
+                <Glyphicon glyph="fire"/>&nbsp;&nbsp;Alunos
             </NavItem>
             <NavItem eventKey={2} href="?responsaveis">
-                <Glyphicon glyph="user"/> Responsáveis
+                <Glyphicon glyph="user"/>&nbsp;&nbsp;Responsáveis
             </NavItem>
             <NavItem eventKey={2} href="?colaboradores">
-                <Glyphicon glyph="education"/> Colaboradores
+                <Glyphicon glyph="education"/>&nbsp;&nbsp;Colaboradores
             </NavItem>
             <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
 		        <MenuItem eventKey="2" href="?grupoAlunos">
-		            <Glyphicon glyph="link"/> Grupo de Alunos
+		            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
 		        </MenuItem>
 		        <MenuItem eventKey="2" href="?planejamentoGrupos">
-                    <Glyphicon glyph="th-list"/> Planejamento de Grupos
+                    <Glyphicon glyph="th-list"/>&nbsp;&nbsp;Planejamento de Grupos
                 </MenuItem>    
             	<MenuItem eventKey="1" href="?atividades">
-                    <Glyphicon glyph="flag"/> Atividade
+                    <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade
                 </MenuItem>
                 <MenuItem eventKey="2" href="?tipoAtividades">
-                    <Glyphicon glyph="pencil"/> Tipo de Atividade
+                    <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Tipo de Atividade
                 </MenuItem>
                 <MenuItem divider/>
                 <MenuItem eventKey="3" href="?modeloAvaliacoesClinicas">
-                    <Glyphicon glyph="road"/> Modelo de Avaliação Clinica
+                    <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação Clinica
                 </MenuItem>
                 <MenuItem eventKey="4" href="?tipoInfoClinicas">
-                    <Glyphicon glyph="tags"/> Tipo de Informação Clinica
+                    <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação Clinica
                 </MenuItem>
                 <MenuItem eventKey="3" href="?avaliacoesClinicas">
-                    <Glyphicon glyph="send"/> Avaliação Clinica
+                    <Glyphicon glyph="send"/>&nbsp;&nbsp;Avaliação Clinica
                 </MenuItem>
                 <MenuItem eventKey="4" href="?infoClinicas">
-                    <Glyphicon glyph="stats"/> Informação Clinica
+                    <Glyphicon glyph="stats"/>&nbsp;&nbsp;Informação Clinica
                 </MenuItem>
             </NavDropdown>
             <NavItem eventKey={2} href="?login">
