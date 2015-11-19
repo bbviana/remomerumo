@@ -32,7 +32,7 @@ class Alunos extends Component {
             </tr>
     }
 
-    formSchema = (aluno, {grupos = [], responsaveis = []}) =>
+    formSchema = (aluno, {responsaveis = []}) =>
         <div>
             <Grid fluid>
 	        <Row className="show-grid">
@@ -65,15 +65,6 @@ class Alunos extends Component {
 	        	<Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={aluno.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
 	        </Row>
 	        <Row className="show-grid">	
-	        	<Col xs={12} md={6}>
-		        	<Input type="select" label="Grupo" name="grupo"
-			                defaultValue={id(aluno.grupo)} onChange={handleAssociationChange}>
-			            <option value="">Selecione...</option>
-			            {grupos.map((element, i) =>
-			                <option key={i} value={element.id}>{element.nome}</option>
-			            )}
-		            </Input>
-	            </Col>
 	        	<Col xs={12}>
 	        	 <Input type="select" label="Responsáveis" name="responsaveis"
 	                   defaultValue={ids(aluno.responsaveis)} onChange={handleAssociationChange} multiple>

@@ -34,11 +34,6 @@ public class Aluno extends Pessoa implements Serializable {
 	@OneToMany(mappedBy = "aluno")
 	private Collection<AlunoAtividade> alunoAtividades;
 
-	@JsonFilter("associationFilter")
-	@ManyToOne
-	@JoinColumn(name = "grupoid")
-	private GrupoAluno grupo;
-
 	@Override
 	public String toString() {
 		return reflectionToString(this, SHORT_PREFIX_STYLE);
@@ -59,15 +54,6 @@ public class Aluno extends Pessoa implements Serializable {
 	public void setAlunoAtividades(Collection<AlunoAtividade> alunoAtividades) {
 		this.alunoAtividades = alunoAtividades;
 	}
-
-	public GrupoAluno getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(GrupoAluno grupo) {
-		this.grupo = grupo;
-	}
-
 
 	public void setMatrAluno(String matrAluno) {
 		this.matrAluno = matrAluno;

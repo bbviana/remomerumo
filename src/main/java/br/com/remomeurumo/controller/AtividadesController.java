@@ -22,7 +22,6 @@ public class AtividadesController extends CrudController<Atividade> {
 	
 	@Override
 	protected void postBlank(Result<Atividade> result) {
-		result.addAssociation("colaboradores", findAll(Colaborador.class));
 		result.addAssociation("tipos", findAll(TipoAtividade.class));
 	}
 

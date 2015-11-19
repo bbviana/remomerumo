@@ -27,11 +27,11 @@ class Atividades extends Component {
             </tr>
     }
 
-    formSchema = (atividade, {tipos = [], colaboradores = []}) =>
+    formSchema = (atividade, {tipos = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome completo do aluno" name="nome" defaultValue={atividade.nome} autoFocus/></Col>
+		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome da Atividade" name="nome" defaultValue={atividade.nome} autoFocus/></Col>
 		          	<Col xs={12} md={6}><Input type="text" label="Data" placeholder="Data da aula" name="data" defaultValue={atividade.nome} autoFocus/></Col>
 		        </Row>
 		
@@ -40,7 +40,7 @@ class Atividades extends Component {
 		        </Row>
 		        <Row className="show-grid">	
 	        	<Col xs={12}>
-		        	<Input type="select" label="Atividade" name="tipoAtividade"
+		        	<Input type="select" label="Tipo de Atividade" name="tipoAtividade"
 			                defaultValue={id(atividade.tipoAtividade)} onChange={handleAssociationChange}>
 			            <option value="">Selecione...</option>
 			            {tipos.map((element, i) =>
@@ -49,17 +49,6 @@ class Atividades extends Component {
 		            </Input>
 	            </Col>
             </Row>
-            <Row className="show-grid">	
-	        	<Col xs={12}>
-	        	 <Input type="select" label="Colaborador" name="colaboradores"
-	                   defaultValue={ids(atividade.colaboradores)} onChange={handleAssociationChange} multiple>
-	                <option value="">Selecione...</option>
-	                {colaboradores.map((element, i) =>
-	                    <option key={i} value={element.id}>{element.nome}</option>
-	                )}
-	            </Input>
-		        </Col>
-	        </Row>
 		
 	      </Grid>
         </div>

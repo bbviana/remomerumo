@@ -56,7 +56,7 @@ class AvaliacoesClinicas extends Component {
 		            </Col>
 		        </Row>
 		        <Row className="show-grid">
-	          		<Col xs={12}><Input type="textarea" label="Comentário" placeholder="Comentários da Avaliação" name="comentario" defaultValue={avaliacaoClinica.comentario} autoFocus/></Col>
+	          		<Col xs={12}><Input type="textarea" label="Comentário" placeholder="Comentários da Avaliação" name="comentario" defaultValue={avaliacaoClinica.comentario} /></Col>
 	          	</Row>
 	      </Grid>
         </div>

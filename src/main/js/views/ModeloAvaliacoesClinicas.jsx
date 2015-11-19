@@ -46,7 +46,7 @@ class ModeloAvaliacoesClinicas extends Component {
 		        </Row>
 		        
 		        <Row className="show-grid">
-	          		<Col xs={12}><Input type="textarea" label="Descrição" placeholder="Descrição do modelo" name="descricao" defaultValue={modeloAvaliacaoClinica.descricao} autoFocus/></Col>
+	          		<Col xs={12}><Input type="textarea" label="Descrição" placeholder="Descrição do modelo" name="descricao" defaultValue={modeloAvaliacaoClinica.descricao} /></Col>
 	          	</Row>
 	      </Grid>
         </div>

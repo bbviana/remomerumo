@@ -1,15 +1,18 @@
 package br.com.remomeurumo.model;
 
-import br.com.remomeurumo.framework.BaseEntity;
-
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonFilter;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import java.util.Collection;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import br.com.remomeurumo.framework.BaseEntity;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
  * @author jardim
@@ -20,8 +23,6 @@ public class Atividade extends BaseEntity {
 	private String data;
 
 	private String nome;
-
-	private String planejamento;
 
 	private String comentario;
 
@@ -34,8 +35,9 @@ public class Atividade extends BaseEntity {
 	private Collection<AlunoAtividade> alunos;
 
 	@JsonFilter("associationFilter")
-	@ManyToMany(mappedBy = "atividades")
-	private Collection<Colaborador> colaboradores;
+	@ManyToOne
+	@JoinColumn(name = "AtividadePlanejamentoGrupos")
+	private PlanejamentoGrupo planejamentoGrupo;
 
 	@Override
 	public String toString() {
@@ -50,28 +52,12 @@ public class Atividade extends BaseEntity {
 		this.data = data;
 	}
 
-	public String getPlanejamento() {
-		return planejamento;
-	}
-
-	public void setPlanejamento(String planejamento) {
-		this.planejamento = planejamento;
-	}
-
 	public Collection<AlunoAtividade> getAlunos() {
 		return alunos;
 	}
 
 	public void setAlunos(Collection<AlunoAtividade> alunos) {
 		this.alunos = alunos;
-	}
-
-	public Collection<Colaborador> getColaboradores() {
-		return colaboradores;
-	}
-
-	public void setColaboradores(Collection<Colaborador> colaboradores) {
-		this.colaboradores = colaboradores;
 	}
 
 	public TipoAtividade getTipoAtividade() {
@@ -96,6 +82,14 @@ public class Atividade extends BaseEntity {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public PlanejamentoGrupo getPlanejamentoGrupo() {
+		return planejamentoGrupo;
+	}
+
+	public void setPlanejamentoGrupo(PlanejamentoGrupo planejamentoGrupo) {
+		this.planejamentoGrupo = planejamentoGrupo;
 	}
 
 	private static final long serialVersionUID = 1L;

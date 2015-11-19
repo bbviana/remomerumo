@@ -1,13 +1,12 @@
 package br.com.remomeurumo.controller;
 
-import br.com.remomeurumo.model.Aluno;
-import br.com.remomeurumo.model.GrupoAluno;
-import br.com.remomeurumo.model.Responsavel;
-import br.com.remomeurumo.framework.CrudController;
-import br.com.remomeurumo.framework.Result;
-
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
+
+import br.com.remomeurumo.framework.CrudController;
+import br.com.remomeurumo.framework.Result;
+import br.com.remomeurumo.model.Aluno;
+import br.com.remomeurumo.model.Responsavel;
 
 /**
  * @author bbviana
@@ -22,7 +21,6 @@ public class AlunosController extends CrudController<Aluno> {
 
 	@Override
 	protected void postBlank(Result<Aluno> result) {
-		result.addAssociation("grupos", findAll(GrupoAluno.class));
 		result.addAssociation("responsaveis", findAll(Responsavel.class));
 	}
 

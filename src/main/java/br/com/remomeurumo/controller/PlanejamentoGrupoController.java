@@ -19,44 +19,48 @@ import br.com.remomeurumo.framework.CrudController;
 import br.com.remomeurumo.framework.Result;
 import br.com.remomeurumo.framework.ResultList;
 import br.com.remomeurumo.model.Aluno;
-import br.com.remomeurumo.model.AvaliacaoClinica;
-import br.com.remomeurumo.model.ModeloAvaliacaoClinica;
+import br.com.remomeurumo.model.Atividade;
+import br.com.remomeurumo.model.Colaborador;
+import br.com.remomeurumo.model.GrupoAluno;
+import br.com.remomeurumo.model.PlanejamentoGrupo;
 
 /**
  * @author jardim
  */
 @RequestScoped
-@Path("avaliacoesClinicas")
-public class AvaliacoesClinicasController extends CrudController<AvaliacaoClinica> {
+@Path("planejamentoGrupos")
+public class PlanejamentoGrupoController extends
+		CrudController<PlanejamentoGrupo> {
 
-	@Override
-	protected Class<AvaliacaoClinica> getType() {
-		return AvaliacaoClinica.class;
+	protected Class<PlanejamentoGrupo> getType() {
+		return PlanejamentoGrupo.class;
 	}
 
 	@Override
-	protected void postBlank(Result<AvaliacaoClinica> result) {
-		result.addAssociation("modelos", findAll(ModeloAvaliacaoClinica.class));
+	protected void postBlank(Result<PlanejamentoGrupo> result) {
 		result.addAssociation("alunos", findAll(Aluno.class));
+		result.addAssociation("grupos", findAll(GrupoAluno.class));
+		result.addAssociation("colaboradores", findAll(Colaborador.class));
+		result.addAssociation("atividades", findAll(Atividade.class));
 	}
 
 	@Override
-	protected void postLoad(Result<AvaliacaoClinica> result) {
+	protected void postLoad(Result<PlanejamentoGrupo> result) {
 		postBlank(result);
 	}
 	
 	@GET
 	@SuppressWarnings("unchecked")
-	public ResultList<AvaliacaoClinica> list(
+	public ResultList<PlanejamentoGrupo> list(
 			@QueryParam("count") Integer count,
 			@QueryParam("page") Integer page,
-			@QueryParam("search.data") String data) {
+			@QueryParam("search.planejamentoDeAula") String planejamentoDeAula) {
 
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(getType());
 		Criteria countCriteria = session.createCriteria(getType());
 
-		criteria.addOrder(Order.asc("data"));
+		criteria.addOrder(Order.asc("planejamentoDeAula"));
 
 		if (count != null) {
 			criteria.setMaxResults(count);
@@ -66,14 +70,15 @@ public class AvaliacoesClinicasController extends CrudController<AvaliacaoClinic
 			criteria.setFirstResult((page - 1) * count);
 		}
 
-		if (data != null) {
-			criteria.add(Restrictions.ilike("data", data, ANYWHERE));
-			countCriteria.add(Restrictions.ilike("data", data, ANYWHERE));
+		if (planejamentoDeAula != null) {
+			criteria.add(Restrictions.ilike("planejamentoDeAula", planejamentoDeAula, ANYWHERE));
+			countCriteria.add(Restrictions.ilike("planejamentoDeAula", planejamentoDeAula, ANYWHERE));
 		}
 
-		List<AvaliacaoClinica> list = criteria.list();
+		List<PlanejamentoGrupo> list = criteria.list();
 		Long totalResults = (Long) countCriteria.setProjection(Projections.rowCount()).uniqueResult();
 
 		return new ResultList<>(list, page, count, totalResults.intValue());
 	}
+
 }
