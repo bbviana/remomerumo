@@ -24,6 +24,8 @@ public class PlanejamentoGrupo extends BaseEntity {
 	private String planejamentoDeAula;
 
 	private String comentario;
+	
+	private String nome;
 
 	@JsonFilter("associationFilter")
 	@ManyToOne
@@ -97,6 +99,17 @@ public class PlanejamentoGrupo extends BaseEntity {
 	public void setAtividade(Atividade atividade) {
 		this.atividade = atividade;
 	}
+	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
 
 	private static final long serialVersionUID = 1L;
 }
