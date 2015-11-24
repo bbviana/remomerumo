@@ -4,7 +4,7 @@ import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, Tip
 
 if(window.location.search === "?login"){
     // localhost:8080/?login
-    ReactDOM.render(<Login />, document.getElementById("app"));
+    ReactDOM.render(<Login id="42"/>, document.getElementById("app"));
 } else if(window.location.search === "?atividades") {
     // localhost:8080/?atividades
     ReactDOM.render(<Atividades />, document.getElementById("app"));
