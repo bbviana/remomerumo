@@ -9,6 +9,7 @@ import ModeloAvaliacoesClinicasController from './ModeloAvaliacoesClinicasContro
 import InfoClinicasController from './InfoClinicasController'
 import TipoInfoClinicasController from './TipoInfoClinicasController'
 import PlanejamentoGruposController from './PlanejamentoGruposController'
+import PlanejamentoAtividadesController from './PlanejamentoAtividadesController'
 
 export {
     AlunosController,
@@ -21,5 +22,6 @@ export {
     TipoInfoClinicasController,
     ModeloAvaliacoesClinicasController,
     AvaliacoesClinicasController,
-    PlanejamentoGruposController
+    PlanejamentoGruposController,
+    PlanejamentoAtividadesController
 }

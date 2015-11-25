@@ -34,7 +34,6 @@ public class Atividade extends BaseEntity {
 	@OneToMany(mappedBy = "atividade")
 	private Collection<AlunoAtividade> alunos;
 
-	@JsonFilter("associationFilter")
 	@OneToMany(mappedBy = "atividade")
 	private Collection<PlanejamentoGrupo> planejamentoGrupos;
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, InfoClinicas, ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoGrupos} from './views'
+import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, InfoClinicas, ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoGrupos, PlanejamentoAtividades} from './views'
 
 if(window.location.search === "?login"){
     // localhost:8080/?login
@@ -35,6 +35,9 @@ if(window.location.search === "?login"){
 } else if(window.location.search === "?planejamentoGrupos") {
     // localhost:8080/?planejamentoGrupos
     ReactDOM.render(<PlanejamentoGrupos />, document.getElementById("app"));
+} else if(window.location.search === "?planejamentoAtividades"){
+    // localhost:8080/?login
+    ReactDOM.render(<PlanejamentoAtividades id="38"/>, document.getElementById("app"));
 } else {
 	
     // localhost:8080/
