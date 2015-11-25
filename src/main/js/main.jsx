@@ -37,7 +37,7 @@ if(window.location.search === "?login"){
     ReactDOM.render(<PlanejamentoGrupos />, document.getElementById("app"));
 } else if(window.location.search === "?planejamentoAtividades"){
     // localhost:8080/?login
-    ReactDOM.render(<PlanejamentoAtividades id="38"/>, document.getElementById("app"));
+    ReactDOM.render(<PlanejamentoAtividades id="27"/>, document.getElementById("app"));
 } else {
 	
     // localhost:8080/
