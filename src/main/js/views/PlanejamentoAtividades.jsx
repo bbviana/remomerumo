@@ -58,6 +58,17 @@ class PlanejamentoAtividades extends Component {
     	this.setState({planejamentoGrupos : planejamentos})
     }
     
+    removerPlanejamento = (idPlanejamento) => {
+    	console.log(idPlanejamento)
+    	var planejamentos = this.state.planejamentoGrupos
+    	
+    	var planejamentoEscolhido = planejamentos.filter(element => {
+    		return element.id != idPlanejamento
+    	})
+    	
+    	this.setState({planejamentoGrupos : planejamentos})
+    }
+    
     componentDidMount = () => {
     	this.procurarGrupos()
     }
@@ -89,28 +100,31 @@ class PlanejamentoAtividades extends Component {
             	        <Grid fluid>
             		    
             	        {this.state.planejamentoGrupos.map((planejamentoGrupo, index) => {
-            	        	return <Panel  key={index} header={planejamentoGrupo.id}>
+            	        	return <Panel  key={index} header={planejamentoGrupo.grupo.nome}>
 	            	            <Row className="show-grid">
-	            	        		<Col xs={6} md={1}>Alunos</Col>
-	            	        		<Col xs={6} md={1}>Colaboradores</Col>
-	            	        		<Col xs={12} md={5}>Comentarios</Col>
-	            	        		<Col xs={12} md={5}>Planejamento</Col>
+	            	        		<Col xs={6} md={2}>Alunos</Col>
+	            	        		<Col xs={6} md={2}>Colaboradores</Col>
+	            	        		<Col xs={12} md={4}>Comentarios</Col>
+	            	        		<Col xs={12} md={4}>Planejamento</Col>
 	            	          	</Row>
 	            	          	<Row className="show-grid">
-	            	          		<Col xs={6} md={1}>
+	            	          		<Col xs={6} md={2}>
 		            	          		{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
 		            	          			return <div key={indexAluno} >{aluno.nome}&nbsp;<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></div>
 		            	          		})}
 	            	          		</Col>
-	            	          		<Col xs={6} md={1}>
+	            	          		<Col xs={6} md={2}>
 		            	          		{planejamentoGrupo.colaboradores.map((colaborador, indexColaborador) => {
 		            	          			return <div key={indexColaborador} >{colaborador.nome}&nbsp; <Button bsStyle="danger" bsSize="xsmall">
 		            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, planejamentoGrupo.id)} glyph="minus"/></Button></div>
 		            	          		})}
 	            	          		</Col>
-	            	          		<Col xs={12} md={5}><Input type="textarea" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
-	            	          		<Col xs={12} md={5}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={planejamentoGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+	            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
+	            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={planejamentoGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
 	            	          	</Row>
+	            	          	<Row className="show-grid">
+            	          			<Col xs={12}><Button bsStyle="danger" bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerPlanejamento.bind(this, planejamentoGrupo.id)} glyph="minus"/></Button></Col>
+            	          		</Row>
             	          	</Panel>
             	        })}
             	      </Grid>
