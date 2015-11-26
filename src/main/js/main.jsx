@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, InfoClinicas, ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoGrupos, PlanejamentoAtividades} from './views'
+import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, InfoClinicas, ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoGrupos, PlanejamentoAtividades, ExecucaoAtividades} from './views'
 
 if(window.location.search === "?login"){
     // localhost:8080/?login
@@ -37,7 +37,10 @@ if(window.location.search === "?login"){
     ReactDOM.render(<PlanejamentoGrupos />, document.getElementById("app"));
 } else if(window.location.search === "?planejamentoAtividades"){
     // localhost:8080/?login
-    ReactDOM.render(<PlanejamentoAtividades id="38"/>, document.getElementById("app"));
+    ReactDOM.render(<PlanejamentoAtividades id="27"/>, document.getElementById("app"));
+} else if(window.location.search === "?execucaoAtividades"){
+    // localhost:8080/?execucaoAtividades
+    ReactDOM.render(<ExecucaoAtividades id="27"/>, document.getElementById("app"));
 } else {
 	
     // localhost:8080/

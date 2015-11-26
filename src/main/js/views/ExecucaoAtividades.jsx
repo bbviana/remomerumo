@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
 import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button} from 'react-bootstrap';
 
-class PlanejamentoAtividades extends Component {
+class ExecucaoAtividades extends Component {
     state = {
         id: "",
         nome: "",
@@ -13,7 +13,7 @@ class PlanejamentoAtividades extends Component {
     salvar = (event) => {
         event.preventDefault()
 
-        Request.post('api/planejamentoAtividades/salvar', this.state)
+        Request.post('api/execucaoAtividades/salvar', this.state)
         .then(atividade => this.setState({
             id: atividade.id,
             nome: atividade.nome,
@@ -23,7 +23,7 @@ class PlanejamentoAtividades extends Component {
     }
 
     procurarGrupos = () => {
-        Request.get('api/planejamentoAtividades/procurarGrupos', {
+        Request.get('api/execucaoAtividades/procurarAlunos', {
             id: this.props.id
         })
         .then(atividade => this.setState({
@@ -46,29 +46,6 @@ class PlanejamentoAtividades extends Component {
     	this.setState({planejamentoGrupos : planejamentos})
     }
     
-    removerColaborador = (idColaborador, idPlanejamento) => {
-    	var planejamentos = this.state.planejamentoGrupos
-    	
-    	var planejamentoEscolhido = planejamentos.find(element => {
-    		return element.id == idPlanejamento
-    	})
-    	planejamentoEscolhido.colaboradores = planejamentoEscolhido.colaboradores.filter(element => {
-    		return element.id != idColaborador
-    	})
-    	this.setState({planejamentoGrupos : planejamentos})
-    }
-    
-    removerPlanejamento = (idPlanejamento) => {
-    	console.log(idPlanejamento)
-    	var planejamentos = this.state.planejamentoGrupos
-    	
-    	var planejamentosEscolhido = planejamentos.filter(element => {
-    		return element.id != idPlanejamento
-    	})
-    	
-    	this.setState({planejamentoGrupos : planejamentosEscolhido})
-    }
-    
     componentDidMount = () => {
     	this.procurarGrupos()
     }
@@ -80,7 +57,7 @@ class PlanejamentoAtividades extends Component {
 	            <a href="?login">Remo meu Rumo</a>
 	        </NavBrand>
 	        <Nav>
-	        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Planejamento de Atividades</NavItem>
+	        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Execução de Atividades</NavItem>
 	        </Nav>
 	        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
 	            <NavItem eventKey={1} href="#">
@@ -102,26 +79,17 @@ class PlanejamentoAtividades extends Component {
             	        {this.state.planejamentoGrupos.map((planejamentoGrupo, index) => {
             	        	return <Panel  key={index} header={planejamentoGrupo.grupo.nome}>
 	            	            <Row className="show-grid">
-	            	        		<Col xs={6} md={2}>Alunos</Col>
-	            	        		<Col xs={6} md={2}>Colaboradores</Col>
-	            	        		<Col xs={12} md={4}>Comentarios</Col>
-	            	        		<Col xs={12} md={4}>Planejamento</Col>
+	            	        		<Col xs={6} md={4}>Alunos</Col>
+	            	        		<Col xs={12} md={8}>Comentarios</Col>
 	            	          	</Row>
 	            	          	<Row className="show-grid">
-	            	          		<Col xs={6} md={2}>
+	            	          		<Col xs={6} md={4}>
 		            	          		{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
 		            	          			return <div key={indexAluno} >{aluno.nome}&nbsp; <Button bsStyle="danger" bsSize="xsmall">
 		            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button></div>
 		            	          		})}
 	            	          		</Col>
-	            	          		<Col xs={6} md={2}>
-		            	          		{planejamentoGrupo.colaboradores.map((colaborador, indexColaborador) => {
-		            	          			return <div key={indexColaborador} >{colaborador.nome}&nbsp; <Button bsStyle="danger" bsSize="xsmall">
-		            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, planejamentoGrupo.id)} glyph="minus"/></Button></div>
-		            	          		})}
-	            	          		</Col>
-	            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
-	            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={planejamentoGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+	            	          		<Col xs={6} md={8}><Input type="textarea" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
 	            	          	</Row>
 	            	          	<Row className="show-grid">
             	          			<Col xs={12}><Button bsStyle="danger" bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerPlanejamento.bind(this, planejamentoGrupo.id)} glyph="minus"/></Button></Col>
@@ -151,4 +119,4 @@ const s = {
     }
 }
 
-export default PlanejamentoAtividades
+export default ExecucaoAtividades

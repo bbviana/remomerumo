@@ -10,16 +10,17 @@
  */
 package br.com.remomeurumo.framework;
 
+import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 
 /**
  * @author bbviana
  */
 @MappedSuperclass
-public abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable, Comparable<BaseEntity> {
 
 	@Id
 	@GeneratedValue
@@ -33,5 +34,21 @@ public abstract class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return this.getId().equals(((BaseEntity)obj).getId());
+	}
+	
+	@Override
+	public int compareTo(BaseEntity o) {
+		
+		if(this.getId() > o.getId())
+			return 1;
+		else if (this.getId() < o.getId())
+			return -1;
+		
+		return 0;
+	}
+	
 	private static final long serialVersionUID = 1L;
 }

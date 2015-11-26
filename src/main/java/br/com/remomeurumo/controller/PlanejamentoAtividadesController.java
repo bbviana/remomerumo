@@ -1,7 +1,6 @@
 package br.com.remomeurumo.controller;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.hibernate.criterion.MatchMode.ANYWHERE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +18,15 @@ import javax.ws.rs.QueryParam;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.remomeurumo.framework.ResultList;
 import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.GrupoAluno;
-import br.com.remomeurumo.model.InfoClinica;
 import br.com.remomeurumo.model.PlanejamentoGrupo;
 import br.com.remomeurumo.persistence.Transactional;
 
 /**
- * @author bbviana
+ * @author jardim
  */
 @RequestScoped
 @Transactional
@@ -44,15 +40,26 @@ public class PlanejamentoAtividadesController {
 	@Produces(APPLICATION_JSON)
 	@Path("procurarGrupos")
 	public Atividade procurarGrupos(@QueryParam("id") Long id) {
-		System.out.println("-- "+this.procurarGrupos());
-		Atividade atividade = em.find(Atividade.class,id);
-		List<PlanejamentoGrupo> procurarGrupos = this.procurarGrupos();
-		long i = 1;
-		for (PlanejamentoGrupo planejamento : procurarGrupos) {
-			planejamento.setId(i++);
-		}
 		
-		atividade.setPlanejamentoGrupos(procurarGrupos);
+		Atividade atividade = em.find(Atividade.class,id);
+		//se a atividade já tem planejamentos usa os dela, senão procura pelos tipos
+		if(atividade.getPlanejamentoGrupos()==null || atividade.getPlanejamentoGrupos().isEmpty()) {
+			List<PlanejamentoGrupo> procurarGrupos = this.procurarGrupos();
+			List<PlanejamentoGrupo> novosGrupos = new ArrayList<PlanejamentoGrupo>();
+			long i = -1;
+			for (PlanejamentoGrupo planejamento : procurarGrupos) {
+				PlanejamentoGrupo novoPlanejamento = new PlanejamentoGrupo();
+				novoPlanejamento.setId(i--);
+				novoPlanejamento.setComentario(planejamento.getComentario());
+				novoPlanejamento.setPlanejamentoDeAula(planejamento.getPlanejamentoDeAula());
+				novoPlanejamento.setAlunos(planejamento.getAlunos());
+				novoPlanejamento.setColaboradores(planejamento.getColaboradores());
+				novoPlanejamento.setGrupo(planejamento.getGrupo());
+				novosGrupos.add(novoPlanejamento);
+			}
+			atividade.setPlanejamentoGrupos(novosGrupos);
+		}	
+		
 		return atividade;
 	}
 	
@@ -63,15 +70,12 @@ public class PlanejamentoAtividadesController {
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(GrupoAluno.class);
 		List<GrupoAluno> list = criteria.list();
-		System.out.println("-\n\n-"+list);		
-		criteria = session.createCriteria(PlanejamentoGrupo.class);
 		ArrayList<PlanejamentoGrupo> planejamentos = new ArrayList<PlanejamentoGrupo>();
 		for (GrupoAluno grupoAluno : list) {
-			System.out.println("-\n\n-"+grupoAluno.getNome());	
+			criteria = session.createCriteria(PlanejamentoGrupo.class);
 			criteria.add(Restrictions.eq("grupo", grupoAluno));
 			criteria.addOrder(Order.asc("id"));
 			List<PlanejamentoGrupo> resultList = criteria.list();
-			System.out.println("-\nLLL\n-"+resultList);
 			if(resultList!=null && !resultList.isEmpty()) {
 				planejamentos.add(resultList.iterator().next());
 			}
@@ -96,11 +100,16 @@ public class PlanejamentoAtividadesController {
 	@Path("salvar")
 	public Atividade salvar(Atividade atividade) {
 		System.out.println("\n\n Salvando -- "+atividade.getId());
+		
+		//deve comparar os grupos que vieram no request contra os que já existiam no banco
+		Atividade atividadeOriginal = em.find(Atividade.class,atividade.getId());
 		for (PlanejamentoGrupo planejamento : atividade.getPlanejamentoGrupos()) {
-			if(planejamento.getId() != null) {
+			if(atividadeOriginal.getPlanejamentoGrupos().contains(planejamento)) {
 				System.out.println("\n\n Merge -- "+planejamento.getId());
+				//this.em.merge(planejamento);
 			} else {
-				System.out.println("\n\n Salvando -- ");
+				System.out.println("\n\n Salvando Novo -- ");
+				//this.em.persist(planejamento);
 			}
 		}
 		

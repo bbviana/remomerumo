@@ -51,22 +51,6 @@ class Atividades extends Component {
 		            </Input>
 	            </Col>
             </Row>
-            {planejamentos.map((iterador, i) =>
-            <Panel header={iterador.id}>
-	            <Row className="show-grid">
-	        		<Col xs={6} md={2}>Alunos</Col>
-	        		<Col xs={6} md={2}>Colaboradores</Col>
-	        		<Col xs={12} md={4}>Comentarios</Col>
-	        		<Col xs={12} md={4}>Planejamento</Col>
-	          	</Row>
-	          	<Row className="show-grid">
-	          		<Col xs={6} md={2}>Aluno&nbsp;<Glyphicon glyph="minus"/></Col>
-	          		<Col xs={6} md={2}>Colaborador B&nbsp;<Glyphicon glyph="minus"/></Col>
-	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={iterador.comentario} placeholder="Comentário"  /></Col>
-	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={iterador.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
-	          	</Row>
-	          	</Panel>
-            )}
 	      </Grid>
         </div>
 

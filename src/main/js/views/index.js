@@ -11,6 +11,7 @@ import TipoInfoClinicas from './TipoInfoClinicas'
 import GrupoAlunos from './GrupoAlunos'
 import PlanejamentoGrupos from './PlanejamentoGrupos'
 import PlanejamentoAtividades from './PlanejamentoAtividades'
+import ExecucaoAtividades from './ExecucaoAtividades'
 
 export {
     Alunos,
@@ -25,5 +26,6 @@ export {
     TipoInfoClinicas,
     AvaliacoesClinicas,
     PlanejamentoGrupos,
-    PlanejamentoAtividades
+    PlanejamentoAtividades,
+    ExecucaoAtividades
 }
