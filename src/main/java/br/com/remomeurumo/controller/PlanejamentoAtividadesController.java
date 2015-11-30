@@ -3,6 +3,7 @@ package br.com.remomeurumo.controller;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -46,16 +47,18 @@ public class PlanejamentoAtividadesController {
 		if(atividade.getPlanejamentoGrupos()==null || atividade.getPlanejamentoGrupos().isEmpty()) {
 			List<PlanejamentoGrupo> procurarGrupos = this.procurarGrupos();
 			List<PlanejamentoGrupo> novosGrupos = new ArrayList<PlanejamentoGrupo>();
-			long i = -1;
 			for (PlanejamentoGrupo planejamento : procurarGrupos) {
 				PlanejamentoGrupo novoPlanejamento = new PlanejamentoGrupo();
-				novoPlanejamento.setId(i--);
+				//novoPlanejamento.setId(i--);
 				novoPlanejamento.setComentario(planejamento.getComentario());
 				novoPlanejamento.setPlanejamentoDeAula(planejamento.getPlanejamentoDeAula());
 				novoPlanejamento.setAlunos(planejamento.getAlunos());
 				novoPlanejamento.setColaboradores(planejamento.getColaboradores());
 				novoPlanejamento.setGrupo(planejamento.getGrupo());
 				novosGrupos.add(novoPlanejamento);
+				//cria o novo grupo
+				this.em.persist(novoPlanejamento);
+				System.out.println("Persistindo com novo ID: "+novoPlanejamento.getId());
 			}
 			atividade.setPlanejamentoGrupos(novosGrupos);
 		}	
@@ -74,7 +77,7 @@ public class PlanejamentoAtividadesController {
 		for (GrupoAluno grupoAluno : list) {
 			criteria = session.createCriteria(PlanejamentoGrupo.class);
 			criteria.add(Restrictions.eq("grupo", grupoAluno));
-			criteria.addOrder(Order.asc("id"));
+			criteria.addOrder(Order.desc("id"));
 			List<PlanejamentoGrupo> resultList = criteria.list();
 			if(resultList!=null && !resultList.isEmpty()) {
 				planejamentos.add(resultList.iterator().next());
@@ -89,7 +92,6 @@ public class PlanejamentoAtividadesController {
 	@Produces(APPLICATION_JSON)
 	@Path("removerAluno")
 	public Atividade removerAluno(@QueryParam("id") Long id) {
-		System.out.println("Removendo o relacionamento do aluno -- "+id);
 		return em.find(Atividade.class,id);
 	}
 	
@@ -103,6 +105,13 @@ public class PlanejamentoAtividadesController {
 		
 		//deve comparar os grupos que vieram no request contra os que já existiam no banco
 		Atividade atividadeOriginal = em.find(Atividade.class,atividade.getId());
+		Collection<PlanejamentoGrupo> planejametoMantidos = new ArrayList<PlanejamentoGrupo>(atividadeOriginal.getPlanejamentoGrupos());
+		Collection<PlanejamentoGrupo> planejametoRemovidos = new ArrayList<PlanejamentoGrupo>(atividadeOriginal.getPlanejamentoGrupos());
+		
+		System.out.println("\n\n Colecao que mantém -- "+planejametoMantidos.retainAll(atividade.getPlanejamentoGrupos()));
+		System.out.println("\n\n Diferença apagar -- "+planejametoRemovidos.removeAll(atividade.getPlanejamentoGrupos()));
+		System.out.println("\n\n Colecao que mantém -- "+planejametoMantidos);
+		System.out.println("\n\n Diferença apagar -- "+planejametoRemovidos);
 		for (PlanejamentoGrupo planejamento : atividade.getPlanejamentoGrupos()) {
 			if(atividadeOriginal.getPlanejamentoGrupos().contains(planejamento)) {
 				System.out.println("\n\n Merge -- "+planejamento.getId());

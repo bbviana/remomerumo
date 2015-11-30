@@ -124,7 +124,7 @@ class PlanejamentoAtividades extends Component {
 	            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={planejamentoGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
 	            	          	</Row>
 	            	          	<Row className="show-grid">
-            	          			<Col xs={12}><Button bsStyle="danger" bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerPlanejamento.bind(this, planejamentoGrupo.id)} glyph="minus"/></Button></Col>
+            	          			<Col xs={12}><Button bsStyle="danger" bsSize="xsmall">Remover Grupo&nbsp;<Glyphicon style={s.button} onClick={this.removerPlanejamento.bind(this, planejamentoGrupo.id)} glyph="minus"/></Button></Col>
             	          		</Row>
             	          	</Panel>
             	        })}

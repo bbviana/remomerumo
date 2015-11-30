@@ -47,6 +47,7 @@ class ExecucaoAtividades extends Component {
     }
     
     componentDidMount = () => {
+    	console.log(this.props.id)
     	this.procurarGrupos()
     }
     
@@ -79,21 +80,17 @@ class ExecucaoAtividades extends Component {
             	        {this.state.planejamentoGrupos.map((planejamentoGrupo, index) => {
             	        	return <Panel  key={index} header={planejamentoGrupo.grupo.nome}>
 	            	            <Row className="show-grid">
-	            	        		<Col xs={6} md={4}>Alunos</Col>
-	            	        		<Col xs={12} md={8}>Comentarios</Col>
+	            	        		<Col xs={3} md={2}>Alunos</Col>
+	            	        		<Col xs={6} md={9}>Comentarios</Col>
+	            	        		<Col xs={1} md={1}></Col>
 	            	          	</Row>
-	            	          	<Row className="show-grid">
-	            	          		<Col xs={6} md={4}>
-		            	          		{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
-		            	          			return <div key={indexAluno} >{aluno.nome}&nbsp; <Button bsStyle="danger" bsSize="xsmall">
-		            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button></div>
-		            	          		})}
-	            	          		</Col>
-	            	          		<Col xs={6} md={8}><Input type="textarea" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
+	            	          	{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
+	            	          		return  <Row className="show-grid" key={indexAluno}>
+	            	          		<Col xs={3} md={2}>{aluno.nome}</Col>
+	            	          		<Col xs={6} md={9}><Input type="text" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
+	            	          		<Col xs={1} md={1}><Button bsStyle="danger" bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button></Col>
 	            	          	</Row>
-	            	          	<Row className="show-grid">
-            	          			<Col xs={12}><Button bsStyle="danger" bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerPlanejamento.bind(this, planejamentoGrupo.id)} glyph="minus"/></Button></Col>
-            	          		</Row>
+	            	          	})}
             	          	</Panel>
             	        })}
             	      </Grid>
