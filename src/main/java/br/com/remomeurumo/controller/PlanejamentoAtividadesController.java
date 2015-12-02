@@ -21,7 +21,9 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import br.com.remomeurumo.model.Aluno;
 import br.com.remomeurumo.model.Atividade;
+import br.com.remomeurumo.model.Colaborador;
 import br.com.remomeurumo.model.GrupoAluno;
 import br.com.remomeurumo.model.PlanejamentoGrupo;
 import br.com.remomeurumo.persistence.Transactional;
@@ -52,18 +54,30 @@ public class PlanejamentoAtividadesController {
 				//novoPlanejamento.setId(i--);
 				novoPlanejamento.setComentario(planejamento.getComentario());
 				novoPlanejamento.setPlanejamentoDeAula(planejamento.getPlanejamentoDeAula());
-				novoPlanejamento.setAlunos(planejamento.getAlunos());
-				novoPlanejamento.setColaboradores(planejamento.getColaboradores());
+				novoPlanejamento.setAlunos(this.cloneAlunos(planejamento.getAlunos()));
+				novoPlanejamento.setColaboradores(this.cloneColaboradores(planejamento.getColaboradores()));
 				novoPlanejamento.setGrupo(planejamento.getGrupo());
+				novoPlanejamento.setAtividade(atividade);
 				novosGrupos.add(novoPlanejamento);
 				//cria o novo grupo
 				this.em.persist(novoPlanejamento);
-				System.out.println("Persistindo com novo ID: "+novoPlanejamento.getId());
 			}
 			atividade.setPlanejamentoGrupos(novosGrupos);
 		}	
 		
 		return atividade;
+	}
+	
+	private List<Aluno> cloneAlunos(Collection<Aluno> alunos){
+		List<Aluno> novosAlunos = new ArrayList<Aluno>();
+		novosAlunos.addAll(alunos);
+		return novosAlunos;
+	}
+	
+	private List<Colaborador> cloneColaboradores(Collection<Colaborador> colaboradores){
+		List<Colaborador> novosColaboradores = new ArrayList<Colaborador>();
+		novosColaboradores.addAll(colaboradores);
+		return novosColaboradores;
 	}
 	
 	@GET
@@ -107,19 +121,19 @@ public class PlanejamentoAtividadesController {
 		Atividade atividadeOriginal = em.find(Atividade.class,atividade.getId());
 		Collection<PlanejamentoGrupo> planejametoMantidos = new ArrayList<PlanejamentoGrupo>(atividadeOriginal.getPlanejamentoGrupos());
 		Collection<PlanejamentoGrupo> planejametoRemovidos = new ArrayList<PlanejamentoGrupo>(atividadeOriginal.getPlanejamentoGrupos());
-		
+		System.out.println("\n\n Colecao  -- "+atividade.getPlanejamentoGrupos());
+		System.out.println("\n\n Colecao original  -- "+atividadeOriginal.getPlanejamentoGrupos());
 		System.out.println("\n\n Colecao que mantém -- "+planejametoMantidos.retainAll(atividade.getPlanejamentoGrupos()));
 		System.out.println("\n\n Diferença apagar -- "+planejametoRemovidos.removeAll(atividade.getPlanejamentoGrupos()));
 		System.out.println("\n\n Colecao que mantém -- "+planejametoMantidos);
 		System.out.println("\n\n Diferença apagar -- "+planejametoRemovidos);
-		for (PlanejamentoGrupo planejamento : atividade.getPlanejamentoGrupos()) {
-			if(atividadeOriginal.getPlanejamentoGrupos().contains(planejamento)) {
-				System.out.println("\n\n Merge -- "+planejamento.getId());
-				//this.em.merge(planejamento);
-			} else {
-				System.out.println("\n\n Salvando Novo -- ");
-				//this.em.persist(planejamento);
-			}
+		for (PlanejamentoGrupo planejamento : planejametoMantidos) {
+			System.out.println("\n\n Merge -- "+planejamento.getId());
+			this.em.merge(planejamento);
+		}
+		for (PlanejamentoGrupo planejamento : planejametoRemovidos) {
+			System.out.println("\n\n Removendo -- "+planejamento.getId());
+			this.em.remove(planejamento);
 		}
 		
 		return atividade;
