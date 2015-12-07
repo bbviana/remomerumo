@@ -127,6 +127,7 @@ const ListSection = ({controller, schema, list, currentPage, totalPages, pageSiz
                     <td>
                         <EditButton controller={controller} id={element.id} />
                         <RemoveButton controller={controller} id={element.id} />
+                        {schema.actions && schema.actions(element).props.children}
                     </td>
                 </tr>
             )}

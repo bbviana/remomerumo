@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AvaliacoesClinicasController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Button,Input, Row, Col, Grid} from 'react-bootstrap';
 
 class AvaliacoesClinicas extends Component {
     componentDidMount = () => AvaliacoesClinicasController.list() // Busca inicial
@@ -26,7 +26,12 @@ class AvaliacoesClinicas extends Component {
                 <td>{avaliacaoClinica.modelo.nome}</td>
                 <td>{avaliacaoClinica.aluno.nome}</td>
                 <td>{avaliacaoClinica.data}</td>
-            </tr>
+            </tr>,
+        actions: (avaliacaoClinica) =>  
+        	 <div>
+        		<Button id={avaliacaoClinica.id} bsStyle="link" onClick={() => window.open("?login")} >A</Button>
+        		<Button id={avaliacaoClinica.id}>B</Button>
+        	 </div>
     }
 
     formSchema = (avaliacaoClinica, {modelos = [], alunos = [], tipos = []}) =>
@@ -74,6 +79,7 @@ class AvaliacoesClinicas extends Component {
 	      </Grid>
         </div>
 
+        
     render = () =>
         <Crud title="Avaliação Clinica"
               controller={AvaliacoesClinicasController}

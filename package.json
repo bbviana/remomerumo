@@ -32,7 +32,8 @@
     "react": "^0.14.1",
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.1",
-    "superagent": "~1.2.0"
+    "superagent": "~1.2.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel": "^5.8.23",

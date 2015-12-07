@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, AvaliacaoInfoClinicas, InfoClinicas, ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoGrupos, PlanejamentoAtividades, ExecucaoAtividades} from './views'
+import url from 'url'
+
+const queryParams = url.parse(window.location.href, true).query
 
 if(window.location.search === "?login"){
     // localhost:8080/?login
@@ -41,9 +44,9 @@ if(window.location.search === "?login"){
 } else if(window.location.search === "?execucaoAtividades"){
     // localhost:8080/?execucaoAtividades
     ReactDOM.render(<ExecucaoAtividades id="38"/>, document.getElementById("app"));
-} else if(window.location.search === "?avaliacaoInfoClinicas"){
+} else if(window.location.search.startsWith("?avaliacaoInfoClinicas")){
     // localhost:8080/?execucaoAtividades
-    ReactDOM.render(<AvaliacaoInfoClinicas id="12"/>, document.getElementById("app"));
+    ReactDOM.render(<AvaliacaoInfoClinicas id={queryParams.id}/>, document.getElementById("app"));
 } else {
 	
     // localhost:8080/
