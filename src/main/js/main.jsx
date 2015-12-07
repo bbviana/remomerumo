@@ -43,7 +43,7 @@ if(window.location.search === "?login"){
     ReactDOM.render(<ExecucaoAtividades id="38"/>, document.getElementById("app"));
 } else if(window.location.search === "?avaliacaoInfoClinicas"){
     // localhost:8080/?execucaoAtividades
-    ReactDOM.render(<AvaliacaoInfoClinicas id="6"/>, document.getElementById("app"));
+    ReactDOM.render(<AvaliacaoInfoClinicas id="12"/>, document.getElementById("app"));
 } else {
 	
     // localhost:8080/

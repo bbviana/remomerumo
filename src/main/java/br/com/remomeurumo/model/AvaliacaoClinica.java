@@ -1,10 +1,11 @@
 package br.com.remomeurumo.model;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import br.com.remomeurumo.framework.BaseEntity;
 
@@ -19,21 +20,21 @@ public class AvaliacaoClinica extends BaseEntity {
 	private String data;
 
 	private String comentario;
-	
-	//TODO: ANexo a ficha clinica
+
+	// TODO: ANexo a ficha clinica
 
 	@JsonFilter("associationFilter")
 	@ManyToOne
 	@JoinColumn(name = "modeloid")
 	private ModeloAvaliacaoClinica modelo;
-	
+
 	@JsonFilter("associationFilter")
 	@ManyToOne
 	@JoinColumn(name = "alunoid")
 	private Aluno aluno;
-	
-	@ManyToOne
-	private ArrayList<InfoClinica> informacoesClinicas;
+
+	@OneToMany(mappedBy = "avaliacao")
+	private Collection<InfoClinica> informacoesClinicas;
 
 	public String getData() {
 		return data;
@@ -58,7 +59,7 @@ public class AvaliacaoClinica extends BaseEntity {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-	
+
 	public ModeloAvaliacaoClinica getModelo() {
 		return modelo;
 	}
@@ -67,16 +68,14 @@ public class AvaliacaoClinica extends BaseEntity {
 		this.modelo = modelo;
 	}
 
-
-	public ArrayList<InfoClinica> getInformacoesClinicas() {
+	public Collection<InfoClinica> getInformacoesClinicas() {
 		return informacoesClinicas;
 	}
 
-	public void setInformacoesClinicas(ArrayList<InfoClinica> informacoesClinicas) {
+	public void setInformacoesClinicas(
+			Collection<InfoClinica> informacoesClinicas) {
 		this.informacoesClinicas = informacoesClinicas;
 	}
-
-
 
 	private static final long serialVersionUID = 1L;
 }

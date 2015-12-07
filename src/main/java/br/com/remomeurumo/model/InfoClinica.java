@@ -16,7 +16,6 @@ public class InfoClinica extends BaseEntity {
 
 	private String valor;
 
-	@JsonFilter("associationFilter")
 	@ManyToOne
 	@JoinColumn(name = "tipoid")
 	private TipoInfoClinica tipo;

@@ -50,7 +50,7 @@ class AvaliacaoInfoClinicas extends Component {
 	        </Nav>
 	        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
 	            <NavItem eventKey={1} href="#">
-	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;avaliacao : {this.state.aluno},&nbsp;{this.state.modelo} 
+	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Avaliacao : {this.state.modelo}, Aluno: {this.state.aluno} 
 	            </NavItem>
 	            
 	            <NavItem eventKey={2} href="?login">
@@ -65,14 +65,14 @@ class AvaliacaoInfoClinicas extends Component {
                     	<div>
             	        <Grid fluid>
             	        <Row className="show-grid">
-	    	        		<Col xs={3} md={2}>Medida</Col>
-	    	        		<Col xs={6} md={8}>Valor</Col>
-	    	        		<Col xs={3} md={2}>Sigla</Col>
+	    	        		<Col xs={4} md={2}>Medida</Col>
+	    	        		<Col xs={4} md={6}>Valor</Col>
+	    	        		<Col xs={2} md={2}>Sigla</Col>
     	        		</Row>
             	        {this.state.informacoesClinicas.map((informacaoClinica, index) => {
-            	          		return  <Row className="show-grid" key={indexAluno}>
-	            	          		<Col xs={2} md={2}>{informacaoClinica.tipo.nome}</Col>
-	            	          		<Col xs={8} md={8}><Input type="text" label="" name="valor" defaultValue={informacaoClinica.valor} placeholder="Valor"  /></Col>
+            	          		return  <Row className="show-grid" key={index}>
+	            	          		<Col xs={4} md={2}>{informacaoClinica.tipo.nome}</Col>
+	            	          		<Col xs={4} md={6}><Input type="text" label="" name="valor" defaultValue={informacaoClinica.valor} placeholder="Valor"  /></Col>
 	            	          		<Col xs={2} md={2}>{informacaoClinica.tipo.sigla}</Col>
 	            	          	</Row>
             	        })}
