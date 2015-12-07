@@ -23,9 +23,6 @@ public class ModeloAvaliacaoClinica extends BaseEntity {
 	@JoinTable(name = "ModeloAvalTipoInfoClinica")
 	private Collection<TipoInfoClinica> tipoInfoClinicas;
 
-	@ManyToOne
-	private Aluno aluno;
-
 	public String getNome() {
 		return nome;
 	}
@@ -50,14 +47,6 @@ public class ModeloAvaliacaoClinica extends BaseEntity {
 		this.tipoInfoClinicas = tipoInfoClinicas;
 	}
 
-
-	public Aluno getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
-	}
 
 	private static final long serialVersionUID = 1L;
 }

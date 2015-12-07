@@ -1,10 +1,12 @@
 package br.com.remomeurumo.model;
 
+import java.util.ArrayList;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import br.com.remomeurumo.framework.BaseEntity;
-
-import java.util.Collection;
-
-import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
@@ -29,6 +31,9 @@ public class AvaliacaoClinica extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "alunoid")
 	private Aluno aluno;
+	
+	@ManyToOne
+	private ArrayList<InfoClinica> informacoesClinicas;
 
 	public String getData() {
 		return data;
@@ -60,6 +65,15 @@ public class AvaliacaoClinica extends BaseEntity {
 
 	public void setModelo(ModeloAvaliacaoClinica modelo) {
 		this.modelo = modelo;
+	}
+
+
+	public ArrayList<InfoClinica> getInformacoesClinicas() {
+		return informacoesClinicas;
+	}
+
+	public void setInformacoesClinicas(ArrayList<InfoClinica> informacoesClinicas) {
+		this.informacoesClinicas = informacoesClinicas;
 	}
 
 

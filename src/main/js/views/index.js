@@ -12,6 +12,7 @@ import GrupoAlunos from './GrupoAlunos'
 import PlanejamentoGrupos from './PlanejamentoGrupos'
 import PlanejamentoAtividades from './PlanejamentoAtividades'
 import ExecucaoAtividades from './ExecucaoAtividades'
+import AvaliacaoInfoClinicas from './AvaliacaoInfoClinicas'
 
 export {
     Alunos,
@@ -27,5 +28,6 @@ export {
     AvaliacoesClinicas,
     PlanejamentoGrupos,
     PlanejamentoAtividades,
-    ExecucaoAtividades
+    ExecucaoAtividades,
+    AvaliacaoInfoClinicas
 }
