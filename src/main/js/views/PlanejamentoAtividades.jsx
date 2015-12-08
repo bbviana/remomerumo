@@ -88,7 +88,7 @@ class PlanejamentoAtividades extends Component {
 	            </NavItem>
 	            
 	            <NavItem eventKey={2} href="?login">
-	                <Glyphicon glyph="log-out"/>
+	                <Glyphicon glyph="remove"/>
 	            </NavItem>
 	        </Nav>
 	    </Navbar>

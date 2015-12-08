@@ -4,10 +4,11 @@ import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, Tip
 import url from 'url'
 
 const queryParams = url.parse(window.location.href, true).query
+console.log(queryParams)
 
 if(window.location.search === "?login"){
     // localhost:8080/?login
-    ReactDOM.render(<Login id="42"/>, document.getElementById("app"));
+    ReactDOM.render(<Login />, document.getElementById("app"));
 } else if(window.location.search === "?atividades") {
     // localhost:8080/?atividades
     ReactDOM.render(<Atividades />, document.getElementById("app"));
@@ -38,17 +39,16 @@ if(window.location.search === "?login"){
 } else if(window.location.search === "?planejamentoGrupos") {
     // localhost:8080/?planejamentoGrupos
     ReactDOM.render(<PlanejamentoGrupos />, document.getElementById("app"));
-} else if(window.location.search === "?planejamentoAtividades"){
-    // localhost:8080/?login
-    ReactDOM.render(<PlanejamentoAtividades id="47"/>, document.getElementById("app"));
-} else if(window.location.search === "?execucaoAtividades"){
+} else if(window.location.search.startsWith("?planejamentoAtividades")){
+    // localhost:8080/?planejamentoAtividades
+    ReactDOM.render(<PlanejamentoAtividades id={queryParams.id}/>, document.getElementById("app"));
+} else if(window.location.search.startsWith("?execucaoAtividades")){
     // localhost:8080/?execucaoAtividades
-    ReactDOM.render(<ExecucaoAtividades id="38"/>, document.getElementById("app"));
+    ReactDOM.render(<ExecucaoAtividades id={queryParams.id}/>, document.getElementById("app"));
 } else if(window.location.search.startsWith("?avaliacaoInfoClinicas")){
     // localhost:8080/?execucaoAtividades
     ReactDOM.render(<AvaliacaoInfoClinicas id={queryParams.id}/>, document.getElementById("app"));
 } else {
-	
     // localhost:8080/
     ReactDOM.render(<Alunos />, document.getElementById("app"));
 }

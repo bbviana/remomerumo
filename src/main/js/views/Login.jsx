@@ -6,8 +6,7 @@ class Login extends Component {
     state = {
         id: "",
         login: "",
-        senha: "",
-        associacoes: []
+        senha: ""
     }
 
     login = (event) => {
@@ -22,7 +21,6 @@ class Login extends Component {
             id: usuario.id,
             login: usuario.login,
             senha: usuario.senha,
-            associacoes: [usuario, usuario]
         }))
     }
 
@@ -46,15 +44,7 @@ class Login extends Component {
                             <input type="checkbox" value="remember-me" /> Lembrar
                         </label>
                     </div>
-
-                    <div>
-                        {this.state.id}
-                        {this.state.login}
-                        {this.state.senha}
-                    </div>
-                    {this.state.associacoes.map(function(element, index){
-                        return <div key={index}>{element.login}</div>
-                    })}
+                  
                     <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                 </form>
             </div>

@@ -81,11 +81,8 @@ const Header = ({label}) =>
                 <MenuItem eventKey="4" href="?tipoInfoClinicas">
                     <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação Clinica
                 </MenuItem>
-                <MenuItem eventKey="3" href="?avaliacoesClinicas">
-                    <Glyphicon glyph="send"/>&nbsp;&nbsp;Avaliação Clinica
-                </MenuItem>
-                <MenuItem eventKey="4" href="?infoClinicas">
-                    <Glyphicon glyph="stats"/>&nbsp;&nbsp;Informação Clinica
+                <MenuItem eventKey="5" href="?avaliacoesClinicas">
+                    <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação Clinica
                 </MenuItem>
             </NavDropdown>
             <NavItem eventKey={2} href="?login">
@@ -126,8 +123,8 @@ const ListSection = ({controller, schema, list, currentPage, totalPages, pageSiz
                     {schema.body(element).props.children}
                     <td>
                         <EditButton controller={controller} id={element.id} />
-                        <RemoveButton controller={controller} id={element.id} />
                         {schema.actions && schema.actions(element).props.children}
+                        <RemoveButton controller={controller} id={element.id} />
                     </td>
                 </tr>
             )}

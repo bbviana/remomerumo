@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button} from 'react-bootstrap';
+import {Image, Input, Row, Col, Table, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button} from 'react-bootstrap';
 
 class AvaliacaoInfoClinicas extends Component {
     state = {
@@ -35,7 +35,6 @@ class AvaliacaoInfoClinicas extends Component {
     }
     
     componentDidMount = () => {
-    	console.log(this.props.id)
     	this.procurarAvaliacao()
     }
     
@@ -54,7 +53,7 @@ class AvaliacaoInfoClinicas extends Component {
 	            </NavItem>
 	            
 	            <NavItem eventKey={2} href="?login">
-	                <Glyphicon glyph="log-out"/>
+	                <Glyphicon glyph="remove"/>
 	            </NavItem>
 	        </Nav>
 	    </Navbar>
@@ -63,20 +62,24 @@ class AvaliacaoInfoClinicas extends Component {
                 <form style={s.form} onSubmit={this.salvar}>
                     
                     	<div>
-            	        <Grid fluid>
-            	        <Row className="show-grid">
-	    	        		<Col xs={4} md={2}>Medida</Col>
-	    	        		<Col xs={4} md={6}>Valor</Col>
-	    	        		<Col xs={2} md={2}>Sigla</Col>
-    	        		</Row>
-            	        {this.state.informacoesClinicas.map((informacaoClinica, index) => {
-            	          		return  <Row className="show-grid" key={index}>
-	            	          		<Col xs={4} md={2}>{informacaoClinica.tipo.nome}</Col>
-	            	          		<Col xs={4} md={6}><Input type="text" label="" name="valor" defaultValue={informacaoClinica.valor} placeholder="Valor"  /></Col>
-	            	          		<Col xs={2} md={2}>{informacaoClinica.tipo.sigla}</Col>
-	            	          	</Row>
-            	        })}
-            	      </Grid>
+                    	<Table striped hover>
+                        <thead>
+                        <tr>
+                        	<th>Medida</th>
+                        	<th>Valor</th>
+                        	<th>Sigla</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.informacoesClinicas.map((informacaoClinica, index) => {
+                            <tr key={index}>
+	                            <td>{informacaoClinica.tipo.nome}</td>
+	                            <td><Input type="text" label="" name="valor" defaultValue={informacaoClinica.valor} placeholder="Valor"  /></td>
+	                            <td>{informacaoClinica.tipo.sigla}</td>
+                            </tr>
+                        })}
+                        </tbody>
+                    </Table>
                     </div>
                     
                     <button className="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>

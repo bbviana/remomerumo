@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AtividadesController} from '../controllers'
-import {Input, Row, Col, Grid, Panel, Glyphicon} from 'react-bootstrap';
+import {Input, Row, Col, Grid, Panel, Glyphicon, Button} from 'react-bootstrap';
 
 class Atividades extends Component {
     componentDidMount = () => AtividadesController.list() // Busca inicial
@@ -26,7 +26,16 @@ class Atividades extends Component {
                 <td>{atividade.nome}</td>
                 <td>{atividade.data}</td>
                 <td>{atividade.comentario}</td>
-            </tr>
+            </tr>,
+            
+       actions: (atividade) =>  
+       	 <div>
+       		<Button id={atividade.id} bsStyle="link" onClick={(id) => window.open("?planejamentoAtividades&id="+
+       				{id})} ><Glyphicon glyph="inbox"/></Button>
+       		<Button id={atividade.id} bsStyle="link" onClick={(id) => window.open("?execucaoAtividades&id="+
+       	       				{id})} ><Glyphicon glyph="ok"/></Button>		
+       	 </div>     
+            
     }
 
     formSchema = (atividade, {tipos = [], planejamentos = []}) =>

@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AvaliacoesClinicasController} from '../controllers'
-import {Button,Input, Row, Col, Grid} from 'react-bootstrap';
+import {Button,Input, Row, Col, Grid, Glyphicon} from 'react-bootstrap';
 
 class AvaliacoesClinicas extends Component {
     componentDidMount = () => AvaliacoesClinicasController.list() // Busca inicial
@@ -29,8 +29,8 @@ class AvaliacoesClinicas extends Component {
             </tr>,
         actions: (avaliacaoClinica) =>  
         	 <div>
-        		<Button id={avaliacaoClinica.id} bsStyle="link" onClick={() => window.open("?login")} >A</Button>
-        		<Button id={avaliacaoClinica.id}>B</Button>
+        		<Button id={avaliacaoClinica.id} bsStyle="link" onClick={(id) => window.open("?avaliacaoInfoClinicas&id=12"
+        				)} ><Glyphicon glyph="th-list"/></Button>
         	 </div>
     }
 
