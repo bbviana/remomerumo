@@ -52,8 +52,8 @@ class AvaliacaoInfoClinicas extends Component {
 	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Avaliacao : {this.state.modelo}, Aluno: {this.state.aluno} 
 	            </NavItem>
 	            
-	            <NavItem eventKey={2} href="?login">
-	                <Glyphicon glyph="remove"/>
+	            <NavItem eventKey={2} onClick={() => window.close()}>
+	            	<Glyphicon glyph="remove"/>
 	            </NavItem>
 	        </Nav>
 	    </Navbar>
@@ -72,7 +72,7 @@ class AvaliacaoInfoClinicas extends Component {
                         </thead>
                         <tbody>
                         {this.state.informacoesClinicas.map((informacaoClinica, index) => {
-                            <tr key={index}>
+                            return <tr key={index}>
 	                            <td>{informacaoClinica.tipo.nome}</td>
 	                            <td><Input type="text" label="" name="valor" defaultValue={informacaoClinica.valor} placeholder="Valor"  /></td>
 	                            <td>{informacaoClinica.tipo.sigla}</td>
@@ -80,6 +80,7 @@ class AvaliacaoInfoClinicas extends Component {
                         })}
                         </tbody>
                     </Table>
+                  
                     </div>
                     
                     <button className="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>

@@ -87,9 +87,9 @@ class PlanejamentoAtividades extends Component {
 	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade : {this.state.nome},&nbsp;{this.state.data} 
 	            </NavItem>
 	            
-	            <NavItem eventKey={2} href="?login">
-	                <Glyphicon glyph="remove"/>
-	            </NavItem>
+	            <NavItem eventKey={2} onClick={() => window.close()}>
+            		<Glyphicon glyph="remove"/>
+            	</NavItem>
 	        </Nav>
 	    </Navbar>
         

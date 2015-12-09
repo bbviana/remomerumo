@@ -39,7 +39,6 @@ public class AvaliacoesClinicasController extends CrudController<AvaliacaoClinic
 	protected void postBlank(Result<AvaliacaoClinica> result) {
 		result.addAssociation("modelos", findAll(ModeloAvaliacaoClinica.class));
 		result.addAssociation("alunos", findAll(Aluno.class));
-		result.addAssociation("tipos", findAll(TipoInfoClinica.class));
 	}
 
 	@Override

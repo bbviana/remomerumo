@@ -63,19 +63,6 @@ class AvaliacoesClinicas extends Component {
 		        <Row className="show-grid">
 	          		<Col xs={12}><Input type="textarea" label="Comentário" placeholder="Comentários da Avaliação" name="comentario" defaultValue={avaliacaoClinica.comentario} /></Col>
 	          	</Row>
-	          	<Row className="show-grid">
-	          		<Col xs={6} md={4}>nome</Col>
-	          		<Col xs={6} md={4}>valor</Col>
-	          		<Col xs={12} md={4}>unidade de medida</Col>
-        		</Row>
-	          	{tipos.map((iterador, i) =>
-	          	 <Row className="show-grid">
-	        		<Col xs={6} md={4}>{iterador.nome}</Col>
-	        		<Col xs={6} md={4}><Input type="text" label="" placeholder="Valor" name="data"/></Col>
-	        		<Col xs={12} md={4}>{iterador.sigla}</Col>
-	          	</Row>
-	          	
-	          	 )}
 	      </Grid>
         </div>
 

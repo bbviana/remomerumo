@@ -40,12 +40,14 @@ public class AvaliacaoInfoClinicasController {
 			if (avaliacaoClinica.getModelo() != null) {
 				for (TipoInfoClinica tipoInfo : avaliacaoClinica.getModelo()
 						.getTipoInfoClinicas()) {
+					System.out.println("-- "+tipoInfo);
 					InfoClinica infoClinica = new InfoClinica();
 					infoClinica.setTipo(tipoInfo);
 					infoClinica.setAvaliacao(avaliacaoClinica);
 					this.em.persist(infoClinica);
 					avaliacaoClinica.getInformacoesClinicas().add(infoClinica);
 				}
+				this.em.merge(avaliacaoClinica);
 			}
 		}
 
