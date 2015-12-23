@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button} from 'react-bootstrap';
+import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar} from 'react-bootstrap';
 
 class PlanejamentoAtividades extends Component {
     state = {
@@ -97,41 +97,57 @@ class PlanejamentoAtividades extends Component {
                 <form style={s.form} onSubmit={this.salvar}>
                     
                     	<div>
-            	        <Grid fluid>
+                    	
+                    	
+                    	<Tabs defaultActiveKey={1}>
             		    
             	        {this.state.planejamentoGrupos.map((planejamentoGrupo, index) => {
-            	        	return <Panel  key={index} header={planejamentoGrupo.grupo.nome}>
-	            	            <Row className="show-grid">
-	            	        		<Col xs={6} md={2}>Alunos</Col>
-	            	        		<Col xs={6} md={2}>Colaboradores</Col>
-	            	        		<Col xs={12} md={4}>Comentarios</Col>
-	            	        		<Col xs={12} md={4}>Planejamento</Col>
-	            	          	</Row>
-	            	          	<Row className="show-grid">
-	            	          		<Col xs={6} md={2}>
-		            	          		{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
-		            	          			return <div key={indexAluno} >{aluno.nome}&nbsp; <Button bsStyle="danger" bsSize="xsmall">
-		            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button></div>
-		            	          		})}
-	            	          		</Col>
-	            	          		<Col xs={6} md={2}>
-		            	          		{planejamentoGrupo.colaboradores.map((colaborador, indexColaborador) => {
-		            	          			return <div key={indexColaborador} >{colaborador.nome}&nbsp; <Button bsStyle="danger" bsSize="xsmall">
-		            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, planejamentoGrupo.id)} glyph="minus"/></Button></div>
-		            	          		})}
-	            	          		</Col>
-	            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
-	            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={planejamentoGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
-	            	          	</Row>
-	            	          	<Row className="show-grid">
-            	          			<Col xs={12}><Button bsStyle="danger" bsSize="xsmall">Remover Grupo&nbsp;<Glyphicon style={s.button} onClick={this.removerPlanejamento.bind(this, planejamentoGrupo.id)} glyph="minus"/></Button></Col>
-            	          		</Row>
-            	          	</Panel>
+            	        	return  <Tab eventKey={index} title={planejamentoGrupo.grupo.nome} > <div>
+	            	        		<Grid fluid>	
+	            	        	
+			            	            <Row className="show-grid">
+			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
+			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
+			            	        		<Col xs={12} md={4}><strong>Comentarios</strong></Col>
+			            	        		<Col xs={12} md={4}><strong>Planejamento</strong></Col>
+			            	          	</Row>
+			            	          	<Row className="show-grid">
+			            	          		<Col xs={6} md={2}>
+				            	          		{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
+				            	          			return <div key={indexAluno} ><Button bsSize="xsmall" active>
+				            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}</div>
+				            	          		})}
+			            	          		</Col>
+			            	          		<Col xs={6} md={2}>
+				            	          		{planejamentoGrupo.colaboradores.map((colaborador, indexColaborador) => {
+				            	          			return <div key={indexColaborador} ><Button bsSize="xsmall" active>
+				            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, planejamentoGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{colaborador.nome}</div>
+				            	          		})}
+			            	          		</Col>
+			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
+			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={planejamentoGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+			            	          	</Row>
+			            	          	<Row className="show-grid">
+		            	        		<Col xs={12} md={12}>
+		            	        			<ButtonToolbar>
+		            	        				<Button bsStyle="primary" bsSize="medium" type="submit">Salvar</Button>
+		            	        				<Button bsSize="medium" onClick={this.removerPlanejamento.bind(this, planejamentoGrupo.id)}>Remover</Button>
+		            	        			</ButtonToolbar>
+			            	            </Col>
+		            	          	</Row>
+			            	          	
+		            	          	</Grid>
+		            	          	
+            	          	</div>
+            	          	</Tab>
+            	          	
             	        })}
-            	      </Grid>
+            	      
+            	      </Tabs>
+            	      
+      	          	
                     </div>
                     
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
                 </form>
             </div>
         </div>

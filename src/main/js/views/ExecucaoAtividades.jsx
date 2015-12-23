@@ -60,7 +60,7 @@ class ExecucaoAtividades extends Component {
 	        <Nav>
 	        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Execução de Atividades</NavItem>
 	        </Nav>
-	        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
+	        <Nav right eventKey={0}> {}
 	            <NavItem eventKey={1} href="#">
 	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade : {this.state.nome},&nbsp;{this.state.data} 
 	            </NavItem>
@@ -80,15 +80,14 @@ class ExecucaoAtividades extends Component {
             	        {this.state.planejamentoGrupos.map((planejamentoGrupo, index) => {
             	        	return <Panel  key={index} header={planejamentoGrupo.grupo.nome}>
 	            	            <Row className="show-grid">
-	            	        		<Col xs={3} md={2}>Alunos</Col>
-	            	        		<Col xs={6} md={9}>Comentarios</Col>
-	            	        		<Col xs={1} md={1}></Col>
+	            	        		<Col xs={4} md={3}><strong>Alunos</strong></Col>
+	            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
+	            	        		
 	            	          	</Row>
 	            	          	{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
 	            	          		return  <Row className="show-grid" key={indexAluno}>
-	            	          		<Col xs={3} md={2}>{aluno.nome}</Col>
+	            	          		<Col xs={4} md={3}><Button active bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}</Col>
 	            	          		<Col xs={6} md={9}><Input type="text" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
-	            	          		<Col xs={1} md={1}><Button bsStyle="danger" bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button></Col>
 	            	          	</Row>
 	            	          	})}
             	          	</Panel>
