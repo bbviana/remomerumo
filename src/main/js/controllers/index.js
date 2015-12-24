@@ -12,6 +12,7 @@ import PlanejamentoGruposController from './PlanejamentoGruposController'
 import PlanejamentoAtividadesController from './PlanejamentoAtividadesController'
 import ExecucaoAtividadesController from './ExecucaoAtividadesController'
 import AvaliacaoInfoClinicasController from './AvaliacaoInfoClinicasController'
+import HomeController from './HomeController'
 
 export {
     AlunosController,
@@ -27,5 +28,6 @@ export {
     PlanejamentoGruposController,
     PlanejamentoAtividadesController,
     ExecucaoAtividadesController,
-    AvaliacaoInfoClinicasController
+    AvaliacaoInfoClinicasController,
+    HomeController
 }
