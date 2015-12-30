@@ -7,7 +7,7 @@ class ExecucaoAtividades extends Component {
         id: "",
         nome: "",
         data: "",
-        planejamentoGrupos: []
+        atividadeGrupos: []
     }
 
     salvar = (event) => {
@@ -18,7 +18,7 @@ class ExecucaoAtividades extends Component {
             id: atividade.id,
             nome: atividade.nome,
             data: atividade.data,
-            planejamentoGrupos: atividade.planejamentoGrupos
+            atividadeGrupos: atividade.atividadeGrupos
         }))
     }
 
@@ -30,20 +30,20 @@ class ExecucaoAtividades extends Component {
             id: atividade.id,
             nome: atividade.nome,
             data: atividade.data,
-            planejamentoGrupos: atividade.planejamentoGrupos
+            atividadeGrupos: atividade.atividadeGrupos
         }))
     }
     
     removerAluno = (idAluno, idPlanejamento) => {
-    	var planejamentos = this.state.planejamentoGrupos
+    	var atividades = this.state.atividadeGrupos
     	
-    	var planejamentoEscolhido = planejamentos.find(element => {
+    	var atividadeEscolhido = atividades.find(element => {
     		return element.id == idPlanejamento
     	})
-    	planejamentoEscolhido.alunos = planejamentoEscolhido.alunos.filter(element => {
+    	atividadeEscolhido.alunos = atividadeEscolhido.alunos.filter(element => {
     		return element.id != idAluno
     	})
-    	this.setState({planejamentoGrupos : planejamentos})
+    	this.setState({atividadeGrupos : atividades})
     }
     
     componentDidMount = () => {
@@ -77,17 +77,17 @@ class ExecucaoAtividades extends Component {
                     	<div>
             	        <Grid fluid>
             		    
-            	        {this.state.planejamentoGrupos.map((planejamentoGrupo, index) => {
-            	        	return <Panel  key={index} header={planejamentoGrupo.grupo.nome}>
+            	        {this.state.atividadeGrupos.map((atividadeGrupo, index) => {
+            	        	return <Panel  key={index} header={atividadeGrupo.grupo.nome}>
 	            	            <Row className="show-grid">
 	            	        		<Col xs={4} md={3}><strong>Alunos</strong></Col>
 	            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
 	            	        		
 	            	          	</Row>
-	            	          	{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
+	            	          	{atividadeGrupo.alunos.map((aluno, indexAluno) => {
 	            	          		return  <Row className="show-grid" key={indexAluno}>
-	            	          		<Col xs={4} md={3}><Button active bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}</Col>
-	            	          		<Col xs={6} md={9}><Input type="text" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
+	            	          		<Col xs={4} md={3}><Button active bsSize="xsmall"><Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}</Col>
+	            	          		<Col xs={6} md={9}><Input type="text" label="" name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
 	            	          	</Row>
 	            	          	})}
             	          	</Panel>

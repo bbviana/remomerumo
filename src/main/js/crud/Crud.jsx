@@ -65,9 +65,6 @@ const Header = ({label}) =>
 		        <MenuItem eventKey="2" href="?grupoAlunos">
 		            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
 		        </MenuItem>
-		        <MenuItem eventKey="2" href="?planejamentoGrupos">
-                    <Glyphicon glyph="th-list"/>&nbsp;&nbsp;Planejamento de Grupos
-                </MenuItem>    
             	<MenuItem eventKey="1" href="?atividades">
                     <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade
                 </MenuItem>

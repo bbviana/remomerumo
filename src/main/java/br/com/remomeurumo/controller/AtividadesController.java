@@ -6,7 +6,7 @@ import javax.ws.rs.Path;
 import br.com.remomeurumo.framework.CrudController;
 import br.com.remomeurumo.framework.Result;
 import br.com.remomeurumo.model.Atividade;
-import br.com.remomeurumo.model.PlanejamentoGrupo;
+import br.com.remomeurumo.model.AtividadeGrupo;
 import br.com.remomeurumo.model.TipoAtividade;
 
 /**
@@ -23,11 +23,12 @@ public class AtividadesController extends CrudController<Atividade> {
 	@Override
 	protected void postBlank(Result<Atividade> result) {
 		result.addAssociation("tipos", findAll(TipoAtividade.class));
-		result.addAssociation("planejamentos", findAll(PlanejamentoGrupo.class));
+		result.addAssociation("planejamentos", findAll(AtividadeGrupo.class));
 	}
 
 	@Override
 	protected void postLoad(Result<Atividade> result) {
 		postBlank(result);
 	}
+
 }

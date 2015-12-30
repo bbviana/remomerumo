@@ -25,7 +25,8 @@ import br.com.remomeurumo.model.Aluno;
 import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.Colaborador;
 import br.com.remomeurumo.model.GrupoAluno;
-import br.com.remomeurumo.model.PlanejamentoGrupo;
+import br.com.remomeurumo.model.AtividadeGrupo;
+import br.com.remomeurumo.model.TipoAtividade;
 import br.com.remomeurumo.persistence.Transactional;
 
 /**
@@ -46,23 +47,20 @@ public class PlanejamentoAtividadesController {
 		
 		Atividade atividade = em.find(Atividade.class,id);
 		//se a atividade já tem planejamentos usa os dela, senão procura pelos tipos
-		if(atividade.getPlanejamentoGrupos()==null || atividade.getPlanejamentoGrupos().isEmpty()) {
-			List<PlanejamentoGrupo> procurarGrupos = this.procurarGrupos();
-			List<PlanejamentoGrupo> novosGrupos = new ArrayList<PlanejamentoGrupo>();
-			for (PlanejamentoGrupo planejamento : procurarGrupos) {
-				PlanejamentoGrupo novoPlanejamento = new PlanejamentoGrupo();
-				//novoPlanejamento.setId(i--);
-				novoPlanejamento.setComentario(planejamento.getComentario());
-				novoPlanejamento.setPlanejamentoDeAula(planejamento.getPlanejamentoDeAula());
-				novoPlanejamento.setAlunos(this.cloneAlunos(planejamento.getAlunos()));
-				novoPlanejamento.setColaboradores(this.cloneColaboradores(planejamento.getColaboradores()));
-				novoPlanejamento.setGrupo(planejamento.getGrupo());
+		if(atividade.getAtividadeGrupos()==null || atividade.getAtividadeGrupos().isEmpty()) {
+			List<GrupoAluno> procurarGrupos = this.procurarGrupos(atividade.getTipoAtividade());
+			List<AtividadeGrupo> novosGrupos = new ArrayList<AtividadeGrupo>();
+			for (GrupoAluno grupo : procurarGrupos) {
+				AtividadeGrupo novoPlanejamento = new AtividadeGrupo();
+				novoPlanejamento.setAlunos(this.cloneAlunos(grupo.getAlunos()));
+				novoPlanejamento.setColaboradores(this.cloneColaboradores(grupo.getColaboradores()));
+				novoPlanejamento.setGrupo(grupo);
 				novoPlanejamento.setAtividade(atividade);
 				novosGrupos.add(novoPlanejamento);
 				//cria o novo grupo
 				this.em.persist(novoPlanejamento);
 			}
-			atividade.setPlanejamentoGrupos(novosGrupos);
+			atividade.setAtividadeGrupos(novosGrupos);
 		}	
 		
 		return atividade;
@@ -82,23 +80,14 @@ public class PlanejamentoAtividadesController {
 	
 	@GET
 	@SuppressWarnings("unchecked")
-	public List<PlanejamentoGrupo> procurarGrupos() {
+	public List<GrupoAluno> procurarGrupos(TipoAtividade tipoAtividade) {
 
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(GrupoAluno.class);
+		criteria.add(Restrictions.eq("tipoAtividade", tipoAtividade));
+		criteria.addOrder(Order.desc("id"));
 		List<GrupoAluno> list = criteria.list();
-		ArrayList<PlanejamentoGrupo> planejamentos = new ArrayList<PlanejamentoGrupo>();
-		for (GrupoAluno grupoAluno : list) {
-			criteria = session.createCriteria(PlanejamentoGrupo.class);
-			criteria.add(Restrictions.eq("grupo", grupoAluno));
-			criteria.addOrder(Order.desc("id"));
-			List<PlanejamentoGrupo> resultList = criteria.list();
-			if(resultList!=null && !resultList.isEmpty()) {
-				planejamentos.add(resultList.iterator().next());
-			}
-		}
-		
-		return planejamentos;
+		return list;
 	}
 	
 	
@@ -119,19 +108,23 @@ public class PlanejamentoAtividadesController {
 		
 		//deve comparar os grupos que vieram no request contra os que já existiam no banco
 		Atividade atividadeOriginal = em.find(Atividade.class,atividade.getId());
-		Collection<PlanejamentoGrupo> planejametoMantidos = new ArrayList<PlanejamentoGrupo>(atividadeOriginal.getPlanejamentoGrupos());
-		Collection<PlanejamentoGrupo> planejametoRemovidos = new ArrayList<PlanejamentoGrupo>(atividadeOriginal.getPlanejamentoGrupos());
-		System.out.println("\n\n Colecao  -- "+atividade.getPlanejamentoGrupos());
-		System.out.println("\n\n Colecao original  -- "+atividadeOriginal.getPlanejamentoGrupos());
-		System.out.println("\n\n Colecao que mantém -- "+planejametoMantidos.retainAll(atividade.getPlanejamentoGrupos()));
-		System.out.println("\n\n Diferença apagar -- "+planejametoRemovidos.removeAll(atividade.getPlanejamentoGrupos()));
-		System.out.println("\n\n Colecao que mantém -- "+planejametoMantidos);
-		System.out.println("\n\n Diferença apagar -- "+planejametoRemovidos);
-		for (PlanejamentoGrupo planejamento : planejametoMantidos) {
+		Collection<AtividadeGrupo> planejametoMantidos = new ArrayList<AtividadeGrupo>(atividade.getAtividadeGrupos());
+		Collection<AtividadeGrupo> planejametoRemovidos = new ArrayList<AtividadeGrupo>(atividadeOriginal.getAtividadeGrupos());
+		System.out.println("\n\n Colecao  -- "+atividade.getAtividadeGrupos());
+		System.out.println("\n\n Colecao original  -- "+atividadeOriginal.getAtividadeGrupos());
+		
+		planejametoMantidos.retainAll(atividadeOriginal.getAtividadeGrupos());
+		planejametoRemovidos.removeAll(atividade.getAtividadeGrupos());
+		
+		for (AtividadeGrupo planejamento : planejametoMantidos) {
 			System.out.println("\n\n Merge -- "+planejamento.getId());
-			this.em.merge(planejamento);
+			System.out.println("\n\n Comentario -- "+planejamento.getComentario());
+			System.out.println("\n\n Alunos -- "+planejamento.getAlunos());
+			System.out.println("\n\n Colaboradores -- "+planejamento.getColaboradores());
+			AtividadeGrupo atividadeGrupo = this.em.merge(planejamento);
+			//System.out.println("\n\n Alunos Mantidos -- "+atividadeGrupo.getAlunos().retainAll(planejamento.getAlunos()));
 		}
-		for (PlanejamentoGrupo planejamento : planejametoRemovidos) {
+		for (AtividadeGrupo planejamento : planejametoRemovidos) {
 			System.out.println("\n\n Removendo -- "+planejamento.getId());
 			this.em.remove(planejamento);
 		}

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
  * @author jardim
  */
 @Entity
-public class PlanejamentoGrupo extends BaseEntity {
+public class AtividadeGrupo extends BaseEntity {
 
 	private String planejamentoDeAula;
 
@@ -34,14 +34,14 @@ public class PlanejamentoGrupo extends BaseEntity {
 
 	@JsonFilter("associationFilter")
 	@ManyToMany
-	@JoinTable(name = "PlanejamentoGrupoAlunos")
+	@JoinTable(name = "AtividadeGrupoAlunos")
 	private Collection<Aluno> alunos;
 
 	@JsonFilter("associationFilter")
 	@ManyToMany
-	@JoinTable(name = "PlanejamentoGrupoColaboradores")
+	@JoinTable(name = "AtividadeGrupoColaboradores")
 	private Collection<Colaborador> colaboradores;
-
+	
 	@JsonFilter("associationFilter")
 	@ManyToOne
 	@JoinColumn(name = "atividadeid")

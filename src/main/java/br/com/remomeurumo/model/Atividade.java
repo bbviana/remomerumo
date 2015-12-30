@@ -31,11 +31,11 @@ public class Atividade extends BaseEntity {
 	@JoinColumn(name = "tipoid")
 	private TipoAtividade tipoAtividade;
 
-	@OneToMany(mappedBy = "atividade")
+	@OneToMany(mappedBy = "atividade", orphanRemoval = true)
 	private Collection<AlunoAtividade> alunos;
 
 	@OneToMany(mappedBy = "atividade")
-	private Collection<PlanejamentoGrupo> planejamentoGrupos;
+	private Collection<AtividadeGrupo> atividadeGrupos;
 
 	@Override
 	public String toString() {
@@ -82,13 +82,13 @@ public class Atividade extends BaseEntity {
 		this.nome = nome;
 	}
 
-	public Collection<PlanejamentoGrupo> getPlanejamentoGrupos() {
-		return planejamentoGrupos;
+	public Collection<AtividadeGrupo> getAtividadeGrupos() {
+		return atividadeGrupos;
 	}
 
-	public void setPlanejamentoGrupos(
-			Collection<PlanejamentoGrupo> planejamentoGrupos) {
-		this.planejamentoGrupos = planejamentoGrupos;
+	public void setAtividadeGrupos(
+			Collection<AtividadeGrupo> atividadeGrupos) {
+		this.atividadeGrupos = atividadeGrupos;
 	}
 
 	private static final long serialVersionUID = 1L;

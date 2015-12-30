@@ -12,7 +12,6 @@ class AvaliacaoInfoClinicas extends Component {
 
     salvar = (event) => {
         event.preventDefault()
-
         Request.post('api/avaliacaoInfoClinicas/salvar', this.state)
         .then(avaliacao => this.setState({
             id: avaliacao.id,

@@ -7,66 +7,66 @@ class PlanejamentoAtividades extends Component {
         id: "",
         nome: "",
         data: "",
-        planejamentoGrupos: []
+        atividadeGrupos: []
     }
 
     salvar = (event) => {
         event.preventDefault()
 
-        Request.post('api/planejamentoAtividades/salvar', this.state)
+        Request.post('api/atividadeAtividades/salvar', this.state)
         .then(atividade => this.setState({
             id: atividade.id,
             nome: atividade.nome,
             data: atividade.data,
-            planejamentoGrupos: atividade.planejamentoGrupos
+            atividadeGrupos: atividade.atividadeGrupos
         }))
     }
 
     procurarGrupos = () => {
-        Request.get('api/planejamentoAtividades/procurarGrupos', {
+        Request.get('api/atividadeAtividades/procurarGrupos', {
             id: this.props.id
         })
         .then(atividade => this.setState({
             id: atividade.id,
             nome: atividade.nome,
             data: atividade.data,
-            planejamentoGrupos: atividade.planejamentoGrupos
+            atividadeGrupos: atividade.atividadeGrupos
         }))
     }
     
     removerAluno = (idAluno, idPlanejamento) => {
-    	var planejamentos = this.state.planejamentoGrupos
+    	var atividades = this.state.atividadeGrupos
     	
-    	var planejamentoEscolhido = planejamentos.find(element => {
+    	var atividadeEscolhido = atividades.find(element => {
     		return element.id == idPlanejamento
     	})
-    	planejamentoEscolhido.alunos = planejamentoEscolhido.alunos.filter(element => {
+    	atividadeEscolhido.alunos = atividadeEscolhido.alunos.filter(element => {
     		return element.id != idAluno
     	})
-    	this.setState({planejamentoGrupos : planejamentos})
+    	this.setState({atividadeGrupos : atividades})
     }
     
     removerColaborador = (idColaborador, idPlanejamento) => {
-    	var planejamentos = this.state.planejamentoGrupos
+    	var atividades = this.state.atividadeGrupos
     	
-    	var planejamentoEscolhido = planejamentos.find(element => {
+    	var atividadeEscolhido = atividades.find(element => {
     		return element.id == idPlanejamento
     	})
-    	planejamentoEscolhido.colaboradores = planejamentoEscolhido.colaboradores.filter(element => {
+    	atividadeEscolhido.colaboradores = atividadeEscolhido.colaboradores.filter(element => {
     		return element.id != idColaborador
     	})
-    	this.setState({planejamentoGrupos : planejamentos})
+    	this.setState({atividadeGrupos : atividades})
     }
     
     removerPlanejamento = (idPlanejamento) => {
     	console.log(idPlanejamento)
-    	var planejamentos = this.state.planejamentoGrupos
+    	var atividades = this.state.atividadeGrupos
     	
-    	var planejamentosEscolhido = planejamentos.filter(element => {
+    	var atividadesEscolhido = atividades.filter(element => {
     		return element.id != idPlanejamento
     	})
     	
-    	this.setState({planejamentoGrupos : planejamentosEscolhido})
+    	this.setState({atividadeGrupos : atividadesEscolhido})
     }
     
     componentDidMount = () => {
@@ -97,14 +97,15 @@ class PlanejamentoAtividades extends Component {
                 <form style={s.form} onSubmit={this.salvar}>
                     
                     	<div>
-                    	
-                    	
-                    	<Tabs defaultActiveKey={1}>
+                    	                    	
+                    	<Tabs defaultActiveKey={0}>
             		    
-            	        {this.state.planejamentoGrupos.map((planejamentoGrupo, index) => {
-            	        	return  <Tab eventKey={index} title={planejamentoGrupo.grupo.nome} > <div>
+            	        {this.state.atividadeGrupos.map((atividadeGrupo, index) => {
+            	        	return  <Tab eventKey={index} title={atividadeGrupo.grupo.nome} > <div>
 	            	        		<Grid fluid>	
-	            	        	
+		            	        		<Row className="show-grid">
+			            	        		<Col xs={12}>&nbsp;</Col>
+			            	          	</Row>
 			            	            <Row className="show-grid">
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
@@ -113,39 +114,41 @@ class PlanejamentoAtividades extends Component {
 			            	          	</Row>
 			            	          	<Row className="show-grid">
 			            	          		<Col xs={6} md={2}>
-				            	          		{planejamentoGrupo.alunos.map((aluno, indexAluno) => {
+				            	          		{atividadeGrupo.alunos.map((aluno, indexAluno) => {
 				            	          			return <div key={indexAluno} ><Button bsSize="xsmall" active>
-				            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, planejamentoGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}</div>
+				            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}</div>
 				            	          		})}
 			            	          		</Col>
 			            	          		<Col xs={6} md={2}>
-				            	          		{planejamentoGrupo.colaboradores.map((colaborador, indexColaborador) => {
+				            	          		{atividadeGrupo.colaboradores.map((colaborador, indexColaborador) => {
 				            	          			return <div key={indexColaborador} ><Button bsSize="xsmall" active>
-				            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, planejamentoGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{colaborador.nome}</div>
+				            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{colaborador.nome}</div>
 				            	          		})}
 			            	          		</Col>
-			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={planejamentoGrupo.comentario} placeholder="Comentário"  /></Col>
-			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={planejamentoGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
+			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="atividadeDeAula" defaultValue={atividadeGrupo.atividadeDeAula} placeholder="Planejamento de aula"  /></Col>
 			            	          	</Row>
+		            	        		<Row className="show-grid">
+		            	        			<Col xs={12}>&nbsp;</Col>
+		            	        		</Row>
 			            	          	<Row className="show-grid">
 		            	        		<Col xs={12} md={12}>
 		            	        			<ButtonToolbar>
-		            	        				<Button bsStyle="primary" bsSize="medium" type="submit">Salvar</Button>
-		            	        				<Button bsSize="medium" onClick={this.removerPlanejamento.bind(this, planejamentoGrupo.id)}>Remover</Button>
+		            	        				<Button bsSize="medium" onClick={this.removerPlanejamento.bind(this, atividadeGrupo.id)}>Remover</Button>
 		            	        			</ButtonToolbar>
 			            	            </Col>
 		            	          	</Row>
+	            	        		<Row className="show-grid">
+	            	        			<Col xs={12}>&nbsp;</Col>
+	            	        		</Row>
 			            	          	
 		            	          	</Grid>
-		            	          	
             	          	</div>
             	          	</Tab>
-            	          	
             	        })}
             	      
             	      </Tabs>
-            	      
-      	          	
+            	      <button className="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
                     </div>
                     
                 </form>

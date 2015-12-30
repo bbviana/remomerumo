@@ -13,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import br.com.remomeurumo.model.Atividade;
-import br.com.remomeurumo.model.PlanejamentoGrupo;
+import br.com.remomeurumo.model.AtividadeGrupo;
 import br.com.remomeurumo.persistence.Transactional;
 
 /**
@@ -44,8 +44,8 @@ public class ExecucaoAtividadesController {
 		
 		//deve comparar os grupos que vieram no request contra os que já existiam no banco
 		Atividade atividadeOriginal = em.find(Atividade.class,atividade.getId());
-		for (PlanejamentoGrupo planejamento : atividade.getPlanejamentoGrupos()) {
-			if(atividadeOriginal.getPlanejamentoGrupos().contains(planejamento)) {
+		for (AtividadeGrupo planejamento : atividade.getAtividadeGrupos()) {
+			if(atividadeOriginal.getAtividadeGrupos().contains(planejamento)) {
 				System.out.println("\n\n Merge -- "+planejamento.getId());
 				//this.em.merge(planejamento);
 			} else {
