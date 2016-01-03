@@ -13,7 +13,7 @@ class PlanejamentoAtividades extends Component {
     salvar = (event) => {
         event.preventDefault()
 
-        Request.post('api/atividadeAtividades/salvar', this.state)
+        Request.post('api/planejamentoAtividades/salvar', this.state)
         .then(atividade => this.setState({
             id: atividade.id,
             nome: atividade.nome,
@@ -23,7 +23,7 @@ class PlanejamentoAtividades extends Component {
     }
 
     procurarGrupos = () => {
-        Request.get('api/atividadeAtividades/procurarGrupos', {
+        Request.get('api/planejamentoAtividades/procurarGrupos', {
             id: this.props.id
         })
         .then(atividade => this.setState({
@@ -98,7 +98,7 @@ class PlanejamentoAtividades extends Component {
                     
                     	<div>
                     	                    	
-                    	<Tabs defaultActiveKey={0}>
+                    	<Tabs>
             		    
             	        {this.state.atividadeGrupos.map((atividadeGrupo, index) => {
             	        	return  <Tab eventKey={index} title={atividadeGrupo.grupo.nome} > <div>

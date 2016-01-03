@@ -17,15 +17,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.remomeurumo.model.Aluno;
 import br.com.remomeurumo.model.Atividade;
+import br.com.remomeurumo.model.AtividadeGrupo;
 import br.com.remomeurumo.model.Colaborador;
 import br.com.remomeurumo.model.GrupoAluno;
-import br.com.remomeurumo.model.AtividadeGrupo;
 import br.com.remomeurumo.model.TipoAtividade;
 import br.com.remomeurumo.persistence.Transactional;
 
@@ -45,6 +46,14 @@ public class PlanejamentoAtividadesController {
 	@Path("procurarGrupos")
 	public Atividade procurarGrupos(@QueryParam("id") Long id) {
 		
+		Session session1 = (Session) em.getDelegate();
+		Query criteria1 = session1.createSQLQuery("delete from planejamentogrupocolaboradores ");
+		criteria1.executeUpdate();
+		 criteria1 = session1.createSQLQuery("delete from planejamentogrupo");
+		criteria1.executeUpdate();
+		
+		
+		System.out.println("\n\n Recuperando -- "+id);
 		Atividade atividade = em.find(Atividade.class,id);
 		//se a atividade já tem planejamentos usa os dela, senão procura pelos tipos
 		if(atividade.getAtividadeGrupos()==null || atividade.getAtividadeGrupos().isEmpty()) {
@@ -61,8 +70,9 @@ public class PlanejamentoAtividadesController {
 				this.em.persist(novoPlanejamento);
 			}
 			atividade.setAtividadeGrupos(novosGrupos);
+			this.em.merge(atividade);
 		}	
-		
+		System.out.println("Atividades: "+ atividade.getAtividadeGrupos());
 		return atividade;
 	}
 	
@@ -81,12 +91,14 @@ public class PlanejamentoAtividadesController {
 	@GET
 	@SuppressWarnings("unchecked")
 	public List<GrupoAluno> procurarGrupos(TipoAtividade tipoAtividade) {
-
+		
+		System.out.println("\n\n procurando tipo -- "+tipoAtividade.getId());
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(GrupoAluno.class);
 		criteria.add(Restrictions.eq("tipoAtividade", tipoAtividade));
 		criteria.addOrder(Order.desc("id"));
 		List<GrupoAluno> list = criteria.list();
+		System.out.println("\n\n procurando list -- "+list);
 		return list;
 	}
 	
