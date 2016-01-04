@@ -12,7 +12,7 @@ class AvaliacaoInfoClinicas extends Component {
 
     salvar = (event) => {
         event.preventDefault()
-        Request.post('api/avaliacaoInfoClinicas/salvar', this.state)
+        Request.post('api/avaliacaoInfoClinicas/salvar2', this.state)
         .then(avaliacao => this.setState({
             id: avaliacao.id,
             aluno: avaliacao.aluno.nome,
@@ -20,7 +20,7 @@ class AvaliacaoInfoClinicas extends Component {
             informacoesClinicas: avaliacao.informacoesClinicas
         }))
     }
-
+    
     procurarAvaliacao = () => {
         Request.get('api/avaliacaoInfoClinicas/procurarAvaliacao', {
             id: this.props.id

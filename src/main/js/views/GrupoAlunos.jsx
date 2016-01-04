@@ -17,6 +17,7 @@ class GrupoAlunos extends Component {
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Descrição</th>
+                <th>Tipo de Atividade</th>
             </tr>,
 
         body: (grupoAluno) =>
@@ -24,6 +25,7 @@ class GrupoAlunos extends Component {
                 <td>{grupoAluno.id}</td>
                 <td>{grupoAluno.nome}</td>
                 <td>{grupoAluno.descricao}</td>
+                <td>{grupoAluno.tipoAtividade.nome}</td>
             </tr>
     }
 

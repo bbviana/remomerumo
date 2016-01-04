@@ -134,21 +134,22 @@ class PlanejamentoAtividades extends Component {
 			            	          	<Row className="show-grid">
 		            	        		<Col xs={12} md={12}>
 		            	        			<ButtonToolbar>
-		            	        				<Button bsSize="medium" onClick={this.removerPlanejamento.bind(this, atividadeGrupo.id)}>Remover</Button>
+		            	        				<Button bsSize="medium" bsStyle="danger" onClick={this.removerPlanejamento.bind(this, atividadeGrupo.id)}>Remover Grupo</Button>
+		            	        				<Button bsSize="medium" bsStyle="primary" type="submit">Salvar Alterações</Button>
 		            	        			</ButtonToolbar>
 			            	            </Col>
 		            	          	</Row>
 	            	        		<Row className="show-grid">
 	            	        			<Col xs={12}>&nbsp;</Col>
 	            	        		</Row>
-			            	          	
+	            	        		
 		            	          	</Grid>
             	          	</div>
             	          	</Tab>
             	        })}
             	      
             	      </Tabs>
-            	      <button className="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
+            	      
                     </div>
                     
                 </form>

@@ -24,8 +24,8 @@ public class GrupoAlunosController extends CrudController<GrupoAluno> {
 	@Override
 	protected void postBlank(Result<GrupoAluno> result) {
 		result.addAssociation("tipos", findAll(TipoAtividade.class));
-		result.addAssociation("alunos", findAll(Aluno.class));
-		result.addAssociation("colaboradores", findAll(Colaborador.class));
+		result.addAssociation("alunos", findAllAtivos(Aluno.class));
+		result.addAssociation("colaboradores", findAllAtivos(Colaborador.class));
 	}
 
 	@Override

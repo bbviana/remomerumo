@@ -143,5 +143,13 @@ public class CrudController<T extends BaseEntity> {
 		Criteria criteria = session.createCriteria(entityClass);
 		return criteria.list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	protected <E> List<E> findAllAtivos(Class<? extends E> entityClass) {
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(entityClass);
+		criteria.add(Restrictions.eq("ativo", true));
+		return criteria.list();
+	}
 
 }

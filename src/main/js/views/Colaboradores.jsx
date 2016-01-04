@@ -17,7 +17,7 @@ class Colaboradores extends Component {
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Telefone</th>
-                <th>Celular</th>
+                <th>Ativo?</th>
             </tr>,
 
         body: (colaborador) =>
@@ -26,7 +26,7 @@ class Colaboradores extends Component {
                 <td>{colaborador.nome}</td>
 				<td>{colaborador.email}</td>
                 <td>{colaborador.telefone}</td>
-                <td>{colaborador.celular}</td>
+                <td>{colaborador.ativo}</td>
             </tr>
     }
 
@@ -61,6 +61,9 @@ class Colaboradores extends Component {
 		        	<Col xs={12} md={4}><Input type="text" name="bermuda" defaultValue={colaborador.bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  /></Col>
 		        	<Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={colaborador.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
 		        </Row>
+		        <Row className="show-grid">	
+    				<Col xs={12}><Input type="checkbox" name="ativo" defaultValue={colaborador.ativo}  value="true" label="Ativo" /></Col>
+    			</Row>
 	      </Grid>
         </div>
 

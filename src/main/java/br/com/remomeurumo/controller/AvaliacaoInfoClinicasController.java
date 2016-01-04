@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.AvaliacaoClinica;
 import br.com.remomeurumo.model.InfoClinica;
 import br.com.remomeurumo.model.TipoInfoClinica;
@@ -59,10 +60,18 @@ public class AvaliacaoInfoClinicasController {
 	@POST
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
+	@Path("salvar2")
+	public void ssalvar(Atividade atividade) {
+		System.out.println("SALVAR 2");
+	}
+	
+	@POST
+	@Consumes(APPLICATION_JSON)
+	@Produces(APPLICATION_JSON)
 	@Path("salvar")
 	public AvaliacaoClinica salvar(AvaliacaoClinica avaliacao) {
-		System.out.println("Salvando a Informação clinica da avaliação");
-		
+		System.out.println("Salvando a Informação clinica da avaliação "+avaliacao);
+		this.em.merge(avaliacao);
 		return avaliacao;
 	}
 }

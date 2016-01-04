@@ -47,7 +47,6 @@ class ExecucaoAtividades extends Component {
     }
     
     componentDidMount = () => {
-    	console.log(this.props.id)
     	this.procurarGrupos()
     }
     

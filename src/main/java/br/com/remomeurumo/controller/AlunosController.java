@@ -21,7 +21,7 @@ public class AlunosController extends CrudController<Aluno> {
 
 	@Override
 	protected void postBlank(Result<Aluno> result) {
-		result.addAssociation("responsaveis", findAll(Responsavel.class));
+		result.addAssociation("responsaveis", findAllAtivos(Responsavel.class));
 	}
 
 	@Override

@@ -46,14 +46,6 @@ public class PlanejamentoAtividadesController {
 	@Path("procurarGrupos")
 	public Atividade procurarGrupos(@QueryParam("id") Long id) {
 		
-		Session session1 = (Session) em.getDelegate();
-		Query criteria1 = session1.createSQLQuery("delete from planejamentogrupocolaboradores ");
-		criteria1.executeUpdate();
-		 criteria1 = session1.createSQLQuery("delete from planejamentogrupo");
-		criteria1.executeUpdate();
-		
-		
-		System.out.println("\n\n Recuperando -- "+id);
 		Atividade atividade = em.find(Atividade.class,id);
 		//se a atividade já tem planejamentos usa os dela, senão procura pelos tipos
 		if(atividade.getAtividadeGrupos()==null || atividade.getAtividadeGrupos().isEmpty()) {
@@ -72,19 +64,25 @@ public class PlanejamentoAtividadesController {
 			atividade.setAtividadeGrupos(novosGrupos);
 			this.em.merge(atividade);
 		}	
-		System.out.println("Atividades: "+ atividade.getAtividadeGrupos());
+
 		return atividade;
 	}
 	
 	private List<Aluno> cloneAlunos(Collection<Aluno> alunos){
 		List<Aluno> novosAlunos = new ArrayList<Aluno>();
-		novosAlunos.addAll(alunos);
+		for (Aluno aluno : alunos) {
+			if(Boolean.TRUE.equals(aluno.getAtivo()))
+				novosAlunos.add(aluno);
+		}
 		return novosAlunos;
 	}
 	
 	private List<Colaborador> cloneColaboradores(Collection<Colaborador> colaboradores){
 		List<Colaborador> novosColaboradores = new ArrayList<Colaborador>();
-		novosColaboradores.addAll(colaboradores);
+		for (Colaborador colaborador : novosColaboradores) {
+			if(Boolean.TRUE.equals(colaborador.getAtivo()))
+				novosColaboradores.add(colaborador);
+		}
 		return novosColaboradores;
 	}
 	
@@ -92,13 +90,12 @@ public class PlanejamentoAtividadesController {
 	@SuppressWarnings("unchecked")
 	public List<GrupoAluno> procurarGrupos(TipoAtividade tipoAtividade) {
 		
-		System.out.println("\n\n procurando tipo -- "+tipoAtividade.getId());
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(GrupoAluno.class);
 		criteria.add(Restrictions.eq("tipoAtividade", tipoAtividade));
 		criteria.addOrder(Order.desc("id"));
 		List<GrupoAluno> list = criteria.list();
-		System.out.println("\n\n procurando list -- "+list);
+
 		return list;
 	}
 	
@@ -116,7 +113,6 @@ public class PlanejamentoAtividadesController {
 	@Produces(APPLICATION_JSON)
 	@Path("salvar")
 	public Atividade salvar(Atividade atividade) {
-		System.out.println("\n\n Salvando -- "+atividade.getId());
 		
 		//deve comparar os grupos que vieram no request contra os que já existiam no banco
 		Atividade atividadeOriginal = em.find(Atividade.class,atividade.getId());

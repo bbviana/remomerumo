@@ -34,6 +34,8 @@ public class Pessoa extends BaseEntity {
 	private String sapato;
 	private String bermuda;
 	private String camiseta;
+	
+	private Boolean ativo = true;
 
 
 	//TODO: FOTO
@@ -146,6 +148,14 @@ public class Pessoa extends BaseEntity {
 
 	public void setCamiseta(String camiseta) {
 		this.camiseta = camiseta;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	private static final long serialVersionUID = 1L;

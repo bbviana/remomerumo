@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, AvaliacaoInfoClinicas, InfoClinicas, ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoAtividades, ExecucaoAtividades, Home} from './views'
+import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, AvaliacaoInfoClinicas, InfoClinicas, 
+	ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoAtividades, ExecucaoAtividades, Home, ResumoAlunos} from './views'
 import url from 'url'
 
 const queryParams = url.parse(window.location.href, true).query
@@ -45,6 +46,9 @@ if(window.location.search === "?login"){
 } else if(window.location.search.startsWith("?avaliacaoInfoClinicas")){
     // localhost:8080/?execucaoAtividades
     ReactDOM.render(<AvaliacaoInfoClinicas id={queryParams.id}/>, document.getElementById("app"));
+} else if(window.location.search.startsWith("?resumoAlunos")){
+    // localhost:8080/?execucaoAtividades
+    ReactDOM.render(<ResumoAlunos id={queryParams.id}/>, document.getElementById("app"));
 } else if(window.location.search.startsWith("?alunos")){
     // localhost:8080/?alunos
 	ReactDOM.render(<Alunos />, document.getElementById("app"));

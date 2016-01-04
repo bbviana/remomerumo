@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AlunosController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, Row, Col, Grid, Button, Glyphicon} from 'react-bootstrap';
 
 class Alunos extends Component {
     componentDidMount = () => AlunosController.list() // Busca inicial
@@ -18,7 +18,7 @@ class Alunos extends Component {
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Telefone</th>
-                <th>Celular</th>
+                <th>Ativo?</th>
             </tr>,
 
         body: (aluno) =>
@@ -28,8 +28,15 @@ class Alunos extends Component {
                 <td>{aluno.endereco}</td>
 				<td>{aluno.email}</td>
                 <td>{aluno.telefone}</td>
-                <td>{aluno.celular}</td>
-            </tr>
+                <td>{aluno.ativo}</td>
+            </tr>,
+            
+            
+        actions: (aluno) =>  
+            	 <div>
+            		<Button id={aluno.id} bsStyle="link" onClick={() => window.open("?resumoAlunos&id="+aluno.id
+            				)} ><Glyphicon glyph="stats"/></Button>
+            	 </div> 
     }
 
     formSchema = (aluno, {responsaveis = []}) =>
@@ -78,6 +85,9 @@ class Alunos extends Component {
 	        <Row className="show-grid">	
         		<Col xs={12}><Input type="textarea" name="observacoes" defaultValue={aluno.observacoes} label="Observações" placeholder="Detalhes relevantes sobre o aluno"  /></Col>
         	</Row>
+        	<Row className="show-grid">	
+    			<Col xs={12}><Input type="checkbox" name="ativo" defaultValue={aluno.ativo}  checked label="Ativo" /></Col>
+    		</Row>
 	        
       </Grid>
         </div>

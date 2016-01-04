@@ -13,6 +13,7 @@ import PlanejamentoAtividades from './PlanejamentoAtividades'
 import ExecucaoAtividades from './ExecucaoAtividades'
 import AvaliacaoInfoClinicas from './AvaliacaoInfoClinicas'
 import Home from './Home'
+import ResumoAlunos from './ResumoAlunos'
 
 export {
     Alunos,
@@ -29,5 +30,6 @@ export {
     PlanejamentoAtividades,
     ExecucaoAtividades,
     AvaliacaoInfoClinicas,
-    Home
+    Home,
+    ResumoAlunos
 }
