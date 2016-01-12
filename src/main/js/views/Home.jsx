@@ -68,19 +68,22 @@ class PlanejamentoAtividades extends Component {
 	            <li><strong>Planejamento:</strong> O planejamento de uma atividade envolve dizer quais grupos de alunos e colaboradores irão participar da atividade em questão, o sistema usa os Grupo de Alunos pré cadastrados para este fim, separando este planejamento por tipo de atividade e tipo de grupo de cntrole.</li>
 	            <li><strong>Execução:</strong> Aqui contamos com a lista de chamada</li>
 	            </Tab>
-	            <Tab eventKey={3} title="Avaliações">
-	            <p>&nbsp;</p>
-	            <p><strong> <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação Clinica:</strong></p>
-	            <p><strong> <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação Clinica:</strong></p>
-	            <p><strong> <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação Clinica:</strong></p></Tab>
+	            <Tab eventKey={3} title="Avaliações"><p>&nbsp;</p>
+	            <p>São os cadastros e informações necessárias para preenchimento de uma avalição clinica de um aluno: </p>
+	            <p><strong> <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação Clinica:</strong> Este modelo determmina quais as medidas serão usadas na avaliação clínica deste tipo.</p>
+	            <p><strong> <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação Clinica:</strong>São os tipos de informação clinica que podem ser usados em uma avaliação, tais como peso, altura, etc..</p>
+	            <p><strong> <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação Clinica:</strong>Representa a efetivação de uma avaliação clínica, escolhido um modelo, um aluno e uma data esta avaliação representará as medições feitas.</p></Tab>
 	            <Tab eventKey={4} title="To Do"><p>
-	            <li>Ativaçao nao aparece na lista e o checkbox esta estranho</li>
+	            <strong>Blocker</strong>
 	            <li>Planejamento de atividade não esta salvando comentários e planejamento</li>
 	            <li>Fazer a tela de resumo do aluno e colocar o link no crud do aluno, nesta tela deveria constar as avaliaçẽs e as presenças/comentários dos alunos na atividades</li>
 	            <li>Não esta salvando a informação clinica da avaliacaoinfoclinica</li>
 	            <li>Dar feed back ao usuário quando clicar em salvar nas ações</li>
 	            <li>Colocar segurança no sistema</li>
+	            <li>Comentario da execução de atividade não salva</li>
+	            <strong>Desejados</strong>
 	            <li>Colocar a data de inicio do aluno no IRMR</li>
+	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
 	            </p></Tab>
 	          </Tabs>
            </div>

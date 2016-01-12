@@ -61,10 +61,15 @@ class CrudController extends Controller {
     save = () => {
         const {form} =  this.state;
         if(form.id) {
-            Request.put(`api/${this.url}/${form.id}`, form).then(() => this.list())
+            Request.put(`api/${this.url}/${form.id}`, form).then(() => {
+            	$.toaster({ title: 'Sucesso', message : 'Registro salvo com sucesso', settings: {timeout: 5000} });		
+            	this.list()
+        })
         } else {
             Request.post(`api/${this.url}`, form).then(() => this.list())
         }
+        
+       
     }
 
     remove = (id) => {

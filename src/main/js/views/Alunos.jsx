@@ -2,11 +2,11 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AlunosController} from '../controllers'
-import {Input, Row, Col, Grid, Button, Glyphicon} from 'react-bootstrap';
+import {Input, Row, Col, Grid, Button, Glyphicon} from 'react-bootstrap'
 
 class Alunos extends Component {
     componentDidMount = () => AlunosController.list() // Busca inicial
-
+ 
     searchSchema = (search) =>
        <Input type="text" placeholder="Buscar por nome do Aluno" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
@@ -25,10 +25,9 @@ class Alunos extends Component {
             <tr>
                 <td>{aluno.id}</td>
                 <td>{aluno.nome}</td>
-                <td>{aluno.endereco}</td>
 				<td>{aluno.email}</td>
                 <td>{aluno.telefone}</td>
-                <td>{aluno.ativo}</td>
+                <td>{aluno.ativo?"Sim":"Não"}</td>
             </tr>,
             
             
@@ -83,10 +82,14 @@ class Alunos extends Component {
 		        </Col>
 	        </Row>
 	        <Row className="show-grid">	
-        		<Col xs={12}><Input type="textarea" name="observacoes" defaultValue={aluno.observacoes} label="Observações" placeholder="Detalhes relevantes sobre o aluno"  /></Col>
+        		<Col xs={12}>
+        			<Input type="textarea" name="observacoes" defaultValue={aluno.observacoes} label="Observações" placeholder="Detalhes relevantes sobre o aluno"  />
+        		</Col>
         	</Row>
         	<Row className="show-grid">	
-    			<Col xs={12}><Input type="checkbox" name="ativo" defaultValue={aluno.ativo}  checked label="Ativo" /></Col>
+    			<Col xs={12}>
+    				<Input type="checkbox" name="ativo" defaultChecked={aluno.ativo} label="Ativo" />
+    			</Col>
     		</Row>
 	        
       </Grid>
@@ -97,7 +100,8 @@ class Alunos extends Component {
               controller={AlunosController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}
-              formSchema={this.formSchema} />
+              formSchema={this.formSchema}>
+        </Crud>
 }
 
 

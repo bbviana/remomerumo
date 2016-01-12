@@ -23,7 +23,12 @@ const decorateOnChange = (originalHander) => {
         invariant(target.name, `Especifique o atributo 'name' no elemento ${target}`)
 
         const newValue = {}
-        newValue[target.name] = target.value
+        if(target.type == 'checkbox'){
+        	newValue[target.name] = target.checked
+        } else {
+        	newValue[target.name] = target.value
+        }
+       
         originalHander(newValue)
     }
 }

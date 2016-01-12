@@ -6,18 +6,19 @@ class ResumoAlunos extends Component {
     state = {
         id: "",
         nome: "",
-        atividades: []
+        alunoAtividades: [],
+    	avaliacoes: []
     }
 
     procurarAluno = () => {
-    	console.log("Carregando aluno")
         Request.get('api/resumoAlunos/procurarAluno', {
             id: this.props.id
         })
         .then(aluno => this.setState({
             id: aluno.id,
             nome: aluno.nome,
-            atividades: aluno.alunoAtividades
+            alunoAtividades: aluno.alunoAtividades,
+            avaliacoes: aluno.avaliacoes
         }))
     }
     
@@ -51,9 +52,9 @@ class ResumoAlunos extends Component {
 		            <Tab eventKey={1} title="Atividades"><p>&nbsp;</p>
 	                    	<div>
 	            	        <Grid fluid>
-	            		    
-	            	        {this.state.atividades.map((alunoAtividade, index) => {
-	            	        	return <Panel  key={index} header={alunoAtividades.atividade.nome}>
+	            	        {this.state.alunoAtividades}
+	            	        {this.state.alunoAtividades.map((alunoAtividade, index) => {
+	            	        	return <Panel  key={index} header={alunoAtividade.atividade.nome}>
 		            	            <Row className="show-grid">
 		            	        		<Col xs={4} md={3}><strong>Alunos</strong></Col>
 		            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
@@ -64,8 +65,22 @@ class ResumoAlunos extends Component {
 	            	      </Grid>
 	                    </div>
                     </Tab>
-                    <Tab eventKey={2} title="Avaliaçõess"><p>&nbsp;</p>
-                    </Tab>
+                    <Tab eventKey={2} title="Avaliações"><p>&nbsp;</p>
+	                	<div>
+		        	        <Grid fluid>
+		        		    
+			        	        {this.state.avaliacoes.map((avaliacao, index) => {
+			        	        	return <Panel  key={index} header={avaliacao.nome}>
+			            	            <Row className="show-grid">
+			            	        		<Col xs={4} md={3}><strong>Alunos</strong></Col>
+			            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
+			            	        		
+			            	          	</Row>
+			        	          	</Panel>
+			        	        })}
+			        	    </Grid>
+		        	    </div>
+		        	</Tab>
                   </Tabs>  
                 </form>
             </div>

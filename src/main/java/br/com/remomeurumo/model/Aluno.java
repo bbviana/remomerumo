@@ -1,13 +1,17 @@
 package br.com.remomeurumo.model;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
  * @author bbviana
@@ -33,6 +37,10 @@ public class Aluno extends Pessoa implements Serializable {
 	@JsonFilter("associationFilter")
 	@OneToMany(mappedBy = "aluno")
 	private Collection<AlunoAtividade> alunoAtividades;
+	
+	@JsonFilter("associationFilter")
+	@OneToMany(mappedBy = "aluno")
+	private Collection<AvaliacaoClinica> avaliacoes;
 
 	@Override
 	public String toString() {
@@ -70,5 +78,12 @@ public class Aluno extends Pessoa implements Serializable {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
-	
+
+	public Collection<AvaliacaoClinica> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(Collection<AvaliacaoClinica> avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
 }

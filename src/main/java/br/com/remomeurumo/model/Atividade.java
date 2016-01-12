@@ -31,6 +31,7 @@ public class Atividade extends BaseEntity {
 	@JoinColumn(name = "tipoid")
 	private TipoAtividade tipoAtividade;
 
+	@JsonFilter("associationFilter")
 	@OneToMany(mappedBy = "atividade", orphanRemoval = true)
 	private Collection<AlunoAtividade> alunos;
 

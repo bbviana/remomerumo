@@ -9,9 +9,9 @@
         </layout>
     </appender>
 
-    <category name="org.hibernate.type">
+   <!--  <category name="org.hibernate.type">
         <priority value="trace" />
-    </category>
+    </category> -->
 
     <root>
         <priority value="INFO"/>

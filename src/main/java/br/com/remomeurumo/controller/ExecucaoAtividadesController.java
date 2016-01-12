@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import br.com.remomeurumo.model.Aluno;
+import br.com.remomeurumo.model.AlunoAtividade;
 import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.AtividadeGrupo;
 import br.com.remomeurumo.persistence.Transactional;
@@ -46,11 +48,17 @@ public class ExecucaoAtividadesController {
 		Atividade atividadeOriginal = em.find(Atividade.class,atividade.getId());
 		for (AtividadeGrupo planejamento : atividade.getAtividadeGrupos()) {
 			if(atividadeOriginal.getAtividadeGrupos().contains(planejamento)) {
-				System.out.println("\n\n Merge -- "+planejamento.getId());
+				System.out.println("\n\n Merge -- "+planejamento);
+
+				for (Aluno aluno : planejamento.getAlunos()) {
+					AlunoAtividade alunoAtividade = new AlunoAtividade();
+					alunoAtividade.setAtividade(atividade);
+					alunoAtividade.setAluno(aluno);
+					this.em.persist(alunoAtividade);
+				}
+				
+				//para gravar o comentário
 				//this.em.merge(planejamento);
-			} else {
-				System.out.println("\n\n Salvando Novo -- ");
-				//this.em.persist(planejamento);
 			}
 		}
 		

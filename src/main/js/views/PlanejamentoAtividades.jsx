@@ -14,13 +14,16 @@ class PlanejamentoAtividades extends Component {
         event.preventDefault()
 
         Request.post('api/planejamentoAtividades/salvar', this.state)
-        .then(atividade => this.setState({
-            id: atividade.id,
-            nome: atividade.nome,
-            data: atividade.data,
-            atividadeGrupos: atividade.atividadeGrupos
-        }))
-    }
+        .then(atividade =>{ 
+	        this.setState({
+	            id: atividade.id,
+	            nome: atividade.nome,
+	            data: atividade.data,
+	            atividadeGrupos: atividade.atividadeGrupos
+	        });
+        	$.toaster({ title: 'Sucesso', message : 'Registro salvo com sucesso', settings: {timeout: 5000} });
+        }
+    )}
 
     procurarGrupos = () => {
         Request.get('api/planejamentoAtividades/procurarGrupos', {
@@ -126,7 +129,7 @@ class PlanejamentoAtividades extends Component {
 				            	          		})}
 			            	          		</Col>
 			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
-			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="atividadeDeAula" defaultValue={atividadeGrupo.atividadeDeAula} placeholder="Planejamento de aula"  /></Col>
+			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">
 		            	        			<Col xs={12}>&nbsp;</Col>

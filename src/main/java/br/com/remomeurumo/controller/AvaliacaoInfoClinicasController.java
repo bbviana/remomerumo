@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import br.com.remomeurumo.model.Aluno;
 import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.AvaliacaoClinica;
 import br.com.remomeurumo.model.InfoClinica;
@@ -57,13 +58,6 @@ public class AvaliacaoInfoClinicasController {
 		return avaliacaoClinica;
 	}
 	
-	@POST
-	@Consumes(APPLICATION_JSON)
-	@Produces(APPLICATION_JSON)
-	@Path("salvar2")
-	public void ssalvar(Atividade atividade) {
-		System.out.println("SALVAR 2");
-	}
 	
 	@POST
 	@Consumes(APPLICATION_JSON)
