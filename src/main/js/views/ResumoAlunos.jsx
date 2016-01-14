@@ -17,13 +17,14 @@ class ResumoAlunos extends Component {
         .then(aluno => this.setState({
             id: aluno.id,
             nome: aluno.nome,
-            alunoAtividades: aluno.alunoAtividades,
-            avaliacoes: aluno.avaliacoes
+            alunoAtividades: aluno.alunoAtividadesTransient,
+            avaliacoes: aluno.avaliacoesTransient
         }))
     }
     
     componentDidMount = () => {
     	this.procurarAluno()
+    	
     }
     
     render = () =>
@@ -52,9 +53,8 @@ class ResumoAlunos extends Component {
 		            <Tab eventKey={1} title="Atividades"><p>&nbsp;</p>
 	                    	<div>
 	            	        <Grid fluid>
-	            	        {this.state.alunoAtividades}
 	            	        {this.state.alunoAtividades.map((alunoAtividade, index) => {
-	            	        	return <Panel  key={index} header={alunoAtividade.atividade.nome}>
+	            	        	return <Panel  key={index} header={alunoAtividade.id}>
 		            	            <Row className="show-grid">
 		            	        		<Col xs={4} md={3}><strong>Alunos</strong></Col>
 		            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>

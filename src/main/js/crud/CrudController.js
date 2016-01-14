@@ -66,9 +66,12 @@ class CrudController extends Controller {
             	this.list()
         })
         } else {
-            Request.post(`api/${this.url}`, form).then(() => this.list())
+            Request.post(`api/${this.url}`, form).then(() => {
+            	$.toaster({ title: 'Sucesso', message : 'Registro criado com sucesso', settings: {timeout: 5000} });
+            	console.log("nao sei o que estou fazendo");
+            	this.list()
+            })
         }
-        
        
     }
 

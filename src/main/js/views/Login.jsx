@@ -26,7 +26,8 @@ class Login extends Component {
 
     render = () =>
         <div style={s.app}>
-            <div className="container">
+        	<span style={s.bgTop}></span>
+            <div className="container" style={s.container}>
                 <form style={s.form} onSubmit={this.login}>
                     <Image src="img/nav-logo-remo.png" responsive />
                     <Image src="img/nav-logo-instituto.png" responsive />
@@ -48,17 +49,50 @@ class Login extends Component {
                     <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                 </form>
             </div>
+            <span style={s.bgBottom}></span>
         </div>
 }
 
 const s = {
     app: {
-        background: "#EEE",
+        background: "#FFF",
         height: "100%",
         paddingTop: 40,
         paddingBottom: 40
     },
 
+    bgTop: {
+    	background: 'url(http://www.remomeurumo.com.br/_imagens/background/bg-border-bottom.png) 0 bottom repeat-x',
+	    marginBottom: -12,
+	    position: 'relative',
+	    clear: 'both',
+	    display: 'block',
+	    height: 55,
+	    top: 0,
+	    width: '100%',
+	    zIndex: 1
+    },
+    
+    bgBottom: {
+    	background: 'url(http://www.remomeurumo.com.br/_imagens/background/bg-border-top.png) 0 bottom repeat-x',
+	    marginTop: -30,
+	    clear: 'both',
+	    display: 'block',
+	    height: 55,
+	    width: '100%',
+	    zIndex: 1
+    },
+    
+    container: {
+    	background: '#FFF',
+	    height: '100%',
+	    paddingTop: 40,
+	    paddingBottom: 40,
+	    backgroundImage: 'url(http://www.remomeurumo.com.br/_imagens/background/imagem2.jpg)',
+	    height: 535,
+	    width: '100%'
+    },
+    
     form: {
         maxWidth: 330,
         padding: 15,

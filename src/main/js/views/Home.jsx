@@ -75,15 +75,14 @@ class PlanejamentoAtividades extends Component {
 	            <p><strong> <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação Clinica:</strong>Representa a efetivação de uma avaliação clínica, escolhido um modelo, um aluno e uma data esta avaliação representará as medições feitas.</p></Tab>
 	            <Tab eventKey={4} title="To Do"><p>
 	            <strong>Blocker</strong>
-	            <li>Planejamento de atividade não esta salvando comentários e planejamento</li>
 	            <li>Fazer a tela de resumo do aluno e colocar o link no crud do aluno, nesta tela deveria constar as avaliaçẽs e as presenças/comentários dos alunos na atividades</li>
 	            <li>Não esta salvando a informação clinica da avaliacaoinfoclinica</li>
-	            <li>Dar feed back ao usuário quando clicar em salvar nas ações</li>
 	            <li>Colocar segurança no sistema</li>
 	            <li>Comentario da execução de atividade não salva</li>
 	            <strong>Desejados</strong>
 	            <li>Colocar a data de inicio do aluno no IRMR</li>
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
+	            <li>Finalização de atividade</li>
 	            </p></Tab>
 	          </Tabs>
            </div>

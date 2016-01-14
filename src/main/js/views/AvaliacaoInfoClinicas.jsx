@@ -16,7 +16,15 @@ class AvaliacaoInfoClinicas extends Component {
         	id: this.state.id,
         	informacoesClinicas: this.state.informacoesClinicas
         })
-        .then(console.log("Msg de sucesso"))
+        .then(avaliacao => {
+	        this.setState({
+	            id: avaliacao.id,
+	            aluno: avaliacao.aluno.nome,
+	            modelo: avaliacao.modelo.nome,
+	            informacoesClinicas: avaliacao.informacoesClinicas
+	        });                   
+	        $.toaster({ title: 'Sucesso', message : 'Registro salvo com sucesso', settings: {timeout: 5000} });
+        })
     }
 
     procurarAvaliacao = () => {

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
@@ -41,6 +42,12 @@ public class Aluno extends Pessoa implements Serializable {
 	@JsonFilter("associationFilter")
 	@OneToMany(mappedBy = "aluno")
 	private Collection<AvaliacaoClinica> avaliacoes;
+	
+	@Transient
+	private Collection<AvaliacaoClinica> avaliacoesTransient;
+	
+	@Transient
+	private Collection<AlunoAtividade> alunoAtividadesTransient;
 
 	@Override
 	public String toString() {
@@ -86,4 +93,23 @@ public class Aluno extends Pessoa implements Serializable {
 	public void setAvaliacoes(Collection<AvaliacaoClinica> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
+
+	public Collection<AvaliacaoClinica> getAvaliacoesTransient() {
+		return avaliacoesTransient;
+	}
+
+	public void setAvaliacoesTransient(
+			Collection<AvaliacaoClinica> avaliacoesTransient) {
+		this.avaliacoesTransient = avaliacoesTransient;
+	}
+
+	public Collection<AlunoAtividade> getAlunoAtividadesTransient() {
+		return alunoAtividadesTransient;
+	}
+
+	public void setAlunoAtividadesTransient(
+			Collection<AlunoAtividade> alunoAtividadesTransient) {
+		this.alunoAtividadesTransient = alunoAtividadesTransient;
+	}
+	
 }

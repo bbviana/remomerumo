@@ -31,6 +31,8 @@ public class ResumoAlunosController {
 
 		Aluno aluno = em.find(Aluno.class, id);
 		System.out.println("Aluno: " + aluno.getNome());
+		aluno.setAlunoAtividadesTransient(aluno.getAlunoAtividades());
+		aluno.setAvaliacoesTransient(aluno.getAvaliacoesTransient());
 		return aluno;
 	}
 

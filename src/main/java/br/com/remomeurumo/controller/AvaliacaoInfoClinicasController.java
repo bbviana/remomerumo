@@ -14,8 +14,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import br.com.remomeurumo.model.Aluno;
-import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.AvaliacaoClinica;
 import br.com.remomeurumo.model.InfoClinica;
 import br.com.remomeurumo.model.TipoInfoClinica;
@@ -64,8 +62,13 @@ public class AvaliacaoInfoClinicasController {
 	@Produces(APPLICATION_JSON)
 	@Path("salvar")
 	public AvaliacaoClinica salvar(AvaliacaoClinica avaliacao) {
-		System.out.println("Salvando a Informação clinica da avaliação "+avaliacao);
-		this.em.merge(avaliacao);
-		return avaliacao;
+		System.out.println("Salvando a Informação clinica da avaliação "+avaliacao.getInformacoesClinicas());
+		AvaliacaoClinica avaliacaoClinica = em.find(AvaliacaoClinica.class, avaliacao.getId());
+		for (InfoClinica info : avaliacao.getInformacoesClinicas()) {
+			System.out.println("Info "+info.getValor());
+		}
+		avaliacaoClinica.setInformacoesClinicas(avaliacao.getInformacoesClinicas());
+		//this.em.merge(avaliacaoClinica);
+		return avaliacaoClinica;
 	}
 }

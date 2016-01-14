@@ -62,7 +62,6 @@ class PlanejamentoAtividades extends Component {
     }
     
     removerPlanejamento = (idPlanejamento) => {
-    	console.log(idPlanejamento)
     	var atividades = this.state.atividadeGrupos
     	
     	var atividadesEscolhido = atividades.filter(element => {
@@ -70,6 +69,32 @@ class PlanejamentoAtividades extends Component {
     	})
     	
     	this.setState({atividadeGrupos : atividadesEscolhido})
+    }
+    
+    alterarComentario = (idPlanejamento, event) => {
+    	
+    	var atividades = this.state.atividadeGrupos
+    	
+    	var atividadeEscolhido = atividades.find(element => {
+    		return element.id == idPlanejamento
+    	})
+    	
+    	atividadeEscolhido.comentario = event.target.value
+    	
+    	this.setState({atividadeGrupos : atividades})
+    }
+    
+    alterarPlanejamento = (idPlanejamento, event) => {
+    	
+    	var atividades = this.state.atividadeGrupos
+    	
+    	var atividadeEscolhido = atividades.find(element => {
+    		return element.id == idPlanejamento
+    	})
+    	
+    	atividadeEscolhido.planejamentoDeAula = event.target.value
+    	
+    	this.setState({atividadeGrupos : atividades})
     }
     
     componentDidMount = () => {
@@ -128,8 +153,8 @@ class PlanejamentoAtividades extends Component {
 				            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{colaborador.nome}</div>
 				            	          		})}
 			            	          		</Col>
-			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
-			            	          		<Col xs={12} md={4}><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+			            	          		<Col xs={12} md={4}><Input type="textarea" label="" onChange={this.alterarComentario.bind(this, atividadeGrupo.id)} name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
+			            	          		<Col xs={12} md={4}><Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">
 		            	        			<Col xs={12}>&nbsp;</Col>

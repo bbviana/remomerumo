@@ -14,12 +14,15 @@ class ExecucaoAtividades extends Component {
         event.preventDefault()
 
         Request.post('api/execucaoAtividades/salvar', this.state)
-        .then(atividade => this.setState({
-            id: atividade.id,
-            nome: atividade.nome,
-            data: atividade.data,
-            atividadeGrupos: atividade.atividadeGrupos
-        }))
+        .then(atividade => { 
+        	this.setState({
+	            id: atividade.id,
+	            nome: atividade.nome,
+	            data: atividade.data,
+	            atividadeGrupos: atividade.atividadeGrupos
+        });
+        $.toaster({ title: 'Sucesso', message : 'Registro salvo com sucesso', settings: {timeout: 5000} });
+        })
     }
 
     procurarGrupos = () => {
