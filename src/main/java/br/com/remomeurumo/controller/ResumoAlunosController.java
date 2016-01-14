@@ -2,6 +2,8 @@ package br.com.remomeurumo.controller;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+import java.util.ArrayList;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -11,6 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import br.com.remomeurumo.model.Aluno;
+import br.com.remomeurumo.model.AlunoAtividade;
+import br.com.remomeurumo.model.AvaliacaoClinica;
 import br.com.remomeurumo.persistence.Transactional;
 
 /**
@@ -31,8 +35,10 @@ public class ResumoAlunosController {
 
 		Aluno aluno = em.find(Aluno.class, id);
 		System.out.println("Aluno: " + aluno.getNome());
-		aluno.setAlunoAtividadesTransient(aluno.getAlunoAtividades());
-		aluno.setAvaliacoesTransient(aluno.getAvaliacoesTransient());
+		aluno.setAlunoAtividadesTransient(new ArrayList<AlunoAtividade>());
+		aluno.getAlunoAtividadesTransient().addAll(aluno.getAlunoAtividades());
+		aluno.setAvaliacoesTransient(new ArrayList<AvaliacaoClinica>());
+		aluno.getAvaliacoesTransient().addAll(aluno.getAvaliacoesTransient());
 		return aluno;
 	}
 
