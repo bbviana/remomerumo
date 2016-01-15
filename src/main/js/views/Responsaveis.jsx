@@ -26,7 +26,7 @@ class Responsaveis extends Component {
                 <td>{responsavel.nome}</td>
 				<td>{responsavel.email}</td>
                 <td>{responsavel.telefone}</td>
-                <td>{aluno.ativo?"Sim":"Não"}</td>
+                <td>{responsavel.ativo?"Sim":"Não"}</td>
             </tr>
     }
 
@@ -62,7 +62,7 @@ class Responsaveis extends Component {
 		        	<Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={responsavel.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
 		        </Row>
 		        <Row className="show-grid">	
-    				<Col xs={12}><Input type="checkbox" name="ativo" defaultChecked={aluno.ativo} label="Ativo" /></Col>
+    				<Col xs={12}><Input type="checkbox" name="ativo" defaultChecked={responsavel.ativo} label="Ativo" /></Col>
     			</Row>
 	      </Grid>
         </div>

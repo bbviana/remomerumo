@@ -17,7 +17,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -54,9 +53,11 @@ public class PlanejamentoAtividadesController {
 			for (GrupoAluno grupo : procurarGrupos) {
 				AtividadeGrupo novoPlanejamento = new AtividadeGrupo();
 				novoPlanejamento.setAlunos(this.cloneAlunos(grupo.getAlunos()));
+				System.out.println(grupo.getColaboradores().size());
 				novoPlanejamento.setColaboradores(this.cloneColaboradores(grupo.getColaboradores()));
 				novoPlanejamento.setGrupo(grupo);
 				novoPlanejamento.setAtividade(atividade);
+				System.out.println(novoPlanejamento.getColaboradores().size());
 				novosGrupos.add(novoPlanejamento);
 				//cria o novo grupo
 				this.em.persist(novoPlanejamento);

@@ -21,7 +21,7 @@ class PlanejamentoAtividades extends Component {
 	            data: atividade.data,
 	            atividadeGrupos: atividade.atividadeGrupos
 	        });
-        	$.toaster({ title: 'Sucesso', message : 'Registro salvo com sucesso', settings: {timeout: 5000} });
+        	$.toaster({ title: 'Sucesso', message : 'Registro salvo', settings: {timeout: 3000} });
         }
     )}
 

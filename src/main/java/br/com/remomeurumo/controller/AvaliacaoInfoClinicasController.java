@@ -33,16 +33,15 @@ public class AvaliacaoInfoClinicasController {
 	@Path("procurarAvaliacao")
 	public AvaliacaoClinica procurarAvaliacao(@QueryParam("id") Long id) {
 		AvaliacaoClinica avaliacaoClinica = em.find(AvaliacaoClinica.class, id);
+		System.out.println("Recuperando a Informação clinica da avaliação "+avaliacaoClinica.getInformacoesClinicas().size());
 		// cria as informações clinicas baseadas no modelo da avaliação
 		if (avaliacaoClinica.getInformacoesClinicas() == null
 				|| avaliacaoClinica.getInformacoesClinicas().isEmpty()) {
 			avaliacaoClinica
 					.setInformacoesClinicas(new ArrayList<InfoClinica>());
-			System.out.println("Criando as informações ");
 			if (avaliacaoClinica.getModelo() != null) {
 				for (TipoInfoClinica tipoInfo : avaliacaoClinica.getModelo()
 						.getTipoInfoClinicas()) {
-					System.out.println("-- "+tipoInfo);
 					InfoClinica infoClinica = new InfoClinica();
 					infoClinica.setTipo(tipoInfo);
 					infoClinica.setAvaliacao(avaliacaoClinica);
@@ -64,11 +63,16 @@ public class AvaliacaoInfoClinicasController {
 	public AvaliacaoClinica salvar(AvaliacaoClinica avaliacao) {
 		System.out.println("Salvando a Informação clinica da avaliação "+avaliacao.getInformacoesClinicas());
 		AvaliacaoClinica avaliacaoClinica = em.find(AvaliacaoClinica.class, avaliacao.getId());
+		avaliacaoClinica.getInformacoesClinicas().clear();
+
 		for (InfoClinica info : avaliacao.getInformacoesClinicas()) {
 			System.out.println("Info "+info.getValor());
+			this.em.merge(info);
+			avaliacaoClinica.getInformacoesClinicas().add(info);			
 		}
-		avaliacaoClinica.setInformacoesClinicas(avaliacao.getInformacoesClinicas());
-		//this.em.merge(avaliacaoClinica);
+		
+		this.em.merge(avaliacaoClinica);
+		System.out.println("Salvando a Informação clinica da avaliação "+avaliacaoClinica.getInformacoesClinicas().size());
 		return avaliacaoClinica;
 	}
 }

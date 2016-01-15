@@ -23,7 +23,7 @@ class AvaliacaoInfoClinicas extends Component {
 	            modelo: avaliacao.modelo.nome,
 	            informacoesClinicas: avaliacao.informacoesClinicas
 	        });                   
-	        $.toaster({ title: 'Sucesso', message : 'Registro salvo com sucesso', settings: {timeout: 5000} });
+	        $.toaster({ title: 'Sucesso', message : 'Registro salvo', settings: {timeout: 3000} });
         })
     }
 
@@ -37,6 +37,19 @@ class AvaliacaoInfoClinicas extends Component {
             modelo: avaliacao.modelo.nome,
             informacoesClinicas: avaliacao.informacoesClinicas
         }))
+    }
+    
+    alterarValor = (idInformacaoClinica, event) => {
+    	
+    	var infoClinicas = this.state.informacoesClinicas
+    	
+    	var infoEscolhida = infoClinicas.find(element => {
+    		return element.id == idInformacaoClinica
+    	})
+    	
+    	infoEscolhida.valor = event.target.value
+    	console.log(infoEscolhida.valor)
+    	this.setState({informacoesClinicas : infoClinicas})
     }
     
     componentDidMount = this.procurarAvaliacao
@@ -76,7 +89,7 @@ class AvaliacaoInfoClinicas extends Component {
 		                    {this.state.informacoesClinicas.map((informacaoClinica, index) =>
 		                        <tr key={index}>
 		                            <td>{informacaoClinica.tipo.nome}</td>
-		                            <td><Input type="text" label="" name="valor" defaultValue={informacaoClinica.valor} placeholder="Valor"  /></td>
+		                            <td><Input type="text" label="" name="valor" onChange={this.alterarValor.bind(this, informacaoClinica.id)} defaultValue={informacaoClinica.valor} placeholder="Valor"  /></td>
 		                            <td>{informacaoClinica.tipo.sigla}</td>
 		                        </tr>
 		                    )}
