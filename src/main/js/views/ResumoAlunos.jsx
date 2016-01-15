@@ -24,7 +24,6 @@ class ResumoAlunos extends Component {
     
     componentDidMount = () => {
     	this.procurarAluno()
-    	
     }
     
     render = () =>
@@ -54,9 +53,9 @@ class ResumoAlunos extends Component {
 	                    	<div>
 	            	        <Grid fluid>
 	            	        {this.state.alunoAtividades.map((alunoAtividade, index) => {
-	            	        	return <Panel  key={index} header={alunoAtividade.id}>
+	            	        	return <Panel  key={index} header={alunoAtividade.atividade.nome}>
 		            	            <Row className="show-grid">
-		            	        		<Col xs={4} md={3}><strong>Alunos</strong></Col>
+		            	        		<Col xs={4} md={3}><strong>Data:</strong> {alunoAtividade.atividade.data}</Col>
 		            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
 		            	        		
 		            	          	</Row>
@@ -70,9 +69,9 @@ class ResumoAlunos extends Component {
 		        	        <Grid fluid>
 		        		    
 			        	        {this.state.avaliacoes.map((avaliacao, index) => {
-			        	        	return <Panel  key={index} header={avaliacao.nome}>
+			        	        	return <Panel  key={index} header={avaliacao.modelo.nome}>
 			            	            <Row className="show-grid">
-			            	        		<Col xs={4} md={3}><strong>Alunos</strong></Col>
+			            	        		<Col xs={4} md={3}><strong>Data:</strong> {avaliacao.data}</Col>
 			            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
 			            	        		
 			            	          	</Row>

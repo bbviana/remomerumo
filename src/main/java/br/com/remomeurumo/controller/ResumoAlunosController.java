@@ -36,9 +36,14 @@ public class ResumoAlunosController {
 		Aluno aluno = em.find(Aluno.class, id);
 		System.out.println("Aluno: " + aluno.getNome());
 		aluno.setAlunoAtividadesTransient(new ArrayList<AlunoAtividade>());
-		aluno.getAlunoAtividadesTransient().addAll(aluno.getAlunoAtividades());
+		for (AlunoAtividade alunoAtividade : aluno.getAlunoAtividades()) {
+			AlunoAtividade newAlunoAtividade = new AlunoAtividade();
+			newAlunoAtividade.setId(alunoAtividade.getId());
+			newAlunoAtividade.setAtividade(alunoAtividade.getAtividade());
+			aluno.getAlunoAtividadesTransient().add(newAlunoAtividade);
+		}
 		aluno.setAvaliacoesTransient(new ArrayList<AvaliacaoClinica>());
-		aluno.getAvaliacoesTransient().addAll(aluno.getAvaliacoesTransient());
+		aluno.getAvaliacoesTransient().addAll(aluno.getAvaliacoes());
 		return aluno;
 	}
 
