@@ -13,6 +13,8 @@ import ExecucaoAtividadesController from './ExecucaoAtividadesController'
 import AvaliacaoInfoClinicasController from './AvaliacaoInfoClinicasController'
 import HomeController from './HomeController'
 import ResumoAlunosController from './ResumoAlunosController'
+import UsuariosController from './UsuariosController'
+import PermissoesController from './PermissoesController'
 
 export {
     AlunosController,
@@ -29,5 +31,7 @@ export {
     ExecucaoAtividadesController,
     AvaliacaoInfoClinicasController,
     HomeController,
-    ResumoAlunosController
+    ResumoAlunosController,
+    UsuariosController,
+    PermissoesController
 }

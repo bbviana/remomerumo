@@ -14,6 +14,8 @@ import ExecucaoAtividades from './ExecucaoAtividades'
 import AvaliacaoInfoClinicas from './AvaliacaoInfoClinicas'
 import Home from './Home'
 import ResumoAlunos from './ResumoAlunos'
+import Usuarios from './Usuarios'
+import Permissoes from './Permissoes'
 
 export {
     Alunos,
@@ -31,5 +33,7 @@ export {
     ExecucaoAtividades,
     AvaliacaoInfoClinicas,
     Home,
-    ResumoAlunos
+    ResumoAlunos,
+    Usuarios,
+    Permissoes
 }

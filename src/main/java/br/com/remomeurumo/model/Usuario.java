@@ -1,31 +1,65 @@
 package br.com.remomeurumo.model;
 
-import br.com.remomeurumo.framework.BaseEntity;
+import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
+import br.com.remomeurumo.framework.BaseEntity;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
  * @author bbviana
  */
 @Entity
 public class Usuario extends BaseEntity {
-    private String login;
 
-    private String senha;
+	private String nome;
 
-    public String getLogin() {
-        return login;
-    }
+	private String senha;
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	@JsonFilter("associationFilter")
+	@ManyToMany
+	@JoinColumn(name = "usuariopermissao")
+	private Collection<Permissao> permissoes;
 
-    public String getSenha() {
-        return senha;
-    }
+	@JsonFilter("associationFilter")
+	@OneToOne
+	@JoinColumn(name = "colaboradorid")
+	private Colaborador colaborador;
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Collection<Permissao> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(Collection<Permissao> permissoes) {
+		this.permissoes = permissoes;
+	}
+
+	public Colaborador getColaborador() {
+		return colaborador;
+	}
+
+	public void setColaborador(Colaborador colaborador) {
+		this.colaborador = colaborador;
+	}
 }
