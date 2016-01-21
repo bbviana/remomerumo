@@ -56,17 +56,17 @@ const Header = ({label}) =>
                 <Glyphicon glyph="fire"/>&nbsp;&nbsp;Alunos
             </NavItem>
             <NavItem eventKey={2} href="?responsaveis">
-                <Glyphicon glyph="user"/>&nbsp;&nbsp;Responsáveis
+                <Glyphicon glyph="eye-open"/>&nbsp;&nbsp;Responsáveis
             </NavItem>
             <NavItem eventKey={2} href="?colaboradores">
                 <Glyphicon glyph="education"/>&nbsp;&nbsp;Colaboradores
             </NavItem>
             <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
             	<MenuItem eventKey="1" href="?usuarios">
-            		<Glyphicon glyph="link"/>&nbsp;&nbsp;Usuários
+            		<Glyphicon glyph="user"/>&nbsp;&nbsp;Usuários
             	</MenuItem>
             	<MenuItem eventKey="2" href="?permissoes">
-            		<Glyphicon glyph="link"/>&nbsp;&nbsp;Permissões
+            		<Glyphicon glyph="folder-open"/>&nbsp;&nbsp;Permissões
             	</MenuItem>
             	<MenuItem divider/>
 		        <MenuItem eventKey="3" href="?grupoAlunos">

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button, Tabs, Tab} from 'react-bootstrap';
+import {Table, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Tabs, Tab} from 'react-bootstrap';
 
 class ResumoAlunos extends Component {
     state = {
@@ -50,34 +50,47 @@ class ResumoAlunos extends Component {
                 <form style={s.form} onSubmit={this.salvar}>
                 <Tabs defaultActiveKey={1}>
 		            <Tab eventKey={1} title="Atividades"><p>&nbsp;</p>
-	                    	<div>
-	            	        <Grid fluid>
-	            	        {this.state.alunoAtividades.map((alunoAtividade, index) => {
-	            	        	return <Panel  key={index} header={alunoAtividade.atividade.nome}>
-		            	            <Row className="show-grid">
-		            	        		<Col xs={4} md={3}><strong>Data:</strong> {alunoAtividade.atividade.data}</Col>
-		            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
-		            	        		
-		            	          	</Row>
-	            	          	</Panel>
-	            	        })}
-	            	      </Grid>
+		            <div>
+		            <Table striped hover>
+	                    <thead>
+	                    <tr>
+	                    	<th>Nome</th>
+	                    	<th>Data</th>
+	                    	<th>Comentário</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+	                    {this.state.alunoAtividades.map((alunoAtividade, index) => 
+            	        	<tr key={index}>
+                        		<td> {alunoAtividade.atividade.nome}</td>
+                        		<td> {alunoAtividade.atividade.data}</td>
+                        		<td> {alunoAtividade.atividade.comentario}</td>
+                        	</tr>	
+            	        )}
+	            	        </tbody>
+		                   </Table>
 	                    </div>
                     </Tab>
                     <Tab eventKey={2} title="Avaliações"><p>&nbsp;</p>
 	                	<div>
-		        	        <Grid fluid>
-		        		    
-			        	        {this.state.avaliacoes.map((avaliacao, index) => {
-			        	        	return <Panel  key={index} header={avaliacao.modelo.nome}>
-			            	            <Row className="show-grid">
-			            	        		<Col xs={4} md={3}><strong>Data:</strong> {avaliacao.data}</Col>
-			            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
-			            	        		
-			            	          	</Row>
-			        	          	</Panel>
-			        	        })}
-			        	    </Grid>
+	                	<Table striped hover>
+		                    <thead>
+		                    <tr>
+		                    	<th>Nome</th>
+		                    	<th>Data</th>
+		                    	<th>Comentário</th>
+		                    </tr>
+		                    </thead>
+		                    <tbody>
+			        	        {this.state.avaliacoes.map((avaliacao, index) => 
+			        	        	<tr key={index}>
+	                            		<td> {avaliacao.modelo.nome}</td>
+	                            		<td> {avaliacao.data}</td>
+	                            		<td> {avaliacao.comentario}</td>
+	                            	</tr>	
+			        	        )}
+			        	        </tbody>
+				           </Table>
 		        	    </div>
 		        	</Tab>
                   </Tabs>  

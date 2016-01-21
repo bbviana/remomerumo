@@ -16,6 +16,7 @@ import Home from './Home'
 import ResumoAlunos from './ResumoAlunos'
 import Usuarios from './Usuarios'
 import Permissoes from './Permissoes'
+import Auditorias from './Auditorias'
 
 export {
     Alunos,
@@ -35,5 +36,6 @@ export {
     Home,
     ResumoAlunos,
     Usuarios,
-    Permissoes
+    Permissoes,
+    Auditorias
 }

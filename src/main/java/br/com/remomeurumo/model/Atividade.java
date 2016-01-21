@@ -25,6 +25,8 @@ public class Atividade extends BaseEntity {
 	private String nome;
 
 	private String comentario;
+	
+	private Boolean executada;
 
 	@JsonFilter("associationFilter")
 	@ManyToOne
@@ -91,6 +93,16 @@ public class Atividade extends BaseEntity {
 			Collection<AtividadeGrupo> atividadeGrupos) {
 		this.atividadeGrupos = atividadeGrupos;
 	}
+	
+	public Boolean getExecutada() {
+		return executada;
+	}
+
+	public void setExecutada(Boolean executada) {
+		this.executada = executada;
+	}
+
+
 
 	private static final long serialVersionUID = 1L;
 }

@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
  * @author bbviana
  */
 @Entity
-public class Aluno extends Pessoa implements Serializable {
+public class Aluno extends Pessoa implements Serializable, Auditavel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -110,6 +110,11 @@ public class Aluno extends Pessoa implements Serializable {
 	public void setAlunoAtividadesTransient(
 			Collection<AlunoAtividade> alunoAtividadesTransient) {
 		this.alunoAtividadesTransient = alunoAtividadesTransient;
+	}
+
+	@Override
+	public String getAuditoria() {
+		return this.getNome();
 	}
 	
 }
