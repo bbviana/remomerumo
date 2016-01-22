@@ -46,7 +46,7 @@ class Crud extends Component {
 const Header = ({label}) =>
     <Navbar fixedTop fluid inverse>
         <NavBrand>
-            <a href="?login">Remo meu Rumo</a>
+            <a href="/remomeurumo">Remo meu Rumo</a>
         </NavBrand>
         <Nav>
         	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; {label}</NavItem>
@@ -80,13 +80,13 @@ const Header = ({label}) =>
                 </MenuItem>
                 <MenuItem divider/>
                 <MenuItem eventKey="6" href="?modeloAvaliacoesClinicas">
-                    <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação Clinica
+                    <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação
                 </MenuItem>
                 <MenuItem eventKey="7" href="?tipoInfoClinicas">
-                    <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação Clinica
+                    <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação
                 </MenuItem>
                 <MenuItem eventKey="8" href="?avaliacoesClinicas">
-                    <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação Clinica
+                    <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação
                 </MenuItem>
             </NavDropdown>
             <NavItem eventKey={2} href="?login">

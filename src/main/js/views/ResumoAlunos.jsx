@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Table, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Tabs, Tab} from 'react-bootstrap';
+import {Table, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Tabs, Tab, ListGroup, ListGroupItem, Panel} from 'react-bootstrap';
 
 class ResumoAlunos extends Component {
     state = {
@@ -79,6 +79,7 @@ class ResumoAlunos extends Component {
 		                    	<th>Nome</th>
 		                    	<th>Data</th>
 		                    	<th>Comentário</th>
+		                    	<th>Valores</th>
 		                    </tr>
 		                    </thead>
 		                    <tbody>
@@ -87,6 +88,17 @@ class ResumoAlunos extends Component {
 	                            		<td> {avaliacao.modelo.nome}</td>
 	                            		<td> {avaliacao.data}</td>
 	                            		<td> {avaliacao.comentario}</td>
+	                            		<td>  
+	                            		
+	                            		 <Panel collapsible bsStyle="info" header="Clique para ver os valores">
+	                            		    <ListGroup fill>
+	                            		    {avaliacao.informacoesClinicas.map((info, index2) =><div>
+	                            		      <ListGroupItem key={index2}><strong>{info.tipo.nome}</strong>:&nbsp;{info.valor}&nbsp;<strong>{info.tipo.sigla}</strong></ListGroupItem></div>
+	                            		    )}
+	                            		    </ListGroup>
+	                            		  </Panel>
+	                            		 
+	                            		 </td>
 	                            	</tr>	
 			        	        )}
 			        	        </tbody>

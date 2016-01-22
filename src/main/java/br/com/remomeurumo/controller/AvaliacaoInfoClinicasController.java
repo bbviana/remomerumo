@@ -17,11 +17,13 @@ import javax.ws.rs.QueryParam;
 import br.com.remomeurumo.model.AvaliacaoClinica;
 import br.com.remomeurumo.model.InfoClinica;
 import br.com.remomeurumo.model.TipoInfoClinica;
+import br.com.remomeurumo.persistence.Transactional;
 
 /**
  * @author jardim
  */
 @RequestScoped
+@Transactional
 @Path("avaliacaoInfoClinicas")
 public class AvaliacaoInfoClinicasController {
 

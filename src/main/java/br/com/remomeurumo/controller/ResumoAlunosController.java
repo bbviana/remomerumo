@@ -3,6 +3,7 @@ package br.com.remomeurumo.controller;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -21,7 +22,6 @@ import br.com.remomeurumo.persistence.Transactional;
  * @author jardim
  */
 @RequestScoped
-@Transactional
 @Path("resumoAlunos")
 public class ResumoAlunosController {
 
@@ -43,7 +43,11 @@ public class ResumoAlunosController {
 			aluno.getAlunoAtividadesTransient().add(newAlunoAtividade);
 		}
 		aluno.setAvaliacoesTransient(new ArrayList<AvaliacaoClinica>());
-		aluno.getAvaliacoesTransient().addAll(aluno.getAvaliacoes());
+		for (AvaliacaoClinica avaliacao : aluno.getAvaliacoes()) {
+			System.out.println(avaliacao.getInformacoesClinicas().size());
+			aluno.getAvaliacoesTransient().add(avaliacao);
+		}
+		
 		return aluno;
 	}
 

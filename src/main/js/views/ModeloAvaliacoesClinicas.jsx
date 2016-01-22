@@ -52,7 +52,7 @@ class ModeloAvaliacoesClinicas extends Component {
         </div>
 
     render = () =>
-        <Crud title="Modelo de Avaliação Clinica"
+        <Crud title="Modelo de Avaliação"
               controller={ModeloAvaliacoesClinicasController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}

@@ -8,46 +8,53 @@ class PlanejamentoAtividades extends Component {
         <div style={s.app}>
         <Navbar fixedTop fluid inverse>
         <NavBrand>
-            <a href="?login">Remo meu Rumo</a>
+            <a href="">Remo meu Rumo</a>
         </NavBrand>
         <Nav>
         	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Pagina Inicial</NavItem>
         </Nav>
         <Nav right eventKey={0}> {/* This is the eventKey referenced */}
-            <NavItem eventKey={1} href="?alunos">
-                <Glyphicon glyph="fire"/>&nbsp;&nbsp;Alunos
-            </NavItem>
-            <NavItem eventKey={2} href="?responsaveis">
-                <Glyphicon glyph="user"/>&nbsp;&nbsp;Responsáveis
-            </NavItem>
-            <NavItem eventKey={2} href="?colaboradores">
-                <Glyphicon glyph="education"/>&nbsp;&nbsp;Colaboradores
-            </NavItem>
-            <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
-		        <MenuItem eventKey="2" href="?grupoAlunos">
-		            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
-		        </MenuItem>
-            	<MenuItem eventKey="1" href="?atividades">
-                    <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade
-                </MenuItem>
-                <MenuItem eventKey="2" href="?tipoAtividades">
-                    <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Tipo de Atividade
-                </MenuItem>
-                <MenuItem divider/>
-                <MenuItem eventKey="3" href="?modeloAvaliacoesClinicas">
-                    <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação Clinica
-                </MenuItem>
-                <MenuItem eventKey="4" href="?tipoInfoClinicas">
-                    <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação Clinica
-                </MenuItem>
-                <MenuItem eventKey="5" href="?avaliacoesClinicas">
-                    <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação Clinica
-                </MenuItem>
-            </NavDropdown>
-            <NavItem eventKey={2} href="?login">
-                <Glyphicon glyph="log-out"/>
-            </NavItem>
-        </Nav>
+        <NavItem eventKey={1} href="?alunos">
+            <Glyphicon glyph="fire"/>&nbsp;&nbsp;Alunos
+        </NavItem>
+        <NavItem eventKey={2} href="?responsaveis">
+            <Glyphicon glyph="eye-open"/>&nbsp;&nbsp;Responsáveis
+        </NavItem>
+        <NavItem eventKey={2} href="?colaboradores">
+            <Glyphicon glyph="education"/>&nbsp;&nbsp;Colaboradores
+        </NavItem>
+        <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
+        	<MenuItem eventKey="1" href="?usuarios">
+        		<Glyphicon glyph="user"/>&nbsp;&nbsp;Usuários
+        	</MenuItem>
+        	<MenuItem eventKey="2" href="?permissoes">
+        		<Glyphicon glyph="folder-open"/>&nbsp;&nbsp;Permissões
+        	</MenuItem>
+        	<MenuItem divider/>
+	        <MenuItem eventKey="3" href="?grupoAlunos">
+	            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
+	        </MenuItem>
+        	<MenuItem eventKey="4" href="?atividades">
+                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade
+            </MenuItem>
+            <MenuItem eventKey="5" href="?tipoAtividades">
+                <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Tipo de Atividade
+            </MenuItem>
+            <MenuItem divider/>
+            <MenuItem eventKey="6" href="?modeloAvaliacoesClinicas">
+                <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação
+            </MenuItem>
+            <MenuItem eventKey="7" href="?tipoInfoClinicas">
+                <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação
+            </MenuItem>
+            <MenuItem eventKey="8" href="?avaliacoesClinicas">
+                <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação
+            </MenuItem>
+        </NavDropdown>
+        <NavItem eventKey={2} href="?login">
+            <Glyphicon glyph="log-out"/>
+        </NavItem>
+    </Nav>
     </Navbar>
         
             <div className="container-fluid">
@@ -76,11 +83,10 @@ class PlanejamentoAtividades extends Component {
 	            <Tab eventKey={4} title="To Do"><p>
 	            <strong>&nbsp;</strong>
 	            <li>Tela de usuários não esta carregando o colaborador para a lista</li>
-	            <li>Na tela de execução de atividade colocar o fechado e virar só view no planejamento e na atividade</li>
 	            <li>Colocar segurança no sistema</li>
 	            <li>Comentario da execução de atividade não salva</li>
 	            <li>Colocar a data de inicio do aluno no IRMR</li>
-	            <li>if(!{atividade.executada}) não planejar uma atividade já executada</li>
+	            <li>Considerar o atividade já executada, não planejar uma atividade já executada</li>
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
 	            </p></Tab>
 	          </Tabs>

@@ -8,7 +8,7 @@ class InfoClinicas extends Component {
     componentDidMount = () => InfoClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por valor da Informação Clinica" autoComplete="off"
+        <Input type="text" placeholder="Buscar por valor da Informação" autoComplete="off"
                name="valor" degaultValue={search.valor}/>
 
     listSchema = {
@@ -48,7 +48,7 @@ class InfoClinicas extends Component {
         </div>
 
     render = () =>
-        <Crud title="Informação Clinica"
+        <Crud title="Informação"
               controller={InfoClinicasController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}
