@@ -11,6 +11,7 @@
 package br.com.remomeurumo.framework;
 
 import br.com.remomeurumo.persistence.Transactional;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
@@ -20,6 +21,7 @@ import org.hibernate.criterion.Restrictions;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.ws.rs.*;
+
 import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -35,6 +37,9 @@ public class CrudController<T extends BaseEntity> {
 
 	@Inject
 	protected EntityManager em;
+	
+	@Inject
+	protected AuditoriaService auditService;
 
 	protected Class<T> getType() {
 		return null;
@@ -86,6 +91,7 @@ public class CrudController<T extends BaseEntity> {
 	@Path("{id}")
 	public T update(@PathParam("id") Long id, T element) {
 		element.setId(id);
+		this.auditService.registrarAuditoria(element, AuditoriaService.operationUpdate);
 		return em.merge(element);
 	}
 

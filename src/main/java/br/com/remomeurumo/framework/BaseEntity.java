@@ -16,11 +16,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import br.com.remomeurumo.model.Auditavel;
+
 /**
  * @author bbviana
  */
 @MappedSuperclass
-public abstract class BaseEntity implements Serializable, Comparable<BaseEntity> {
+public abstract class BaseEntity implements Serializable, Comparable<BaseEntity>, Auditavel {
 
 	@Id
 	@GeneratedValue
@@ -48,6 +50,10 @@ public abstract class BaseEntity implements Serializable, Comparable<BaseEntity>
 			return -1;
 		
 		return 0;
+	}
+	
+	public String getAuditoria() {
+		return String.valueOf(this.getId());
 	}
 	
 	private static final long serialVersionUID = 1L;

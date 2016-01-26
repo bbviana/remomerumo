@@ -22,12 +22,10 @@ import org.hibernate.criterion.Order;
 import br.com.remomeurumo.model.Auditavel;
 import br.com.remomeurumo.model.RegistroAuditoria;
 import br.com.remomeurumo.model.Usuario;
-import br.com.remomeurumo.persistence.Transactional;
 
 /**
  * @author jardim
  */
-@Transactional
 public class AuditoriaService {
 
 	public static String operationUpdate = "ATUALIZAR";

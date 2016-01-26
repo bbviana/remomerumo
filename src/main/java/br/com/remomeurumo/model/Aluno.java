@@ -7,10 +7,13 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+import br.com.remomeurumo.framework.AuditoriaService;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
@@ -18,7 +21,8 @@ import com.fasterxml.jackson.annotation.JsonFilter;
  * @author bbviana
  */
 @Entity
-public class Aluno extends Pessoa implements Serializable, Auditavel {
+@EntityListeners(AuditoriaService.class)
+public class Aluno extends Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
