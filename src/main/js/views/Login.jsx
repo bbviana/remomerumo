@@ -9,36 +9,21 @@ class Login extends Component {
         senha: ""
     }
 
-    login = (event) => {
-        event.preventDefault()
-
-        Request.post('api/login/logar', {
-            id: this.props.id,
-            login: this.refs.email.value,
-            senha: this.refs.senha.value
-        })
-        .then(usuario => this.setState({
-            id: usuario.id,
-            login: usuario.login,
-            senha: usuario.senha,
-        }))
-    }
-
     render = () =>
         <div style={s.app}>
         	<span style={s.bgTop}></span>
             <div className="container" style={s.container}>
-                <form style={s.form} onSubmit={this.login}>
+                <form style={s.form} method='post' action='j_security_check'>
                     <Image src="img/nav-logo-remo.png" responsive />
                     <Image src="img/nav-logo-instituto.png" responsive />
 
                 	<h2>Login</h2>
 
                     <label className="sr-only">Email</label>
-                    <input ref="email" className="form-control" required autoFocus />
+                    <input  name='j_username' className="form-control" required autoFocus />
 
                     <label className="sr-only">Senha</label>
-                    <input ref="senha" type="password" className="form-control" required="required" />
+                    <input name='j_password' type="password" className="form-control" required="required" />
 
                     <div className="checkbox">
                         <label>
@@ -48,6 +33,7 @@ class Login extends Component {
                   
                     <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                 </form>
+                
             </div>
             <span style={s.bgBottom}></span>
         </div>

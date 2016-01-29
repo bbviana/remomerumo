@@ -1,19 +1,22 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Image, Input, Row, Col, Table, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button} from 'react-bootstrap';
+import {Image, Input, Row, Col, Table, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button, ButtonToolbar} from 'react-bootstrap';
 
 class AvaliacaoInfoClinicas extends Component {
     state = {
         id: "",
         aluno: "",
         modelo: "",
-        informacoesClinicas: []
+        informacoesClinicas: [],
+        fechada: false
     }
 
     salvar = (event) => {
+    	console.log("chamou também!")
         event.preventDefault()
         Request.post('api/avaliacaoInfoClinicas/salvar', {
         	id: this.state.id,
+        	fechada: this.state.fechada,
         	informacoesClinicas: this.state.informacoesClinicas
         })
         .then(avaliacao => {
@@ -25,6 +28,11 @@ class AvaliacaoInfoClinicas extends Component {
 	        });                   
 	        $.toaster({ title: 'Sucesso', message : 'Registro salvo', settings: {timeout: 3000} });
         })
+    }
+    
+    salvarEFechar = () => {
+        console.log("chamou")
+        this.state.fechada = true
     }
 
     procurarAvaliacao = () => {
@@ -96,8 +104,11 @@ class AvaliacaoInfoClinicas extends Component {
 		                    </tbody>
 	                    </Table>
 	                </div>
-	                
-	                <button className="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
+    			<ButtonToolbar>
+    			<Button bsSize="medium" bsStyle="danger" >Remover Grupo</Button>
+	                <Button bsSize="medium" bsStyle="primary" type="submit">Salvar</Button>
+	                <Button bsSize="medium" bsStyle="primary" onClick={() => this.salvarEFechar()} type="submit">Finalizar</Button>
+	            </ButtonToolbar>    
 	            </form>
 	        </div>
 	        </div>

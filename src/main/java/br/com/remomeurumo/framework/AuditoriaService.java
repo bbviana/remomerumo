@@ -38,7 +38,7 @@ public class AuditoriaService {
 	public void registrarAuditoria(Auditavel entidade, String tipoOperacao) {
 		System.out.println("\n\nRegistrando Auditoria!\n\n");
 		RegistroAuditoria registro = new RegistroAuditoria();
-		registro.setEntidade(entidade.getClass().getSimpleName());
+		registro.setNome(entidade.getClass().getSimpleName());
 		registro.setIdEntidade(entidade.getId());
 		registro.setRegistro(entidade.getAuditoria());
 		registro.setTipoOperacao(tipoOperacao);

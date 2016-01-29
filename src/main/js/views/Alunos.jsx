@@ -9,7 +9,7 @@ class Alunos extends Component {
  
     searchSchema = (search) =>
        <Input type="text" placeholder="Buscar por nome do Aluno" autoComplete="off"
-               name="nome" degaultValue={search.nome}/>
+               name="nome" defaultValue={search.nome}/>
 
     listSchema = {
         header: () =>

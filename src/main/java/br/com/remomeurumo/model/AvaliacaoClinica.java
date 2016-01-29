@@ -20,6 +20,8 @@ public class AvaliacaoClinica extends BaseEntity {
 	private String data;
 
 	private String comentario;
+	
+	private Boolean fechada;
 
 	// TODO: ANexo a ficha clinica
 
@@ -76,6 +78,15 @@ public class AvaliacaoClinica extends BaseEntity {
 			Collection<InfoClinica> informacoesClinicas) {
 		this.informacoesClinicas = informacoesClinicas;
 	}
+	
+	public Boolean getFechada() {
+		return fechada;
+	}
+
+	public void setFechada(Boolean fechada) {
+		this.fechada = fechada;
+	}
+
 
 	private static final long serialVersionUID = 1L;
 }

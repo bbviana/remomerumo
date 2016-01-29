@@ -29,7 +29,7 @@ class AvaliacoesClinicas extends Component {
             </tr>,
         actions: (avaliacaoClinica) =>  
         	 <div>
-        		<Button id={avaliacaoClinica.id} bsStyle="link" onClick={(id) => window.open("?avaliacaoInfoClinicas&id="+avaliacaoClinica.id
+        		<Button id={avaliacaoClinica.id} bsStyle="link" disabled={avaliacaoClinica.fechada} onClick={(id) => window.open("?avaliacaoInfoClinicas&id="+avaliacaoClinica.id
         				)} ><Glyphicon glyph="th-list"/></Button>
         	 </div>
     }

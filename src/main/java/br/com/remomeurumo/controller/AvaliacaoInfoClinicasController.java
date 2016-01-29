@@ -63,18 +63,19 @@ public class AvaliacaoInfoClinicasController {
 	@Produces(APPLICATION_JSON)
 	@Path("salvar")
 	public AvaliacaoClinica salvar(AvaliacaoClinica avaliacao) {
-		System.out.println("Salvando a Informação clinica da avaliação "+avaliacao.getInformacoesClinicas());
 		AvaliacaoClinica avaliacaoClinica = em.find(AvaliacaoClinica.class, avaliacao.getId());
 		avaliacaoClinica.getInformacoesClinicas().clear();
 
 		for (InfoClinica info : avaliacao.getInformacoesClinicas()) {
-			System.out.println("Info "+info.getValor());
 			this.em.merge(info);
 			avaliacaoClinica.getInformacoesClinicas().add(info);			
 		}
 		
+		if(avaliacao.getFechada())
+			avaliacaoClinica.setFechada(true);
+		
 		this.em.merge(avaliacaoClinica);
-		System.out.println("Salvando a Informação clinica da avaliação "+avaliacaoClinica.getInformacoesClinicas().size());
 		return avaliacaoClinica;
 	}
+	
 }

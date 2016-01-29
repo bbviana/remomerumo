@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
-import {PermissoesController} from '../controllers'
+import {AuditoriasController} from '../controllers'
 import {Input, Row, Col, Grid, Panel, Glyphicon, Button} from 'react-bootstrap';
 
 class Auditorias extends Component {
@@ -9,7 +9,7 @@ class Auditorias extends Component {
 
     searchSchema = (search) =>
         <Input type="text" placeholder="Buscar por Entidade" autoComplete="off"
-               name="entidade" degaultValue={search.entidade}/>
+               name="nome" defaultValue={search.nome}/>
 
     listSchema = {
         header: () =>
@@ -24,18 +24,18 @@ class Auditorias extends Component {
             <tr>
                 <td>{auditoria.id}</td>
                 <td>{auditoria.usuario.nome}</td>
-                <td>{auditoria.entidade}</td>
+                <td>{auditoria.nome}</td>
                 <td>{auditoria.tipoOperacao}</td>
             </tr>
             
     }
 
-    formSchema = (permissao) =>
+    formSchema = (auditoria) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Login do usuário" name="nome" defaultValue={permissao.nome} autoFocus/></Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Descrição" placeholder="Descrição" name="descricao" defaultValue={permissao.descricao}/></Col>
+		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Login do usuário" name="nome" defaultValue={auditoria.nome} autoFocus/></Col>
+		          	<Col xs={12} md={6}><Input type="text" label="Descrição" placeholder="Descrição" name="registro" defaultValue={auditoria.registro}/></Col>
 		        </Row>
 	      </Grid>
         </div>

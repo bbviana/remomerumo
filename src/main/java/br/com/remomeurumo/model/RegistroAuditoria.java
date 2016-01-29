@@ -14,7 +14,7 @@ import br.com.remomeurumo.framework.BaseEntity;
 @Entity
 public class RegistroAuditoria extends BaseEntity {
 
-	private String entidade;
+	private String nome;
 
 	private Long idEntidade;
 
@@ -27,12 +27,12 @@ public class RegistroAuditoria extends BaseEntity {
 
 	private String tipoOperacao;
 
-	public String getEntidade() {
-		return entidade;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setEntidade(String entidade) {
-		this.entidade = entidade;
+	public void setNome(String entidade) {
+		this.nome = entidade;
 	}
 
 	public Long getIdEntidade() {

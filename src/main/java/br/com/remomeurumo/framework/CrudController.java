@@ -71,6 +71,7 @@ public class CrudController<T extends BaseEntity> {
 	@POST
 	public T insert(T element) {
 		em.persist(element);
+		this.auditService.registrarAuditoria(element, AuditoriaService.operationSave);
 		return element;
 	}
 
@@ -116,6 +117,7 @@ public class CrudController<T extends BaseEntity> {
 		Criteria countCriteria = session.createCriteria(getType());
 
 		criteria.addOrder(Order.asc("nome"));
+		criteria.addOrder(Order.desc("id"));
 
 		if (count != null) {
 			criteria.setMaxResults(count);
@@ -140,6 +142,7 @@ public class CrudController<T extends BaseEntity> {
 	@Path("{id}")
 	public void remove(@PathParam("id") Long id) {
 		T entity = em.find(getType(), id);
+		this.auditService.registrarAuditoria(entity, AuditoriaService.operationDelete);
 		em.remove(entity);
 	}
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+    <!-- Rode tables.sql para gerar as tabelas de login -->
+
+    <Realm className="org.apache.catalina.realm.JDBCRealm"
+           driverName="org.postgresql.Driver"
+           connectionURL="jdbc:postgresql://localhost/remomeurumo"
+           connectionName="postgres"
+           connectionPassword="postgres"
+           userTable="Usuario" userNameCol="nome" userCredCol="senha"
+           userRoleTable="usuariopermissao" roleNameCol="nome"/>
+</Context>

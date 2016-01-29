@@ -19,4 +19,29 @@
         <servlet-name>Jersey Web Application</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    
+    
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>JDBCRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/?login</form-login-page>
+            <form-error-page>/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/protegido/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>logado</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-role>
+        <role-name>logado</role-name>
+    </security-role>
+    
 </web-app>

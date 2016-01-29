@@ -86,7 +86,8 @@ class PlanejamentoAtividades extends Component {
 	            <li>Colocar segurança no sistema</li>
 	            <li>Comentario da execução de atividade não salva</li>
 	            <li>Colocar a data de inicio do aluno no IRMR</li>
-	            <li>Considerar o atividade já executada, não planejar uma atividade já executada</li>
+	            <li>Fechar avaliação após informar valores "salvar e fechar" </li>
+	            <li>Auditoria, tirar o crud tosco </li>
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
 	            </p></Tab>
 	          </Tabs>
