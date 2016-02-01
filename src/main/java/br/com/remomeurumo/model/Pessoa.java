@@ -158,5 +158,10 @@ public class Pessoa extends BaseEntity {
 		this.ativo = ativo;
 	}
 
+	@Override
+	public String getAuditoria() {
+		return this.getNome();
+	}
+	
 	private static final long serialVersionUID = 1L;
 }

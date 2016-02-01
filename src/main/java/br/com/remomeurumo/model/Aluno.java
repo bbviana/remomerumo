@@ -29,7 +29,9 @@ public class Aluno extends Pessoa implements Serializable {
 	private String matrAluno;
 
 	private String observacoes;
-
+	
+	private String dataDeIngresso;
+	
 
 	//TODO: FOTO
 	//private String Foto;
@@ -115,10 +117,13 @@ public class Aluno extends Pessoa implements Serializable {
 			Collection<AlunoAtividade> alunoAtividadesTransient) {
 		this.alunoAtividadesTransient = alunoAtividadesTransient;
 	}
-
-	@Override
-	public String getAuditoria() {
-		return this.getNome();
-	}
 	
+	public String getDataDeIngresso() {
+		return dataDeIngresso;
+	}
+
+	public void setDataDeIngresso(String dataDeIngresso) {
+		this.dataDeIngresso = dataDeIngresso;
+	}
+
 }

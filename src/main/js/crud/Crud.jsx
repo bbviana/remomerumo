@@ -187,12 +187,12 @@ const NewButton = ({controller, label}) =>
     </Button>
 
 const EditButton = ({controller, id}) =>
-    <Button bsStyle="link" onClick={() => controller.load(id)}>
+    <Button bsStyle="link" title="Editar" onClick={() => controller.load(id)}>
         <Glyphicon glyph="edit"/>
     </Button>
 
 const RemoveButton = ({controller, id}) =>
-    <Button bsStyle="link" onClick={() => controller.remove(id)}>
+    <Button bsStyle="link" title="Remover" onClick={() => controller.remove(id)}>
         <Glyphicon glyph="trash" />
     </Button>
 

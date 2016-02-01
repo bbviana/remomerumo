@@ -33,7 +33,7 @@ class Alunos extends Component {
             
         actions: (aluno) =>  
             	 <div>
-            		<Button id={aluno.id} bsStyle="link" onClick={() => window.open("?resumoAlunos&id="+aluno.id
+            		<Button id={aluno.id} bsStyle="link" title="Ver o Resumo" onClick={() => window.open("?resumoAlunos&id="+aluno.id
             				)} ><Glyphicon glyph="stats"/></Button>
             	 </div> 
     }
@@ -47,14 +47,15 @@ class Alunos extends Component {
 	        </Row>
 	
 	        <Row className="show-grid">
-	          	<Col xs={12} md={6}><Input type="text" name="naturalDe" defaultValue={aluno.naturalDe} label="Natural de" placeholder="Cidade - estado"  /></Col>
-	          	<Col xs={12} md={6}><Input type="text" name="dtNasc" defaultValue={aluno.dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="dtNasc" defaultValue={aluno.dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  /></Col>	        
+	          	<Col xs={12} md={4}><Input type="text" name="naturalDe" defaultValue={aluno.naturalDe} label="Natural de" placeholder="Cidade - estado"  /></Col>
+	          	<Col xs={12} md={4}><Input type="text" name="dataDeIngresso" defaultValue={aluno.dataDeIngresso} label="Data de Ingresso" placeholder="dd/mm/aaaa"  /></Col>
 	        </Row>
 	
 	        <Row className="show-grid">
-	        	<Col xs={12} md={4}><Input type="text" name="matrAluno" defaultValue={aluno.matrAluno} label="Número de Matricula" placeholder="Número da matricula do aluno"  /></Col>
 	        	<Col xs={12} md={4}><Input type="text" name="cpf" defaultValue={aluno.cpf} label="CPF" placeholder="Documento CPF"  /></Col>
 	        	<Col xs={12} md={4}><Input type="text" name="rg" defaultValue={aluno.rg} label="RG" placeholder="Documento RG"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="matrAluno" defaultValue={aluno.matrAluno} label="Código de identificação" placeholder="Matricula externa ou paciente"  /></Col>
 	        </Row>
 	        <Row className="show-grid">	
 	        	<Col xs={12}><Input type="text" name="endereco" defaultValue={aluno.endereco} label="Endereço" placeholder="Rua, número"  /></Col>

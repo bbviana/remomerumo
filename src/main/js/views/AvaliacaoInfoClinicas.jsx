@@ -105,9 +105,8 @@ class AvaliacaoInfoClinicas extends Component {
 	                    </Table>
 	                </div>
     			<ButtonToolbar>
-    			<Button bsSize="medium" bsStyle="danger" >Remover Grupo</Button>
 	                <Button bsSize="medium" bsStyle="primary" type="submit">Salvar</Button>
-	                <Button bsSize="medium" bsStyle="primary" onClick={() => this.salvarEFechar()} type="submit">Finalizar</Button>
+	                <Button bsSize="medium" bsStyle="warning" onClick={() => this.salvarEFechar()} type="submit">Salvar e Finalizar</Button>
 	            </ButtonToolbar>    
 	            </form>
 	        </div>
