@@ -34,7 +34,6 @@ public class ResumoAlunosController {
 	public Aluno procurarAluno(@QueryParam("id") Long id) {
 
 		Aluno aluno = em.find(Aluno.class, id);
-		System.out.println("Aluno: " + aluno.getNome());
 		aluno.setAlunoAtividadesTransient(new ArrayList<AlunoAtividade>());
 		for (AlunoAtividade alunoAtividade : aluno.getAlunoAtividades()) {
 			AlunoAtividade newAlunoAtividade = new AlunoAtividade();
@@ -44,7 +43,6 @@ public class ResumoAlunosController {
 		}
 		aluno.setAvaliacoesTransient(new ArrayList<AvaliacaoClinica>());
 		for (AvaliacaoClinica avaliacao : aluno.getAvaliacoes()) {
-			System.out.println(avaliacao.getInformacoesClinicas().size());
 			aluno.getAvaliacoesTransient().add(avaliacao);
 		}
 		

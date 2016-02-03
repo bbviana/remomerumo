@@ -160,7 +160,17 @@ public class Pessoa extends BaseEntity {
 
 	@Override
 	public String getAuditoria() {
-		return this.getNome();
+		StringBuilder audit = new StringBuilder();
+		if(nome!=null) 
+			audit.append("Nome: "+nome+"\n");
+		if(apelido!=null) 
+			audit.append("Apelido: "+apelido+"\n");
+		if(cpf!=null) 
+			audit.append("CPF: "+cpf+"\n");
+		if(rg!=null) 
+			audit.append("RG: "+rg+"\n");
+			
+		return audit.toString();
 	}
 	
 	private static final long serialVersionUID = 1L;

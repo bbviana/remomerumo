@@ -46,50 +46,50 @@ class Crud extends Component {
 const Header = ({label}) =>
     <Navbar fixedTop fluid inverse>
         <NavBrand>
-            <a href="/remomeurumo">Remo meu Rumo</a>
+            <a href="remomeurumo">Remo meu Rumo</a>
         </NavBrand>
         <Nav>
         	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; {label}</NavItem>
         </Nav>
         <Nav right eventKey={0}> {/* This is the eventKey referenced */}
-            <NavItem eventKey={1} href="?alunos">
+            <NavItem eventKey={1} href="alunos">
                 <Glyphicon glyph="fire"/>&nbsp;&nbsp;Alunos
             </NavItem>
-            <NavItem eventKey={2} href="?responsaveis">
+            <NavItem eventKey={2} href="responsaveis">
                 <Glyphicon glyph="eye-open"/>&nbsp;&nbsp;Responsáveis
             </NavItem>
-            <NavItem eventKey={2} href="?colaboradores">
+            <NavItem eventKey={2} href="colaboradores">
                 <Glyphicon glyph="education"/>&nbsp;&nbsp;Colaboradores
             </NavItem>
             <NavDropdown eventKey={3} title="Mais.." id="collapsible-navbar-dropdown">
-            	<MenuItem eventKey="1" href="?usuarios">
+            	<MenuItem eventKey="1" href="usuarios">
             		<Glyphicon glyph="user"/>&nbsp;&nbsp;Usuários
             	</MenuItem>
-            	<MenuItem eventKey="2" href="?permissoes">
+            	<MenuItem eventKey="2" href="permissoes">
             		<Glyphicon glyph="folder-open"/>&nbsp;&nbsp;Permissões
             	</MenuItem>
             	<MenuItem divider/>
-		        <MenuItem eventKey="3" href="?grupoAlunos">
+		        <MenuItem eventKey="3" href="grupoAlunos">
 		            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
 		        </MenuItem>
-            	<MenuItem eventKey="4" href="?atividades">
+            	<MenuItem eventKey="4" href="atividades">
                     <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade
                 </MenuItem>
-                <MenuItem eventKey="5" href="?tipoAtividades">
+                <MenuItem eventKey="5" href="tipoAtividades">
                     <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Tipo de Atividade
                 </MenuItem>
                 <MenuItem divider/>
-                <MenuItem eventKey="6" href="?modeloAvaliacoesClinicas">
+                <MenuItem eventKey="6" href="modeloAvaliacoesClinicas">
                     <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação
                 </MenuItem>
-                <MenuItem eventKey="7" href="?tipoInfoClinicas">
+                <MenuItem eventKey="7" href="tipoInfoClinicas">
                     <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação
                 </MenuItem>
-                <MenuItem eventKey="8" href="?avaliacoesClinicas">
+                <MenuItem eventKey="8" href="avaliacoesClinicas">
                     <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação
                 </MenuItem>
             </NavDropdown>
-            <NavItem eventKey={2} href="?login">
+            <NavItem eventKey={2} href="login">
                 <Glyphicon glyph="log-out"/>
             </NavItem>
         </Nav>

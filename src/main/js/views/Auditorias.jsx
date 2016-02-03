@@ -18,6 +18,7 @@ class Auditorias extends Component {
                 <th>Usuario</th>
                 <th>Entidade</th>
                 <th>Operação</th>
+                <th>Data</th>
             </tr>,
 
         body: (auditoria) =>
@@ -26,6 +27,7 @@ class Auditorias extends Component {
                 <td>{auditoria.usuario.nome}</td>
                 <td>{auditoria.nome}</td>
                 <td>{auditoria.tipoOperacao}</td>
+                <td>{auditoria.dataRegistro}</td>
             </tr>
             
     }
@@ -34,14 +36,17 @@ class Auditorias extends Component {
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Login do usuário" name="nome" defaultValue={auditoria.nome} autoFocus/></Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Descrição" placeholder="Descrição" name="registro" defaultValue={auditoria.registro}/></Col>
+		        	<Col xs={12} md={6}><Input type="text" disabled label="Nome" name="nome" defaultValue={auditoria.nome}/></Col>
+		        	<Col xs={12} md={6}><Input type="text" disabled label="dataRegistro" name="dataRegistro" defaultValue={auditoria.dataRegistro} /></Col>
+		        </Row>
+		        <Row className="show-grid">
+		        	<Col xs={12} md={12}><Input type="textarea" disabled label="Descrição" placeholder="Descrição" name="registro" defaultValue={auditoria.registro}/></Col>
 		        </Row>
 	      </Grid>
         </div>
 
     render = () =>
-        <Crud title="auditoria"
+        <Crud title="Auditoria"
               controller={AuditoriasController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}

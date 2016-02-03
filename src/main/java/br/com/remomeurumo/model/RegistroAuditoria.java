@@ -19,6 +19,8 @@ public class RegistroAuditoria extends BaseEntity {
 	private Long idEntidade;
 
 	private String registro;
+	
+	private String dataRegistro;
 
 	@JsonFilter("associationFilter")
 	@ManyToOne
@@ -66,5 +68,14 @@ public class RegistroAuditoria extends BaseEntity {
 	public void setTipoOperacao(String tipoOperacao) {
 		this.tipoOperacao = tipoOperacao;
 	}
+
+	public String getDataRegistro() {
+		return dataRegistro;
+	}
+
+	public void setDataRegistro(String dataRegistro) {
+		this.dataRegistro = dataRegistro;
+	}
+	
 
 }

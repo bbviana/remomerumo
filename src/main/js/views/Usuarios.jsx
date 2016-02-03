@@ -23,7 +23,7 @@ class Usuarios extends Component {
             <tr>
                 <td>{usuario.id}</td>
                 <td>{usuario.nome}</td>
-                <td>{usuario.id}</td>
+                <td>{usuario.colaborador.nome}</td>
             </tr>
             
     }
@@ -33,11 +33,11 @@ class Usuarios extends Component {
 	        <Grid fluid>
 		        <Row className="show-grid">
 		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Login do usuário" name="nome" defaultValue={usuario.nome} autoFocus/></Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Senha" placeholder="Senha" name="senha" defaultValue={usuario.data}/></Col>
+		          	<Col xs={12} md={6}><Input type="password" label="Senha" placeholder="Senha" name="senha" defaultValue={usuario.senha}/></Col>
 		        </Row>
 		        <Row className="show-grid">	
 	        	<Col xs={12}>
-		        	<Input type="select" label="Colaboradores" name="colaboradores"
+		        	<Input type="select" label="Colaboradores" name="colaborador"
 			                defaultValue={id(usuario.colaborador)} onChange={handleAssociationChange}>
 			            <option value="">Selecione...</option>
 			            {colaboradores.map((element, i) =>

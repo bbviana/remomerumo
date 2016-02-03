@@ -5,63 +5,44 @@ import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, Tip
 import url from 'url'
 
 const queryParams = url.parse(window.location.href, true).query
-console.log(queryParams)
+const pathname = window.location.pathname
 
-if(window.location.search === "?login"){
-    // localhost:8080/?login
+if(pathname.endsWith("/login")){
     ReactDOM.render(<Login />, document.getElementById("app"));
-} else if(window.location.search === "?atividades") {
-    // localhost:8080/?atividades
+} else if(pathname.endsWith("/atividades")) {
     ReactDOM.render(<Atividades />, document.getElementById("app"));
-} else if(window.location.search === "?tipoAtividades") {
-    // localhost:8080/?tipoAtividades
+} else if(pathname.endsWith("/tipoAtividades")) {
     ReactDOM.render(<TipoAtividades />, document.getElementById("app"));
-} else if(window.location.search === "?avaliacoesClinicas") {
-    // localhost:8080/?avaliacoesClinicas
+} else if(pathname.endsWith("/avaliacoesClinicas")) {
     ReactDOM.render(<AvaliacoesClinicas />, document.getElementById("app"));
-} else if(window.location.search === "?infoClinicas") {
-    // localhost:8080/?infoClnicas
+} else if(pathname.endsWith("/infoClinicas")) {
     ReactDOM.render(<InfoClinicas />, document.getElementById("app"));
-} else if(window.location.search === "?colaboradores") {
-    // localhost:8080/?colaboradores
+} else if(pathname.endsWith("/colaboradores")) {
     ReactDOM.render(<Colaboradores />, document.getElementById("app"));
-} else if(window.location.search === "?responsaveis") {
-    // localhost:8080/?responsaveis
+} else if(pathname.endsWith("/responsaveis")) {
     ReactDOM.render(<Responsaveis />, document.getElementById("app"));
-} else if(window.location.search === "?grupoAlunos") {
-    // localhost:8080/?grupoAlunos
+} else if(pathname.endsWith("/grupoAlunos")) {
     ReactDOM.render(<GrupoAlunos />, document.getElementById("app"));
-} else if(window.location.search === "?tipoInfoClinicas") {
-    // localhost:8080/?tipoInfoClinicas
+} else if(pathname.endsWith("/tipoInfoClinicas")) {
     ReactDOM.render(<TipoInfoClinicas />, document.getElementById("app"));
-} else if(window.location.search === "?modeloAvaliacoesClinicas") {
-    // localhost:8080/?modeloAvaliacoesClinicas
+} else if(pathname.endsWith("/modeloAvaliacoesClinicas")) {
     ReactDOM.render(<ModeloAvaliacoesClinicas />, document.getElementById("app"));
-} else if(window.location.search.startsWith("?planejamentoAtividades")){
-    // localhost:8080/?planejamentoAtividades
+} else if(pathname.endsWith("/planejamentoAtividades")){
     ReactDOM.render(<PlanejamentoAtividades id={queryParams.id}/>, document.getElementById("app"));
-} else if(window.location.search.startsWith("?execucaoAtividades")){
-    // localhost:8080/?execucaoAtividades
+} else if(pathname.endsWith("/execucaoAtividades")){
     ReactDOM.render(<ExecucaoAtividades id={queryParams.id}/>, document.getElementById("app"));
-} else if(window.location.search.startsWith("?avaliacaoInfoClinicas")){
-    // localhost:8080/?execucaoAtividades
+} else if(pathname.endsWith("/avaliacaoInfoClinicas")){
     ReactDOM.render(<AvaliacaoInfoClinicas id={queryParams.id}/>, document.getElementById("app"));
-} else if(window.location.search.startsWith("?resumoAlunos")){
-    // localhost:8080/?execucaoAtividades
+} else if(pathname.endsWith("/resumoAlunos")){
     ReactDOM.render(<ResumoAlunos id={queryParams.id}/>, document.getElementById("app"));
-} else if(window.location.search.startsWith("?alunos")){
-    // localhost:8080/?alunos
+} else if(pathname.endsWith("/alunos")){
 	ReactDOM.render(<Alunos />, document.getElementById("app"));
-} else if(window.location.search.startsWith("?usuarios")){
-    // localhost:8080/?usuarios
+} else if(pathname.endsWith("/usuarios")){
 	ReactDOM.render(<Usuarios />, document.getElementById("app"));
-} else if(window.location.search.startsWith("?permissoes")){
-    // localhost:8080/?permissoes
+} else if(pathname.endsWith("/permissoes")){
 	ReactDOM.render(<Permissoes />, document.getElementById("app"));
-} else if(window.location.search.startsWith("?auditorias")){
-    // localhost:8080/?auditorias
+} else if(pathname.endsWith("/auditorias")){
 	ReactDOM.render(<Auditorias />, document.getElementById("app"));
 } else {
-    // localhost:8080/
     ReactDOM.render(<Home />, document.getElementById("app"));
 }

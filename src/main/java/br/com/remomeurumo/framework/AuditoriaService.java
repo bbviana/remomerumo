@@ -10,6 +10,8 @@
  */
 package br.com.remomeurumo.framework;
 
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,6 +45,9 @@ public class AuditoriaService {
 		registro.setRegistro(entidade.getAuditoria());
 		registro.setTipoOperacao(tipoOperacao);
 		registro.setUsuario(getUsuarioLogado());
+		GregorianCalendar dataRegistro = new GregorianCalendar();
+		SimpleDateFormat fmt = new SimpleDateFormat("dd/MMM/yyyy-HH:mm");
+	    registro.setDataRegistro(fmt.format(dataRegistro.getTime()));
 		this.em.persist(registro);
 	}
 

@@ -33,7 +33,7 @@ class Alunos extends Component {
             
         actions: (aluno) =>  
             	 <div>
-            		<Button id={aluno.id} bsStyle="link" title="Ver o Resumo" onClick={() => window.open("?resumoAlunos&id="+aluno.id
+            		<Button id={aluno.id} bsStyle="link" title="Ver o Resumo" onClick={() => window.open("resumoAlunos?id="+aluno.id
             				)} ><Glyphicon glyph="stats"/></Button>
             	 </div> 
     }

@@ -10,5 +10,5 @@
            connectionName="postgres"
            connectionPassword="postgres"
            userTable="Usuario" userNameCol="nome" userCredCol="senha"
-           userRoleTable="usuariopermissao" roleNameCol="nome"/>
+           userRoleTable="permissao" roleNameCol="nome"/>
 </Context>

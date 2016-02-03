@@ -30,9 +30,9 @@ class Atividades extends Component {
             
        actions: (atividade) =>  
        	 <div>
-       		<Button id={atividade.id} bsStyle="link" disabled={atividade.executada} onClick={() => window.open("?planejamentoAtividades&id="+atividade.id
+       		<Button id={atividade.id} bsStyle="link" disabled={atividade.executada} onClick={() => window.open("planejamentoAtividades?id="+atividade.id
        				)} ><Glyphicon glyph="inbox" title="Planejamento"/></Button>
-       		<Button id={atividade.id} bsStyle="link" onClick={() => window.open("?execucaoAtividades&id="+atividade.id
+       		<Button id={atividade.id} bsStyle="link" onClick={() => window.open("execucaoAtividades?id="+atividade.id
        	       				)} ><Glyphicon glyph="ok" title="Lista de chamada" /></Button>		
        	 </div>     
             
