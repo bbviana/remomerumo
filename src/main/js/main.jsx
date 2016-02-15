@@ -43,6 +43,8 @@ if(pathname.endsWith("/login")){
 	ReactDOM.render(<Permissoes />, document.getElementById("app"));
 } else if(pathname.endsWith("/auditorias")){
 	ReactDOM.render(<Auditorias />, document.getElementById("app"));
+} else if(pathname.endsWith("/auditoria")){
+    ReactDOM.render(<Auditoria id={queryParams.id}/>, document.getElementById("app"));
 } else {
     ReactDOM.render(<Home />, document.getElementById("app"));
 }

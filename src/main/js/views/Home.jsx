@@ -89,7 +89,7 @@ class PlanejamentoAtividades extends Component {
 	            
 	            <li>Comentario da execução de atividade não salva</li>
 	            <li>Auditoria, tirar o crud, colocar um botão em cada linha </li>
-	            <li>Instalar o apache na produção</li>
+	            
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
 	            </p></Tab>
 	          </Tabs>

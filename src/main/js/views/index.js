@@ -17,6 +17,7 @@ import ResumoAlunos from './ResumoAlunos'
 import Usuarios from './Usuarios'
 import Permissoes from './Permissoes'
 import Auditorias from './Auditorias'
+import Auditoria from './Auditoria'
 
 export {
     Alunos,
@@ -37,5 +38,6 @@ export {
     ResumoAlunos,
     Usuarios,
     Permissoes,
-    Auditorias
+    Auditorias,
+    Auditoria
 }

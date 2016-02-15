@@ -129,6 +129,7 @@ const ListSection = ({controller, schema, list, currentPage, totalPages, pageSiz
                         <EditButton controller={controller} id={element.id} />
                         {schema.actions && schema.actions(element).props.children}
                         <RemoveButton controller={controller} id={element.id} />
+                        <AuditButton controller={controller} id={element.id} />
                     </td>
                 </tr>
             )}
@@ -195,6 +196,10 @@ const RemoveButton = ({controller, id}) =>
     <Button bsStyle="link" title="Remover" onClick={() => controller.remove(id)}>
         <Glyphicon glyph="trash" />
     </Button>
+const AuditButton = ({controller, id}) =>
+    <Button bsStyle="link" title="Auditoria" onClick={() => controller.audit(id)}>
+        <Glyphicon glyph="flag" />
+    </Button>    
 
 
 const styles = {

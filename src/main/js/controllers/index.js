@@ -16,6 +16,7 @@ import ResumoAlunosController from './ResumoAlunosController'
 import UsuariosController from './UsuariosController'
 import PermissoesController from './PermissoesController'
 import AuditoriasController from './AuditoriasController'
+import AuditoriaController from './AuditoriaController'
 
 export {
     AlunosController,
@@ -35,5 +36,6 @@ export {
     ResumoAlunosController,
     UsuariosController,
     PermissoesController,
-    AuditoriasController
+    AuditoriasController,
+    AuditoriaController
 }

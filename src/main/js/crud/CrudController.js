@@ -80,7 +80,11 @@ class CrudController extends Controller {
             Request.del(`api/${this.url}/${id}`).then(() => this.list())
     }
 
-
+    audit = (id) => {
+    	window.open("consultarAuditoria?id="+id);
+    }
+    
+    
     closeForm = () => {
         this.dispatch({form: {}, showForm: false})
     }
