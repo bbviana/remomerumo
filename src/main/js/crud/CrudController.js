@@ -81,7 +81,7 @@ class CrudController extends Controller {
     }
 
     audit = (id) => {
-    	window.open("consultarAuditoria?id="+id);
+    	window.open("auditoria?id="+id);
     }
     
     

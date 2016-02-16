@@ -88,7 +88,6 @@ class PlanejamentoAtividades extends Component {
 	            <li>Colocar segurança no sistema</li>
 	            
 	            <li>Comentario da execução de atividade não salva</li>
-	            <li>Auditoria, tirar o crud, colocar um botão em cada linha </li>
 	            
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
 	            </p></Tab>

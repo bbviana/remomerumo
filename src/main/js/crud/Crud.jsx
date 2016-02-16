@@ -198,7 +198,7 @@ const RemoveButton = ({controller, id}) =>
     </Button>
 const AuditButton = ({controller, id}) =>
     <Button bsStyle="link" title="Auditoria" onClick={() => controller.audit(id)}>
-        <Glyphicon glyph="flag" />
+        <Glyphicon glyph="list-alt" />
     </Button>    
 
 

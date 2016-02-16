@@ -1,13 +1,15 @@
 import React, {Component, PropTypes} from 'react'
-import {Crud} from '../crud'
-import {id, ids, handleAssociationChange} from '../crud/Associations'
-import {AuditoriaController} from '../controllers'
-import {Input, Row, Col, Grid, Panel, Glyphicon, Button, Navbar, NavItem, Nav} from 'react-bootstrap';
+import {Request} from '../helpers'
+import {Input, Row, Col, Grid, Panel, Glyphicon, Button, Navbar, NavItem, Nav, NavBrand} from 'react-bootstrap';
 
 class Auditoria extends Component {
     state = {
         id: "",
-        nome: ""
+        nome: "",
+        tipoOperacao: "",
+        dataRegistro: "",
+        registro: "",
+        usuario: ""
     }
 
     procurarRegistro = () => {
@@ -18,9 +20,13 @@ class Auditoria extends Component {
             id: auditoria.id,
             nome: auditoria.nome,
             dataRegistro: auditoria.dataRegistro,
-            registro: auditoria.registro
+            registro: auditoria.registro,
+            usuario: auditoria.usuario.nome,
+            tipoOperacao: auditoria.tipoOperacao
         }))
     }
+    
+    
     
     componentDidMount = () => {
     	this.procurarRegistro()
@@ -33,11 +39,11 @@ class Auditoria extends Component {
 	            <a href="?login">Remo meu Rumo</a>
 	        </NavBrand>
 	        <Nav>
-	        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Planejamento de Atividades</NavItem>
+	        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Auditoria</NavItem>
 	        </Nav>
 	        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
 	            <NavItem eventKey={1} href="#">
-	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade : {this.state.nome},&nbsp;{this.state.data} 
+	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Entidade : {this.state.nome},&nbsp;{this.state.dataRegistro} 
 	            </NavItem>
 	            
 	            <NavItem eventKey={2} onClick={() => window.close()}>
@@ -51,11 +57,12 @@ class Auditoria extends Component {
                     <div>
                      <Grid fluid>
 	    		        <Row className="show-grid">
-	    		        	<Col xs={12} md={6}><Input type="text" disabled label="Nome" name="nome" defaultValue={nome}/></Col>
-	    		        	<Col xs={12} md={6}><Input type="text" disabled label="dataRegistro" name="dataRegistro" defaultValue={dataRegistro} /></Col>
+	    		        	<Col xs={12} md={4}><b>Usuario:</b> {this.state.usuario}</Col>
+	    		        	<Col xs={12} md={4}><b>Operacao:</b> {this.state.tipoOperacao}</Col>
+	    		        	<Col xs={12} md={4}><b>Data:</b> {this.state.dataRegistro}</Col>
 	    		        </Row>
 	    		        <Row className="show-grid">
-	    		        	<Col xs={12} md={12}><Input type="textarea" disabled label="Descrição" placeholder="Descrição" name="registro" defaultValue={registro}/></Col>
+	    		        	<Col xs={12} md={12}><b>Registro:</b> {this.state.registro}</Col>
 	    		        </Row>
 	    		       </Grid>
                     </div>

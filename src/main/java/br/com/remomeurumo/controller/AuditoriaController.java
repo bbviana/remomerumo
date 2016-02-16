@@ -32,7 +32,6 @@ public class AuditoriaController {
 	@Produces(APPLICATION_JSON)
 	@Path("procurarRegistro")
 	public RegistroAuditoria procurarRegistro(@QueryParam("id") Long id) {
-		this.em.find(RegistroAuditoria.class, id);
 		
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(RegistroAuditoria.class);

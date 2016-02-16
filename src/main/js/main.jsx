@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, AvaliacaoInfoClinicas, InfoClinicas, 
-	ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoAtividades, ExecucaoAtividades, Home, ResumoAlunos, Usuarios, Permissoes, Auditorias} from './views'
+	ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoAtividades, ExecucaoAtividades, Home, ResumoAlunos, Usuarios, Permissoes, Auditorias, Auditoria} from './views'
 import url from 'url'
 
 const queryParams = url.parse(window.location.href, true).query
