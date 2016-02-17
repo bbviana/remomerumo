@@ -8,11 +8,13 @@ import br.com.remomeurumo.framework.Result;
 import br.com.remomeurumo.model.Colaborador;
 import br.com.remomeurumo.model.Permissao;
 import br.com.remomeurumo.model.Usuario;
+import br.com.remomeurumo.persistence.Transactional;
 
 /**
  * @author jardim
  */
 @RequestScoped
+@Transactional
 @Path("usuarios")
 public class UsuariosController extends CrudController<Usuario> {
 
@@ -30,5 +32,5 @@ public class UsuariosController extends CrudController<Usuario> {
 	protected void postLoad(Result<Usuario> result) {
 		postBlank(result);
 	}
-
+	
 }

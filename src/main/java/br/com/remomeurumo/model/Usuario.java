@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
@@ -23,7 +24,7 @@ public class Usuario extends BaseEntity {
 
 	@JsonFilter("associationFilter")
 	@ManyToMany
-	@JoinColumn(name = "usuariopermissao")
+	@JoinTable(name = "usuario_permissao")
 	private Collection<Permissao> permissoes;
 
 	@JsonFilter("associationFilter")
