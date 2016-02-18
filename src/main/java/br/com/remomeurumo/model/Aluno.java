@@ -29,12 +29,17 @@ public class Aluno extends Pessoa implements Serializable {
 	private String matrAluno;
 
 	private String observacoes;
-	
-	private String dataDeIngresso;
-	
 
-	//TODO: FOTO
-	//private String Foto;
+	private String dataDeIngresso;
+
+	private String periodoEscolar;
+
+	private String transporte;
+
+	private String horarioTreino;
+
+	// TODO: FOTO
+	// private String Foto;
 
 	@JsonFilter("associationFilter")
 	@ManyToMany
@@ -44,14 +49,14 @@ public class Aluno extends Pessoa implements Serializable {
 	@JsonFilter("associationFilter")
 	@OneToMany(mappedBy = "aluno")
 	private Collection<AlunoAtividade> alunoAtividades;
-	
+
 	@JsonFilter("associationFilter")
 	@OneToMany(mappedBy = "aluno")
 	private Collection<AvaliacaoClinica> avaliacoes;
-	
+
 	@Transient
 	private Collection<AvaliacaoClinica> avaliacoesTransient;
-	
+
 	@Transient
 	private Collection<AlunoAtividade> alunoAtividadesTransient;
 
@@ -117,13 +122,37 @@ public class Aluno extends Pessoa implements Serializable {
 			Collection<AlunoAtividade> alunoAtividadesTransient) {
 		this.alunoAtividadesTransient = alunoAtividadesTransient;
 	}
-	
+
 	public String getDataDeIngresso() {
 		return dataDeIngresso;
 	}
 
 	public void setDataDeIngresso(String dataDeIngresso) {
 		this.dataDeIngresso = dataDeIngresso;
+	}
+
+	public String getPeriodoEscolar() {
+		return periodoEscolar;
+	}
+
+	public void setPeriodoEscolar(String periodoEscolar) {
+		this.periodoEscolar = periodoEscolar;
+	}
+
+	public String getTransporte() {
+		return transporte;
+	}
+
+	public void setTransporte(String transporte) {
+		this.transporte = transporte;
+	}
+
+	public String getHorarioTreino() {
+		return horarioTreino;
+	}
+
+	public void setHorarioTreino(String horarioTreino) {
+		this.horarioTreino = horarioTreino;
 	}
 
 }
