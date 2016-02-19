@@ -86,7 +86,7 @@ class PlanejamentoAtividades extends Component {
 	            <strong>&nbsp;</strong>
 	            <li>Tela de usuários, fazer validação de senha</li>
 	            <li>Colocar segurança no sistema</li>
-	            
+	            <li>COlocar campos maiores no banco para coisas como descrição do grupo aluno</li>
 	            <li>Comentario da execução de atividade não salva</li>
 	            
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>

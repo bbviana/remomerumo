@@ -66,10 +66,15 @@ class Alunos extends Component {
 	        	<Col xs={12} md={4}><Input type="text" name="telefone" defaultValue={aluno.telefone} label="Telefone" placeholder="Telefone Fixo"  /></Col>
 	        	<Col xs={12} md={4}><Input type="text" name="celular" defaultValue={aluno.celular} label="Celular" placeholder="Celular com ddd"  /></Col>
 	        </Row>
+	        <Row className="show-grid">
+        		<Col xs={12} md={4}><Input type="text" name="email" defaultValue={aluno.email} label="Email" placeholder="Email para contato"  /></Col>
+        		<Col xs={12} md={4}><Input type="text" name="telefone" defaultValue={aluno.telefone} label="Telefone" placeholder="Telefone Fixo"  /></Col>
+        		<Col xs={12} md={4}><Input type="text" name="celular" defaultValue={aluno.celular} label="Celular" placeholder="Celular com ddd"  /></Col>
+        	</Row>
 	        <Row className="show-grid">	
-	        	<Col xs={12} md={4}><Input type="text" name="sapato" defaultValue={aluno.sapato} label="Sapato" placeholder="Tamanho da sapato"  /></Col>
-	        	<Col xs={12} md={4}><Input type="text" name="bermuda" defaultValue={aluno.bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  /></Col>
-	        	<Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={aluno.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="periodoEscolar" defaultValue={aluno.periodoEscolar} label="Período Escolar" placeholder="Período Escolar"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="transporte" defaultValue={aluno.transporte} label="Transporte" placeholder="Transporte"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="horarioTreino" defaultValue={aluno.horarioTreino} label="Horário de Treino" placeholder="Horário de Treino"  /></Col>
 	        </Row>
 	        <Row className="show-grid">	
 	        	<Col xs={12}>

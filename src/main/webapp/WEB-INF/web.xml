@@ -31,13 +31,17 @@
     <auth-constraint>
       <role-name>logado</role-name>
     </auth-constraint>
-    <web-resource-collection>
+  </security-constraint>   
+  <security-constraint>
+   <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
       <url-pattern>/alunos/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>logado</role-name>
     </auth-constraint>
+    </security-constraint>   
+  <security-constraint>
     <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
       <url-pattern>/colaboradores/*</url-pattern>
@@ -45,6 +49,8 @@
     <auth-constraint>
       <role-name>logado</role-name>
     </auth-constraint>
+    </security-constraint>   
+  <security-constraint>
     <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
       <url-pattern>/reponsaveis/*</url-pattern>
@@ -52,13 +58,8 @@
     <auth-constraint>
       <role-name>logado</role-name>
     </auth-constraint>
-    <web-resource-collection>
-      <web-resource-name>Protected Area</web-resource-name>
-      <url-pattern>/</url-pattern>
-    </web-resource-collection>
-    <auth-constraint>
-      <role-name>logado</role-name>
-    </auth-constraint>
+    </security-constraint>   
+  <security-constraint>
     <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
       <url-pattern>/tipoAtividades/*</url-pattern>
@@ -66,6 +67,8 @@
     <auth-constraint>
       <role-name>logado</role-name>
     </auth-constraint>
+    </security-constraint>   
+  <security-constraint>
     <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
       <url-pattern>/tipoInfoClinicas/*</url-pattern>
@@ -73,6 +76,8 @@
     <auth-constraint>
       <role-name>logado</role-name>
     </auth-constraint>
+    </security-constraint>   
+  <security-constraint>
     <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
       <url-pattern>/avaliacoesClinicas/*</url-pattern>
@@ -80,7 +85,34 @@
     <auth-constraint>
       <role-name>logado</role-name>
     </auth-constraint>
-  </security-constraint>
+    </security-constraint>  
+     <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Protected Area</web-resource-name>
+      <url-pattern>/usuarios/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>logado</role-name>
+    </auth-constraint>
+    </security-constraint>  
+     <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Protected Area</web-resource-name>
+      <url-pattern>/permissoes/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>logado</role-name>
+    </auth-constraint>
+    </security-constraint> 
+   <!--  <security-constraint>
+ 	<web-resource-collection>
+      <web-resource-name>Protected Area</web-resource-name>
+      <url-pattern>/</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>logado</role-name>
+    </auth-constraint>     
+  </security-constraint> -->
   
   <security-role>
     <role-name>logado</role-name>
