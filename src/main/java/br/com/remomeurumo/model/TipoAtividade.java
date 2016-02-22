@@ -1,10 +1,11 @@
 package br.com.remomeurumo.model;
 
-import br.com.remomeurumo.framework.BaseEntity;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import java.util.Collection;
+
+import br.com.remomeurumo.framework.BaseEntity;
 
 /**
  * @author jardim
@@ -16,6 +17,8 @@ public class TipoAtividade extends BaseEntity {
 
 	@ManyToMany(mappedBy = "tipoAtividade")
 	private Collection<Atividade> atividades;
+
+	private String observacao;
 
 	public String getNome() {
 		return nome;
@@ -31,6 +34,14 @@ public class TipoAtividade extends BaseEntity {
 
 	public void setAtividades(Collection<Atividade> atividades) {
 		this.atividades = atividades;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	private static final long serialVersionUID = 1L;

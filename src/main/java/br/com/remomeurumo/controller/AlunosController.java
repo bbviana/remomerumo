@@ -17,8 +17,6 @@ import br.com.remomeurumo.model.Responsavel;
 @Path("alunos")
 public class AlunosController extends CrudController<Aluno> {
 
-	@Inject
-	private AuditoriaService auditService;
 
 	protected Class<Aluno> getType() {
 		return Aluno.class;

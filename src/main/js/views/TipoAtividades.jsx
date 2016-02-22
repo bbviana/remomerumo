@@ -30,6 +30,9 @@ class TipoAtividades extends Component {
 		        <Row className="show-grid">
 		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome do Tipo de Atividade" name="nome" defaultValue={tipoAtividade.nome} autoFocus/></Col>
 		        </Row>
+		        <Row className="show-grid">
+	          	<Col xs={12}><Input type="textarea" label="Observação" placeholder="Observações gerais sobre a atividade" name="observacao" defaultValue={tipoAtividade.observacao} /></Col>
+	        </Row>
 	      </Grid>
         </div>
 

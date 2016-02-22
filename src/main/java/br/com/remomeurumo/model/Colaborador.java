@@ -7,8 +7,12 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
  * @author jardim
@@ -16,8 +20,13 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Colaborador extends Pessoa implements Serializable {
 
-	private TipoColaborador tipoColcaborador;
+	private String areaColaborador;
 
+	@JsonFilter("associationFilter")
+	@ManyToOne
+	@JoinColumn(name = "responsavelid")
+	private Colaborador responsavel;
+	
 	@ManyToMany
 	@JoinTable(name = "ColaboradorAtividade")
 	private Collection<Atividade> atividades;
@@ -27,20 +36,28 @@ public class Colaborador extends Pessoa implements Serializable {
 		return reflectionToString(this, SHORT_PREFIX_STYLE);
 	}
 
-	public TipoColaborador getTipoColcaborador() {
-		return tipoColcaborador;
-	}
-
-	public void setTipoColcaborador(TipoColaborador tipoColcaborador) {
-		this.tipoColcaborador = tipoColcaborador;
-	}
-
 	public Collection<Atividade> getAtividades() {
 		return atividades;
 	}
 
 	public void setAtividade(Collection<Atividade> atividades) {
 		this.atividades = atividades;
+	}
+
+	public String getAreaColaborador() {
+		return areaColaborador;
+	}
+
+	public void setAreaColaborador(String areaColaborador) {
+		this.areaColaborador = areaColaborador;
+	}
+
+	public Colaborador getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(Colaborador responsavel) {
+		this.responsavel = responsavel;
 	}
 
 	private static final long serialVersionUID = 1L;

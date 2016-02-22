@@ -150,6 +150,7 @@ public class CrudController<T extends BaseEntity> {
 	protected <E> List<E> findAll(Class<? extends E> entityClass) {
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(entityClass);
+		criteria.addOrder(Order.asc("nome"));
 		return criteria.list();
 	}
 	
@@ -158,6 +159,7 @@ public class CrudController<T extends BaseEntity> {
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(entityClass);
 		criteria.add(Restrictions.eq("ativo", true));
+		criteria.addOrder(Order.asc("nome"));
 		return criteria.list();
 	}
 

@@ -30,7 +30,7 @@ class Colaboradores extends Component {
             </tr>
     }
 
-    formSchema = (colaborador) =>
+    formSchema = (colaborador, {responsaveis = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
@@ -39,17 +39,19 @@ class Colaboradores extends Component {
 		        </Row>
 		
 		        <Row className="show-grid">
+	          		<Col xs={12} md={4}><Input type="text" name="areaColaborador" defaultValue={colaborador.naturalDe} label="Área de trabalho" placeholder="Colaborador trabalha em.."  /></Col>
+		        	<Col xs={12} md={4}><Input type="text" name="cpf" defaultValue={colaborador.cpf} label="CPF" placeholder="Documento CPF"  /></Col>
+		        	<Col xs={12} md={4}><Input type="text" name="rg" defaultValue={colaborador.rg} label="RG" placeholder="Documento RG"  /></Col>
+	          	</Row>
+		        
+		        <Row className="show-grid">
 		          	<Col xs={12} md={6}><Input type="text" name="naturalDe" defaultValue={colaborador.naturalDe} label="Natural de" placeholder="Cidade - estado"  /></Col>
 		          	<Col xs={12} md={6}><Input type="text" name="dtNasc" defaultValue={colaborador.dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  /></Col>
 		        </Row>
-		
-		        <Row className="show-grid">
-		        	<Col xs={12} md={6}><Input type="text" name="cpf" defaultValue={colaborador.cpf} label="CPF" placeholder="Documento CPF"  /></Col>
-		        	<Col xs={12} md={6}><Input type="text" name="rg" defaultValue={colaborador.rg} label="RG" placeholder="Documento RG"  /></Col>
-		        </Row>
+		        
 		        <Row className="show-grid">	
 		        	<Col xs={12}><Input type="text" name="endereco" defaultValue={colaborador.endereco} label="Endereço" placeholder="Rua, número"  /></Col>
-		       </Row>
+		        </Row>
 		
 		        <Row className="show-grid">
 		        	<Col xs={12} md={4}><Input type="text" name="email" defaultValue={colaborador.email} label="Email" placeholder="Email para contato"  /></Col>
@@ -62,7 +64,16 @@ class Colaboradores extends Component {
 		        	<Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={colaborador.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
 		        </Row>
 		        <Row className="show-grid">	
-    				<Col xs={12}><Input type="checkbox" name="ativo" defaultChecked={colaborador.ativo} label="Ativo" /></Col>
+		        	<Col xs={8}>
+			        	<Input type="select" label="Responsável pelo Colaborador" name="responsavel"
+				                defaultValue={id(colaborador.responsavel)} onChange={handleAssociationChange}>
+				            <option value="">Selecione...</option>
+				            {responsaveis.map((element, i) =>
+				                <option key={i} value={element.id}>{element.nome}</option>
+				            )}
+			            </Input>
+		            </Col>
+    				<Col xs={4}><Input type="checkbox" name="ativo" defaultChecked={colaborador.ativo} label="Ativo" /></Col>
     			</Row>
 	      </Grid>
         </div>

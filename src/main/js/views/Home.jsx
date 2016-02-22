@@ -88,7 +88,11 @@ class PlanejamentoAtividades extends Component {
 	            <li>Colocar segurança no sistema</li>
 	            <li>COlocar campos maiores no banco para coisas como descrição do grupo aluno</li>
 	            <li>Comentario da execução de atividade não salva</li>
-	            
+	            <li>Detalhes sobre o tipo de treino
+	            Hierarquia dos colaboradores
+	            Mais detalhes nas atividades
+	            No tipo de atividades
+	            Colocar a área do profissional</li>
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
 	            </p></Tab>
 	          </Tabs>
