@@ -37,6 +37,11 @@ class PlanejamentoAtividades extends Component {
         }))
     }
     
+    arquivoCsv = () => {
+    	console.log("Chamou!")
+        window.open("api/planejamentoAtividades/arquivoCsv?id=36");
+    }
+    
     removerAluno = (idAluno, idPlanejamento) => {
     	var atividades = this.state.atividadeGrupos
     	
@@ -99,6 +104,7 @@ class PlanejamentoAtividades extends Component {
     
     componentDidMount = () => {
     	this.procurarGrupos()
+    	//this.arquivoCsv()
     }
     
     render = () =>

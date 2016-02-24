@@ -37,6 +37,8 @@ public class Aluno extends Pessoa implements Serializable {
 	private String transporte;
 
 	private String horarioTreino;
+	
+	private String abc;
 
 	// TODO: FOTO
 	// private String Foto;
@@ -153,6 +155,14 @@ public class Aluno extends Pessoa implements Serializable {
 
 	public void setHorarioTreino(String horarioTreino) {
 		this.horarioTreino = horarioTreino;
+	}
+
+	public String getAbc() {
+		return abc;
+	}
+
+	public void setAbc(String abc) {
+		this.abc = abc;
 	}
 
 }

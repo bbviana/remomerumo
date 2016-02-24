@@ -2,6 +2,9 @@ package br.com.remomeurumo.controller;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +18,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -53,11 +58,9 @@ public class PlanejamentoAtividadesController {
 			for (GrupoAluno grupo : procurarGrupos) {
 				AtividadeGrupo novoPlanejamento = new AtividadeGrupo();
 				novoPlanejamento.setAlunos(this.cloneAlunos(grupo.getAlunos()));
-				System.out.println(grupo.getColaboradores().size());
 				novoPlanejamento.setColaboradores(this.cloneColaboradores(grupo.getColaboradores()));
 				novoPlanejamento.setGrupo(grupo);
 				novoPlanejamento.setAtividade(atividade);
-				System.out.println(novoPlanejamento.getColaboradores().size());
 				novosGrupos.add(novoPlanejamento);
 				//cria o novo grupo
 				this.em.persist(novoPlanejamento);
@@ -80,7 +83,7 @@ public class PlanejamentoAtividadesController {
 	
 	private List<Colaborador> cloneColaboradores(Collection<Colaborador> colaboradores){
 		List<Colaborador> novosColaboradores = new ArrayList<Colaborador>();
-		for (Colaborador colaborador : novosColaboradores) {
+		for (Colaborador colaborador : colaboradores) {
 			if(Boolean.TRUE.equals(colaborador.getAtivo()))
 				novosColaboradores.add(colaborador);
 		}
@@ -107,6 +110,20 @@ public class PlanejamentoAtividadesController {
 	public Atividade removerAluno(@QueryParam("id") Long id) {
 		return em.find(Atividade.class,id);
 	}
+	
+	@GET
+    @Path("arquivoCsv")
+    @Produces("text/plain")
+    public Response getTextFile() {
+	 
+        //File file = new File(TXT_FILE);
+		String exampleString = "lala,lele";
+		InputStream stream = new ByteArrayInputStream(exampleString.getBytes(StandardCharsets.UTF_8));
+        ResponseBuilder response = Response.ok(stream);
+		        response.header("Content-Disposition", "attachment; filename=\"test_text_file.txt\"");
+		        
+	   return response.build();
+    }
 	
 
 	@POST

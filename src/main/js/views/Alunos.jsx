@@ -67,9 +67,9 @@ class Alunos extends Component {
 	        	<Col xs={12} md={4}><Input type="text" name="celular" defaultValue={aluno.celular} label="Celular" placeholder="Celular com ddd"  /></Col>
 	        </Row>
 	        <Row className="show-grid">
-        		<Col xs={12} md={4}><Input type="text" name="email" defaultValue={aluno.email} label="Email" placeholder="Email para contato"  /></Col>
-        		<Col xs={12} md={4}><Input type="text" name="telefone" defaultValue={aluno.telefone} label="Telefone" placeholder="Telefone Fixo"  /></Col>
-        		<Col xs={12} md={4}><Input type="text" name="celular" defaultValue={aluno.celular} label="Celular" placeholder="Celular com ddd"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="email" defaultValue={aluno.email} label="Email" placeholder="Email para contato"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="telefone" defaultValue={aluno.telefone} label="Telefone" placeholder="Telefone Fixo"  /></Col>
+	        	<Col xs={12} md={4}><Input type="text" name="celular" defaultValue={aluno.celular} label="Celular" placeholder="Celular com ddd"  /></Col>
         	</Row>
 	        <Row className="show-grid">	
 	        	<Col xs={12} md={4}><Input type="text" name="periodoEscolar" defaultValue={aluno.periodoEscolar} label="Período Escolar" placeholder="Período Escolar"  /></Col>
@@ -92,6 +92,11 @@ class Alunos extends Component {
         			<Input type="textarea" name="observacoes" defaultValue={aluno.observacoes} label="Observações" placeholder="Detalhes relevantes sobre o aluno"  />
         		</Col>
         	</Row>
+        	<Row className="show-grid">	
+    			<Col xs={12}>
+    				<Input type="textarea" name="abc" defaultValue={aluno.abc} label="Abc" placeholder="Adaptações, limitações e indicações para a criança"  />
+    			</Col>
+    		</Row>
         	<Row className="show-grid">	
     			<Col xs={12}>
     				<Input type="checkbox" name="ativo" defaultChecked={aluno.ativo} label="Ativo" />
