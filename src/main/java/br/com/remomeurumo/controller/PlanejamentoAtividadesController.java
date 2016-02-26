@@ -67,7 +67,7 @@ public class PlanejamentoAtividadesController {
 			}
 			atividade.setAtividadeGrupos(novosGrupos);
 			this.em.merge(atividade);
-		}	
+		} 
 
 		return atividade;
 	}
