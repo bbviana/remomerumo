@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.BaseEntity;
 
@@ -39,6 +40,9 @@ public class Atividade extends BaseEntity {
 
 	@OneToMany(mappedBy = "atividade")
 	private Collection<AtividadeGrupo> atividadeGrupos;
+	
+	@Transient
+	private Collection<AtividadeGrupo> atividadeGruposTransient;
 
 	@Override
 	public String toString() {
@@ -102,6 +106,14 @@ public class Atividade extends BaseEntity {
 		this.executada = executada;
 	}
 
+	public Collection<AtividadeGrupo> getAtividadeGruposTransient() {
+		return atividadeGruposTransient;
+	}
+
+	public void setAtividadeGruposTransient(
+			Collection<AtividadeGrupo> atividadeGruposTransient) {
+		this.atividadeGruposTransient = atividadeGruposTransient;
+	}
 
 
 	private static final long serialVersionUID = 1L;

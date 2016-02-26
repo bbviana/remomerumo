@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, AvaliacaoInfoClinicas, InfoClinicas, 
-	ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoAtividades, ExecucaoAtividades, Home, ResumoAlunos, Usuarios, Permissoes, Auditorias, Auditoria} from './views'
+	ModeloAvaliacoesClinicas, TipoInfoClinicas, PlanejamentoAtividades, ImpressaoAtividades, ExecucaoAtividades, Home, ResumoAlunos, Usuarios, Permissoes, Auditorias, Auditoria} from './views'
 import url from 'url'
 
 const queryParams = url.parse(window.location.href, true).query
@@ -29,6 +29,8 @@ if(pathname.endsWith("/login")){
     ReactDOM.render(<ModeloAvaliacoesClinicas />, document.getElementById("app"));
 } else if(pathname.endsWith("/planejamentoAtividades")){
     ReactDOM.render(<PlanejamentoAtividades id={queryParams.id}/>, document.getElementById("app"));
+} else if(pathname.endsWith("/impressaoAtividades")){
+    ReactDOM.render(<ImpressaoAtividades id={queryParams.id}/>, document.getElementById("app"));
 } else if(pathname.endsWith("/execucaoAtividades")){
     ReactDOM.render(<ExecucaoAtividades id={queryParams.id}/>, document.getElementById("app"));
 } else if(pathname.endsWith("/avaliacaoInfoClinicas")){

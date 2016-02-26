@@ -21,7 +21,12 @@ import org.hibernate.criterion.Restrictions;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -162,5 +167,30 @@ public class CrudController<T extends BaseEntity> {
 		criteria.addOrder(Order.asc("nome"));
 		return criteria.list();
 	}
+	
+	@GET
+    @Path("arquivoCsv")
+    @Produces("text/plain")
+    public Response getTextFile() {
+	 
+		StringBuilder returnString = new StringBuilder();
+		
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(getType());
+		criteria.addOrder(Order.asc("nome"));
+		criteria.addOrder(Order.desc("id"));
+
+		List<T> list = criteria.list();
+		for (T t : list) {
+			returnString.append(t.getId());
+			returnString.append("\n");
+		}
+		
+		InputStream stream = new ByteArrayInputStream(returnString.toString().getBytes(StandardCharsets.UTF_8));
+        ResponseBuilder response = Response.ok(stream);
+		        response.header("Content-Disposition", "attachment; filename=\"default_file.csv\"");
+		        
+	   return response.build();
+    }
 
 }

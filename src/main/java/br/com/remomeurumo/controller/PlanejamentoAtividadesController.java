@@ -69,7 +69,22 @@ public class PlanejamentoAtividadesController {
 			this.em.merge(atividade);
 		} 
 
+		this.loadAlunos(atividade);
 		return atividade;
+	}
+	
+	/**
+	 * Método para carregar os alunos e não só o nome e id deles
+	 */
+	private void loadAlunos(Atividade atividade){
+		atividade.setAtividadeGruposTransient(new ArrayList<AtividadeGrupo>());
+		for (AtividadeGrupo atividadeGrupo : atividade.getAtividadeGrupos()) {
+			atividade.getAtividadeGruposTransient().add(atividadeGrupo);
+			atividadeGrupo.setAlunosTransient(new ArrayList<Aluno>());
+			for (Aluno aluno : atividadeGrupo.getAlunos()) {
+				atividadeGrupo.getAlunosTransient().add(aluno);
+			}
+		}
 	}
 	
 	private List<Aluno> cloneAlunos(Collection<Aluno> alunos){
@@ -110,20 +125,6 @@ public class PlanejamentoAtividadesController {
 	public Atividade removerAluno(@QueryParam("id") Long id) {
 		return em.find(Atividade.class,id);
 	}
-	
-	@GET
-    @Path("arquivoCsv")
-    @Produces("text/plain")
-    public Response getTextFile() {
-	 
-        //File file = new File(TXT_FILE);
-		String exampleString = "lala,lele";
-		InputStream stream = new ByteArrayInputStream(exampleString.getBytes(StandardCharsets.UTF_8));
-        ResponseBuilder response = Response.ok(stream);
-		        response.header("Content-Disposition", "attachment; filename=\"test_text_file.txt\"");
-		        
-	   return response.build();
-    }
 	
 
 	@POST

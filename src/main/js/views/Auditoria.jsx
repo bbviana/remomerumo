@@ -1,32 +1,22 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Input, Row, Col, Grid, Panel, Glyphicon, Button, Navbar, NavItem, Nav, NavBrand} from 'react-bootstrap';
+import {Input, Row, Col, Grid, Glyphicon, Button, Navbar, NavItem, Nav, NavBrand, Panel, Accordion} from 'react-bootstrap';
 
 class Auditoria extends Component {
     state = {
         id: "",
-        nome: "",
-        tipoOperacao: "",
-        dataRegistro: "",
-        registro: "",
-        usuario: ""
+        auditorias: []
     }
 
     procurarRegistro = () => {
         Request.get('api/auditoria/procurarRegistro', {
             id: this.props.id
         })
-        .then(auditoria => this.setState({
-            id: auditoria.id,
-            nome: auditoria.nome,
-            dataRegistro: auditoria.dataRegistro,
-            registro: auditoria.registro,
-            usuario: auditoria.usuario.nome,
-            tipoOperacao: auditoria.tipoOperacao
+        .then(auditorias => this.setState({
+            auditorias: auditorias
         }))
+        console.log(this.state.auditorias)
     }
-    
-    
     
     componentDidMount = () => {
     	this.procurarRegistro()
@@ -51,23 +41,28 @@ class Auditoria extends Component {
             	</NavItem>
 	        </Nav>
 	    </Navbar>
-        
+	    
             <div className="container-fluid">
-                <form style={s.form}>
-                    <div>
-                     <Grid fluid>
-	    		        <Row className="show-grid">
-	    		        	<Col xs={12} md={4}><b>Usuario:</b> {this.state.usuario}</Col>
-	    		        	<Col xs={12} md={4}><b>Operacao:</b> {this.state.tipoOperacao}</Col>
-	    		        	<Col xs={12} md={4}><b>Data:</b> {this.state.dataRegistro}</Col>
-	    		        </Row>
-	    		        <Row className="show-grid">
-	    		        	<Col xs={12} md={12}><b>Registro:</b> {this.state.registro}</Col>
-	    		        </Row>
-	    		       </Grid>
-                    </div>
-                </form>
-            </div>
+	            <Accordion>
+	        	<Panel header="{this.state.id}" eventKey={this.state.id}>
+	                {this.state.auditorias.map((auditoria, index) => {
+	    	        	return 
+	                    <div>
+	                     <Grid fluid>
+		    		        <Row className="show-grid">
+		    		        	<Col xs={12} md={4}><b>Usuario:</b> {auditoria.usuario}</Col>
+		    		        	<Col xs={12} md={4}><b>Operacao:</b> {auditoria.tipoOperacao}</Col>
+		    		        	<Col xs={12} md={4}><b>Data:</b> {auditoria.dataRegistro}</Col>
+		    		        </Row>
+		    		        <Row className="show-grid">
+		    		        	<Col xs={12} md={12}><b>Registro:</b> {auditoria.registro}</Col>
+		    		        </Row>
+		    		       </Grid>
+	                    </div>
+	                })}
+	                </Panel>
+	        	   </Accordion>
+             </div>
         </div>
 }
 

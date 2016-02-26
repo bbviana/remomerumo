@@ -29,8 +29,10 @@ class Crud extends Component {
                              currentPage={this.state.currentPage}
                              totalPages={this.state.totalPages}
                              pageSize={this.state.pageSize}/>
-
                 <NewButton controller={controller}
+                label={title}/>
+                
+                <CsvButton controller={controller}
                            label={title}/>
             </Content>
 
@@ -199,7 +201,12 @@ const RemoveButton = ({controller, id}) =>
 const AuditButton = ({controller, id}) =>
     <Button bsStyle="link" title="Auditoria" onClick={() => controller.audit(id)}>
         <Glyphicon glyph="list-alt" />
-    </Button>    
+    </Button>   
+    
+const CsvButton = ({controller, label}) =>
+    <Button style={styles.csvButton} bsStyle="success" onClick={() => controller.csv()}>
+        <Glyphicon glyph="menu-hamburger"/> .CSV
+    </Button>
 
 
 const styles = {
@@ -227,6 +234,10 @@ const styles = {
 
     newButton: {
         margin: 20
+    },
+    
+    csvButton: {
+        margin: 5
     }
 }
 

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar} from 'react-bootstrap';
+import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar, ListGroupItem, ListGroup} from 'react-bootstrap';
 
 class PlanejamentoAtividades extends Component {
     state = {
@@ -33,13 +33,8 @@ class PlanejamentoAtividades extends Component {
             id: atividade.id,
             nome: atividade.nome,
             data: atividade.data,
-            atividadeGrupos: atividade.atividadeGrupos
+            atividadeGrupos: atividade.atividadeGruposTransient
         }))
-    }
-    
-    arquivoCsv = () => {
-    	console.log("Chamou!")
-        window.open("api/planejamentoAtividades/arquivoCsv?id=36");
     }
     
     removerAluno = (idAluno, idPlanejamento) => {
@@ -104,7 +99,6 @@ class PlanejamentoAtividades extends Component {
     
     componentDidMount = () => {
     	this.procurarGrupos()
-    	//this.arquivoCsv()
     }
     
     render = () =>
@@ -143,24 +137,30 @@ class PlanejamentoAtividades extends Component {
 			            	            <Row className="show-grid">
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
-			            	        		<Col xs={12} md={4}><strong>Comentarios</strong></Col>
 			            	        		<Col xs={12} md={4}><strong>Planejamento</strong></Col>
+			            	        		<Col xs={12} md={4}><strong>Comentários</strong></Col>
 			            	          	</Row>
 			            	          	<Row className="show-grid">
 			            	          		<Col xs={6} md={2}>
-				            	          		{atividadeGrupo.alunos.map((aluno, indexAluno) => {
-				            	          			return <div key={indexAluno} ><Button bsSize="xsmall" active>
-				            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}</div>
+			            	          		 <ListGroup>
+				            	          		{atividadeGrupo.alunosTransient.map((aluno, indexAluno) => {
+				            	          			return <div key={indexAluno} ><ListGroupItem><Button bsSize="xsmall" active>
+				            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}
+				            	          			</ListGroupItem>
+				            	          			<ListGroupItem bsStyle="danger">{aluno.abc}</ListGroupItem></div>
 				            	          		})}
+				            	          		</ListGroup>
 			            	          		</Col>
 			            	          		<Col xs={6} md={2}>
+			            	          			<ListGroup>
 				            	          		{atividadeGrupo.colaboradores.map((colaborador, indexColaborador) => {
-				            	          			return <div key={indexColaborador} ><Button bsSize="xsmall" active>
-				            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{colaborador.nome}</div>
+				            	          			return <div key={indexColaborador} ><ListGroupItem><Button bsSize="xsmall" active>
+				            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{colaborador.nome}</ListGroupItem></div>
 				            	          		})}
+				            	          		</ListGroup>	
 			            	          		</Col>
-			            	          		<Col xs={12} md={4}><Input type="textarea" label="" onChange={this.alterarComentario.bind(this, atividadeGrupo.id)} name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
 			            	          		<Col xs={12} md={4}><Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+			            	          		<Col xs={12} md={4}><Input type="textarea" label="" onChange={this.alterarComentario.bind(this, atividadeGrupo.id)} name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">
 		            	        			<Col xs={12}>&nbsp;</Col>

@@ -18,6 +18,7 @@ import Usuarios from './Usuarios'
 import Permissoes from './Permissoes'
 import Auditorias from './Auditorias'
 import Auditoria from './Auditoria'
+import ImpressaoAtividades from './ImpressaoAtividades'
 
 export {
     Alunos,
@@ -39,5 +40,6 @@ export {
     Usuarios,
     Permissoes,
     Auditorias,
-    Auditoria
+    Auditoria,
+    ImpressaoAtividades
 }

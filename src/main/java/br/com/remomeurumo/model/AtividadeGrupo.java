@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.BaseEntity;
 
@@ -36,6 +37,9 @@ public class AtividadeGrupo extends BaseEntity {
 	@ManyToMany
 	@JoinTable(name = "AtividadeGrupoAlunos")
 	private Collection<Aluno> alunos;
+	
+	@Transient
+	private Collection<Aluno> alunosTransient;
 
 	@JsonFilter("associationFilter")
 	@ManyToMany
@@ -109,6 +113,13 @@ public class AtividadeGrupo extends BaseEntity {
 		this.nome = nome;
 	}
 
+	public Collection<Aluno> getAlunosTransient() {
+		return alunosTransient;
+	}
+
+	public void setAlunosTransient(Collection<Aluno> alunosTransient) {
+		this.alunosTransient = alunosTransient;
+	}
 
 
 	private static final long serialVersionUID = 1L;

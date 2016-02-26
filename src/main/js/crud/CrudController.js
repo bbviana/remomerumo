@@ -84,6 +84,10 @@ class CrudController extends Controller {
     	window.open("auditoria?id="+id);
     }
     
+    csv = (id) => {
+    	window.open(`api/${this.url}/arquivoCsv?id=${id}`);
+    }
+    
     
     closeForm = () => {
         this.dispatch({form: {}, showForm: false})

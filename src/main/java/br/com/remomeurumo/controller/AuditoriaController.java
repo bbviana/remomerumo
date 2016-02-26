@@ -7,6 +7,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import org.hibernate.criterion.Order;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -31,17 +32,15 @@ public class AuditoriaController {
 	@GET
 	@Produces(APPLICATION_JSON)
 	@Path("procurarRegistro")
-	public RegistroAuditoria procurarRegistro(@QueryParam("id") Long id) {
+	public List<RegistroAuditoria> procurarRegistro(@QueryParam("id") Long id) {
 		
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(RegistroAuditoria.class);
 		criteria.add(Restrictions.eq("idEntidade", id));
-		//criteria.addOrder(Order.desc("id"));
+		criteria.addOrder(Order.desc("id"));
 		List<RegistroAuditoria> list = criteria.list();
-		if(!list.isEmpty())
-			return list.iterator().next();
 			
-		return null;
+		return list;
 	}
 
 }
