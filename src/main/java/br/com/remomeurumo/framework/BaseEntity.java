@@ -56,5 +56,16 @@ public abstract class BaseEntity implements Serializable, Comparable<BaseEntity>
 		return String.valueOf(this.getId());
 	}
 	
+	
+	public String getCSV() {
+		
+		StringBuilder returnString = new StringBuilder();
+		
+		returnString.append(this.getId());
+		returnString.append("\n");
+		
+		return returnString.toString();
+	}
+	
 	private static final long serialVersionUID = 1L;
 }

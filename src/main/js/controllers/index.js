@@ -18,6 +18,7 @@ import PermissoesController from './PermissoesController'
 import AuditoriasController from './AuditoriasController'
 import AuditoriaController from './AuditoriaController'
 import ImpressaoAtividadesController from './ImpressaoAtividadesController'
+import TarefasController from './TarefasController'
 
 export {
     AlunosController,
@@ -39,5 +40,6 @@ export {
     PermissoesController,
     AuditoriasController,
     AuditoriaController,
-    ImpressaoAtividadesController
+    ImpressaoAtividadesController,
+    TarefasController
 }

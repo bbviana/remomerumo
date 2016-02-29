@@ -182,7 +182,7 @@ public class CrudController<T extends BaseEntity> {
 
 		List<T> list = criteria.list();
 		for (T t : list) {
-			returnString.append(t.getId());
+			returnString.append(t.getCSV());
 			returnString.append("\n");
 		}
 		

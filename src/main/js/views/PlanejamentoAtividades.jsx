@@ -159,7 +159,9 @@ class PlanejamentoAtividades extends Component {
 				            	          		})}
 				            	          		</ListGroup>	
 			            	          		</Col>
-			            	          		<Col xs={12} md={4}><Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+			            	          		<Col xs={12} md={4}>
+			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+			            	          		
 			            	          		<Col xs={12} md={4}><Input type="textarea" label="" onChange={this.alterarComentario.bind(this, atividadeGrupo.id)} name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">

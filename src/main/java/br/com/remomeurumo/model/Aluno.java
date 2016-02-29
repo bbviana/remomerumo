@@ -164,5 +164,17 @@ public class Aluno extends Pessoa implements Serializable {
 	public void setAbc(String abc) {
 		this.abc = abc;
 	}
+	
+	public String getCSV() {
+		
+		StringBuilder returnString = new StringBuilder();
+		
+		returnString.append(this.getId());
+		returnString.append(","+this.getNome());
+		returnString.append(","+this.getApelido());
+		returnString.append(","+this.getCpf());
+		
+		return returnString.toString();
+	}
 
 }
