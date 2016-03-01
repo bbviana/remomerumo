@@ -114,6 +114,20 @@ public class Atividade extends BaseEntity {
 			Collection<AtividadeGrupo> atividadeGruposTransient) {
 		this.atividadeGruposTransient = atividadeGruposTransient;
 	}
+	
+	@Transient
+	public String getCSV() {
+		
+		StringBuilder returnString = new StringBuilder();
+		
+		returnString.append(this.getId());
+		returnString.append(","+this.getNome());
+		returnString.append(","+this.getData());
+		returnString.append(","+this.getComentario());
+		returnString.append("\n");
+		
+		return returnString.toString();
+	}
 
 
 	private static final long serialVersionUID = 1L;

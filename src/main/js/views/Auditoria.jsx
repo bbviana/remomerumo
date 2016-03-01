@@ -12,10 +12,9 @@ class Auditoria extends Component {
         Request.get('api/auditoria/procurarRegistro', {
             id: this.props.id
         })
-        .then(auditorias => this.setState({
-            auditorias: auditorias
+        .then(auditoriasRequest => this.setState({
+            auditorias: auditoriasRequest
         }))
-        console.log(this.state.auditorias)
     }
     
     componentDidMount = () => {
@@ -23,6 +22,7 @@ class Auditoria extends Component {
     }
     
     render = () =>
+    
         <div style={s.app}>
         <Navbar fixedTop fluid inverse>
 	        <NavBrand>
@@ -44,10 +44,9 @@ class Auditoria extends Component {
 	    
             <div className="container-fluid">
 	            <Accordion>
-	        	<Panel header="{this.state.id}" eventKey={this.state.id}>
-	                {this.state.auditorias.map((auditoria, index) => {
-	    	        	return 
-	                    <div>
+                {this.state.auditorias.map((auditoria, index) =>
+	                <Panel header={auditoria.id} eventKey={auditoria.id}>
+	    	        	<div>
 	                     <Grid fluid>
 		    		        <Row className="show-grid">
 		    		        	<Col xs={12} md={4}><b>Usuario:</b> {auditoria.usuario}</Col>
@@ -59,8 +58,8 @@ class Auditoria extends Component {
 		    		        </Row>
 		    		       </Grid>
 	                    </div>
-	                })}
-	                </Panel>
+	                    </Panel>
+	                )}
 	        	   </Accordion>
              </div>
         </div>

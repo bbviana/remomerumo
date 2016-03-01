@@ -2,9 +2,6 @@ package br.com.remomeurumo.controller;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,8 +15,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -31,6 +26,7 @@ import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.AtividadeGrupo;
 import br.com.remomeurumo.model.Colaborador;
 import br.com.remomeurumo.model.GrupoAluno;
+import br.com.remomeurumo.model.Tarefa;
 import br.com.remomeurumo.model.TipoAtividade;
 import br.com.remomeurumo.persistence.Transactional;
 
@@ -157,6 +153,19 @@ public class PlanejamentoAtividadesController {
 		}
 		
 		return atividade;
+	}
+	
+	@GET
+	@Path("procurarTarefas")
+	@SuppressWarnings("unchecked")
+	public List<Tarefa> procurarTarefas() {
+		
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Tarefa.class);
+		criteria.addOrder(Order.desc("nome"));
+		List<Tarefa> list = criteria.list();
+
+		return list;
 	}
 	
 }

@@ -15,6 +15,7 @@ import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import br.com.remomeurumo.model.Auditavel;
 
@@ -56,7 +57,7 @@ public abstract class BaseEntity implements Serializable, Comparable<BaseEntity>
 		return String.valueOf(this.getId());
 	}
 	
-	
+	@Transient
 	public String getCSV() {
 		
 		StringBuilder returnString = new StringBuilder();

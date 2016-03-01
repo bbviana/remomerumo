@@ -164,7 +164,8 @@ public class Aluno extends Pessoa implements Serializable {
 	public void setAbc(String abc) {
 		this.abc = abc;
 	}
-	
+
+	@Transient
 	public String getCSV() {
 		
 		StringBuilder returnString = new StringBuilder();
