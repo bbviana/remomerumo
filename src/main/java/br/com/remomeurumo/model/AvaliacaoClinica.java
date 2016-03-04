@@ -3,6 +3,7 @@ package br.com.remomeurumo.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +22,7 @@ public class AvaliacaoClinica extends BaseEntity {
 
 	private String data;
 
+	@Column(name= "comentario", length=2048)
 	private String comentario;
 
 	private Boolean fechada;

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.JoinTable;
@@ -28,7 +29,8 @@ public class Aluno extends Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String matrAluno;
-
+	
+	@Column(name= "observacoes", length=2048)
 	private String observacoes;
 
 	private String dataDeIngresso;
@@ -38,7 +40,8 @@ public class Aluno extends Pessoa implements Serializable {
 	private String transporte;
 
 	private String horarioTreino;
-
+	
+	@Column(name= "abc", length=2048)
 	private String abc;
 
 	// TODO: FOTO

@@ -1,5 +1,6 @@
 package br.com.remomeurumo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +19,7 @@ public class RegistroAuditoria extends BaseEntity {
 
 	private Long idEntidade;
 
+	@Column(name= "registro", length=2048)
 	private String registro;
 	
 	private String dataRegistro;

@@ -6,6 +6,7 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,6 +27,7 @@ public class Atividade extends BaseEntity {
 
 	private String nome;
 
+	@Column(name= "comentario", length=2048)
 	private String comentario;
 
 	private Boolean executada;

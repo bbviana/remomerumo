@@ -56,7 +56,7 @@ public abstract class BaseEntity implements Serializable,
 	}
 
 	@Transient
-	public String getAuditoria() {
+	public String auditoria() {
 		StringBuilder returnString = new StringBuilder();
 
 		Object[] head = this.csvHead();

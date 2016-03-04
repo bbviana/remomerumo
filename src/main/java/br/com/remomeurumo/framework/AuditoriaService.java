@@ -42,7 +42,7 @@ public class AuditoriaService {
 		RegistroAuditoria registro = new RegistroAuditoria();
 		registro.setNome(entidade.getClass().getSimpleName());
 		registro.setIdEntidade(entidade.getId());
-		registro.setRegistro(entidade.getAuditoria());
+		registro.setRegistro(entidade.auditoria());
 		registro.setTipoOperacao(tipoOperacao);
 		registro.setUsuario(getUsuarioLogado());
 		GregorianCalendar dataRegistro = new GregorianCalendar();

@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
+import {id, ids} from '../crud/Associations'
 import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar, ListGroupItem, ListGroup} from 'react-bootstrap';
 
 class PlanejamentoAtividades extends Component {
@@ -11,7 +12,7 @@ class PlanejamentoAtividades extends Component {
         tarefas: []
     }
 
-    salvar = (event) => {
+    salvarAlteracoes = (event) => {
         event.preventDefault()
 
         Request.post('api/planejamentoAtividades/salvar', this.state)
@@ -122,7 +123,7 @@ class PlanejamentoAtividades extends Component {
 	    </Navbar>
         
             <div className="container-fluid">
-                <form style={s.form} onSubmit={this.salvar}>
+                <form style={s.form} onSubmit={this.salvarAlteracoes}>
                     
                     	<div>
                     	                    	
@@ -164,7 +165,7 @@ class PlanejamentoAtividades extends Component {
 			            	          		
 			            	          		<Col xs={12} md={4}>
 			            	          			<div>
-				            	          			<Input type="select" name="tarefas"
+				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)} 
 	                   									onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
 	                										{this.state.tarefas.map((element, i) =>
 	                    								<option key={i} value={element.id}>{element.nome}</option>
