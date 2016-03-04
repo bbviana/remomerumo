@@ -66,7 +66,7 @@ class ImpressaoAtividades extends Component {
 			            	          		 <ListGroup>
 				            	          		{atividadeGrupo.alunosTransient.map((aluno, indexAluno) => {
 				            	          			return <div key={indexAluno} ><ListGroupItem>
-				            	          			&nbsp;&nbsp;{aluno.nome}
+				            	          			<Glyphicon glyph="fire"/>&nbsp;&nbsp;{aluno.nome}
 				            	          			</ListGroupItem>
 				            	          			<ListGroupItem bsStyle="danger">{aluno.abc}</ListGroupItem></div>
 				            	          		})}
@@ -77,12 +77,19 @@ class ImpressaoAtividades extends Component {
 			            	          			<ListGroup>
 				            	          		{atividadeGrupo.colaboradores.map((colaborador, indexColaborador) => {
 				            	          			return <div key={indexColaborador} ><ListGroupItem>
-				            	          			&nbsp;&nbsp;{colaborador.nome}</ListGroupItem></div>
+				            	          			<Glyphicon glyph="education"/>&nbsp;&nbsp;{colaborador.nome}</ListGroupItem></div>
 				            	          		})}
 				            	          		</ListGroup>	
 			            	          		</Col>
 			            	          		<Col xs={12} md={4}><strong>Planejamento</strong><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} disabled/></Col>
-			            	          		<Col xs={12} md={4}><strong>Comentários</strong><Input type="textarea" label="" name="comentario" defaultValue={atividadeGrupo.comentario} disabled/></Col>
+			            	          		<Col xs={12} md={4}><strong>Tarefas</strong>
+			            	          			<ListGroup>
+					            	          		{atividadeGrupo.tarefas.map((tarefa, indexTarefa) => {
+					            	          			return <div ><ListGroupItem key={indexTarefa}>
+					            	          			<Glyphicon glyph="pushpin"/>&nbsp;&nbsp;{tarefa.nome}</ListGroupItem></div>
+					            	          		})}
+				            	          	</ListGroup>
+			            	          		</Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">
 		            	        			<Col xs={12}>&nbsp;</Col>

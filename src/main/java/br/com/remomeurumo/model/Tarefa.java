@@ -1,9 +1,11 @@
 package br.com.remomeurumo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.AuditoriaService;
 import br.com.remomeurumo.framework.BaseEntity;
@@ -37,15 +39,28 @@ public class Tarefa extends BaseEntity implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public String getCSV() {
+	@Transient
+	public Object[] csvHead() {
 
-		StringBuilder returnString = new StringBuilder();
+		ArrayList<String> returnString = new ArrayList<String>();
 
-		returnString.append(this.getId());
-		returnString.append("," + this.getNome());
-		returnString.append("," + this.getDescricao());
+		returnString.add("id");
+		returnString.add("Nome");
+		returnString.add("Descricao");
 
-		return returnString.toString();
+		return returnString.toArray();
+	}
+
+	@Transient
+	public Object[] csv() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getNome());
+		returnString.add(this.getDescricao());
+
+		return returnString.toArray();
 	}
 
 }

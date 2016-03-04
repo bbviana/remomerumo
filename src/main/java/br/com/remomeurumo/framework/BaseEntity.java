@@ -11,6 +11,7 @@
 package br.com.remomeurumo.framework;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,7 +24,8 @@ import br.com.remomeurumo.model.Auditavel;
  * @author bbviana
  */
 @MappedSuperclass
-public abstract class BaseEntity implements Serializable, Comparable<BaseEntity>, Auditavel {
+public abstract class BaseEntity implements Serializable,
+		Comparable<BaseEntity>, Auditavel {
 
 	@Id
 	@GeneratedValue
@@ -39,34 +41,50 @@ public abstract class BaseEntity implements Serializable, Comparable<BaseEntity>
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.getId().equals(((BaseEntity)obj).getId());
+		return this.getId().equals(((BaseEntity) obj).getId());
 	}
-	
+
 	@Override
 	public int compareTo(BaseEntity o) {
-		
-		if(this.getId() > o.getId())
+
+		if (this.getId() > o.getId())
 			return 1;
 		else if (this.getId() < o.getId())
 			return -1;
-		
+
 		return 0;
 	}
-	
-	public String getAuditoria() {
-		return String.valueOf(this.getId());
-	}
-	
+
 	@Transient
-	public String getCSV() {
-		
+	public String getAuditoria() {
 		StringBuilder returnString = new StringBuilder();
-		
-		returnString.append(this.getId());
+
+		Object[] head = this.csvHead();
+		Object[] body = this.csv();
+		for (int i = 0; i < head.length; i++) {
+			Object object = head[i];
+			returnString.append(head[i] + ": " + body[i] + " \n");
+		}
+
 		returnString.append("\n");
-		
 		return returnString.toString();
 	}
-	
+
+	@Transient
+	public Object[] csvHead() {
+		ArrayList<String> returnString = new ArrayList<String>();
+		returnString.add("id");
+
+		return returnString.toArray();
+	}
+
+	@Transient
+	public Object[] csv() {
+		ArrayList<Object> returnString = new ArrayList<Object>();
+		returnString.add(this.getId());
+
+		return returnString.toArray();
+	}
+
 	private static final long serialVersionUID = 1L;
 }

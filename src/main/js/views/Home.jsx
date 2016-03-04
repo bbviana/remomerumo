@@ -40,6 +40,9 @@ class PlanejamentoAtividades extends Component {
             <MenuItem eventKey="5" href="tipoAtividades">
                 <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Tipo de Atividade
             </MenuItem>
+            <MenuItem eventKey="15" href="tarefas">
+                <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Tarefa
+            </MenuItem>
             <MenuItem divider/>
             <MenuItem eventKey="6" href="modeloAvaliacoesClinicas">
                 <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação
@@ -86,13 +89,14 @@ class PlanejamentoAtividades extends Component {
 	            <strong>&nbsp;</strong>
 	            <li>Tela de usuários, fazer validação de senha</li>
 	            <li>Colocar segurança no sistema</li>
-	            <li>COlocar campos maiores no banco para coisas como descrição do grupo aluno</li>
+	            <li>Colocar campos maiores no banco para coisas como descrição do grupo aluno</li>
 	            <li>Comentario da execução de atividade não salva</li>
 	            <li>Detalhes sobre o tipo de treino
 	            Hierarquia dos colaboradores
 	            Mais detalhes nas atividades
 	            No tipo de atividades
 	            Colocar a área do profissional</li>
+	            <li>Tarefas não submetem na tea de planejamento</li>
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
 	            </p></Tab>
 	          </Tabs>

@@ -7,7 +7,8 @@ class PlanejamentoAtividades extends Component {
         id: "",
         nome: "",
         data: "",
-        atividadeGrupos: []
+        atividadeGrupos: [],
+        tarefas: []
     }
 
     salvar = (event) => {
@@ -34,6 +35,13 @@ class PlanejamentoAtividades extends Component {
             nome: atividade.nome,
             data: atividade.data,
             atividadeGrupos: atividade.atividadeGruposTransient
+        }))
+    }
+    
+    procurarTarefas = () => {
+        Request.get('api/planejamentoAtividades/procurarTarefas')
+        .then(tarefasRequest => this.setState({
+            tarefas: tarefasRequest
         }))
     }
     
@@ -71,17 +79,8 @@ class PlanejamentoAtividades extends Component {
     	this.setState({atividadeGrupos : atividadesEscolhido})
     }
     
-    alterarComentario = (idPlanejamento, event) => {
-    	
-    	var atividades = this.state.atividadeGrupos
-    	
-    	var atividadeEscolhido = atividades.find(element => {
-    		return element.id == idPlanejamento
-    	})
-    	
-    	atividadeEscolhido.comentario = event.target.value
-    	
-    	this.setState({atividadeGrupos : atividades})
+    alterarTarefas = (event) => {
+    	console.log("Alterando tarefa")
     }
     
     alterarPlanejamento = (idPlanejamento, event) => {
@@ -99,6 +98,7 @@ class PlanejamentoAtividades extends Component {
     
     componentDidMount = () => {
     	this.procurarGrupos()
+    	this.procurarTarefas()
     }
     
     render = () =>
@@ -138,13 +138,13 @@ class PlanejamentoAtividades extends Component {
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
 			            	        		<Col xs={12} md={4}><strong>Planejamento</strong></Col>
-			            	        		<Col xs={12} md={4}><strong>Comentários</strong></Col>
+			            	        		<Col xs={12} md={4}><strong>Tarefas</strong></Col>
 			            	          	</Row>
 			            	          	<Row className="show-grid">
 			            	          		<Col xs={6} md={2}>
 			            	          		 <ListGroup>
 				            	          		{atividadeGrupo.alunosTransient.map((aluno, indexAluno) => {
-				            	          			return <div key={indexAluno} ><ListGroupItem><Button bsSize="xsmall" active>
+				            	          			return <div ><ListGroupItem key={indexAluno}><Button bsSize="xsmall" active>
 				            	          			<Glyphicon style={s.button} onClick={this.removerAluno.bind(this, aluno.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{aluno.nome}
 				            	          			</ListGroupItem>
 				            	          			<ListGroupItem bsStyle="danger">{aluno.abc}</ListGroupItem></div>
@@ -154,7 +154,7 @@ class PlanejamentoAtividades extends Component {
 			            	          		<Col xs={6} md={2}>
 			            	          			<ListGroup>
 				            	          		{atividadeGrupo.colaboradores.map((colaborador, indexColaborador) => {
-				            	          			return <div key={indexColaborador} ><ListGroupItem><Button bsSize="xsmall" active>
+				            	          			return <div><ListGroupItem key={indexColaborador}><Button bsSize="xsmall" active>
 				            	          			<Glyphicon style={s.button} onClick={this.removerColaborador.bind(this, colaborador.id, atividadeGrupo.id)} glyph="minus"/></Button>&nbsp;&nbsp;{colaborador.nome}</ListGroupItem></div>
 				            	          		})}
 				            	          		</ListGroup>	
@@ -162,7 +162,16 @@ class PlanejamentoAtividades extends Component {
 			            	          		<Col xs={12} md={4}>
 			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
 			            	          		
-			            	          		<Col xs={12} md={4}><Input type="textarea" label="" onChange={this.alterarComentario.bind(this, atividadeGrupo.id)} name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Comentário"  /></Col>
+			            	          		<Col xs={12} md={4}>
+			            	          			<div>
+				            	          			<Input type="select" name="tarefas"
+	                   									onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
+	                										{this.state.tarefas.map((element, i) =>
+	                    								<option key={i} value={element.id}>{element.nome}</option>
+	                										)}
+	            									</Input>
+												</div>
+											</Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">
 		            	        			<Col xs={12}>&nbsp;</Col>

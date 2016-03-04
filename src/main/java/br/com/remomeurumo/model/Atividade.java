@@ -3,6 +3,7 @@ package br.com.remomeurumo.model;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class Atividade extends BaseEntity {
 	private String nome;
 
 	private String comentario;
-	
+
 	private Boolean executada;
 
 	@JsonFilter("associationFilter")
@@ -40,7 +41,7 @@ public class Atividade extends BaseEntity {
 
 	@OneToMany(mappedBy = "atividade")
 	private Collection<AtividadeGrupo> atividadeGrupos;
-	
+
 	@Transient
 	private Collection<AtividadeGrupo> atividadeGruposTransient;
 
@@ -93,11 +94,10 @@ public class Atividade extends BaseEntity {
 		return atividadeGrupos;
 	}
 
-	public void setAtividadeGrupos(
-			Collection<AtividadeGrupo> atividadeGrupos) {
+	public void setAtividadeGrupos(Collection<AtividadeGrupo> atividadeGrupos) {
 		this.atividadeGrupos = atividadeGrupos;
 	}
-	
+
 	public Boolean getExecutada() {
 		return executada;
 	}
@@ -114,21 +114,35 @@ public class Atividade extends BaseEntity {
 			Collection<AtividadeGrupo> atividadeGruposTransient) {
 		this.atividadeGruposTransient = atividadeGruposTransient;
 	}
-	
+
 	@Transient
-	public String getCSV() {
+	public Object[] csvHead() {
 		
-		StringBuilder returnString = new StringBuilder();
+		ArrayList<String> returnString = new ArrayList<String>();
 		
-		returnString.append(this.getId());
-		returnString.append(","+this.getNome());
-		returnString.append(","+this.getData());
-		returnString.append(","+this.getComentario());
-		returnString.append("\n");
-		
-		return returnString.toString();
+		returnString.add("id");
+		returnString.add("Nome");
+		returnString.add("Data");
+		returnString.add("Comentario");
+		returnString.add("Executada");
+				
+		return returnString.toArray();
 	}
 
+	@Transient
+	public Object[] csv() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getNome());
+		returnString.add(this.getComentario());
+		returnString.add(this.getTipoAtividade().getNome());
+		returnString.add(String.valueOf(this.getExecutada()));
+		
+
+		return returnString.toArray();
+	}
 
 	private static final long serialVersionUID = 1L;
 }

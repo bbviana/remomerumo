@@ -157,7 +157,7 @@ public class PlanejamentoAtividadesController {
 	
 	@GET
 	@Path("procurarTarefas")
-	@SuppressWarnings("unchecked")
+	@Produces(APPLICATION_JSON)
 	public List<Tarefa> procurarTarefas() {
 		
 		Session session = (Session) em.getDelegate();

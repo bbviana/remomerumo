@@ -1,6 +1,9 @@
 package br.com.remomeurumo.model;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.BaseEntity;
 
@@ -30,5 +33,30 @@ public class TipoInfoClinica extends BaseEntity {
 		this.sigla = sigla;
 	}
 
+	@Transient
+	public Object[] csvHead() {
+		
+		ArrayList<String> returnString = new ArrayList<String>();
+		
+		returnString.add("id");
+		returnString.add("Nome");
+		returnString.add("Sigla");
+				
+		return returnString.toArray();
+	}
+
+	@Transient
+	public Object[] csv() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getNome());
+		returnString.add(this.getSigla());
+		
+
+		return returnString.toArray();
+	}
+	
 	private static final long serialVersionUID = 1L;
 }

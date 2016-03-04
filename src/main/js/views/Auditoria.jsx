@@ -42,10 +42,11 @@ class Auditoria extends Component {
 	        </Nav>
 	    </Navbar>
 	    
+	    <div>&nbsp;</div>
             <div className="container-fluid">
 	            <Accordion>
                 {this.state.auditorias.map((auditoria, index) =>
-	                <Panel header={auditoria.id} eventKey={auditoria.id}>
+	                <Panel header={auditoria.dataRegistro} eventKey={auditoria.id}>
 	    	        	<div>
 	                     <Grid fluid>
 		    		        <Row className="show-grid">

@@ -1,9 +1,11 @@
 package br.com.remomeurumo.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.BaseEntity;
 
@@ -44,5 +46,30 @@ public class TipoAtividade extends BaseEntity {
 		this.observacao = observacao;
 	}
 
+	@Transient
+	public Object[] csvHead() {
+		
+		ArrayList<String> returnString = new ArrayList<String>();
+		
+		returnString.add("id");
+		returnString.add("Nome");
+		returnString.add("Observacao");
+				
+		return returnString.toArray();
+	}
+
+	@Transient
+	public Object[] csv() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getNome());
+		returnString.add(this.getObservacao());
+		
+
+		return returnString.toArray();
+	}
+	
 	private static final long serialVersionUID = 1L;
 }

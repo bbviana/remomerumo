@@ -1,10 +1,14 @@
 package br.com.remomeurumo.model;
 
-import br.com.remomeurumo.framework.BaseEntity;
-
+import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
+
+import br.com.remomeurumo.framework.BaseEntity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
@@ -30,7 +34,7 @@ public class ModeloAvaliacaoClinica extends BaseEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -47,6 +51,29 @@ public class ModeloAvaliacaoClinica extends BaseEntity {
 		this.tipoInfoClinicas = tipoInfoClinicas;
 	}
 
+	@Transient
+	public Object[] csvHead() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add("id");
+		returnString.add("Nome");
+		returnString.add("Descricao");
+
+		return returnString.toArray();
+	}
+
+	@Transient
+	public Object[] csv() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getNome());
+		returnString.add(this.getDescricao());
+
+		return returnString.toArray();
+	}
 
 	private static final long serialVersionUID = 1L;
 }

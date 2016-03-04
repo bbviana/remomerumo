@@ -80,6 +80,9 @@ const Header = ({label}) =>
                 <MenuItem eventKey="5" href="tipoAtividades">
                     <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Tipo de Atividade
                 </MenuItem>
+                <MenuItem eventKey="15" href="tarefas">
+                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Tarefa
+                </MenuItem>
                 <MenuItem divider/>
                 <MenuItem eventKey="6" href="modeloAvaliacoesClinicas">
                     <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação

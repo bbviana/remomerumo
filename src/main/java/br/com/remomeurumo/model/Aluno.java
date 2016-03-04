@@ -4,6 +4,7 @@ import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToStrin
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -37,7 +38,7 @@ public class Aluno extends Pessoa implements Serializable {
 	private String transporte;
 
 	private String horarioTreino;
-	
+
 	private String abc;
 
 	// TODO: FOTO
@@ -166,16 +167,66 @@ public class Aluno extends Pessoa implements Serializable {
 	}
 
 	@Transient
-	public String getCSV() {
+	public Object[] csvHead() {
 		
-		StringBuilder returnString = new StringBuilder();
+		ArrayList<String> returnString = new ArrayList<String>();
 		
-		returnString.append(this.getId());
-		returnString.append(","+this.getNome());
-		returnString.append(","+this.getApelido());
-		returnString.append(","+this.getCpf());
+		returnString.add("id");
+		returnString.add("Nome");
+		returnString.add("Apelido");
+		returnString.add("NaturalDe");
+		returnString.add("DtNasc");
+		returnString.add("Cpf");
+		returnString.add("Rg");
+		returnString.add("Endereco");
+		returnString.add("Telefone");
+		returnString.add("Celular");
+		returnString.add("Email");
+		returnString.add("Sapato");
+		returnString.add("Bermuda");
+		returnString.add("Camiseta");
+
+		returnString.add("MatrAluno");
+		returnString.add("Observacoes");
+		returnString.add("DataDeIngresso");
+		returnString.add("PeriodoEscolar");
+		returnString.add("Transporte");
+		returnString.add("HorarioTreino");
+		returnString.add("Abc");		
+				
+		return returnString.toArray();
+	}
+
+	@Transient
+	public Object[] csv() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getNome());
+		returnString.add(this.getApelido());
+		returnString.add(this.getNaturalDe());
+		returnString.add(this.getDtNasc());
+		returnString.add(this.getCpf());
+		returnString.add(this.getRg());
+		returnString.add(this.getEndereco());
+		returnString.add(this.getTelefone());
+		returnString.add(this.getCelular());
+		returnString.add(this.getEmail());
+		returnString.add(this.getSapato());
+		returnString.add(this.getBermuda());
+		returnString.add(this.getCamiseta());
+
+		returnString.add(this.getMatrAluno());
+		returnString.add(this.getObservacoes());
+		returnString.add(this.getDataDeIngresso());
+		returnString.add(this.getPeriodoEscolar());
+		returnString.add(this.getTransporte());
+		returnString.add(this.getHorarioTreino());
+		returnString.add(this.getAbc());
 		
-		return returnString.toString();
+
+		return returnString.toArray();
 	}
 
 }

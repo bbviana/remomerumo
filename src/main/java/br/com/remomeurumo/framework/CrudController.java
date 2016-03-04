@@ -10,7 +10,27 @@
  */
 package br.com.remomeurumo.framework;
 
-import br.com.remomeurumo.persistence.Transactional;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static org.hibernate.criterion.MatchMode.ANYWHERE;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -18,19 +38,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.hibernate.criterion.MatchMode.ANYWHERE;
+import br.com.remomeurumo.persistence.Transactional;
 
 /**
  * @author bbviana
@@ -171,6 +179,7 @@ public class CrudController<T extends BaseEntity> {
 	@GET
     @Path("arquivoCsv")
     @Produces("text/plain")
+	@SuppressWarnings("unchecked")
     public Response getTextFile() {
 	 
 		StringBuilder returnString = new StringBuilder();
@@ -180,15 +189,27 @@ public class CrudController<T extends BaseEntity> {
 		criteria.addOrder(Order.asc("nome"));
 		criteria.addOrder(Order.desc("id"));
 
+		String clazz = "default";
 		List<T> list = criteria.list();
+		if(list.get(0)!=null) {
+			Object[] head = list.get(0).csvHead();
+			for (Object object : head) {
+				returnString.append(object+"|");				
+			}
+			returnString.append("\n");
+			clazz = list.get(0).getClass().getSimpleName();
+		}
 		for (T t : list) {
-			returnString.append(t.getCSV());
+			Object[] body = t.csv();
+			for (Object object : body) {
+				returnString.append(object+"|");				
+			}
 			returnString.append("\n");
 		}
 		
 		InputStream stream = new ByteArrayInputStream(returnString.toString().getBytes(StandardCharsets.UTF_8));
         ResponseBuilder response = Response.ok(stream);
-		        response.header("Content-Disposition", "attachment; filename=\"default_file.csv\"");
+		        response.header("Content-Disposition", "attachment; filename=\""+clazz+".csv\"");
 		        
 	   return response.build();
     }

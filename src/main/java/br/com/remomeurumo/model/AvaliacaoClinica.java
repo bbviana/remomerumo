@@ -1,11 +1,13 @@
 package br.com.remomeurumo.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.BaseEntity;
 
@@ -20,7 +22,7 @@ public class AvaliacaoClinica extends BaseEntity {
 	private String data;
 
 	private String comentario;
-	
+
 	private Boolean fechada;
 
 	// TODO: ANexo a ficha clinica
@@ -78,7 +80,7 @@ public class AvaliacaoClinica extends BaseEntity {
 			Collection<InfoClinica> informacoesClinicas) {
 		this.informacoesClinicas = informacoesClinicas;
 	}
-	
+
 	public Boolean getFechada() {
 		return fechada;
 	}
@@ -87,6 +89,30 @@ public class AvaliacaoClinica extends BaseEntity {
 		this.fechada = fechada;
 	}
 
+	@Transient
+	public Object[] csvHead() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add("id");
+		returnString.add("Data");
+		returnString.add("Comentario");
+		returnString.add("Fechada");
+
+		return returnString.toArray();
+	}
+
+	@Transient
+	public Object[] csv() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getComentario());
+		returnString.add(String.valueOf(this.getFechada()));
+
+		return returnString.toArray();
+	}
 
 	private static final long serialVersionUID = 1L;
 }
