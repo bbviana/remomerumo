@@ -80,8 +80,31 @@ class PlanejamentoAtividades extends Component {
     	this.setState({atividadeGrupos : atividadesEscolhido})
     }
     
-    alterarTarefas = (event) => {
-    	console.log("Alterando tarefa")
+    alterarTarefas = (idPlanejamento, event) => {
+    	var atividades = this.state.atividadeGrupos
+    	
+    	var atividadeEscolhido = atividades.find(element => {
+    		return element.id == idPlanejamento
+    	})
+    	
+    	const target = event.target
+        let value
+        	
+        if (target.multiple) {
+            value = Array.from(target.options)
+                .filter(option => option.selected)
+                .map(option => ({id: option.value}))
+        } else {
+            value = {id: target.value}
+        }
+    	
+        if(!target.value){
+            value = null
+        } else {
+        	atividadeEscolhido.tarefas = value
+        	this.setState({atividadeGrupos : atividades})
+        }
+    	
     }
     
     alterarPlanejamento = (idPlanejamento, event) => {
