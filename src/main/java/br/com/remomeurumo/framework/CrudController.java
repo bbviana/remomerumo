@@ -202,7 +202,7 @@ public class CrudController<T extends BaseEntity> {
 		for (T t : list) {
 			Object[] body = t.csv();
 			for (Object object : body) {
-				returnString.append(object+"|");				
+				returnString.append(((object!=null)?object:"")+"|");				
 			}
 			returnString.append("\n");
 		}
