@@ -1,5 +1,6 @@
 package br.com.remomeurumo.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -7,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.BaseEntity;
 
@@ -63,4 +65,27 @@ public class Usuario extends BaseEntity {
 	public void setColaborador(Colaborador colaborador) {
 		this.colaborador = colaborador;
 	}
+	
+	@Transient
+	public Object[] csvHead() {
+		
+		ArrayList<String> returnString = new ArrayList<String>();
+		
+		returnString.add("id");
+		returnString.add("Nome");
+				
+		return returnString.toArray();
+	}
+
+	@Transient
+	public Object[] csv() {
+
+		ArrayList<String> returnString = new ArrayList<String>();
+
+		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getNome());
+
+		return returnString.toArray();
+	}
+	
 }
