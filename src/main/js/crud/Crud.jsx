@@ -75,13 +75,13 @@ const Header = ({label}) =>
 		            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
 		        </MenuItem>
             	<MenuItem eventKey="4" href="atividades">
-                    <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade
+                    <Glyphicon glyph="flag"/>&nbsp;&nbsp;Plano de Aula
                 </MenuItem>
                 <MenuItem eventKey="5" href="tipoAtividades">
-                    <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Tipo de Atividade
+                    <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Modalidade
                 </MenuItem>
                 <MenuItem eventKey="15" href="tarefas">
-                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Tarefa
+                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Atividade
                 </MenuItem>
                 <MenuItem divider/>
                 <MenuItem eventKey="6" href="modeloAvaliacoesClinicas">

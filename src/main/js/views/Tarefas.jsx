@@ -7,7 +7,7 @@ class Tarefas extends Component {
     componentDidMount = () => TarefasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome da Tarefa" autoComplete="off"
+        <Input type="text" placeholder="Buscar por nome da Atividade" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -30,7 +30,7 @@ class Tarefas extends Component {
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome da tarefa" name="nome" defaultValue={tarefa.nome} autoFocus/></Col>
+		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome da Atividade" name="nome" defaultValue={tarefa.nome} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
 		          	<Col xs={12}><Input type="text" label="Descrição" placeholder="Descrição" name="descricao" defaultValue={tarefa.sigla}/></Col>
@@ -39,7 +39,7 @@ class Tarefas extends Component {
         </div>
 
     render = () =>
-        <Crud title="Tarefas"
+        <Crud title="Atividades"
               controller={TarefasController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}

@@ -57,15 +57,17 @@ public class AuditoriaService {
 
 	private Usuario getUsuarioLogado(HttpServletRequest request) {
 
-		String nome = request.getUserPrincipal().getName();
-		if (nome != null) {
-			Session session = (Session) em.getDelegate();
-			Criteria criteria = session.createCriteria(Usuario.class);
-			criteria.add(Restrictions.ilike("nome", nome, ANYWHERE));
-
-			List<Usuario> list = criteria.list();
-			if (list != null && !list.isEmpty())
-				return list.iterator().next();
+		if(request.getUserPrincipal()!=null) {
+			String nome = request.getUserPrincipal().getName();
+			if (nome != null) {
+				Session session = (Session) em.getDelegate();
+				Criteria criteria = session.createCriteria(Usuario.class);
+				criteria.add(Restrictions.ilike("nome", nome, ANYWHERE));
+	
+				List<Usuario> list = criteria.list();
+				if (list != null && !list.isEmpty())
+					return list.iterator().next();
+			}
 		}
 
 		return null;
