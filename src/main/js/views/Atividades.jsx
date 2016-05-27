@@ -44,24 +44,24 @@ class Atividades extends Component {
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome da Atividade" name="nome" defaultValue={atividade.nome} autoFocus/></Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Data" placeholder="Data da aula" name="data" defaultValue={atividade.data}/></Col>
-		        </Row>
-		
-		        <Row className="show-grid">
-		        	<Col xs={12}><Input type="textarea" label="Comentário" name="comentario" defaultValue={atividade.comentario} placeholder="Comentário"  /></Col>
-		        </Row>
-		        <Row className="show-grid">	
-	        	<Col xs={12}>
-		        	<Input type="select" label="Tipo de Atividade" name="tipoAtividade"
+		        	<Col xs={12} md={6}>	<Input type="select" label="Modalidade" name="tipoAtividade"
 			                defaultValue={id(atividade.tipoAtividade)} onChange={handleAssociationChange}>
 			            <option value="">Selecione...</option>
 			            {tipos.map((element, i) =>
 			                <option key={i} value={element.id}>{element.nome}</option>
 			            )}
-		            </Input>
-	            </Col>
-            </Row>
+		            </Input></Col>
+		          	<Col xs={12} md={6}><Input type="text" label="Data" placeholder="Data da aula" name="data" defaultValue={atividade.data}/></Col>
+		        </Row>
+				<Row className="show-grid">	
+		        	<Col xs={12}>
+			        	<Input type="text" label="Conteúdo" placeholder="Conteúdo" name="nome" defaultValue={atividade.nome} autoFocus/>
+		            </Col>
+	            </Row>
+		        <Row className="show-grid">
+		        	<Col xs={12}><Input type="textarea" label="Comentário" name="comentario" defaultValue={atividade.comentario} placeholder="Comentário"  /></Col>
+		        </Row>
+		        
 	      </Grid>
         </div>
 

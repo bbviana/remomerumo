@@ -75,20 +75,23 @@ const Header = ({label}) =>
 		            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
 		        </MenuItem>
             	<MenuItem eventKey="4" href="atividades">
-                    <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade
+                    <Glyphicon glyph="flag"/>&nbsp;&nbsp;Banco de Atividades
                 </MenuItem>
                 <MenuItem eventKey="5" href="tipoAtividades">
-                    <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Tipo de Atividade
+                    <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Modalidade
                 </MenuItem>
                 <MenuItem eventKey="15" href="tarefas">
                     <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Tarefa
+                </MenuItem>
+                <MenuItem eventKey="15" href="equipamentos">
+                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamento
                 </MenuItem>
                 <MenuItem divider/>
                 <MenuItem eventKey="6" href="modeloAvaliacoesClinicas">
                     <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação
                 </MenuItem>
                 <MenuItem eventKey="7" href="tipoInfoClinicas">
-                    <Glyphicon glyph="tags"/>&nbsp;&nbsp;Tipo de Informação
+                    <Glyphicon glyph="tags"/>&nbsp;&nbsp;Medidas
                 </MenuItem>
                 <MenuItem eventKey="8" href="avaliacoesClinicas">
                     <Glyphicon glyph="stats"/>&nbsp;&nbsp;Avaliação

@@ -10,6 +10,7 @@ import InfoClinicas from './InfoClinicas'
 import TipoInfoClinicas from './TipoInfoClinicas'
 import GrupoAlunos from './GrupoAlunos'
 import PlanejamentoAtividades from './PlanejamentoAtividades'
+import ResumoAtividades from './ResumoAtividades'
 import ExecucaoAtividades from './ExecucaoAtividades'
 import AvaliacaoInfoClinicas from './AvaliacaoInfoClinicas'
 import Home from './Home'
@@ -20,6 +21,7 @@ import Auditorias from './Auditorias'
 import Auditoria from './Auditoria'
 import ImpressaoAtividades from './ImpressaoAtividades'
 import Tarefas from './Tarefas'
+import Equipamentos from './Equipamentos'
 
 export {
     Alunos,
@@ -34,6 +36,7 @@ export {
     TipoInfoClinicas,
     AvaliacoesClinicas,
     PlanejamentoAtividades,
+    ResumoAtividades,
     ExecucaoAtividades,
     AvaliacaoInfoClinicas,
     Home,
@@ -43,5 +46,6 @@ export {
     Auditorias,
     Auditoria,
     ImpressaoAtividades,
-    Tarefas
+    Tarefas, 
+    Equipamentos
 }

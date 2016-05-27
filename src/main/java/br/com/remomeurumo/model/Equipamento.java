@@ -5,11 +5,7 @@ import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonFilter;
 
 import br.com.remomeurumo.framework.AuditoriaService;
 import br.com.remomeurumo.framework.BaseEntity;
@@ -19,7 +15,7 @@ import br.com.remomeurumo.framework.BaseEntity;
  */
 @Entity
 @EntityListeners(AuditoriaService.class)
-public class Tarefa extends BaseEntity implements Serializable {
+public class Equipamento extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,11 +23,6 @@ public class Tarefa extends BaseEntity implements Serializable {
 
 	private String descricao;
 
-	@JsonFilter("associationFilter")
-	@ManyToOne
-	@JoinColumn(name = "tipoid")
-	private TipoAtividade tipoAtividade;
-	
 	public String getNome() {
 		return nome;
 	}
@@ -46,14 +37,6 @@ public class Tarefa extends BaseEntity implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	
-	public TipoAtividade getTipoAtividade() {
-		return tipoAtividade;
-	}
-
-	public void setTipoAtividade(TipoAtividade tipoAtividade) {
-		this.tipoAtividade = tipoAtividade;
 	}
 
 	@Transient

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, AvaliacaoInfoClinicas, InfoClinicas, 
-	ModeloAvaliacoesClinicas, TipoInfoClinicas, Tarefas, PlanejamentoAtividades, ImpressaoAtividades, ExecucaoAtividades, Home, ResumoAlunos, Usuarios, Permissoes, Auditorias, Auditoria} from './views'
+	ModeloAvaliacoesClinicas, TipoInfoClinicas, Tarefas, Equipamentos, PlanejamentoAtividades, ResumoAtividades,ImpressaoAtividades, ExecucaoAtividades, Home, ResumoAlunos, Usuarios, Permissoes, Auditorias, Auditoria} from './views'
 import url from 'url'
 
 const queryParams = url.parse(window.location.href, true).query
@@ -27,6 +27,8 @@ if(pathname.endsWith("/login")){
     ReactDOM.render(<TipoInfoClinicas />, document.getElementById("app"));
 } else if(pathname.endsWith("/tarefas")) {
     ReactDOM.render(<Tarefas />, document.getElementById("app"));
+} else if(pathname.endsWith("/equipamentos")) {
+    ReactDOM.render(<Equipamentos />, document.getElementById("app"));
 } else if(pathname.endsWith("/modeloAvaliacoesClinicas")) {
     ReactDOM.render(<ModeloAvaliacoesClinicas />, document.getElementById("app"));
 } else if(pathname.endsWith("/planejamentoAtividades")){
@@ -35,6 +37,8 @@ if(pathname.endsWith("/login")){
     ReactDOM.render(<ImpressaoAtividades id={queryParams.id}/>, document.getElementById("app"));
 } else if(pathname.endsWith("/execucaoAtividades")){
     ReactDOM.render(<ExecucaoAtividades id={queryParams.id}/>, document.getElementById("app"));
+} else if(pathname.endsWith("/resumoAtividades")){
+	ReactDOM.render(<ResumoAtividades />, document.getElementById("app"));
 } else if(pathname.endsWith("/avaliacaoInfoClinicas")){
     ReactDOM.render(<AvaliacaoInfoClinicas id={queryParams.id}/>, document.getElementById("app"));
 } else if(pathname.endsWith("/resumoAlunos")){

@@ -27,7 +27,7 @@ public class Atividade extends BaseEntity {
 
 	private String nome;
 
-	@Column(name= "comentario", length=2048)
+	@Column(name = "comentario", length = 2048)
 	private String comentario;
 
 	private Boolean executada;
@@ -46,6 +46,9 @@ public class Atividade extends BaseEntity {
 
 	@Transient
 	private Collection<AtividadeGrupo> atividadeGruposTransient;
+
+	@Transient
+	private Collection<Atividade> atividadesAnterioresTransient;
 
 	@Override
 	public String toString() {
@@ -117,17 +120,26 @@ public class Atividade extends BaseEntity {
 		this.atividadeGruposTransient = atividadeGruposTransient;
 	}
 
+	public Collection<Atividade> getAtividadesAnterioresTransient() {
+		return atividadesAnterioresTransient;
+	}
+
+	public void setAtividadesAnterioresTransient(
+			Collection<Atividade> atividadesAnterioresTransient) {
+		this.atividadesAnterioresTransient = atividadesAnterioresTransient;
+	}
+
 	@Transient
 	public Object[] csvHead() {
-		
+
 		ArrayList<String> returnString = new ArrayList<String>();
-		
+
 		returnString.add("id");
 		returnString.add("Nome");
 		returnString.add("Data");
 		returnString.add("Comentario");
 		returnString.add("Executada");
-				
+
 		return returnString.toArray();
 	}
 
@@ -141,7 +153,6 @@ public class Atividade extends BaseEntity {
 		returnString.add(this.getComentario());
 		returnString.add(this.getTipoAtividade().getNome());
 		returnString.add(String.valueOf(this.getExecutada()));
-		
 
 		return returnString.toArray();
 	}

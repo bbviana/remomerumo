@@ -16,8 +16,8 @@ class GrupoAlunos extends Component {
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Descrição</th>
-                <th>Tipo de Atividade</th>
+                <th>Critérios ou Fatores</th>
+                <th>Modalidade</th>
             </tr>,
 
         body: (grupoAluno) =>
@@ -37,12 +37,12 @@ class GrupoAlunos extends Component {
 	        </Row>
 	
             <Row className="show-grid">	
-            <Col xs={12}><Input type="textarea" label="Descrição" placeholder="Descrição" name="descricao" defaultValue={grupoAluno.descricao}/></Col>
+            <Col xs={12}><Input type="textarea" label="Critérios ou Fatores" placeholder="Critérios ou Fatores" name="descricao" defaultValue={grupoAluno.descricao}/></Col>
 	        </Row>
 	        
 	        <Row className="show-grid">	
         	<Col xs={12}>
-	        	<Input type="select" label="Tipo de Atividade" name="tipoAtividade"
+	        	<Input type="select" label="Modalidade" name="tipoAtividade"
 		                defaultValue={id(grupoAluno.tipoAtividade)} onChange={handleAssociationChange}>
 		            <option value="">Selecione...</option>
 		            {tipos.map((element, i) =>

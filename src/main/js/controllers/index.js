@@ -9,6 +9,7 @@ import ModeloAvaliacoesClinicasController from './ModeloAvaliacoesClinicasContro
 import InfoClinicasController from './InfoClinicasController'
 import TipoInfoClinicasController from './TipoInfoClinicasController'
 import PlanejamentoAtividadesController from './PlanejamentoAtividadesController'
+import ResumoAtividadesController from './ResumoAtividadesController'
 import ExecucaoAtividadesController from './ExecucaoAtividadesController'
 import AvaliacaoInfoClinicasController from './AvaliacaoInfoClinicasController'
 import HomeController from './HomeController'
@@ -19,6 +20,7 @@ import AuditoriasController from './AuditoriasController'
 import AuditoriaController from './AuditoriaController'
 import ImpressaoAtividadesController from './ImpressaoAtividadesController'
 import TarefasController from './TarefasController'
+import EquipamentosController from './EquipamentosController'
 
 export {
     AlunosController,
@@ -32,6 +34,7 @@ export {
     ModeloAvaliacoesClinicasController,
     AvaliacoesClinicasController,
     PlanejamentoAtividadesController,
+    ResumoAtividadesController,
     ExecucaoAtividadesController,
     AvaliacaoInfoClinicasController,
     HomeController,
@@ -41,5 +44,6 @@ export {
     AuditoriasController,
     AuditoriaController,
     ImpressaoAtividadesController,
-    TarefasController
+    TarefasController,
+    EquipamentosController
 }

@@ -7,7 +7,7 @@ class TipoInfoClinicas extends Component {
     componentDidMount = () => TipoInfoClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do Tipo da Informação Clinica" autoComplete="off"
+        <Input type="text" placeholder="Buscar por nome da Medida" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -30,7 +30,7 @@ class TipoInfoClinicas extends Component {
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome completo da Informação Clinica" name="nome" defaultValue={tipoInfoClinica.nome} autoFocus/></Col>
+		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome completo da Medida" name="nome" defaultValue={tipoInfoClinica.nome} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
 		          	<Col xs={12}><Input type="text" label="Sigla" placeholder="Sigla" name="sigla" defaultValue={tipoInfoClinica.sigla}/></Col>
@@ -39,7 +39,7 @@ class TipoInfoClinicas extends Component {
         </div>
 
     render = () =>
-        <Crud title="Tipo de Informação Clinica"
+        <Crud title="Medida"
               controller={TipoInfoClinicasController}
               searchSchema={this.searchSchema}
               listSchema={this.listSchema}

@@ -23,7 +23,7 @@
     </form-login-config>
   </login-config>
   
- <!-- <security-constraint>
+  <!-- <security-constraint>
     <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
       <url-pattern>/atividades/*</url-pattern>
@@ -112,7 +112,7 @@
     <auth-constraint>
       <role-name>logado</role-name>
     </auth-constraint>     
-  </security-constraint> -->
+  </security-constraint>  -->
   
   <security-role>
     <role-name>logado</role-name>

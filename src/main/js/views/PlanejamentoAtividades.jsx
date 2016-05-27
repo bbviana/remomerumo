@@ -138,7 +138,7 @@ class PlanejamentoAtividades extends Component {
 			            	            <Row className="show-grid">
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
-			            	        		<Col xs={12} md={4}><strong>Planejamento</strong></Col>
+			            	        		<Col xs={12} md={4}><strong>Foco no ensino/Cuidados</strong></Col>
 			            	        		<Col xs={12} md={4}><strong>Tarefas</strong></Col>
 			            	          	</Row>
 			            	          	<Row className="show-grid">
@@ -166,7 +166,7 @@ class PlanejamentoAtividades extends Component {
 			            	          		<Col xs={12} md={4}>
 			            	          			<div>
 				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)} 
-	                   									onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
+	                   									 onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
 	                										{this.state.tarefas.map((element, i) =>
 	                    								<option key={i} value={element.id}>{element.nome}</option>
 	                										)}
