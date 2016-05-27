@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -53,6 +54,9 @@ public class CrudController<T extends BaseEntity> {
 	
 	@Inject
 	protected AuditoriaService auditService;
+	
+	@Inject
+	protected HttpServletRequest request;
 
 	protected Class<T> getType() {
 		return null;
@@ -84,7 +88,7 @@ public class CrudController<T extends BaseEntity> {
 	@POST
 	public T insert(T element) {
 		em.persist(element);
-		this.auditService.registrarAuditoria(element, AuditoriaService.operationSave);
+		this.auditService.registrarAuditoria(element, AuditoriaService.operationSave, request);
 		return element;
 	}
 
@@ -105,7 +109,7 @@ public class CrudController<T extends BaseEntity> {
 	@Path("{id}")
 	public T update(@PathParam("id") Long id, T element) {
 		element.setId(id);
-		this.auditService.registrarAuditoria(element, AuditoriaService.operationUpdate);
+		this.auditService.registrarAuditoria(element, AuditoriaService.operationUpdate, request);
 		return em.merge(element);
 	}
 
@@ -155,7 +159,7 @@ public class CrudController<T extends BaseEntity> {
 	@Path("{id}")
 	public void remove(@PathParam("id") Long id) {
 		T entity = em.find(getType(), id);
-		this.auditService.registrarAuditoria(entity, AuditoriaService.operationDelete);
+		this.auditService.registrarAuditoria(entity, AuditoriaService.operationDelete, request);
 		em.remove(entity);
 	}
 
@@ -202,7 +206,7 @@ public class CrudController<T extends BaseEntity> {
 		for (T t : list) {
 			Object[] body = t.csv();
 			for (Object object : body) {
-				returnString.append(object+"|");				
+				returnString.append(((object!=null)?object:"")+"|");				
 			}
 			returnString.append("\n");
 		}

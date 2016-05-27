@@ -80,8 +80,31 @@ class PlanejamentoAtividades extends Component {
     	this.setState({atividadeGrupos : atividadesEscolhido})
     }
     
-    alterarTarefas = (event) => {
-    	console.log("Alterando tarefa")
+    alterarTarefas = (idPlanejamento, event) => {
+    	var atividades = this.state.atividadeGrupos
+    	
+    	var atividadeEscolhido = atividades.find(element => {
+    		return element.id == idPlanejamento
+    	})
+    	
+    	const target = event.target
+        let value
+        	
+        if (target.multiple) {
+            value = Array.from(target.options)
+                .filter(option => option.selected)
+                .map(option => ({id: option.value}))
+        } else {
+            value = {id: target.value}
+        }
+    	
+        if(!target.value){
+            value = null
+        } else {
+        	atividadeEscolhido.tarefas = value
+        	this.setState({atividadeGrupos : atividades})
+        }
+    	
     }
     
     alterarPlanejamento = (idPlanejamento, event) => {
@@ -93,6 +116,19 @@ class PlanejamentoAtividades extends Component {
     	})
     	
     	atividadeEscolhido.planejamentoDeAula = event.target.value
+    	
+    	this.setState({atividadeGrupos : atividades})
+    }
+    
+    alterarComentario = (idPlanejamento, event) => {
+    	
+    	var atividades = this.state.atividadeGrupos
+    	
+    	var atividadeEscolhido = atividades.find(element => {
+    		return element.id == idPlanejamento
+    	})
+    	
+    	atividadeEscolhido.comentario = event.target.value
     	
     	this.setState({atividadeGrupos : atividades})
     }
@@ -138,8 +174,14 @@ class PlanejamentoAtividades extends Component {
 			            	            <Row className="show-grid">
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
+<<<<<<< HEAD
 			            	        		<Col xs={12} md={4}><strong>Foco no ensino/Cuidados</strong></Col>
 			            	        		<Col xs={12} md={4}><strong>Tarefas</strong></Col>
+=======
+			            	        		<Col xs={12} md={3}><strong>Objetivos</strong></Col>
+			            	        		<Col xs={12} md={2}><strong>Atividades</strong></Col>
+			            	        		<Col xs={12} md={3}><strong>Considerações pedagógicas</strong></Col>
+>>>>>>> 02152f2a43944212fac64b3f547ab4e733d0ea2d
 			            	          	</Row>
 			            	          	<Row className="show-grid">
 			            	          		<Col xs={6} md={2}>
@@ -160,10 +202,10 @@ class PlanejamentoAtividades extends Component {
 				            	          		})}
 				            	          		</ListGroup>	
 			            	          		</Col>
-			            	          		<Col xs={12} md={4}>
-			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
+			            	          		<Col xs={12} md={3}>
+			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="comentario" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Planejamento de aula"  /></Col>
 			            	          		
-			            	          		<Col xs={12} md={4}>
+			            	          		<Col xs={12} md={2}>
 			            	          			<div>
 				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)} 
 	                   									 onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
@@ -173,6 +215,8 @@ class PlanejamentoAtividades extends Component {
 	            									</Input>
 												</div>
 											</Col>
+											<Col xs={12} md={3}>
+			            	          		<Input type="textarea" label="" onChange={this.alterarComentario.bind(this, atividadeGrupo.id)} name="comentario" defaultValue={atividadeGrupo.comentario} placeholder="Considerações e sugestões pedagógicas"  /></Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">
 		            	        			<Col xs={12}>&nbsp;</Col>

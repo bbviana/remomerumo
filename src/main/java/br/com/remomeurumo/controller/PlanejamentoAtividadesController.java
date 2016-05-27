@@ -133,8 +133,6 @@ public class PlanejamentoAtividadesController {
 		Atividade atividadeOriginal = em.find(Atividade.class,atividade.getId());
 		Collection<AtividadeGrupo> planejametoMantidos = new ArrayList<AtividadeGrupo>(atividade.getAtividadeGrupos());
 		Collection<AtividadeGrupo> planejametoRemovidos = new ArrayList<AtividadeGrupo>(atividadeOriginal.getAtividadeGrupos());
-		System.out.println("\n\n Colecao  -- "+atividade.getAtividadeGrupos());
-		System.out.println("\n\n Colecao original  -- "+atividadeOriginal.getAtividadeGrupos());
 		
 		planejametoMantidos.retainAll(atividadeOriginal.getAtividadeGrupos());
 		planejametoRemovidos.removeAll(atividade.getAtividadeGrupos());
@@ -144,6 +142,7 @@ public class PlanejamentoAtividadesController {
 			System.out.println("\n\n Comentario -- "+planejamento.getComentario());
 			System.out.println("\n\n Alunos -- "+planejamento.getAlunos());
 			System.out.println("\n\n Colaboradores -- "+planejamento.getColaboradores());
+			System.out.println("\n\n Tarefas -- "+planejamento.getTarefas());
 			AtividadeGrupo atividadeGrupo = this.em.merge(planejamento);
 			//System.out.println("\n\n Alunos Mantidos -- "+atividadeGrupo.getAlunos().retainAll(planejamento.getAlunos()));
 		}

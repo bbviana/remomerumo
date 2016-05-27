@@ -62,8 +62,8 @@ public abstract class BaseEntity implements Serializable,
 		Object[] head = this.csvHead();
 		Object[] body = this.csv();
 		for (int i = 0; i < head.length; i++) {
-			Object object = head[i];
-			returnString.append(head[i] + ": " + body[i] + " \n");
+			if(body[i]!=null)
+				returnString.append(head[i] + ": " + body[i] + ", ");
 		}
 
 		returnString.append("\n");

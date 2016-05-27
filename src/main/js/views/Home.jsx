@@ -35,13 +35,20 @@ class PlanejamentoAtividades extends Component {
 	            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
 	        </MenuItem>
         	<MenuItem eventKey="4" href="atividades">
+<<<<<<< HEAD
                 <Glyphicon glyph="flag"/>&nbsp;&nbsp;Banco de Atividades
             </MenuItem>
             <MenuItem eventKey="5" href="tipoAtividades">
                 <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Modalidades
+=======
+                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Plano de Aula
+            </MenuItem>
+            <MenuItem eventKey="5" href="tipoAtividades">
+                <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Modalidade
+>>>>>>> 02152f2a43944212fac64b3f547ab4e733d0ea2d
             </MenuItem>
             <MenuItem eventKey="15" href="tarefas">
-                <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Tarefa
+                <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Atividade
             </MenuItem>
              <MenuItem eventKey="15" href="equipamentos">
                     <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamento
@@ -91,15 +98,11 @@ class PlanejamentoAtividades extends Component {
 	            <Tab eventKey={4} title="To Do"><p>
 	            <strong>&nbsp;</strong>
 	            <li>Tela de usuários, fazer validação de senha</li>
-	            <li>Colocar segurança no sistema</li>
 	            <li>Colocar campos maiores no banco para coisas como descrição do grupo aluno</li>
 	            <li>Comentario da execução de atividade não salva</li>
-	            <li>Detalhes sobre o tipo de treino
-	            Hierarquia dos colaboradores
-	            Mais detalhes nas atividades
-	            No tipo de atividades
-	            Colocar a área do profissional</li>
-	            <li>Tarefas não submetem na tea de planejamento</li>
+	            <li>Detalhes sobre o tipo de treino</li>
+	            <li>Mais detalhes nas atividades</li>
+	            <li>No tipo de atividades</li>
 	            <li>Upload de arquivos anexos a avaliação e fotos das crianças</li>
 	            </p></Tab>
 	          </Tabs>
