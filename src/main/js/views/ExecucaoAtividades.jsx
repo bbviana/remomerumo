@@ -25,7 +25,7 @@ class ExecucaoAtividades extends Component {
         })
     }
 
-    procurarGrupos = () => {
+    procurarAlunos = () => {
         Request.get('api/execucaoAtividades/procurarAlunos', {
             id: this.props.id
         })
@@ -50,7 +50,7 @@ class ExecucaoAtividades extends Component {
     }
     
     componentDidMount = () => {
-    	this.procurarGrupos()
+    	this.procurarAlunos()
     }
     
     render = () =>
@@ -83,7 +83,7 @@ class ExecucaoAtividades extends Component {
             	        	return <Panel  key={index} header={atividadeGrupo.grupo.nome}>
 	            	            <Row className="show-grid">
 	            	        		<Col xs={4} md={3}><strong>Alunos</strong></Col>
-	            	        		<Col xs={6} md={9}><strong>Comentarios</strong></Col>
+	            	        		<Col xs={6} md={9}><strong>Comentários</strong></Col>
 	            	        		
 	            	          	</Row>
 	            	          	{atividadeGrupo.alunos.map((aluno, indexAluno) => {

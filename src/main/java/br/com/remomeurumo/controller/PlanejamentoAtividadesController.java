@@ -157,10 +157,12 @@ public class PlanejamentoAtividadesController {
 	@GET
 	@Path("procurarTarefas")
 	@Produces(APPLICATION_JSON)
-	public List<Tarefa> procurarTarefas() {
-		
+	public List<Tarefa> procurarTarefas(@QueryParam("id") Long id) {
+		Atividade atividade = em.find(Atividade.class,id);
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Tarefa.class);
+		if(atividade.getTipoAtividade()!=null)
+			criteria.add(Restrictions.eq("tipoAtividade", atividade.getTipoAtividade()));
 		criteria.addOrder(Order.desc("nome"));
 		List<Tarefa> list = criteria.list();
 

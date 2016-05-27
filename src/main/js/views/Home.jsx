@@ -35,16 +35,16 @@ class PlanejamentoAtividades extends Component {
 	            <Glyphicon glyph="link"/>&nbsp;&nbsp;Grupo de Alunos
 	        </MenuItem>
         	<MenuItem eventKey="4" href="atividades">
-                    <Glyphicon glyph="flag"/>&nbsp;&nbsp;Plano de Aula
-                </MenuItem>
-                <MenuItem eventKey="5" href="tipoAtividades">
-                    <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Modalidades
-                </MenuItem>
-                <MenuItem eventKey="15" href="tarefas">
-                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Banco de Atividades
-                </MenuItem>
+                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Plano de Aula
+            </MenuItem>
+            <MenuItem eventKey="5" href="tipoAtividades">
+                <Glyphicon glyph="pencil"/>&nbsp;&nbsp;Modalidades
+            </MenuItem>
+            <MenuItem eventKey="15" href="tarefas">
+                <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Banco de Atividades
+            </MenuItem>
              <MenuItem eventKey="15" href="equipamentos">
-                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamento
+                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamentos
                 </MenuItem>
             <MenuItem divider/>
             <MenuItem eventKey="6" href="modeloAvaliacoesClinicas">

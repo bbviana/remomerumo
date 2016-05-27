@@ -15,7 +15,7 @@ class Atividades extends Component {
         header: () =>
             <tr>
                 <th>ID</th>
-                <th>Nome</th>
+                <th>Conteúdo</th>
                 <th>Data</th>
             </tr>,
 
@@ -53,9 +53,9 @@ class Atividades extends Component {
 		            </Col>
 		        </Row>
 				<Row className="show-grid">	
-		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome da Atividade" name="nome" defaultValue={atividade.nome} autoFocus/></Col>
-		        	<Col xs={12}>
-			        	<Input type="text" label="Conteúdo" placeholder="Conteúdo" name="nome" defaultValue={atividade.nome} autoFocus/>
+		        	<Col xs={12} md={4}><Input type="text" label="Data" placeholder="Data" name="data" defaultValue={atividade.data}/></Col>
+		        	<Col xs={12} md={8}>
+			        	<Input type="text" label="Conteúdo" placeholder="Conteúdo" name="nome" defaultValue={atividade.nome}/>
 		            </Col>
 	            </Row>
 		        <Row className="show-grid">

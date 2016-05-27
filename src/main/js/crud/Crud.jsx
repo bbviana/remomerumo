@@ -84,7 +84,7 @@ const Header = ({label}) =>
                     <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Banco de Atividades
                 </MenuItem>
                 <MenuItem eventKey="15" href="equipamentos">
-                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamento
+                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamentos
                 </MenuItem>
                 <MenuItem divider/>
                 <MenuItem eventKey="6" href="modeloAvaliacoesClinicas">

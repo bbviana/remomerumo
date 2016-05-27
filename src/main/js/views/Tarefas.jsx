@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
+import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {TarefasController} from '../controllers'
 import {Input, Row, Col, Grid} from 'react-bootstrap';
 
@@ -26,7 +27,7 @@ class Tarefas extends Component {
             </tr>
     }
 
-    formSchema = (tarefa) =>
+    formSchema = (tarefa, {tipos = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
@@ -35,6 +36,18 @@ class Tarefas extends Component {
 		        <Row className="show-grid">
 		          	<Col xs={12}><Input type="text" label="Descrição" placeholder="Descrição" name="descricao" defaultValue={tarefa.sigla}/></Col>
 		        </Row>
+		        <Row className="show-grid">	
+		        	<Col xs={12}>
+			        	<Input type="select" label="Modalidade" name="tipoAtividade"
+				                defaultValue={id(tarefa.tipoAtividade)} onChange={handleAssociationChange}>
+				            <option value="">Selecione...</option>
+				            {tipos.map((element, i) =>
+				                <option key={i} value={element.id}>{element.nome}</option>
+				            )}
+			            </Input>
+		            </Col>
+		        </Row>
+		        
 	      </Grid>
         </div>
 
