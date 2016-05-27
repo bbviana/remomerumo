@@ -22,13 +22,8 @@
       <form-error-page>/error.jsp</form-error-page>
     </form-login-config>
   </login-config>
-<<<<<<< HEAD
-  
-  <!-- <security-constraint>
-=======
   <!-- 
   <security-constraint>
->>>>>>> 02152f2a43944212fac64b3f547ab4e733d0ea2d
     <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
       <url-pattern>/atividades/*</url-pattern>
@@ -118,7 +113,6 @@
       <role-name>logado</role-name>
     </auth-constraint>
     </security-constraint> 
-<<<<<<< HEAD
     <security-constraint>
  	<web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
@@ -128,10 +122,6 @@
       <role-name>logado</role-name>
     </auth-constraint>     
   </security-constraint>  -->
-  
-=======
-   -->
->>>>>>> 02152f2a43944212fac64b3f547ab4e733d0ea2d
   <security-role>
     <role-name>logado</role-name>
   </security-role>

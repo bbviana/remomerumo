@@ -174,14 +174,8 @@ class PlanejamentoAtividades extends Component {
 			            	            <Row className="show-grid">
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
-<<<<<<< HEAD
 			            	        		<Col xs={12} md={4}><strong>Foco no ensino/Cuidados</strong></Col>
 			            	        		<Col xs={12} md={4}><strong>Tarefas</strong></Col>
-=======
-			            	        		<Col xs={12} md={3}><strong>Objetivos</strong></Col>
-			            	        		<Col xs={12} md={2}><strong>Atividades</strong></Col>
-			            	        		<Col xs={12} md={3}><strong>Considerações pedagógicas</strong></Col>
->>>>>>> 02152f2a43944212fac64b3f547ab4e733d0ea2d
 			            	          	</Row>
 			            	          	<Row className="show-grid">
 			            	          		<Col xs={6} md={2}>
