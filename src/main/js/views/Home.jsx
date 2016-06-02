@@ -44,7 +44,7 @@ class PlanejamentoAtividades extends Component {
                 <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Banco de Atividades
             </MenuItem>
              <MenuItem eventKey="15" href="equipamentos">
-                    <Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamentos
+                    <Glyphicon glyph="wrench"/>&nbsp;&nbsp;Equipamentos
                 </MenuItem>
             <MenuItem divider/>
             <MenuItem eventKey="6" href="modeloAvaliacoesClinicas">

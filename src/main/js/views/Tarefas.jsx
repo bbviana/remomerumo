@@ -22,16 +22,25 @@ class Tarefas extends Component {
         body: (tarefa) =>
             <tr>
                 <td>{tarefa.id}</td>
-                <td>{tarefa.nome}</td>
+                <td>{tarefa.nomeCompleto}</td>
                 <td>{tarefa.descricao}</td>
             </tr>
     }
 
-    formSchema = (tarefa, {tipos = []}) =>
+    formSchema = (tarefa, {tipos = [], tarefasPai = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome da Atividade" name="nome" defaultValue={tarefa.nome} autoFocus/></Col>
+		        	<Col xs={12} md={6}>
+			        	<Input type="select" label="Atividade Pai" name="tarefaPai"
+				                defaultValue={id(tarefa.tarefaPai)} onChange={handleAssociationChange}>
+				            <option value="">Selecione...</option>
+				            {tarefasPai.map((element, i) =>
+				                <option key={i} value={element.id}>{element.nome}</option>
+				            )}
+			            </Input>
+		            </Col>
+		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome da Atividade" name="nome" defaultValue={tarefa.nome} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
 		          	<Col xs={12}><Input type="text" label="Descrição" placeholder="Descrição" name="descricao" defaultValue={tarefa.sigla}/></Col>

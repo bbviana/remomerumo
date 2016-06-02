@@ -31,7 +31,7 @@ public class Atividade extends BaseEntity {
 	private String comentario;
 
 	private Boolean executada;
-
+	
 	@JsonFilter("associationFilter")
 	@ManyToOne
 	@JoinColumn(name = "tipoid")
@@ -128,7 +128,7 @@ public class Atividade extends BaseEntity {
 			Collection<Atividade> atividadesAnterioresTransient) {
 		this.atividadesAnterioresTransient = atividadesAnterioresTransient;
 	}
-
+	
 	@Transient
 	public Object[] csvHead() {
 

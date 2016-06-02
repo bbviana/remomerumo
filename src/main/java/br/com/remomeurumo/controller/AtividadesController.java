@@ -19,7 +19,7 @@ public class AtividadesController extends CrudController<Atividade> {
 	protected Class<Atividade> getType() {
 		return Atividade.class;
 	}
-	
+
 	@Override
 	protected void postBlank(Result<Atividade> result) {
 		result.addAssociation("tipos", findAll(TipoAtividade.class));

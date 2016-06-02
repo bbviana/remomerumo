@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
 import {id, ids} from '../crud/Associations'
-import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar, ListGroupItem, ListGroup} from 'react-bootstrap';
+import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar, ListGroupItem, ListGroup, Accordion} from 'react-bootstrap';
 
 class PlanejamentoAtividades extends Component {
     state = {
@@ -176,8 +176,9 @@ class PlanejamentoAtividades extends Component {
 			            	            <Row className="show-grid">
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
-			            	        		<Col xs={12} md={4}><strong>Foco no Ensino/Cuidados</strong></Col>
-			            	        		<Col xs={12} md={4}><strong>Tarefas</strong></Col>
+			            	        		<Col xs={6} md={3}><strong>Foco no Ensino/Cuidados</strong></Col>
+			            	        		<Col xs={6} md={2}><strong>Tarefas</strong></Col>
+			            	        		<Col xs={6} md={3}><strong>Tarefas novo*</strong></Col>
 			            	          	</Row>
 			            	          	<Row className="show-grid">
 			            	          		<Col xs={6} md={2}>
@@ -211,6 +212,15 @@ class PlanejamentoAtividades extends Component {
 	            									</Input>
 												</div>
 											</Col>
+											<Col xs={12} md={3}>
+												<Accordion>
+												{this.state.tarefas.map((element, i) =>
+                									<Panel header={element.nome} eventKey={i}>
+											    		<Input type="checkbox" name="x" defaultChecked={element.id} label={element.nome} inline/>
+											    	</Panel>
+            										)}
+											  </Accordion>
+										  </Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">
 		            	        			<Col xs={12}>&nbsp;</Col>

@@ -32,12 +32,23 @@ public class Tarefa extends BaseEntity implements Serializable {
 	@JoinColumn(name = "tipoid")
 	private TipoAtividade tipoAtividade;
 	
+	@JsonFilter("associationFilter")
+	@ManyToOne
+	@JoinColumn(name = "tarefaPaiid")
+	private Tarefa tarefaPai;
+	
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	@Transient
+	public String getNomeCompleto() {
+		if(tarefaPai!=null)
+			return tarefaPai.getNome() + " - " + nome;
+		return nome;
 	}
 
 	public String getDescricao() {
@@ -54,6 +65,14 @@ public class Tarefa extends BaseEntity implements Serializable {
 
 	public void setTipoAtividade(TipoAtividade tipoAtividade) {
 		this.tipoAtividade = tipoAtividade;
+	}
+
+	public Tarefa getTarefaPai() {
+		return tarefaPai;
+	}
+
+	public void setTarefaPai(Tarefa tarefaPai) {
+		this.tarefaPai = tarefaPai;
 	}
 
 	@Transient
