@@ -216,7 +216,11 @@ class PlanejamentoAtividades extends Component {
 												<Accordion>
 												{this.state.tarefas.map((element, i) =>
                 									<Panel header={element.nome} eventKey={i}>
-											    		<Input type="checkbox" name="x" defaultChecked={element.id} label={element.nome} inline/>
+											    		<Input type="checkbox" name="a" defaultChecked={element.id} label={element.nome} onChange={console.log("mudou")}/>
+											    		{element.tarefasFilhas.map((element1, j) =>
+											    			<Input type="checkbox" name="b" defaultChecked={element1.id} label={element1.nome} onChange={console.log("mudou")}/>
+											    		)}
+											    		
 											    	</Panel>
             										)}
 											  </Accordion>

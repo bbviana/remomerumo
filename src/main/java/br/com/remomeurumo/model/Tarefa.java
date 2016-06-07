@@ -2,11 +2,13 @@ package br.com.remomeurumo.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
@@ -36,6 +38,10 @@ public class Tarefa extends BaseEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "tarefaPaiid")
 	private Tarefa tarefaPai;
+	
+	@JsonFilter("associationFilter")
+	@OneToMany(mappedBy = "tarefaPai")
+	private Collection<Tarefa> tarefasFilhas;
 	
 	public String getNome() {
 		return nome;
@@ -73,6 +79,14 @@ public class Tarefa extends BaseEntity implements Serializable {
 
 	public void setTarefaPai(Tarefa tarefaPai) {
 		this.tarefaPai = tarefaPai;
+	}
+	
+	public Collection<Tarefa> getTarefasFilhas() {
+		return tarefasFilhas;
+	}
+
+	public void setTarefasFilhas(Collection<Tarefa> tarefasFilhas) {
+		this.tarefasFilhas = tarefasFilhas;
 	}
 
 	@Transient

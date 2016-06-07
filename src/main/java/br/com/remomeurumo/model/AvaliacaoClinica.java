@@ -110,6 +110,7 @@ public class AvaliacaoClinica extends BaseEntity {
 		ArrayList<String> returnString = new ArrayList<String>();
 
 		returnString.add(String.valueOf(this.getId()));
+		returnString.add(this.getData());
 		returnString.add(this.getComentario());
 		returnString.add(String.valueOf(this.getFechada()));
 

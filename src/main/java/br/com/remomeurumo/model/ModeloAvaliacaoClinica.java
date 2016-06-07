@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.BaseEntity;
@@ -26,6 +28,11 @@ public class ModeloAvaliacaoClinica extends BaseEntity {
 	@ManyToMany
 	@JoinTable(name = "ModeloAvalTipoInfoClinica")
 	private Collection<TipoInfoClinica> tipoInfoClinicas;
+	
+	@JsonFilter("associationFilter")
+	@ManyToOne
+	@JoinColumn(name = "especialidadeid")
+	private EspecialidadeClinica especialidade;
 
 	public String getNome() {
 		return nome;
@@ -49,6 +56,14 @@ public class ModeloAvaliacaoClinica extends BaseEntity {
 
 	public void setTipoInfoClinicas(Collection<TipoInfoClinica> tipoInfoClinicas) {
 		this.tipoInfoClinicas = tipoInfoClinicas;
+	}
+	
+	public EspecialidadeClinica getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(EspecialidadeClinica especialidade) {
+		this.especialidade = especialidade;
 	}
 
 	@Transient

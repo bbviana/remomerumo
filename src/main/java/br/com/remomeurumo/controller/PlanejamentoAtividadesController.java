@@ -163,6 +163,7 @@ public class PlanejamentoAtividadesController {
 		Criteria criteria = session.createCriteria(Tarefa.class);
 		if(atividade.getTipoAtividade()!=null)
 			criteria.add(Restrictions.eq("tipoAtividade", atividade.getTipoAtividade()));
+		criteria.add(Restrictions.isNull("tarefaPai"));
 		criteria.addOrder(Order.desc("nome"));
 		List<Tarefa> list = criteria.list();
 
