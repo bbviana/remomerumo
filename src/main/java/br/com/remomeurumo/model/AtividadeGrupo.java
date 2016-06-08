@@ -45,10 +45,15 @@ public class AtividadeGrupo extends BaseEntity {
 	@ManyToMany
 	@JoinTable(name = "AtividadeGrupoTarefas")
 	private Collection<Tarefa> tarefas;
-
+	
 	@Transient
 	private Collection<Tarefa> tarefasTransient;
 
+	@JsonFilter("associationFilter")
+	@ManyToMany
+	@JoinTable(name = "AtividadeGrupoEquipamentos")
+	private Collection<Equipamento> equipamentos;
+	
 	@JsonFilter("associationFilter")
 	@ManyToMany
 	@JoinTable(name = "AtividadeGrupoColaboradores")
@@ -142,6 +147,14 @@ public class AtividadeGrupo extends BaseEntity {
 
 	public void setTarefasTransient(Collection<Tarefa> tarefasTransient) {
 		this.tarefasTransient = tarefasTransient;
+	}
+
+	public Collection<Equipamento> getEquipamentos() {
+		return equipamentos;
+	}
+
+	public void setEquipamentos(Collection<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
 	}
 
 	private static final long serialVersionUID = 1L;

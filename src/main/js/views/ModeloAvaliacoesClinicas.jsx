@@ -27,12 +27,23 @@ class ModeloAvaliacoesClinicas extends Component {
             </tr>
     }
 
-    formSchema = (modeloAvaliacaoClinica, {tipoInfoClinicas = []}) =>
+    formSchema = (modeloAvaliacaoClinica, {tipoInfoClinicas = [], especialidades = []}) =>
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
 		          	<Col xs={12}  md={6}><Input type="text" label="Nome" placeholder="Nome completo da Avaliação" name="nome" defaultValue={modeloAvaliacaoClinica.nome} autoFocus/></Col>
 		        </Row>
+		        <Row className="show-grid">
+		        <Col xs={12}>
+		        	<Input type="select" label="Especialidade" name="especialidade"
+			                defaultValue={id(modeloAvaliacaoClinica.especialidade)} onChange={handleAssociationChange}>
+			            <option value="">Selecione...</option>
+			            {especialidades.map((element, i) =>
+			                <option key={i} value={element.id}>{element.nome}</option>
+			            )}
+		            </Input>
+	            </Col>
+	            </Row>
 		        <Row className="show-grid">	
 		        	<Col xs={12}>
 		        	 <Input type="select" label="Tipos de Informação Clinica" name="tipoInfoClinicas"

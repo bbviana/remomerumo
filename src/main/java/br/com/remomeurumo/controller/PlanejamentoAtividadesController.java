@@ -25,6 +25,7 @@ import br.com.remomeurumo.model.Aluno;
 import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.AtividadeGrupo;
 import br.com.remomeurumo.model.Colaborador;
+import br.com.remomeurumo.model.Equipamento;
 import br.com.remomeurumo.model.GrupoAluno;
 import br.com.remomeurumo.model.Tarefa;
 import br.com.remomeurumo.model.TipoAtividade;
@@ -163,9 +164,21 @@ public class PlanejamentoAtividadesController {
 		Criteria criteria = session.createCriteria(Tarefa.class);
 		if(atividade.getTipoAtividade()!=null)
 			criteria.add(Restrictions.eq("tipoAtividade", atividade.getTipoAtividade()));
-		criteria.add(Restrictions.isNull("tarefaPai"));
+		criteria.add(Restrictions.isNotNull("tarefaPai"));
 		criteria.addOrder(Order.desc("nome"));
 		List<Tarefa> list = criteria.list();
+
+		return list;
+	}
+	
+	@GET
+	@Path("procurarEquipamentos")
+	@Produces(APPLICATION_JSON)
+	public List<Equipamento> procurarEquipamentos() {
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Equipamento.class);
+		criteria.addOrder(Order.desc("nome"));
+		List<Equipamento> list = criteria.list();
 
 		return list;
 	}

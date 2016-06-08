@@ -51,7 +51,7 @@ class PlanejamentoAtividades extends Component {
                 <Glyphicon glyph="road"/>&nbsp;&nbsp;Modelo de Avaliação
             </MenuItem>
             <MenuItem eventKey="7" href="especialidadeClinicas">
-                <Glyphicon glyph="tags"/>&nbsp;&nbsp;Especialidades
+                <Glyphicon glyph="paperclip"/>&nbsp;&nbsp;Especialidades
             </MenuItem>
             <MenuItem eventKey="8" href="tipoInfoClinicas">
                 <Glyphicon glyph="tags"/>&nbsp;&nbsp;Medidas

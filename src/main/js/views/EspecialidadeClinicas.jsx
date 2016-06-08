@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
-import {EspeciliadadeClinicasController} from '../controllers'
+import {EspecialidadeClinicasController} from '../controllers'
 import {Input, Row, Col, Grid} from 'react-bootstrap';
 
-class EspeciliadadeClinicas extends Component {
-    componentDidMount = () => EspeciliadadeClinicasController.list() // Busca inicial
+class EspecialidadeClinicas extends Component {
+    componentDidMount = () => EspecialidadeClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
         <Input type="text" placeholder="Buscar por nome da Especialidade" autoComplete="off"
@@ -41,4 +41,4 @@ class EspeciliadadeClinicas extends Component {
               formSchema={this.formSchema} />
 }
 
-export default EspeciliadadeClinicas
+export default EspecialidadeClinicas

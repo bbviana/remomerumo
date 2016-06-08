@@ -9,7 +9,8 @@ class PlanejamentoAtividades extends Component {
         nome: "",
         data: "",
         atividadeGrupos: [],
-        tarefas: []
+        tarefas: [],
+        equipamentos: []
     }
 
     salvarAlteracoes = (event) => {
@@ -45,6 +46,15 @@ class PlanejamentoAtividades extends Component {
         })
         .then(tarefasRequest => this.setState({
             tarefas: tarefasRequest
+        }))
+    }
+    
+    procurarEquipamentos = () => {
+    	Request.get('api/planejamentoAtividades/procurarEquipamentos', {
+            id: this.props.id
+        })
+        .then(equipamentosRequest => this.setState({
+        	equipamentos: equipamentosRequest
         }))
     }
     
@@ -109,6 +119,33 @@ class PlanejamentoAtividades extends Component {
     	
     }
     
+    alterarEquipamentos = (idPlanejamento, event) => {
+    	var atividades = this.state.atividadeGrupos
+    	
+    	var atividadeEscolhido = atividades.find(element => {
+    		return element.id == idPlanejamento
+    	})
+    	
+    	const target = event.target
+        let value
+        	
+        if (target.multiple) {
+            value = Array.from(target.options)
+                .filter(option => option.selected)
+                .map(option => ({id: option.value}))
+        } else {
+            value = {id: target.value}
+        }
+    	
+        if(!target.value){
+            value = null
+        } else {
+        	atividadeEscolhido.equipamentos = value
+        	this.setState({atividadeGrupos : atividades})
+        }
+    	
+    }
+    
     alterarPlanejamento = (idPlanejamento, event) => {
     	
     	var atividades = this.state.atividadeGrupos
@@ -138,6 +175,7 @@ class PlanejamentoAtividades extends Component {
     componentDidMount = () => {
     	this.procurarGrupos()
     	this.procurarTarefas()
+    	this.procurarEquipamentos()
     }
     
     render = () =>
@@ -178,7 +216,7 @@ class PlanejamentoAtividades extends Component {
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
 			            	        		<Col xs={6} md={3}><strong>Foco no Ensino/Cuidados</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Tarefas</strong></Col>
-			            	        		<Col xs={6} md={3}><strong>Tarefas novo*</strong></Col>
+			            	        		<Col xs={6} md={3}><strong>Equipamentos</strong></Col>
 			            	          	</Row>
 			            	          	<Row className="show-grid">
 			            	          		<Col xs={6} md={2}>
@@ -207,24 +245,21 @@ class PlanejamentoAtividades extends Component {
 				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)} 
 	                   									 onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
 	                										{this.state.tarefas.map((element, i) =>
-	                    								<option key={i} value={element.id}>{element.nome}</option>
+	                    								<option key={i} value={element.id}>{element.nomeCompleto}</option>
 	                										)}
 	            									</Input>
 												</div>
 											</Col>
-											<Col xs={12} md={3}>
-												<Accordion>
-												{this.state.tarefas.map((element, i) =>
-                									<Panel header={element.nome} eventKey={i}>
-											    		<Input type="checkbox" name="a" defaultChecked={element.id} label={element.nome} onChange={console.log("mudou")}/>
-											    		{element.tarefasFilhas.map((element1, j) =>
-											    			<Input type="checkbox" name="b" defaultChecked={element1.id} label={element1.nome} onChange={console.log("mudou")}/>
-											    		)}
-											    		
-											    	</Panel>
-            										)}
-											  </Accordion>
-										  </Col>
+											<Col xs={12} md={2}>
+		            	          			<div>
+			            	          			<Input type="select" name="equipamentos" defaultValue={ids(atividadeGrupo.equipamentos)} 
+                   									 onChange={this.alterarEquipamentos.bind(this, atividadeGrupo.id)} multiple>
+                										{this.state.equipamentos.map((element, i) =>
+                    								<option key={i} value={element.id}>{element.nome}</option>
+                										)}
+            									</Input>
+											</div>
+										</Col>
 			            	          	</Row>
 		            	        		<Row className="show-grid">
 		            	        			<Col xs={12}>&nbsp;</Col>
