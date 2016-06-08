@@ -8,6 +8,7 @@ import AvaliacoesClinicasController from './AvaliacoesClinicasController'
 import ModeloAvaliacoesClinicasController from './ModeloAvaliacoesClinicasController'
 import InfoClinicasController from './InfoClinicasController'
 import TipoInfoClinicasController from './TipoInfoClinicasController'
+import EspecialidadeClinicasController from './EspecialidadeClinicasController'
 import PlanejamentoAtividadesController from './PlanejamentoAtividadesController'
 import ResumoAtividadesController from './ResumoAtividadesController'
 import ExecucaoAtividadesController from './ExecucaoAtividadesController'
@@ -31,6 +32,7 @@ export {
     TipoAtividadesController,
     InfoClinicasController,
     TipoInfoClinicasController,
+    EspecialidadeClinicasController,
     ModeloAvaliacoesClinicasController,
     AvaliacoesClinicasController,
     PlanejamentoAtividadesController,

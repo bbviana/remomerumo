@@ -8,6 +8,7 @@ import AvaliacoesClinicas from './AvaliacoesClinicas'
 import ModeloAvaliacoesClinicas from './ModeloAvaliacoesClinicas'
 import InfoClinicas from './InfoClinicas'
 import TipoInfoClinicas from './TipoInfoClinicas'
+import EspecialidadeClinicas from './EspecialidadeClinicas'
 import GrupoAlunos from './GrupoAlunos'
 import PlanejamentoAtividades from './PlanejamentoAtividades'
 import ResumoAtividades from './ResumoAtividades'
@@ -34,6 +35,7 @@ export {
     InfoClinicas,
     ModeloAvaliacoesClinicas,
     TipoInfoClinicas,
+    EspecialidadeClinicas,
     AvaliacoesClinicas,
     PlanejamentoAtividades,
     ResumoAtividades,
