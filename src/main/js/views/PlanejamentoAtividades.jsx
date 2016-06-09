@@ -181,13 +181,13 @@ class PlanejamentoAtividades extends Component {
     render = () =>
         <div style={s.app}>
         <Navbar fixedTop fluid inverse>
-	        <NavBrand>
+	        <Navbar.Brand>
 	            <a href="?login">Remo meu Rumo</a>
-	        </NavBrand>
+	        </Navbar.Brand>
 	        <Nav>
 	        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Planejamento de Atividades</NavItem>
 	        </Nav>
-	        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
+	        <Nav pullRight eventKey={0}> {/* This is the eventKey referenced */}
 	            <NavItem eventKey={1} href="#">
 	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Atividade : {this.state.nome},&nbsp;{this.state.data} 
 	            </NavItem>
@@ -203,7 +203,7 @@ class PlanejamentoAtividades extends Component {
                     
                     	<div>
                     	                    	
-                    	<Tabs>
+                    	<Tabs id="tabs-grupos">
             		    
             	        {this.state.atividadeGrupos.map((atividadeGrupo, index) => {
             	        	return  <Tab eventKey={index} title={atividadeGrupo.grupo.nome} > <div>

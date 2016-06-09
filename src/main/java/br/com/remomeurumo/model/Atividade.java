@@ -135,11 +135,16 @@ public class Atividade extends BaseEntity {
 		ArrayList<String> returnString = new ArrayList<String>();
 
 		returnString.add("id");
-		returnString.add("Nome");
+		returnString.add("Conteúdo");
 		returnString.add("Data");
+		returnString.add("Modalidade");
 		returnString.add("Comentario");
 		returnString.add("Executada");
 
+		for (AtividadeGrupo ativGrupo : this.getAtividadeGrupos()) {
+			returnString.add("Grupo");
+		}
+		
 		return returnString.toArray();
 	}
 
@@ -150,10 +155,15 @@ public class Atividade extends BaseEntity {
 
 		returnString.add(String.valueOf(this.getId()));
 		returnString.add(this.getNome());
-		returnString.add(this.getComentario());
+		returnString.add(this.getData());
 		returnString.add(this.getTipoAtividade().getNome());
-		returnString.add(String.valueOf(this.getExecutada()));
+		returnString.add(this.getComentario());
+		returnString.add(String.valueOf((this.getExecutada()==null?false:this.getExecutada())));
 
+		for (AtividadeGrupo ativGrupo : this.getAtividadeGrupos()) {
+			returnString.add(ativGrupo.getNome());
+		}
+		
 		return returnString.toArray();
 	}
 

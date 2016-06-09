@@ -29,13 +29,13 @@ class ResumoAlunos extends Component {
     render = () =>
         <div style={s.app}>
         <Navbar fixedTop fluid inverse>
-	        <NavBrand>
+	        <Navbar.Brand>
 	            <a href="?login">Remo meu Rumo</a>
-	        </NavBrand>
+	        </Navbar.Brand>
 	        <Nav>
 	        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Resumo dos Alunos</NavItem>
 	        </Nav>
-	        <Nav right eventKey={0}> {}
+	        <Nav pullRight eventKey={0}> {}
 	            <NavItem eventKey={1} href="#">
 	                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Aluno : {this.state.nome} 
 	            </NavItem>

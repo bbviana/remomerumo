@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Button, Col, Glyphicon, Input, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, NavDropdown, Pagination,
+import {Button, Col, Glyphicon, Input, MenuItem, Modal, Nav, Navbar, NavItem, NavDropdown, Pagination,
         Row, Table} from 'react-bootstrap'
 import {Form} from '../components'
 
@@ -16,7 +16,7 @@ class Crud extends Component {
 
     render = ({controller, searchSchema, listSchema, formSchema, title} = this.props) =>
         <div style={styles.app}>
-            <Header label={title} />
+            <Header label={title}/>
 
             <Content>
                 <SearchSection controller={controller}
@@ -47,13 +47,13 @@ class Crud extends Component {
 
 const Header = ({label}) =>
     <Navbar fixedTop fluid inverse>
-        <NavBrand>
+        <Navbar.Brand>
             <a href="remomeurumo">Remo meu Rumo</a>
-        </NavBrand>
+        </Navbar.Brand>
         <Nav>
         	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; {label}</NavItem>
         </Nav>
-        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
+        <Nav eventKey={0} pullRight> {/* This is the eventKey referenced */}
             <NavItem eventKey={1} href="alunos">
                 <Glyphicon glyph="fire"/>&nbsp;&nbsp;Alunos
             </NavItem>

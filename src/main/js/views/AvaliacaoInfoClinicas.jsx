@@ -65,13 +65,13 @@ class AvaliacaoInfoClinicas extends Component {
     render = () =>
         <div style={s.app}>
 	        <Navbar fixedTop fluid inverse>
-		        <NavBrand>
+		        <Navbar.Brand>
 		            <a href="?login">Remo meu Rumo</a>
-		        </NavBrand>
+		        </Navbar.Brand>
 		        <Nav>
 		        	<NavItem eventKey={1} href="#"><Glyphicon glyph="chevron-right"/>&nbsp;&nbsp; Informação Clínica da Avaliação</NavItem>
 		        </Nav>
-		        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
+		        <Nav pullRight eventKey={0}> {/* This is the eventKey referenced */}
 		            <NavItem eventKey={1} href="#">
 		                <Glyphicon glyph="flag"/>&nbsp;&nbsp;Avaliacao : {this.state.modelo}, Aluno: {this.state.aluno} 
 		            </NavItem>
