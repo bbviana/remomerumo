@@ -55,6 +55,15 @@ public class Atividade extends BaseEntity {
 		return reflectionToString(this, SHORT_PREFIX_STYLE);
 	}
 
+	@Transient
+	public String getDataFormatada() {
+		if(this.data!=null && this.data.indexOf("T")> 0){
+			//2016-05-04T15:00:00.000Z
+			return this.data.substring(0, this.data.indexOf("T"));
+		}
+		return "";
+	}
+	
 	public String getData() {
 		return data;
 	}

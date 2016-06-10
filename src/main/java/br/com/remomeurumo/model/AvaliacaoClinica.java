@@ -42,6 +42,15 @@ public class AvaliacaoClinica extends BaseEntity {
 	@OneToMany(mappedBy = "avaliacao")
 	private Collection<InfoClinica> informacoesClinicas;
 
+	@Transient
+	public String getDataFormatada() {
+		if(this.data!=null && this.data.indexOf("T")> 0){
+			//2016-05-04T15:00:00.000Z
+			return this.data.substring(0, this.data.indexOf("T"));
+		}
+		return "";
+	}
+	
 	public String getData() {
 		return data;
 	}

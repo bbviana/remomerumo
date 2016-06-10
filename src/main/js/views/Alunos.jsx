@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AlunosController} from '../controllers'
-import {Input, Row, Col, Grid, Button, Glyphicon} from 'react-bootstrap'
+import {Input, Row, Col, Grid, Button, Glyphicon, FormGroup, ControlLabel} from 'react-bootstrap'
+import DatePicker from 'react-bootstrap-date-picker';
 
 class Alunos extends Component {
     componentDidMount = () => AlunosController.list() // Busca inicial
@@ -47,9 +48,19 @@ class Alunos extends Component {
 	        </Row>
 	
 	        <Row className="show-grid">
-	        	<Col xs={12} md={4}><Input type="text" name="dtNasc" defaultValue={aluno.dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  /></Col>	        
-	          	<Col xs={12} md={4}><Input type="text" name="naturalDe" defaultValue={aluno.naturalDe} label="Natural de" placeholder="Cidade - estado"  /></Col>
-	          	<Col xs={12} md={4}><Input type="text" name="dataDeIngresso" defaultValue={aluno.dataDeIngresso} label="Data de Ingresso" placeholder="dd/mm/aaaa"  /></Col>
+	        	<Col xs={12} md={4}>	        
+		        	<FormGroup controlId="data_pk">
+	    				<ControlLabel>Data de Nascimento</ControlLabel>
+	    				<DatePicker placeholder="dd/mm/aaaa" value={aluno.dtNasc} name="dtNasc" onChange={(value) => {AlunosController.state.form.dtNasc=value}} />
+	    			</FormGroup>
+    			</Col>	
+	        	<Col xs={12} md={4}><Input type="text" name="naturalDe" defaultValue={aluno.naturalDe} label="Natural de" placeholder="Cidade - estado"  /></Col>
+	          	<Col xs={12} md={4}>	        
+		        	<FormGroup controlId="data_pki">
+	    				<ControlLabel>Data de Ingresso</ControlLabel>
+	    				<DatePicker placeholder="dd/mm/aaaa" value={aluno.dataDeIngresso} name="dataDeIngresso" onChange={(value) => {AlunosController.state.form.dataDeIngresso=value}} />
+	    			</FormGroup>
+    			</Col>
 	        </Row>
 	
 	        <Row className="show-grid">

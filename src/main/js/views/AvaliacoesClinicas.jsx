@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AvaliacoesClinicasController} from '../controllers'
-import {Button,Input, Row, Col, Grid, Glyphicon} from 'react-bootstrap';
+import {Button,Input, Row, Col, Grid, Glyphicon, FormGroup, ControlLabel} from 'react-bootstrap'
+import DatePicker from 'react-bootstrap-date-picker';
 
 class AvaliacoesClinicas extends Component {
     componentDidMount = () => AvaliacoesClinicasController.list() // Busca inicial
@@ -47,7 +48,12 @@ class AvaliacoesClinicas extends Component {
 				            )}
 			            </Input>
 		            </Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Data" placeholder="Data da Avaliacao" name="data" defaultValue={avaliacaoClinica.data}/></Col>
+		          	<Col xs={12} md={6}>
+			          	<FormGroup controlId="data_pki">
+		    				<ControlLabel>Data</ControlLabel>
+		    				<DatePicker placeholder="dd/mm/aaaa" value={avaliacaoClinica.data} name="data" onChange={(value) => {AvaliacoesClinicasController.state.form.data=value}} />
+		    			</FormGroup>
+		          	</Col>
 		        </Row>
 		        <Row className="show-grid">
 		          	<Col xs={12}>

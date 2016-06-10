@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AuditoriasController} from '../controllers'
-import {Input, Row, Col, Grid, Panel, Glyphicon, Button} from 'react-bootstrap';
+import {Input, Row, Col, Grid, Panel, Glyphicon, Button, FormGroup, ControlLabel} from 'react-bootstrap'
+import DatePicker from 'react-bootstrap-date-picker';
 
 class Auditorias extends Component {
     componentDidMount = () => AuditoriasController.list() // Busca inicial
@@ -27,7 +28,7 @@ class Auditorias extends Component {
                 <td>{auditoria.usuario.nome}</td>
                 <td>{auditoria.nome}</td>
                 <td>{auditoria.tipoOperacao}</td>
-                <td>{auditoria.dataRegistro}</td>
+                <td>{auditoria.dataRegistroFormatada}</td>
             </tr>
             
     }
@@ -37,7 +38,11 @@ class Auditorias extends Component {
 	        <Grid fluid>
 		        <Row className="show-grid">
 		        	<Col xs={12} md={6}><Input type="text" disabled label="Nome" name="nome" defaultValue={auditoria.nome}/></Col>
-		        	<Col xs={12} md={6}><Input type="text" disabled label="dataRegistro" name="dataRegistro" defaultValue={auditoria.dataRegistro} /></Col>
+		        	<Col xs={12} md={6}>
+			        	<FormGroup controlId="data_pki">
+		    				<ControlLabel>Data de Registro</ControlLabel>
+		    				<DatePicker placeholder="dd/mm/aaaa" value={avaliacaoClinica.dataRegistro} name="dataRegistro" onChange={(value) => {AuditoriasController.state.form.dataRegistro=value}} />
+		    			</FormGroup></Col>
 		        </Row>
 		        <Row className="show-grid">
 		        	<Col xs={12} md={12}><Input type="textarea" disabled label="Descrição" placeholder="Descrição" name="registro" defaultValue={auditoria.registro}/></Col>

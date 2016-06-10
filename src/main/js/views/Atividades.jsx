@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AtividadesController} from '../controllers'
-import {Input, Row, Col, Grid, Panel, Glyphicon, Button} from 'react-bootstrap';
+import {Input, Row, Col, Grid, Panel, Glyphicon, Button, FormGroup, ControlLabel} from 'react-bootstrap';
+import DatePicker from 'react-bootstrap-date-picker';
 
 class Atividades extends Component {
     componentDidMount = () => AtividadesController.list() // Busca inicial
@@ -23,7 +24,7 @@ class Atividades extends Component {
             <tr>
                 <td>{atividade.id}</td>
                 <td>{atividade.nome}</td>
-                <td>{atividade.data}</td>
+                <td>{atividade.dataFormatada}</td>
             </tr>,
             
        actions: (atividade) =>  
@@ -53,7 +54,12 @@ class Atividades extends Component {
 		            </Col>
 		        </Row>
 				<Row className="show-grid">	
-		        	<Col xs={12} md={4}><Input type="text" label="Data" placeholder="Data" name="data" defaultValue={atividade.data}/></Col>
+		        	<Col xs={12} md={4}>
+		        		<FormGroup controlId="data_pk">
+		        			<ControlLabel>Data</ControlLabel>
+		        			<DatePicker placeholder="Data" value={atividade.data} name="data" onChange={(value) => {AtividadesController.state.form.data=value}} />
+		        		</FormGroup>
+		        	</Col>
 		        	<Col xs={12} md={8}>
 			        	<Input type="text" label="Conteúdo" placeholder="Conteúdo" name="nome" defaultValue={atividade.nome}/>
 		            </Col>

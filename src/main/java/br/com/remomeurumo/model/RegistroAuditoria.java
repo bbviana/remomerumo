@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
@@ -77,6 +78,15 @@ public class RegistroAuditoria extends BaseEntity {
 
 	public void setDataRegistro(String dataRegistro) {
 		this.dataRegistro = dataRegistro;
+	}
+	
+	@Transient
+	public String getDataRegistroFormatada() {
+		if(this.dataRegistro!=null && this.dataRegistro.indexOf("T")> 0){
+			//2016-05-04T15:00:00.000Z
+			return this.dataRegistro.substring(0, this.dataRegistro.indexOf("T"));
+		}
+		return "";
 	}
 	
 

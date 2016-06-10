@@ -1,14 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
 import {Image, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, NavDropdown, Tabs, Tab, PageHeader} from 'react-bootstrap';
-import DatePicker from 'react-bootstrap-date-picker';
-
 
 class Home extends Component {
-    
+	
+	
     render = () =>
         <div style={s.app}>
-        <DatePicker placeholder="Placeholder" />
+       
         <Navbar fixedTop fluid inverse>
         <Navbar.Brand>
             <a href="">Remo meu Rumo</a>
