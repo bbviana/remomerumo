@@ -2,14 +2,14 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AlunosController} from '../controllers'
-import {Input, Row, Col, Grid, Button, Glyphicon, FormGroup, ControlLabel} from 'react-bootstrap'
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Button, Glyphicon} from 'react-bootstrap'
 import DatePicker from 'react-bootstrap-date-picker';
 
 class Alunos extends Component {
     componentDidMount = () => AlunosController.list() // Busca inicial
  
     searchSchema = (search) =>
-       <Input type="text" placeholder="Buscar por nome do Aluno" autoComplete="off"
+       <FormControl type="text" placeholder="Buscar por nome do Aluno" autoComplete="off"
                name="nome" defaultValue={search.nome}/>
 
     listSchema = {

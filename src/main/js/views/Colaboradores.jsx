@@ -2,13 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {ColaboradoresController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class Colaboradores extends Component {
     componentDidMount = () => ColaboradoresController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do Colaborador" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome do Colaborador" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {

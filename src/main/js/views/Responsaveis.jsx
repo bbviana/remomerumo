@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {ResponsaveisController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, Checkbox, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class Responsaveis extends Component {
     componentDidMount = () => ResponsaveisController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do Responsável" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome do Responsável" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -32,39 +32,41 @@ class Responsaveis extends Component {
 
     formSchema = (responsavel) =>
         <div>
+        	<FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome completo do responsavel" name="nome" defaultValue={responsavel.nome} autoFocus/></Col>
-		          	<Col xs={12} md={6}><Input type="text" name="apelido" defaultValue={responsavel.apelido} label="Apelido" placeholder="Apelido"  /></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome completo do responsavel" name="nome" defaultValue={responsavel.nome} autoFocus/></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Apelido</ControlLabel><FormControl type="text" name="apelido" defaultValue={responsavel.apelido} placeholder="Apelido"  /></Col>
 		        </Row>
 		
 		        <Row className="show-grid">
-		          	<Col xs={12} md={6}><Input type="text" name="naturalDe" defaultValue={responsavel.naturalDe} label="Natural de" placeholder="Cidade - estado"  /></Col>
-		          	<Col xs={12} md={6}><Input type="text" name="dtNasc" defaultValue={responsavel.dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  /></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Natural de</ControlLabel><FormControl type="text" name="naturalDe" defaultValue={responsavel.naturalDe} placeholder="Cidade - estado"  /></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Data de nascimento</ControlLabel><FormControl type="text" name="dtNasc" defaultValue={responsavel.dtNasc} placeholder="dd/mm/aaaa"  /></Col>
 		        </Row>
 		
 		        <Row className="show-grid">
-		        	<Col xs={12} md={6}><Input type="text" name="cpf" defaultValue={responsavel.cpf} label="CPF" placeholder="Documento CPF"  /></Col>
-		        	<Col xs={12} md={6}><Input type="text" name="rg" defaultValue={responsavel.rg} label="RG" placeholder="Documento RG"  /></Col>
+		        	<Col xs={12} md={6}><ControlLabel>CPF</ControlLabel><FormControl type="text" name="cpf" defaultValue={responsavel.cpf} placeholder="Documento CPF"  /></Col>
+		        	<Col xs={12} md={6}><ControlLabel>RG</ControlLabel><FormControl type="text" name="rg" defaultValue={responsavel.rg} placeholder="Documento RG"  /></Col>
 		        </Row>
 		        <Row className="show-grid">	
-		        	<Col xs={12}><Input type="text" name="endereco" defaultValue={responsavel.endereco} label="Endereço" placeholder="Rua, número"  /></Col>
+		        	<Col xs={12}><ControlLabel>Endereco</ControlLabel><FormControl type="text" name="endereco" defaultValue={responsavel.endereco} placeholder="Rua, número"  /></Col>
 		       </Row>
 		
 		        <Row className="show-grid">
-		        	<Col xs={12} md={4}><Input type="text" name="email" defaultValue={responsavel.email} label="Email" placeholder="Email para contato"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="telefone" defaultValue={responsavel.telefone} label="Telefone" placeholder="Telefone Fixo"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="celular" defaultValue={responsavel.celular} label="Celular" placeholder="Celular com ddd"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Celular</ControlLabel><FormControl type="text" name="email" defaultValue={responsavel.email} placeholder="Email para contato"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Telefone</ControlLabel><FormControl type="text" name="telefone" defaultValue={responsavel.telefone} placeholder="Telefone Fixo"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Email</ControlLabel><FormControl type="text" name="celular" defaultValue={responsavel.celular} placeholder="Celular com ddd"  /></Col>
 		        </Row>
 		        <Row className="show-grid">	
-		        	<Col xs={12} md={4}><Input type="text" name="sapato" defaultValue={responsavel.sapato} label="Sapato" placeholder="Tamanho da sapato"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="bermuda" defaultValue={responsavel.bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={responsavel.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Sapato</ControlLabel><FormControl type="text" name="sapato" defaultValue={responsavel.sapato} placeholder="Tamanho da sapato"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Bermuda</ControlLabel><FormControl type="text" name="bermuda" defaultValue={responsavel.bermuda} placeholder="Tamanho da bermuda"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Camiseta</ControlLabel><FormControl type="text" name="camiseta" defaultValue={responsavel.camiseta} placeholder="Tamanho da camiseta"  /></Col>
 		        </Row>
 		        <Row className="show-grid">	
-    				<Col xs={12}><Input type="checkbox" name="ativo" defaultChecked={responsavel.ativo} label="Ativo" /></Col>
+    				<Col xs={12}><ControlLabel>Ativo</ControlLabel><Checkbox name="ativo" defaultChecked={responsavel.ativo} /></Col>
     			</Row>
 	      </Grid>
+	      </FormGroup>
         </div>
 
     render = () =>

@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {EspecialidadeClinicasController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class EspecialidadeClinicas extends Component {
     componentDidMount = () => EspecialidadeClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome da Especialidade" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome da Especialidade" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -26,11 +26,13 @@ class EspecialidadeClinicas extends Component {
 
     formSchema = (especialidadeClinica) =>
         <div>
+        	<FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome completo da Medida" name="nome" defaultValue={especialidadeClinica.nome} autoFocus/></Col>
+		          	<Col xs={12}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome completo da Medida" name="nome" defaultValue={especialidadeClinica.nome} autoFocus/></Col>
 		        </Row>
 	      </Grid>
+	      </FormGroup> 
         </div>
 
     render = () =>

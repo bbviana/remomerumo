@@ -2,14 +2,14 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AtividadesController} from '../controllers'
-import {Input, Row, Col, Grid, Panel, Glyphicon, Button, FormGroup, ControlLabel} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Panel, Glyphicon, Button} from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
 
 class Atividades extends Component {
     componentDidMount = () => AtividadesController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do Plano de Aula" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome do Plano de Aula" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -41,33 +41,36 @@ class Atividades extends Component {
 
     formSchema = (atividade, {tipos = [], planejamentos = []}) =>
         <div>
+        	<FormGroup controlId="data_pk">
 	        <Grid fluid>
 		        <Row className="show-grid">	
 		        	<Col xs={12}>
-			        	<Input type="select" label="Modalidade" name="tipoAtividade"
+		        		<ControlLabel>Modalidade</ControlLabel>
+			        	<FormControl componentClass="select" name="tipoAtividade"
 				                defaultValue={id(atividade.tipoAtividade)} onChange={handleAssociationChange}>
 				            <option value="">Selecione...</option>
 				            {tipos.map((element, i) =>
 				                <option key={i} value={element.id}>{element.nome}</option>
 				            )}
-			            </Input>
+			            </FormControl>
 		            </Col>
 		        </Row>
 				<Row className="show-grid">	
 		        	<Col xs={12} md={4}>
-		        		<FormGroup controlId="data_pk">
-		        			<ControlLabel>Data</ControlLabel>
-		        			<DatePicker placeholder="Data" value={atividade.data} name="data" onChange={(value) => {AtividadesController.state.form.data=value}} />
-		        		</FormGroup>
+	        			<ControlLabel>Data</ControlLabel>
+	        			<DatePicker placeholder="Data" value={atividade.data} name="data" onChange={(value) => {AtividadesController.state.form.data=value}} />
 		        	</Col>
 		        	<Col xs={12} md={8}>
-			        	<Input type="text" label="Conteúdo" placeholder="Conteúdo" name="nome" defaultValue={atividade.nome}/>
+		        		<ControlLabel>Conteúdo</ControlLabel>
+			        	<FormControl componentClass="text" placeholder="Conteúdo" name="nome" defaultValue={atividade.nome}/>
 		            </Col>
 	            </Row>
 		        <Row className="show-grid">
-		        	<Col xs={12}><Input type="textarea" label="Comentário" name="comentario" defaultValue={atividade.comentario} placeholder="Comentário"  /></Col>
+		        	<Col xs={12}><ControlLabel>Comentário</ControlLabel>
+		        	<FormControl componentClass="textarea" name="comentario" defaultValue={atividade.comentario} placeholder="Comentário"  /></Col>
 		        </Row>
 	      </Grid>
+	      </FormGroup>
         </div>
 
     render = () =>

@@ -2,14 +2,14 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AvaliacoesClinicasController} from '../controllers'
-import {Button,Input, Row, Col, Grid, Glyphicon, FormGroup, ControlLabel} from 'react-bootstrap'
+import {Button,Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Glyphicon} from 'react-bootstrap'
 import DatePicker from 'react-bootstrap-date-picker';
 
 class AvaliacoesClinicas extends Component {
     componentDidMount = () => AvaliacoesClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por data da Avaliação" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por data da Avaliação" autoComplete="off"
                name="data" degaultValue={search.data}/>
 
     listSchema = {
@@ -37,39 +37,41 @@ class AvaliacoesClinicas extends Component {
 
     formSchema = (avaliacaoClinica, {modelos = [], alunos = [], tipos = []}) =>
         <div>
+        <FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
 		          	<Col xs={12}  md={6}>
-			          	<Input type="select" label="Modelo" name="modelo"
+		          	<ControlLabel>Modelo</ControlLabel>
+		          		<FormControl componentClass="select" name="modelo"
 			                defaultValue={id(avaliacaoClinica.modelo)} onChange={handleAssociationChange}>
 				            <option value="">Selecione...</option>
 				            {modelos.map((element, i) =>
 				                <option key={i} value={element.id}>{element.nome}</option>
 				            )}
-			            </Input>
+			            </FormControl>
 		            </Col>
 		          	<Col xs={12} md={6}>
-			          	<FormGroup controlId="data_pki">
 		    				<ControlLabel>Data</ControlLabel>
 		    				<DatePicker placeholder="dd/mm/aaaa" value={avaliacaoClinica.data} name="data" onChange={(value) => {AvaliacoesClinicasController.state.form.data=value}} />
-		    			</FormGroup>
 		          	</Col>
 		        </Row>
 		        <Row className="show-grid">
 		          	<Col xs={12}>
-			          	<Input type="select" label="Aluno" name="aluno"
+		          	<ControlLabel>Aluno</ControlLabel>
+	          		<FormControl componentClass="select"  type="select" name="aluno"
 			                defaultValue={id(avaliacaoClinica.aluno)} onChange={handleAssociationChange}>
 				            <option value="">Selecione...</option>
 				            {alunos.map((element, i) =>
 				                <option key={i} value={element.id}>{element.nome}</option>
 				            )}
-			            </Input>
+			            </FormControl>
 		            </Col>
 		        </Row>
 		        <Row className="show-grid">
-	          		<Col xs={12}><Input type="textarea" label="Comentário" placeholder="Comentários da Avaliação" name="comentario" defaultValue={avaliacaoClinica.comentario} /></Col>
+	          		<Col xs={12}><ControlLabel>Comentário</ControlLabel><FormControl componentClass="textarea" label="Comentário" placeholder="Comentários da Avaliação" name="comentario" defaultValue={avaliacaoClinica.comentario} /></Col>
 	          	</Row>
 	      </Grid>
+	      </FormGroup>
         </div>
 
         

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button} from 'react-bootstrap';
+import {Image, Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Panel, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button} from 'react-bootstrap';
 
 class ExecucaoAtividades extends Component {
     state = {

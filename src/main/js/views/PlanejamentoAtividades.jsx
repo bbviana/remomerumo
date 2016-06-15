@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
 import {id, ids} from '../crud/Associations'
-import {Image, Input, Row, Col, Grid, Panel, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar, ListGroupItem, ListGroup, Accordion} from 'react-bootstrap';
+import {Image, Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Panel, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar, ListGroupItem, ListGroup, Accordion} from 'react-bootstrap';
 
 class PlanejamentoAtividades extends Component {
     state = {

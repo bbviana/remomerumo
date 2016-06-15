@@ -2,13 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {InfoClinicasController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class InfoClinicas extends Component {
     componentDidMount = () => InfoClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por valor da Informação" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por valor da Informação" autoComplete="off"
                name="valor" degaultValue={search.valor}/>
 
     listSchema = {
@@ -29,22 +29,25 @@ class InfoClinicas extends Component {
 
     formSchema = (infoClinica, {tipos = []}) =>
         <div>
+        <FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Valor" placeholder="Valor" name="valor" defaultValue={infoClinica.nome} autoFocus/></Col>
+		          	<Col xs={12}><ControlLabel>Valor</ControlLabel><FormControl type="text" placeholder="Valor" name="valor" defaultValue={infoClinica.nome} autoFocus/></Col>
 		        </Row>
 	          	 <Row className="show-grid">	
 			        	<Col xs={12}>
-				        	<Input type="select" label="Tipo" name="tipo"
+			        	<ControlLabel>Tipo</ControlLabel>
+			        	<FormControl componentClass="select" label="Tipo" name="tipo"
 					                defaultValue={id(infoClinica.tipo)} onChange={handleAssociationChange}>
 					            <option value="">Selecione...</option>
 					            {tipos.map((element, i) =>
 					                <option key={i} value={element.id}>{element.nome}</option>
 					            )}
-				            </Input>
+				            </FormControl>
 			            </Col>  	
 		        </Row>
 	      </Grid>
+	      </FormGroup>
         </div>
 
     render = () =>

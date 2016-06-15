@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Image, Input, Row, Col, Table, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button, ButtonToolbar} from 'react-bootstrap';
+import {Image, FormControl, FormGroup, ControlLabel, Input, Row, Col, Table, Glyphicon, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, Button, ButtonToolbar} from 'react-bootstrap';
 
 class AvaliacaoInfoClinicas extends Component {
     state = {

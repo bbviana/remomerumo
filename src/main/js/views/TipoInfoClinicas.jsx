@@ -2,13 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {TipoInfoClinicasController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class TipoInfoClinicas extends Component {
     componentDidMount = () => TipoInfoClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome da Medida" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome da Medida" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -29,25 +29,27 @@ class TipoInfoClinicas extends Component {
 
     formSchema = (tipoInfoClinica, {especialidades = []}) =>
         <div>
-	        <Grid fluid>
-		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome completo da Medida" name="nome" defaultValue={tipoInfoClinica.nome} autoFocus/></Col>
+	        <FormGroup controlId="formControlsFile">
+		        <Grid fluid>
+			        <Row className="show-grid">
+			          	<Col xs={12}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome completo da Medida" name="nome" defaultValue={tipoInfoClinica.nome} autoFocus/></Col>
+			        </Row>
+			        <Row className="show-grid">
+			          	<Col xs={12}><ControlLabel>Sigla</ControlLabel><FormControl type="text" placeholder="Sigla" name="sigla" defaultValue={tipoInfoClinica.sigla}/></Col>
+			        </Row>
+			        <Row className="show-grid">	
+		        	<Col xs={12}>
+		             	<ControlLabel>Especialidade</ControlLabel>
+			            <FormControl componentClass="select" name="especialidade" defaultValue={id(tipoInfoClinica.especialidade)} onChange={handleAssociationChange}>
+				            <option value="">Selecione...</option>
+				            {especialidades.map((element, i) =>
+				                <option key={i} value={element.id}>{element.nome}</option>
+				            )}
+				         </FormControl>
+		            </Col>
 		        </Row>
-		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Sigla" placeholder="Sigla" name="sigla" defaultValue={tipoInfoClinica.sigla}/></Col>
-		        </Row>
-		        <Row className="show-grid">	
-	        	<Col xs={12}>
-		        	<Input type="select" label="Especialidade" name="especialidade"
-			                defaultValue={id(tipoInfoClinica.especialidade)} onChange={handleAssociationChange}>
-			            <option value="">Selecione...</option>
-			            {especialidades.map((element, i) =>
-			                <option key={i} value={element.id}>{element.nome}</option>
-			            )}
-		            </Input>
-	            </Col>
-	        </Row>
-	      </Grid>
+		      </Grid>
+	      </FormGroup>
         </div>
 
     render = () =>

@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {EquipamentosController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class Equipamentos extends Component {
     componentDidMount = () => EquipamentosController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome da Equipamento" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome da Equipamento" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -28,14 +28,16 @@ class Equipamentos extends Component {
 
     formSchema = (equipamento) =>
         <div>
+        <FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome da equipamento" name="nome" defaultValue={equipamento.nome} autoFocus/></Col>
+		          	<Col xs={12}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome da equipamento" name="nome" defaultValue={equipamento.nome} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Descrição" placeholder="Descrição" name="descricao" defaultValue={equipamento.sigla}/></Col>
+		          	<Col xs={12}><ControlLabel>Descrição</ControlLabel><FormControl type="text" placeholder="Descrição" name="descricao" defaultValue={equipamento.sigla}/></Col>
 		        </Row>
 	      </Grid>
+	      </FormGroup>
         </div>
 
     render = () =>

@@ -2,13 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {GrupoAlunosController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class GrupoAlunos extends Component {
     componentDidMount = () => GrupoAlunosController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do Grupo" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome do Grupo" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -31,50 +31,55 @@ class GrupoAlunos extends Component {
 
     formSchema = (grupoAluno, {tipos = [], colaboradores = [], alunos = [] }) =>
         <div>
+        <FormGroup controlId="formControlsFile">
             <Grid fluid>
 	        <Row className="show-grid">
-	          	<Col xs={12}><Input type="text" label="Nome" placeholder="Nome completo do Grupo" name="nome" defaultValue={grupoAluno.nome} autoFocus/></Col>
+	          	<Col xs={12}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome completo do Grupo" name="nome" defaultValue={grupoAluno.nome} autoFocus/></Col>
 	        </Row>
 	
             <Row className="show-grid">	
-            <Col xs={12}><Input type="textarea" label="Critérios ou Fatores" placeholder="Critérios ou Fatores" name="descricao" defaultValue={grupoAluno.descricao}/></Col>
+            <Col xs={12}><ControlLabel>Critérios ou Fatores</ControlLabel><FormControl type="text" placeholder="Critérios ou Fatores" name="descricao" defaultValue={grupoAluno.descricao}/></Col>
 	        </Row>
 	        
 	        <Row className="show-grid">	
         	<Col xs={12}>
-	        	<Input type="select" label="Modalidade" name="tipoAtividade"
+        	<ControlLabel>Modalidade</ControlLabel>
+            	<FormControl componentClass="select" name="tipoAtividade"
 		                defaultValue={id(grupoAluno.tipoAtividade)} onChange={handleAssociationChange}>
 		            <option value="">Selecione...</option>
 		            {tipos.map((element, i) =>
 		                <option key={i} value={element.id}>{element.nome}</option>
 		            )}
-	            </Input>
+	            </FormControl>
             </Col>
         </Row>
         <Row className="show-grid">	
     	<Col xs={12}>
-        	 <Input type="select" label="Alunos" name="alunos"
+    	<ControlLabel>Alunos</ControlLabel>
+        <FormControl componentClass="select" name="alunos"
                    defaultValue={ids(grupoAluno.alunos)} onChange={handleAssociationChange} multiple>
                 <option value="">Selecione...</option>
                 {alunos.map((element, i) =>
                     <option key={i} value={element.id}>{element.nome}</option>
                 )}
-            </Input>
+            </FormControl>
 	        </Col>
         </Row>
         <Row className="show-grid">	
         	<Col xs={12}>
-        	 <Input type="select" label="Colaboradores" name="colaboradores"
+        	<ControlLabel>Colaboradores</ControlLabel>
+            <FormControl componentClass="select" name="colaboradores"
                    defaultValue={ids(grupoAluno.colaboradores)} onChange={handleAssociationChange} multiple>
                 <option value="">Selecione...</option>
                 {colaboradores.map((element, i) =>
                     <option key={i} value={element.id}>{element.nome}</option>
                 )}
-            </Input>
+            </FormControl>
 	        </Col>
 	    </Row>
       </Grid>
-        </div>
+      </FormGroup>
+       </div>
 
     render = () =>
         <Crud title="Grupo de Alunos"

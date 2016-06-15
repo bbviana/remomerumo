@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
-import {Image, Input, Panel, Glyphicon, Nav, Navbar, NavBrand, NavItem, Table} from 'react-bootstrap';
+import {Image, FormControl, FormGroup, ControlLabel, Input, Panel, Glyphicon, Nav, Navbar, NavBrand, NavItem, Table} from 'react-bootstrap';
 
 class ImpressaoAtividades extends Component {
     state = {

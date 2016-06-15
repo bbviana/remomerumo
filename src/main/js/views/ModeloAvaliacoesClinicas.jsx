@@ -2,13 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {ModeloAvaliacoesClinicasController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class ModeloAvaliacoesClinicas extends Component {
     componentDidMount = () => ModeloAvaliacoesClinicasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do Modelo de Avaliação Clínica " autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome do Modelo de Avaliação Clínica " autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -31,33 +31,35 @@ class ModeloAvaliacoesClinicas extends Component {
         <div>
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}  md={6}><Input type="text" label="Nome" placeholder="Nome completo da Avaliação" name="nome" defaultValue={modeloAvaliacaoClinica.nome} autoFocus/></Col>
+		          	<Col xs={12}  md={6}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome completo da Avaliação" name="nome" defaultValue={modeloAvaliacaoClinica.nome} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
 		        <Col xs={12}>
-		        	<Input type="select" label="Especialidade" name="especialidade"
+		        <ControlLabel>Especialidade</ControlLabel>
+	        		<FormControl componentClass="select" name="especialidade"
 			                defaultValue={id(modeloAvaliacaoClinica.especialidade)} onChange={handleAssociationChange}>
 			            <option value="">Selecione...</option>
 			            {especialidades.map((element, i) =>
 			                <option key={i} value={element.id}>{element.nome}</option>
 			            )}
-		            </Input>
+		            </FormControl>
 	            </Col>
 	            </Row>
 		        <Row className="show-grid">	
 		        	<Col xs={12}>
-		        	 <Input type="select" label="Tipos de Informação Clinica" name="tipoInfoClinicas"
+		        	<ControlLabel>Tipos de Informação Clinica</ControlLabel>
+		        	<FormControl componentClass="select" name="tipoInfoClinicas"
 		                   defaultValue={ids(modeloAvaliacaoClinica.tipoInfoClinicas)} onChange={handleAssociationChange} multiple>
 		                <option value="">Selecione...</option>
 		                {tipoInfoClinicas.map((element, i) =>
 		                    <option key={i} value={element.id}>{element.nome}</option>
 		                )}
-		            </Input>
+		            </FormControl>
 			        </Col>
 		        </Row>
 		        
 		        <Row className="show-grid">
-	          		<Col xs={12}><Input type="textarea" label="Descrição" placeholder="Descrição do modelo" name="descricao" defaultValue={modeloAvaliacaoClinica.descricao} /></Col>
+	          		<Col xs={12}><ControlLabel>Descrição</ControlLabel><FormControl componentClass="textarea" placeholder="Descrição do modelo" name="descricao" defaultValue={modeloAvaliacaoClinica.descricao} /></Col>
 	          	</Row>
 	      </Grid>
         </div>

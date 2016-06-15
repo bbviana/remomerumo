@@ -2,13 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {TarefasController} from '../controllers'
-import {Input, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
 
 class Tarefas extends Component {
     componentDidMount = () => TarefasController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome da Atividade" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome da Atividade" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -29,35 +29,38 @@ class Tarefas extends Component {
 
     formSchema = (tarefa, {tipos = [], tarefasPai = []}) =>
         <div>
+        <FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
 		        	<Col xs={12} md={6}>
-			        	<Input type="select" label="Atividade Pai" name="tarefaPai"
+		        		<ControlLabel>Atividade Pai</ControlLabel>
+			        	<FormControl componentClass="select" name="tarefaPai"
 				                defaultValue={id(tarefa.tarefaPai)} onChange={handleAssociationChange}>
 				            <option value="">Selecione...</option>
 				            {tarefasPai.map((element, i) =>
 				                <option key={i} value={element.id}>{element.nome}</option>
 				            )}
-			            </Input>
+			            </FormControl>
 		            </Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome da Atividade" name="nome" defaultValue={tarefa.nome} autoFocus/></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome da Atividade" name="nome" defaultValue={tarefa.nome} autoFocus/></Col>
 		        </Row>
 		        <Row className="show-grid">
-		          	<Col xs={12}><Input type="text" label="Descrição" placeholder="Descrição" name="descricao" defaultValue={tarefa.sigla}/></Col>
+		          	<Col xs={12}><ControlLabel>Descrição</ControlLabel><FormControl type="text" placeholder="Descrição" name="descricao" defaultValue={tarefa.sigla}/></Col>
 		        </Row>
 		        <Row className="show-grid">	
 		        	<Col xs={12}>
-			        	<Input type="select" label="Modalidade" name="tipoAtividade"
+		        		<ControlLabel>Modalidade</ControlLabel>
+			        	<FormControl componentClass="select" name="tipoAtividade"
 				                defaultValue={id(tarefa.tipoAtividade)} onChange={handleAssociationChange}>
 				            <option value="">Selecione...</option>
 				            {tipos.map((element, i) =>
 				                <option key={i} value={element.id}>{element.nome}</option>
 				            )}
-			            </Input>
+			            </FormControl>
 		            </Col>
 		        </Row>
-		        
 	      </Grid>
+	     </FormGroup>
         </div>
 
     render = () =>

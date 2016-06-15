@@ -2,13 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {PermissoesController} from '../controllers'
-import {Input, Row, Col, Grid, Panel, Glyphicon, Button} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Panel, Glyphicon, Button} from 'react-bootstrap';
 
 class Permissoes extends Component {
     componentDidMount = () => PermissoesController.list() // Busca inicial
 
     searchSchema = (search) =>
-        <Input type="text" placeholder="Buscar por nome do usuario" autoComplete="off"
+        <FormControl type="text" placeholder="Buscar por nome do usuario" autoComplete="off"
                name="nome" degaultValue={search.nome}/>
 
     listSchema = {
@@ -30,12 +30,14 @@ class Permissoes extends Component {
 
     formSchema = (permissao) =>
         <div>
+        <FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
-		        	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Login do usuário" name="nome" defaultValue={permissao.nome} autoFocus/></Col>
-		          	<Col xs={12} md={6}><Input type="text" label="Descrição" placeholder="Descrição" name="descricao" defaultValue={permissao.descricao}/></Col>
+		        	<Col xs={12} md={6}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Login do usuário" name="nome" defaultValue={permissao.nome} autoFocus/></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Descrição</ControlLabel><FormControl type="text" placeholder="Descrição" name="descricao" defaultValue={permissao.descricao}/></Col>
 		        </Row>
 	      </Grid>
+	      </FormGroup> 
         </div>
 
     render = () =>
