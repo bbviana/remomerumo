@@ -41,11 +41,12 @@ class Alunos extends Component {
 
     formSchema = (aluno, {responsaveis = []}) =>
         <div>
+        <FormGroup controlId="formControlsFile">
             <Grid fluid>
 	        <Row className="show-grid">
-	          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome completo do aluno" name="nome" defaultValue={aluno.nome} autoFocus/></Col>
-	          	<Col xs={12} md={6}><Input type="text" name="apelido" defaultValue={aluno.apelido} label="Apelido" placeholder="Apelido"  /></Col>
-	        </Row>
+	    		<Col xs={12} md={6}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome completo do colaborador" name="nome" defaultValue={aluno.nome} autoFocus/></Col>
+	    		<Col xs={12} md={6}><ControlLabel>Apelido</ControlLabel><FormControl type="text" name="apelido" defaultValue={aluno.apelido} placeholder="Apelido"  /></Col>
+          	</Row>
 	
 	        <Row className="show-grid">
 	        	<Col xs={12} md={4}>	        
@@ -54,7 +55,7 @@ class Alunos extends Component {
 	    				<DatePicker placeholder="dd/mm/aaaa" value={aluno.dtNasc} name="dtNasc" onChange={(value) => {AlunosController.state.form.dtNasc=value}} />
 	    			</FormGroup>
     			</Col>	
-	        	<Col xs={12} md={4}><Input type="text" name="naturalDe" defaultValue={aluno.naturalDe} label="Natural de" placeholder="Cidade - estado"  /></Col>
+    			<Col xs={12} md={4}><ControlLabel>Natural de</ControlLabel><FormControl type="text" name="naturalDe" defaultValue={aluno.naturalDe} placeholder="Cidade - estado"  /></Col>
 	          	<Col xs={12} md={4}>	        
 		        	<FormGroup controlId="data_pki">
 	    				<ControlLabel>Data de Ingresso</ControlLabel>
@@ -64,48 +65,51 @@ class Alunos extends Component {
 	        </Row>
 	
 	        <Row className="show-grid">
-	        	<Col xs={12} md={4}><Input type="text" name="cpf" defaultValue={aluno.cpf} label="CPF" placeholder="Documento CPF"  /></Col>
-	        	<Col xs={12} md={4}><Input type="text" name="rg" defaultValue={aluno.rg} label="RG" placeholder="Documento RG"  /></Col>
+	        <Col xs={12} md={4}><ControlLabel>CPF</ControlLabel><FormControl type="text" name="cpf" defaultValue={aluno.cpf} placeholder="Documento CPF"  /></Col>
+        	<Col xs={12} md={4}><ControlLabel>RG</ControlLabel><FormControl type="text" name="rg" defaultValue={aluno.rg} placeholder="Documento RG"  /></Col>
 	        	<Col xs={12} md={4}><Input type="text" name="matrAluno" defaultValue={aluno.matrAluno} label="Código de identificação" placeholder="Matricula externa ou paciente"  /></Col>
 	        </Row>
 	        <Row className="show-grid">	
-	        	<Col xs={12}><Input type="text" name="endereco" defaultValue={aluno.endereco} label="Endereço" placeholder="Rua, número"  /></Col>
+	        <Col xs={12}><ControlLabel>Endereco</ControlLabel><FormControl type="text" name="endereco" defaultValue={aluno.endereco} placeholder="Rua, número"  /></Col>
 	       </Row>
 	
 	        <Row className="show-grid">
-	        	<Col xs={12} md={4}><Input type="text" name="email" defaultValue={aluno.email} label="Email" placeholder="Email para contato"  /></Col>
-	        	<Col xs={12} md={4}><Input type="text" name="telefone" defaultValue={aluno.telefone} label="Telefone" placeholder="Telefone Fixo"  /></Col>
-	        	<Col xs={12} md={4}><Input type="text" name="celular" defaultValue={aluno.celular} label="Celular" placeholder="Celular com ddd"  /></Col>
+	        <Col xs={12} md={4}><ControlLabel>Email</ControlLabel><FormControl type="text" name="email" defaultValue={aluno.email} placeholder="Email para contato"  /></Col>
+        	<Col xs={12} md={4}><ControlLabel>Telefone</ControlLabel><FormControl type="text" name="telefone" defaultValue={aluno.telefone} placeholder="Telefone Fixo"  /></Col>
+        	<Col xs={12} md={4}><ControlLabel>Celular</ControlLabel><FormControl type="text" name="celular" defaultValue={aluno.celular} placeholder="Celular com ddd"  /></Col>
 	        </Row>
 	        <Row className="show-grid">
-	        	<Col xs={12} md={4}><Input type="text" name="sapato" defaultValue={aluno.sapato} label="Sapato" placeholder="Tamanho da sapato"  /></Col>
-		        <Col xs={12} md={4}><Input type="text" name="bermuda" defaultValue={aluno.bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  /></Col>
-		        <Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={aluno.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
+	        <Col xs={12} md={4}><ControlLabel>Sapato</ControlLabel><FormControl type="text" name="sapato" defaultValue={aluno.sapato} placeholder="Tamanho da sapato"  /></Col>
+        	<Col xs={12} md={4}><ControlLabel>Bermuda</ControlLabel><FormControl type="text" name="bermuda" defaultValue={aluno.bermuda} placeholder="Tamanho da bermuda"  /></Col>
+        	<Col xs={12} md={4}><ControlLabel>Camiseta</ControlLabel><FormControl type="text" name="camiseta" defaultValue={aluno.camiseta} placeholder="Tamanho da camiseta"  /></Col>
 		       </Row>
 	        <Row className="show-grid">	
-	        	<Col xs={12} md={4}><Input type="text" name="periodoEscolar" defaultValue={aluno.periodoEscolar} label="Período Escolar" placeholder="Período Escolar"  /></Col>
-	        	<Col xs={12} md={4}><Input type="text" name="transporte" defaultValue={aluno.transporte} label="Transporte" placeholder="Transporte"  /></Col>
-	        	<Col xs={12} md={4}><Input type="text" name="horarioTreino" defaultValue={aluno.horarioTreino} label="Horário de Treino" placeholder="Horário de Treino"  /></Col>
+	        	<Col xs={12} md={4}><ControlLabel>Período Escolar</ControlLabel><FormControl type="text" name="periodoEscolar" defaultValue={aluno.periodoEscolar} placeholder="Período Escolar"  /></Col>
+	        	<Col xs={12} md={4}><ControlLabel>Transporte</ControlLabel><FormControl type="text" name="transporte" defaultValue={aluno.transporte} placeholder="Transporte"  /></Col>
+	        	<Col xs={12} md={4}><ControlLabel>Horário treino</ControlLabel><FormControl type="text" name="horarioTreino" defaultValue={aluno.horarioTreino}  placeholder="Horário de Treino"  /></Col>
 	        </Row>
 	        <Row className="show-grid">	
 	        	<Col xs={12}>
-	        	 <Input type="select" label="Responsáveis" name="responsaveis"
+	        	<ControlLabel>Responsável</ControlLabel>
+	        		<FormControl componentClass="select" name="responsaveis"
 	                   defaultValue={ids(aluno.responsaveis)} onChange={handleAssociationChange} multiple>
 	                <option value="">Selecione...</option>
 	                {responsaveis.map((element, i) =>
 	                    <option key={i} value={element.id}>{element.nome}</option>
 	                )}
-	            </Input>
+	            </FormControl>
 		        </Col>
 	        </Row>
 	        <Row className="show-grid">	
         		<Col xs={12}>
-        			<Input type="textarea" name="observacoes" defaultValue={aluno.observacoes} label="Observações" placeholder="Detalhes relevantes sobre o aluno"  />
+        			<ControlLabel>Observações</ControlLabel>
+        			<FormControl componentClass="textarea" name="observacoes" defaultValue={aluno.observacoes} placeholder="Detalhes relevantes sobre o aluno"  />
         		</Col>
         	</Row>
         	<Row className="show-grid">	
     			<Col xs={12}>
-    				<Input type="textarea" name="abc" defaultValue={aluno.abc} label="Abc" placeholder="Adaptações, limitações e indicações para a criança"  />
+    				<ControlLabel>Abc</ControlLabel>
+    				<FormControl componentClass="textarea" name="abc" defaultValue={aluno.abc} placeholder="Adaptações, limitações e indicações para a criança"  />
     			</Col>
     		</Row>
         	<Row className="show-grid">	
@@ -115,6 +119,7 @@ class Alunos extends Component {
     		</Row>
 	        
       </Grid>
+      </FormGroup>
         </div>
 
     render = () =>

@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {ColaboradoresController} from '../controllers'
-import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid} from 'react-bootstrap';
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Checkbox, DatePicker} from 'react-bootstrap';
 
 class Colaboradores extends Component {
     componentDidMount = () => ColaboradoresController.list() // Busca inicial
@@ -33,50 +33,55 @@ class Colaboradores extends Component {
 
     formSchema = (colaborador, {responsaveis = []}) =>
         <div>
+        <FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12} md={6}><Input type="text" label="Nome" placeholder="Nome completo do colaborador" name="nome" defaultValue={colaborador.nome} autoFocus/></Col>
-		          	<Col xs={12} md={6}><Input type="text" name="apelido" defaultValue={colaborador.apelido} label="Apelido" placeholder="Apelido"  /></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome completo do colaborador" name="nome" defaultValue={colaborador.nome} autoFocus/></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Apelido</ControlLabel><FormControl type="text" name="apelido" defaultValue={colaborador.apelido} placeholder="Apelido"  /></Col>
 		        </Row>
 		
 		        <Row className="show-grid">
-	          		<Col xs={12} md={4}><Input type="text" name="areaColaborador" defaultValue={colaborador.naturalDe} label="Área de trabalho" placeholder="Colaborador trabalha em.."  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="cpf" defaultValue={colaborador.cpf} label="CPF" placeholder="Documento CPF"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="rg" defaultValue={colaborador.rg} label="RG" placeholder="Documento RG"  /></Col>
+	          		<Col xs={12} md={4}><ControlLabel>Área de trabalho</ControlLabel><FormControl type="text" name="areaColaborador" defaultValue={colaborador.naturalDe} placeholder="Colaborador trabalha em.."  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>CPF</ControlLabel><FormControl type="text" name="cpf" defaultValue={colaborador.cpf} placeholder="Documento CPF"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>RG</ControlLabel><FormControl type="text" name="rg" defaultValue={colaborador.rg} placeholder="Documento RG"  /></Col>
 	          	</Row>
 		        
 		        <Row className="show-grid">
-		          	<Col xs={12} md={6}><Input type="text" name="naturalDe" defaultValue={colaborador.naturalDe} label="Natural de" placeholder="Cidade - estado"  /></Col>
-		          	<Col xs={12} md={6}><Input type="text" name="dtNasc" defaultValue={colaborador.dtNasc} label="Data de Nascimento" placeholder="dd/mm/aaaa"  /></Col>
+		          	<Col xs={12} md={6}><ControlLabel>Natural de</ControlLabel><FormControl type="text" name="naturalDe" defaultValue={colaborador.naturalDe} placeholder="Cidade - estado"  /></Col>
+		          	<Col xs={12} md={6}>
+		          		<ControlLabel>Data de Nascimento</ControlLabel>
+    				</Col>
 		        </Row>
 		        
 		        <Row className="show-grid">	
-		        	<Col xs={12}><Input type="text" name="endereco" defaultValue={colaborador.endereco} label="Endereço" placeholder="Rua, número"  /></Col>
+		        	<Col xs={12}><ControlLabel>Endereco</ControlLabel><FormControl type="text" name="endereco" defaultValue={colaborador.endereco} placeholder="Rua, número"  /></Col>
 		        </Row>
 		
 		        <Row className="show-grid">
-		        	<Col xs={12} md={4}><Input type="text" name="email" defaultValue={colaborador.email} label="Email" placeholder="Email para contato"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="telefone" defaultValue={colaborador.telefone} label="Telefone" placeholder="Telefone Fixo"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="celular" defaultValue={colaborador.celular} label="Celular" placeholder="Celular com ddd"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Email</ControlLabel><FormControl type="text" name="email" defaultValue={colaborador.email} placeholder="Email para contato"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Telefone</ControlLabel><FormControl type="text" name="telefone" defaultValue={colaborador.telefone} placeholder="Telefone Fixo"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Celular</ControlLabel><FormControl type="text" name="celular" defaultValue={colaborador.celular} placeholder="Celular com ddd"  /></Col>
 		        </Row>
 		        <Row className="show-grid">	
-		        	<Col xs={12} md={4}><Input type="text" name="sapato" defaultValue={colaborador.sapato} label="Sapato" placeholder="Tamanho da sapato"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="bermuda" defaultValue={colaborador.bermuda} label="Bermuda" placeholder="Tamanho da bermuda"  /></Col>
-		        	<Col xs={12} md={4}><Input type="text" name="camiseta" defaultValue={colaborador.camiseta} label="Camiseta" placeholder="Tamanho da camiseta"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Sapato</ControlLabel><FormControl type="text" name="sapato" defaultValue={colaborador.sapato} placeholder="Tamanho da sapato"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Bermuda</ControlLabel><FormControl type="text" name="bermuda" defaultValue={colaborador.bermuda} placeholder="Tamanho da bermuda"  /></Col>
+		        	<Col xs={12} md={4}><ControlLabel>Camiseta</ControlLabel><FormControl type="text" name="camiseta" defaultValue={colaborador.camiseta} placeholder="Tamanho da camiseta"  /></Col>
 		        </Row>
 		        <Row className="show-grid">	
 		        	<Col xs={8}>
-			        	<Input type="select" label="Responsável pelo Colaborador" name="responsavel"
+		        		<ControlLabel>Responsável</ControlLabel>
+			        	<FormControl componentClass="select" name="responsavel"
 				                defaultValue={id(colaborador.responsavel)} onChange={handleAssociationChange}>
 				            <option value="">Selecione...</option>
 				            {responsaveis.map((element, i) =>
 				                <option key={i} value={element.id}>{element.nome}</option>
 				            )}
-			            </Input>
+			            </FormControl>
 		            </Col>
-    				<Col xs={4}><Input type="checkbox" name="ativo" defaultChecked={colaborador.ativo} label="Ativo" /></Col>
+    				<Col xs={4}><ControlLabel>Ativo</ControlLabel><Checkbox name="ativo" defaultChecked={colaborador.ativo} label="Ativo" /></Col>
     			</Row>
 	      </Grid>
+	      </FormGroup>
         </div>
 
     render = () =>
