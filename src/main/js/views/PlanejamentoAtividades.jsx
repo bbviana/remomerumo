@@ -237,12 +237,12 @@ class PlanejamentoAtividades extends Component {
 				            	          		})}
 				            	          		</ListGroup>	
 			            	          		</Col>
-			            	          		<Col xs={12} md={3}>
+			            	          		<Col xs={12} md={2}>
 			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Considerações e sugestões pedagógicas"  /></Col>
 			            	          		
-			            	          		<Col xs={12} md={2}>
+			            	          		<Col xs={12} md={3}>
 			            	          			<div>
-				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)} 
+				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)}  
 	                   									 onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
 	                										{this.state.tarefas.map((element, i) =>
 	                    								<option key={i} value={element.id}>{element.nomeCompleto}</option>

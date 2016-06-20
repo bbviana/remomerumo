@@ -4,6 +4,8 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -116,7 +118,7 @@ public class PlanejamentoAtividadesController {
 		tipoAtividade = em.find(TipoAtividade.class, tipoAtividade.getId());
 		if(tipoAtividade.getTipoAtividadesFilhas()!=null && !tipoAtividade.getTipoAtividadesFilhas().isEmpty()) {
 			for (TipoAtividade filho : tipoAtividade.getTipoAtividadesFilhas()) {
-				
+				list.addAll(procurarGrupos(filho));
 			}
 		}
 		
@@ -166,12 +168,26 @@ public class PlanejamentoAtividadesController {
 	@GET
 	@Path("procurarTarefas")
 	@Produces(APPLICATION_JSON)
-	public List<Tarefa> procurarTarefas(@QueryParam("id") Long id) {
+	public Collection<Tarefa> procurarTarefas(@QueryParam("id") Long id) {
 		Atividade atividade = em.find(Atividade.class,id);
+		LinkedHashSet<Tarefa> list = new LinkedHashSet<Tarefa>();
+		if(atividade.getTipoAtividade()!=null) {
+			List<GrupoAluno> grupos = this.procurarGrupos(atividade.getTipoAtividade());
+			for (GrupoAluno grupoAluno : grupos) {
+				list.addAll(this.procurarTarefasBytipo(grupoAluno.getTipoAtividade()));
+			}
+		} else {
+			list.addAll(this.procurarTarefasBytipo(null));
+		}
+		 
+		return list;
+	}	
+		
+	private List<Tarefa> procurarTarefasBytipo(TipoAtividade tipo) {	
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Tarefa.class);
-		if(atividade.getTipoAtividade()!=null)
-			criteria.add(Restrictions.eq("tipoAtividade", atividade.getTipoAtividade()));
+		if(tipo!=null)
+			criteria.add(Restrictions.eq("tipoAtividade", tipo));
 		criteria.add(Restrictions.isNotNull("tarefaPai"));
 		criteria.addOrder(Order.desc("nome"));
 		List<Tarefa> list = criteria.list();
