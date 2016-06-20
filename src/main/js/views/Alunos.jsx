@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Crud} from '../crud'
 import {id, ids, handleAssociationChange} from '../crud/Associations'
 import {AlunosController} from '../controllers'
-import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Button, Glyphicon} from 'react-bootstrap'
+import {Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Button, Glyphicon, Checkbox} from 'react-bootstrap'
 import DatePicker from 'react-bootstrap-date-picker';
 
 class Alunos extends Component {
@@ -67,7 +67,7 @@ class Alunos extends Component {
 	        <Row className="show-grid">
 	        <Col xs={12} md={4}><ControlLabel>CPF</ControlLabel><FormControl type="text" name="cpf" defaultValue={aluno.cpf} placeholder="Documento CPF"  /></Col>
         	<Col xs={12} md={4}><ControlLabel>RG</ControlLabel><FormControl type="text" name="rg" defaultValue={aluno.rg} placeholder="Documento RG"  /></Col>
-	        	<Col xs={12} md={4}><Input type="text" name="matrAluno" defaultValue={aluno.matrAluno} label="Código de identificação" placeholder="Matricula externa ou paciente"  /></Col>
+	        	<Col xs={12} md={4}><ControlLabel>Código de identificação</ControlLabel><FormControl type="text" name="matrAluno" defaultValue={aluno.matrAluno} placeholder="Matricula externa ou paciente"  /></Col>
 	        </Row>
 	        <Row className="show-grid">	
 	        <Col xs={12}><ControlLabel>Endereco</ControlLabel><FormControl type="text" name="endereco" defaultValue={aluno.endereco} placeholder="Rua, número"  /></Col>
@@ -113,9 +113,7 @@ class Alunos extends Component {
     			</Col>
     		</Row>
         	<Row className="show-grid">	
-    			<Col xs={12}>
-    				<Input type="checkbox" name="ativo" defaultChecked={aluno.ativo} label="Ativo" />
-    			</Col>
+    			<Col xs={12}><ControlLabel>Ativo</ControlLabel><Checkbox name="ativo" defaultChecked={aluno.ativo} /></Col>
     		</Row>
 	        
       </Grid>

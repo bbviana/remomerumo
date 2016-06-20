@@ -112,6 +112,14 @@ public class PlanejamentoAtividadesController {
 		criteria.addOrder(Order.desc("id"));
 		List<GrupoAluno> list = criteria.list();
 
+		//Precisa verificar se o tipo é um tipo final ou um agrupador
+		tipoAtividade = em.find(TipoAtividade.class, tipoAtividade.getId());
+		if(tipoAtividade.getTipoAtividadesFilhas()!=null && !tipoAtividade.getTipoAtividadesFilhas().isEmpty()) {
+			for (TipoAtividade filho : tipoAtividade.getTipoAtividadesFilhas()) {
+				
+			}
+		}
+		
 		return list;
 	}
 	

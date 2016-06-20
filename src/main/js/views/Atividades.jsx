@@ -62,7 +62,7 @@ class Atividades extends Component {
 		        	</Col>
 		        	<Col xs={12} md={8}>
 		        		<ControlLabel>Conteúdo</ControlLabel>
-			        	<FormControl componentClass="text" placeholder="Conteúdo" name="nome" defaultValue={atividade.nome}/>
+			        	<FormControl type="text" placeholder="Conteúdo" name="nome" defaultValue={atividade.nome}/>
 		            </Col>
 	            </Row>
 		        <Row className="show-grid">

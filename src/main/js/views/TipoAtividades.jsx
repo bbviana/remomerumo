@@ -24,13 +24,25 @@ class TipoAtividades extends Component {
             </tr>
     }
 
-    formSchema = (tipoAtividade) =>
+    formSchema = (tipoAtividade, {tipos = []}) =>
         <div>
         <FormGroup controlId="formControlsFile">
 	        <Grid fluid>
 		        <Row className="show-grid">
-		          	<Col xs={12}><ControlLabel>Nome</ControlLabel><FormControl componentClass="text" placeholder="Nome da Modalidade" name="nome" defaultValue={tipoAtividade.nome} autoFocus/></Col>
+		          	<Col xs={12}><ControlLabel>Nome</ControlLabel><FormControl type="text" placeholder="Nome da Modalidade" name="nome" defaultValue={tipoAtividade.nome} autoFocus/></Col>
 		        </Row>
+		        <Row className="show-grid">	
+		        	<Col xs={12}>
+		        		<ControlLabel>Modalidade Pai</ControlLabel>
+			        	<FormControl componentClass="select" name="tipoAtividadePai"
+				                defaultValue={id(tipoAtividade.tipoAtividadePai)} onChange={handleAssociationChange}>
+				            <option value="">Selecione...</option>
+				            {tipos.map((element, i) =>
+				                <option key={i} value={element.id}>{element.nome}</option>
+				            )}
+			            </FormControl>
+		            </Col>
+	            </Row>
 		        <Row className="show-grid">
 	          	<Col xs={12}><ControlLabel>Observação</ControlLabel><FormControl componentClass="textarea" placeholder="Observações gerais sobre a atividade" name="observacao" defaultValue={tipoAtividade.observacao} /></Col>
 	        </Row>

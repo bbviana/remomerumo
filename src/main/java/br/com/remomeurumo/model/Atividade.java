@@ -141,6 +141,7 @@ public class Atividade extends BaseEntity {
 	@Transient
 	public Object[] csvHead() {
 
+		System.out.println("CVS Head");
 		ArrayList<String> returnString = new ArrayList<String>();
 
 		returnString.add("id");
@@ -150,10 +151,11 @@ public class Atividade extends BaseEntity {
 		returnString.add("Comentario");
 		returnString.add("Executada");
 
-		for (AtividadeGrupo ativGrupo : this.getAtividadeGrupos()) {
-			returnString.add("Grupo");
+		if(this.getAtividadeGrupos()!=null) {
+			for (AtividadeGrupo ativGrupo : this.getAtividadeGrupos()) {
+				returnString.add("Grupo");
+			}
 		}
-		
 		return returnString.toArray();
 	}
 
@@ -169,8 +171,10 @@ public class Atividade extends BaseEntity {
 		returnString.add(this.getComentario());
 		returnString.add(String.valueOf((this.getExecutada()==null?false:this.getExecutada())));
 
-		for (AtividadeGrupo ativGrupo : this.getAtividadeGrupos()) {
-			returnString.add(ativGrupo.getNome());
+		if(this.getAtividadeGrupos()!=null) {
+			for (AtividadeGrupo ativGrupo : this.getAtividadeGrupos()) {
+				returnString.add(ativGrupo.getNome());
+			}
 		}
 		
 		return returnString.toArray();

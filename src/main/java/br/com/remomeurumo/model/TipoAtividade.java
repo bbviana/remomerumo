@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import br.com.remomeurumo.framework.BaseEntity;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
  * @author jardim
@@ -20,6 +25,14 @@ public class TipoAtividade extends BaseEntity {
 	@ManyToMany(mappedBy = "tipoAtividade")
 	private Collection<Atividade> atividades;
 
+	@JsonFilter("associationFilter")
+	@ManyToOne
+	@JoinColumn(name = "tipopaiid")
+	private TipoAtividade tipoAtividadePai;
+	
+	@OneToMany(mappedBy = "tipoAtividadePai")
+	private Collection<TipoAtividade> tipoAtividadesFilhas;
+	
 	private String observacao;
 
 	public String getNome() {
@@ -45,6 +58,23 @@ public class TipoAtividade extends BaseEntity {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+	
+	public TipoAtividade getTipoAtividadePai() {
+		return tipoAtividadePai;
+	}
+
+	public void setTipoAtividadePai(TipoAtividade tipoAtividadePai) {
+		this.tipoAtividadePai = tipoAtividadePai;
+	}
+
+	public Collection<TipoAtividade> getTipoAtividadesFilhas() {
+		return tipoAtividadesFilhas;
+	}
+
+	public void setTipoAtividadesFilhas(
+			Collection<TipoAtividade> tipoAtividadesFilhas) {
+		this.tipoAtividadesFilhas = tipoAtividadesFilhas;
+	}
 
 	@Transient
 	public Object[] csvHead() {
@@ -54,7 +84,11 @@ public class TipoAtividade extends BaseEntity {
 		returnString.add("id");
 		returnString.add("Nome");
 		returnString.add("Observacao");
-				
+		
+		if(tipoAtividadePai!=null) {
+			returnString.add("Pai");
+		}
+		
 		return returnString.toArray();
 	}
 
@@ -67,6 +101,9 @@ public class TipoAtividade extends BaseEntity {
 		returnString.add(this.getNome());
 		returnString.add(this.getObservacao());
 		
+		if(tipoAtividadePai!=null) {
+			returnString.add(this.getTipoAtividadePai().getNome());
+		}
 
 		return returnString.toArray();
 	}
