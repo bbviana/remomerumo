@@ -56,7 +56,8 @@ class ImpressaoAtividades extends Component {
 		                    <th><strong><Glyphicon glyph="fire"/>&nbsp;&nbsp;Alunos</strong></th>
 		                    <th><strong><Glyphicon glyph="education"/>&nbsp;&nbsp;Colaboradores</strong></th>
 		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Atividades</strong></th>
-		                    <th><strong>Objetivos</strong></th>
+		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Foco no Ensino</strong></th>
+		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamentos</strong></th>
 		                </tr>
 		            </thead>        
 		            
@@ -81,10 +82,16 @@ class ImpressaoAtividades extends Component {
 			            	          		<td>			            	          	
 				            	          		{atividadeGrupo.tarefas.map((tarefa, indexTarefa) => {
 				            	          			return <div key={indexTarefa}>
-				            	          			{tarefa.nome}</div>
+				            	          			{tarefa.nomeCompleto}</div>
 				            	          		})}
 							            	</td>
 							            	<td><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} disabled/></td>
+							            	<td>			            	          	
+			            	          		{atividadeGrupo.equipamentos.map((equipamento, indexEquipamento) => {
+			            	          			return <div key={indexEquipamento}>
+			            	          			{equipamento.nome}</div>
+			            	          		})}
+						            	</td>
 							            </tr>	
 							      </tbody>    	   
             	        })}

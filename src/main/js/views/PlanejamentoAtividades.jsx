@@ -214,8 +214,8 @@ class PlanejamentoAtividades extends Component {
 			            	            <Row className="show-grid">
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
-			            	        		<Col xs={6} md={3}><strong>Foco no Ensino/Cuidados</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Tarefas</strong></Col>
+			            	        		<Col xs={6} md={3}><strong>Foco no Ensino/Cuidados</strong></Col>
 			            	        		<Col xs={6} md={3}><strong>Equipamentos</strong></Col>
 			            	          	</Row>
 			            	          	<Row className="show-grid">
@@ -237,9 +237,6 @@ class PlanejamentoAtividades extends Component {
 				            	          		})}
 				            	          		</ListGroup>	
 			            	          		</Col>
-			            	          		<Col xs={12} md={2}>
-			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Considerações e sugestões pedagógicas"  /></Col>
-			            	          		
 			            	          		<Col xs={12} md={3}>
 			            	          			<div>
 				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)}  
@@ -250,6 +247,9 @@ class PlanejamentoAtividades extends Component {
 	            									</Input>
 												</div>
 											</Col>
+											<Col xs={12} md={2}>
+			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Considerações e sugestões pedagógicas"  /></Col>
+			            	          		
 											<Col xs={12} md={2}>
 		            	          			<div>
 			            	          			<Input type="select" name="equipamentos" defaultValue={ids(atividadeGrupo.equipamentos)} 
