@@ -4,9 +4,10 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -181,7 +182,22 @@ public class PlanejamentoAtividadesController {
 		}
 		 
 		return list;
-	}	
+	}
+	
+	@GET
+	@Path("procurarTarefasM")
+	@Produces(APPLICATION_JSON)
+	public Map<Long,Collection<Tarefa>> procurarTarefasM(@QueryParam("id") Long id) {
+		Atividade atividade = em.find(Atividade.class,id);
+		Map<Long,Collection<Tarefa>> tarefasM = new HashMap<Long,Collection<Tarefa>>();
+		if(atividade.getTipoAtividade()!=null) {
+			List<GrupoAluno> grupos = this.procurarGrupos(atividade.getTipoAtividade());
+			for (GrupoAluno grupoAluno : grupos) {
+				tarefasM.put(grupoAluno.getId(), this.procurarTarefasBytipo(grupoAluno.getTipoAtividade()));
+			}
+		}
+		return tarefasM;
+	}
 		
 	private List<Tarefa> procurarTarefasBytipo(TipoAtividade tipo) {	
 		Session session = (Session) em.getDelegate();

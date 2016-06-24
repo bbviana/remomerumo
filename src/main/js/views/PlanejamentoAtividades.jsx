@@ -10,7 +10,8 @@ class PlanejamentoAtividades extends Component {
         data: "",
         atividadeGrupos: [],
         tarefas: [],
-        equipamentos: []
+        equipamentos: [],
+        tarefasM: []
     }
 
     salvarAlteracoes = (event) => {
@@ -46,6 +47,15 @@ class PlanejamentoAtividades extends Component {
         })
         .then(tarefasRequest => this.setState({
             tarefas: tarefasRequest
+        }))
+    }
+    
+    procurarTarefasM = () => {
+    	Request.get('api/planejamentoAtividades/procurarTarefasM', {
+            id: this.props.id
+        })
+        .then(tarefasRequest => this.setState({
+            tarefasM: tarefasRequest
         }))
     }
     
@@ -176,6 +186,7 @@ class PlanejamentoAtividades extends Component {
     	this.procurarGrupos()
     	this.procurarTarefas()
     	this.procurarEquipamentos()
+    	this.procurarTarefasM()
     }
     
     render = () =>
@@ -241,7 +252,7 @@ class PlanejamentoAtividades extends Component {
 			            	          			<div>
 				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)}  
 	                   									 onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
-	                										{this.state.tarefas.map((element, i) =>
+	                										{this.state.tarefasM[atividadeGrupo.grupo.id].map((element, i) =>
 	                    								<option key={i} value={element.id}>{element.nomeCompleto}</option>
 	                										)}
 	            									</Input>
@@ -253,7 +264,7 @@ class PlanejamentoAtividades extends Component {
 											<Col xs={12} md={2}>
 		            	          			<div>
 			            	          			<Input type="select" name="equipamentos" defaultValue={ids(atividadeGrupo.equipamentos)} 
-                   									 onChange={this.alterarEquipamentos.bind(this, atividadeGrupo.id)} multiple>
+			            	          			onLoad={console.log("Carregou "+this.state.tarefasM[atividadeGrupo.grupo.id])} onChange={this.alterarEquipamentos.bind(this, atividadeGrupo.id)} multiple>
                 										{this.state.equipamentos.map((element, i) =>
                     								<option key={i} value={element.id}>{element.nome}</option>
                 										)}

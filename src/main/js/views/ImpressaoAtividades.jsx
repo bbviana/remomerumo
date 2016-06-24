@@ -57,7 +57,7 @@ class ImpressaoAtividades extends Component {
 		                    <th><strong><Glyphicon glyph="education"/>&nbsp;&nbsp;Colaboradores</strong></th>
 		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Atividades</strong></th>
 		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Foco no Ensino</strong></th>
-		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Equipamentos</strong></th>
+		                    <th><strong><Glyphicon glyph="wrench"/>&nbsp;&nbsp;Equipamentos</strong></th>
 		                </tr>
 		            </thead>        
 		            
