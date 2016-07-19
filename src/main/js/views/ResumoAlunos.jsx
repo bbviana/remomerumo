@@ -56,7 +56,8 @@ class ResumoAlunos extends Component {
 	                    <tr>
 	                    	<th>Nome</th>
 	                    	<th>Data</th>
-	                    	<th>Comentário</th>
+	                    	<th>Comentário Grupo</th>
+	                    	<th>Comentário Geral Aula</th>
 	                    </tr>
 	                    </thead>
 	                    <tbody>
@@ -64,6 +65,7 @@ class ResumoAlunos extends Component {
             	        	<tr key={index}>
                         		<td> {alunoAtividade.atividade.nome}</td>
                         		<td> {alunoAtividade.atividade.data}</td>
+                        		<td> {alunoAtividade.comentario}</td>
                         		<td> {alunoAtividade.atividade.comentario}</td>
                         	</tr>	
             	        )}

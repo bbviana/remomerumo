@@ -62,17 +62,21 @@ public class ExecucaoAtividadesController {
 						alunoAtividade = new AlunoAtividade();
 						alunoAtividade.setAtividade(atividade);
 						alunoAtividade.setAluno(aluno);
-						alunoAtividade.setComentario("");
+						alunoAtividade.setComentario(planejamento.getComentario());
 						this.em.persist(alunoAtividade);
 					} else {
-						alunoAtividade.setComentario("");
+						alunoAtividade.setComentario(planejamento.getComentario());
 						this.em.merge(alunoAtividade);
 					}
 				}
+				AtividadeGrupo atividadeGrupo = em.find(AtividadeGrupo.class,
+						planejamento.getId());
+				atividadeGrupo.setComentario(planejamento.getComentario());
+				this.em.merge(atividadeGrupo);
 			}
 		}
-		
 		atividadeOriginal.setExecutada(true);
+		atividadeOriginal.setComentario(atividade.getComentario());
 		this.em.merge(atividadeOriginal);
 		return atividade;
 	}

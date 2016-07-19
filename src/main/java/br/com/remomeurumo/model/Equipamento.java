@@ -62,5 +62,10 @@ public class Equipamento extends BaseEntity implements Serializable {
 
 		return returnString.toArray();
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
 
 }

@@ -215,16 +215,17 @@ public class PlanejamentoAtividadesController {
 		return tarefasM;
 	}
 
-	private List<Tarefa> procurarTarefasBytipo(TipoAtividade tipo) {
+	private Collection<Tarefa> procurarTarefasBytipo(TipoAtividade tipo) {
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Tarefa.class);
 		if (tipo != null)
 			criteria.add(Restrictions.eq("tipoAtividade", tipo));
 		criteria.add(Restrictions.isNotNull("tarefaPai"));
-		criteria.addOrder(Order.desc("nome"));
-		List<Tarefa> list = criteria.list();
 
-		return list;
+		TreeSet<Tarefa> order = new TreeSet<Tarefa>(new TarefaCompare());
+		order.addAll(criteria.list());
+		
+		return order;
 	}
 
 	@GET
@@ -233,9 +234,8 @@ public class PlanejamentoAtividadesController {
 	public List<Equipamento> procurarEquipamentos() {
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Equipamento.class);
-		criteria.addOrder(Order.desc("nome"));
+		criteria.addOrder(Order.asc("nome"));
 		List<Equipamento> list = criteria.list();
-		System.out.println(list);
 		return list;
 	}
 

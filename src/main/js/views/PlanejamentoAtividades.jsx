@@ -169,19 +169,6 @@ class PlanejamentoAtividades extends Component {
     	this.setState({atividadeGrupos : atividades})
     }
     
-    alterarComentario = (idPlanejamento, event) => {
-    	
-    	var atividades = this.state.atividadeGrupos
-    	
-    	var atividadeEscolhido = atividades.find(element => {
-    		return element.id == idPlanejamento
-    	})
-    	
-    	atividadeEscolhido.comentario = event.target.value
-    	
-    	this.setState({atividadeGrupos : atividades})
-    }
-    
     componentDidMount = () => {
     	this.procurarGrupos()
     	this.procurarTarefas()

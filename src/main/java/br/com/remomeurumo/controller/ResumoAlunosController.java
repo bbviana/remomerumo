@@ -39,6 +39,7 @@ public class ResumoAlunosController {
 			AlunoAtividade newAlunoAtividade = new AlunoAtividade();
 			newAlunoAtividade.setId(alunoAtividade.getId());
 			newAlunoAtividade.setAtividade(alunoAtividade.getAtividade());
+			newAlunoAtividade.setComentario(alunoAtividade.getComentario());
 			aluno.getAlunoAtividadesTransient().add(newAlunoAtividade);
 		}
 		aluno.setAvaliacoesTransient(new ArrayList<AvaliacaoClinica>());
