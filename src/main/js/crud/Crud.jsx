@@ -161,7 +161,6 @@ const PageSize = ({controller, pageSize}) =>
     <select style={styles.pageSize} className="form-control"
             value={pageSize}
             onChange={({target}) => controller.list({pageSize: target.value})}>
-        <option value="5" >5</option>
         <option value="10">10</option>
         <option value="50">50</option>
         <option value="100">100</option>

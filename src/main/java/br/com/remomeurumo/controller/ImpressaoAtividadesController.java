@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import br.com.remomeurumo.model.Aluno;
 import br.com.remomeurumo.model.Atividade;
 import br.com.remomeurumo.model.AtividadeGrupo;
+import br.com.remomeurumo.model.Tarefa;
 import br.com.remomeurumo.persistence.Transactional;
 
 /**
@@ -48,6 +49,10 @@ public class ImpressaoAtividadesController {
 			atividadeGrupo.setAlunosTransient(new ArrayList<Aluno>());
 			for (Aluno aluno : atividadeGrupo.getAlunos()) {
 				atividadeGrupo.getAlunosTransient().add(aluno);
+			}
+			atividadeGrupo.setTarefasTransient(new ArrayList<Tarefa>());
+			for (Tarefa tarefa : atividadeGrupo.getTarefas()) {
+				atividadeGrupo.getTarefasTransient().add(tarefa);
 			}
 		}
 	}

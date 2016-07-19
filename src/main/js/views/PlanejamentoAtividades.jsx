@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Request} from '../helpers'
 import {id, ids} from '../crud/Associations'
-import {Image, Input, FormControl, FormGroup, ControlLabel, Row, Col, Grid, Panel, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar, ListGroupItem, ListGroup, Accordion} from 'react-bootstrap';
+import {Image, Input, ControlLabel, Row, Col, Grid, Panel, Glyphicon, MenuItem, Nav, Navbar, NavBrand, NavItem, Button, Tab, Tabs, ButtonToolbar, ListGroupItem, ListGroup, Accordion} from 'react-bootstrap';
 
 class PlanejamentoAtividades extends Component {
     state = {
@@ -225,8 +225,8 @@ class PlanejamentoAtividades extends Component {
 			            	            <Row className="show-grid">
 			            	        		<Col xs={6} md={2}><strong>Alunos</strong></Col>
 			            	        		<Col xs={6} md={2}><strong>Colaboradores</strong></Col>
-			            	        		<Col xs={6} md={2}><strong>Tarefas</strong></Col>
-			            	        		<Col xs={6} md={3}><strong>Foco no Ensino/Cuidados</strong></Col>
+			            	        		<Col xs={6} md={2}><strong>Foco no Ensino/Cuidados</strong></Col>
+			            	        		<Col xs={6} md={3}><strong>Tarefas</strong></Col>
 			            	        		<Col xs={6} md={3}><strong>Equipamentos</strong></Col>
 			            	          	</Row>
 			            	          	<Row className="show-grid">
@@ -248,10 +248,13 @@ class PlanejamentoAtividades extends Component {
 				            	          		})}
 				            	          		</ListGroup>	
 			            	          		</Col>
+			            	          		<Col xs={12} md={2}>
+			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Considerações e sugestões pedagógicas" style={{height: 300}} /></Col>
 			            	          		<Col xs={12} md={3}>
 			            	          			<div>
 				            	          			<Input type="select" name="tarefas" defaultValue={ids(atividadeGrupo.tarefas)}  
-	                   									 onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple>
+	                   									 onChange={this.alterarTarefas.bind(this, atividadeGrupo.id)} multiple 
+	                   									 style={{height: 300}}>
 	                										{this.state.tarefasM[atividadeGrupo.grupo.id].map((element, i) =>
 	                    								<option key={i} value={element.id}>{element.nomeCompleto}</option>
 	                										)}
@@ -259,12 +262,9 @@ class PlanejamentoAtividades extends Component {
 												</div>
 											</Col>
 											<Col xs={12} md={2}>
-			            	          		<Input type="textarea" label="" onChange={this.alterarPlanejamento.bind(this, atividadeGrupo.id)} name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} placeholder="Considerações e sugestões pedagógicas"  /></Col>
-			            	          		
-											<Col xs={12} md={2}>
 		            	          			<div>
 			            	          			<Input type="select" name="equipamentos" defaultValue={ids(atividadeGrupo.equipamentos)} 
-			            	          			onLoad={console.log("Carregou "+this.state.tarefasM[atividadeGrupo.grupo.id])} onChange={this.alterarEquipamentos.bind(this, atividadeGrupo.id)} multiple>
+			            	          			  onChange={this.alterarEquipamentos.bind(this, atividadeGrupo.id)} multiple  style={{height: 300}}>
                 										{this.state.equipamentos.map((element, i) =>
                     								<option key={i} value={element.id}>{element.nome}</option>
                 										)}

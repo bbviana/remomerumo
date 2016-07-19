@@ -21,7 +21,7 @@ class ImpressaoAtividades extends Component {
 	            data: atividade.data,
 	            atividadeGrupos: atividade.atividadeGruposTransient
         	});
-        	window.print();
+        	//window.print();
         })
     }
     
@@ -55,15 +55,15 @@ class ImpressaoAtividades extends Component {
 		                <tr>
 		                    <th><strong><Glyphicon glyph="fire"/>&nbsp;&nbsp;Alunos</strong></th>
 		                    <th><strong><Glyphicon glyph="education"/>&nbsp;&nbsp;Colaboradores</strong></th>
-		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Atividades</strong></th>
 		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Foco no Ensino</strong></th>
+		                    <th><strong><Glyphicon glyph="pushpin"/>&nbsp;&nbsp;Atividades</strong></th>
 		                    <th><strong><Glyphicon glyph="wrench"/>&nbsp;&nbsp;Equipamentos</strong></th>
 		                </tr>
 		            </thead>        
 		            
             	        {this.state.atividadeGrupos.map((atividadeGrupo, index) => {
             	        	return  <tbody key={index}> <tr>
-   	                     				<td colSpan="4">{atividadeGrupo.grupo.nome}</td>
+   	                     				<td colSpan="5">{atividadeGrupo.grupo.nome}</td>
    	                     		     </tr>
 		            	                 <tr>
 		            	                     <td>
@@ -79,13 +79,13 @@ class ImpressaoAtividades extends Component {
 				            	          			{colaborador.nome}</div>
 				            	          		})}
 			            	          		</td>
-			            	          		<td>			            	          	
-				            	          		{atividadeGrupo.tarefas.map((tarefa, indexTarefa) => {
-				            	          			return <div key={indexTarefa}>
-				            	          			{tarefa.nomeCompleto}</div>
-				            	          		})}
-							            	</td>
-							            	<td><Input type="textarea" label="" name="planejamentoDeAula" defaultValue={atividadeGrupo.planejamentoDeAula} disabled/></td>
+							            	<td><p>{atividadeGrupo.planejamentoDeAula}</p></td>
+							            	<td>			            	          	
+			            	          		{atividadeGrupo.tarefasTransient.map((tarefa, indexTarefa) => {
+			            	          			return <div key={indexTarefa}>
+			            	          			{tarefa.nomeCompleto}</div>
+			            	          		})}
+			            	          		</td>
 							            	<td>			            	          	
 			            	          		{atividadeGrupo.equipamentos.map((equipamento, indexEquipamento) => {
 			            	          			return <div key={indexEquipamento}>

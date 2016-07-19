@@ -16,7 +16,7 @@ class CrudController extends Controller {
         showForm: false,
 
         currentPage: 1,
-        pageSize: 5,
+        pageSize: 10,
         totalPages: 1
     }
 
