@@ -87,10 +87,19 @@ public class CrudController<T extends BaseEntity> {
 
 	@POST
 	public T insert(T element) {
+		
+		if(!this.validate(element))
+			return null;
+		
 		em.persist(element);
 		this.auditService.registrarAuditoria(element, AuditoriaService.operationSave, request);
 		return element;
 	}
+	
+	public boolean validate(T element){
+		return element.validate();
+	}
+
 
 	@GET
 	@Path("blank")

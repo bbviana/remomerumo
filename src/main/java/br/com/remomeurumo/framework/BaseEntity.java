@@ -85,6 +85,12 @@ public abstract class BaseEntity implements Serializable,
 
 		return returnString.toArray();
 	}
+	
+	
+	@Transient
+	public boolean validate() {
+		return true;
+	}
 
 	private static final long serialVersionUID = 1L;
 }

@@ -61,14 +61,23 @@ class CrudController extends Controller {
     save = () => {
         const {form} =  this.state;
         if(form.id) {
-            Request.put(`api/${this.url}/${form.id}`, form).then(() => {
-            	$.toaster({ title: 'Sucesso', message : 'Registro salvo', settings: {timeout: 3000} });		
+            Request.put(`api/${this.url}/${form.id}`, form).then(retorno => {
+            if(retorno === null) {	
+            	$.toaster({ title: 'Fracasso', message : 'Registro não foi salvo, algum campo obrigatório não foi preenchido', settings: {timeout: 3000} });
+            } else {
+            	$.toaster({ title: 'Sucesso', message : 'Registro salvo', settings: {timeout: 3000} });
             	this.list()
+            }
+            	
         })
         } else {
-            Request.post(`api/${this.url}`, form).then(() => {
-            	$.toaster({ title: 'Sucesso', message : 'Registro criado', settings: {timeout: 3000} });
-            	this.list()
+            Request.post(`api/${this.url}`, form).then( retorno => {
+            	if(retorno === null) {
+            		$.toaster({ title: 'Fracasso', message : 'Registro não criado, algum campo obrigatório não foi preenchido', settings: {timeout: 3000} });
+            	} else {
+            		$.toaster({ title: 'Sucesso', message : 'Registro criado', settings: {timeout: 3000} });
+            		this.list()
+            	}
             })
         }
        

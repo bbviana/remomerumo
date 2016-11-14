@@ -108,5 +108,11 @@ public class TipoAtividade extends BaseEntity {
 		return returnString.toArray();
 	}
 	
+	@Transient
+	public boolean validate() {
+		return (this.nome!=null);
+	}
+	
+	
 	private static final long serialVersionUID = 1L;
 }
