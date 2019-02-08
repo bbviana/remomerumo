@@ -112,6 +112,12 @@ class Alunos extends Component {
     				<FormControl componentClass="textarea" name="abc" defaultValue={aluno.abc} placeholder="Adaptações, limitações e indicações para a criança"  />
     			</Col>
     		</Row>
+    		<Row className="show-grid">	
+    			<Col xs={12}>
+    				<ControlLabel>URL Documentos</ControlLabel>
+    				<FormControl type="text" name="urldocumentos" defaultValue={aluno.urldocumentos} placeholder="URl para os documentos o aluno"  />
+    			</Col>
+    		</Row>
         	<Row className="show-grid">	
     			<Col xs={12}><ControlLabel>Ativo</ControlLabel><Checkbox name="ativo" defaultChecked={aluno.ativo} /></Col>
     		</Row>

@@ -43,6 +43,9 @@ public class Aluno extends Pessoa implements Serializable {
 	
 	@Column(name= "abc", length=2048)
 	private String abc;
+	
+	private String urldocumentos;
+	
 
 	// TODO: FOTO
 	// private String Foto;
@@ -168,6 +171,15 @@ public class Aluno extends Pessoa implements Serializable {
 	public void setAbc(String abc) {
 		this.abc = abc;
 	}
+	
+	public String getUrldocumentos() {
+		return urldocumentos;
+	}
+
+	public void setUrldocumentos(String urldocumentos) {
+		this.urldocumentos = urldocumentos;
+	}
+	
 
 	@Transient
 	public Object[] csvHead() {
@@ -196,6 +208,7 @@ public class Aluno extends Pessoa implements Serializable {
 		returnString.add("Transporte");
 		returnString.add("HorarioTreino");
 		returnString.add("Abc");		
+		returnString.add("Urldocumentos");
 				
 		return returnString.toArray();
 	}
@@ -227,6 +240,7 @@ public class Aluno extends Pessoa implements Serializable {
 		returnString.add(this.getTransporte());
 		returnString.add(this.getHorarioTreino());
 		returnString.add(this.getAbc());
+		returnString.add(this.getUrldocumentos());
 		
 
 		return returnString.toArray();
