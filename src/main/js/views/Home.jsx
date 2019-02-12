@@ -100,6 +100,8 @@ class Home extends Component {
 	          </Tabs>
            </div>
            
+           
+           
         </div>
 }
 

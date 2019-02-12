@@ -219,7 +219,7 @@ const CsvButton = ({controller, label}) =>
 
 const styles = {
     actions: {
-        width: 200
+        width: 240
     },
 
     app: {

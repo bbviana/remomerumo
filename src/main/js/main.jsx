@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Alunos, GrupoAlunos, Login, Colaboradores, Responsaveis, Atividades, TipoAtividades, AvaliacoesClinicas, AvaliacaoInfoClinicas, InfoClinicas, 
-	ModeloAvaliacoesClinicas, TipoInfoClinicas, EspecialidadeClinicas, Tarefas, Equipamentos, PlanejamentoAtividades, ResumoAtividades,ImpressaoAtividades, ExecucaoAtividades, Home, ResumoAlunos, Usuarios, Permissoes, Auditorias, Auditoria} from './views'
+	ModeloAvaliacoesClinicas, TipoInfoClinicas, EspecialidadeClinicas, Tarefas, Equipamentos, PlanejamentoAtividades, ResumoAtividades, ImpressaoAtividades, ExecucaoAtividades, Home, ResumoAlunos, ImagemAlunos, Usuarios, Permissoes, Auditorias, Auditoria} from './views'
 import url from 'url'
 
 const queryParams = url.parse(window.location.href, true).query
@@ -45,7 +45,9 @@ if(pathname.endsWith("/login")){
     ReactDOM.render(<AvaliacaoInfoClinicas id={queryParams.id}/>, document.getElementById("app"));
 } else if(pathname.endsWith("/resumoAlunos")){
     ReactDOM.render(<ResumoAlunos id={queryParams.id}/>, document.getElementById("app"));
-} else if(pathname.endsWith("/alunos")){
+} else if(pathname.endsWith("/imagemAlunos")){
+    ReactDOM.render(<ImagemAlunos id={queryParams.id}/>, document.getElementById("app"));
+}else if(pathname.endsWith("/alunos")){
 	ReactDOM.render(<Alunos />, document.getElementById("app"));
 } else if(pathname.endsWith("/usuarios")){
 	ReactDOM.render(<Usuarios />, document.getElementById("app"));

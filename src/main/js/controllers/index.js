@@ -15,6 +15,7 @@ import ExecucaoAtividadesController from './ExecucaoAtividadesController'
 import AvaliacaoInfoClinicasController from './AvaliacaoInfoClinicasController'
 import HomeController from './HomeController'
 import ResumoAlunosController from './ResumoAlunosController'
+import ImagemAlunosController from './ImagemAlunosController'
 import UsuariosController from './UsuariosController'
 import PermissoesController from './PermissoesController'
 import AuditoriasController from './AuditoriasController'
@@ -22,6 +23,7 @@ import AuditoriaController from './AuditoriaController'
 import ImpressaoAtividadesController from './ImpressaoAtividadesController'
 import TarefasController from './TarefasController'
 import EquipamentosController from './EquipamentosController'
+
 
 export {
     AlunosController,
@@ -47,5 +49,6 @@ export {
     AuditoriaController,
     ImpressaoAtividadesController,
     TarefasController,
+    ImagemAlunosController,
     EquipamentosController
 }

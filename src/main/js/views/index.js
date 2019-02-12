@@ -16,6 +16,7 @@ import ExecucaoAtividades from './ExecucaoAtividades'
 import AvaliacaoInfoClinicas from './AvaliacaoInfoClinicas'
 import Home from './Home'
 import ResumoAlunos from './ResumoAlunos'
+import ImagemAlunos from './ImagemAlunos'
 import Usuarios from './Usuarios'
 import Permissoes from './Permissoes'
 import Auditorias from './Auditorias'
@@ -43,6 +44,7 @@ export {
     AvaliacaoInfoClinicas,
     Home,
     ResumoAlunos,
+    ImagemAlunos,
     Usuarios,
     Permissoes,
     Auditorias,

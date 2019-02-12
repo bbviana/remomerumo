@@ -45,10 +45,9 @@ public class Aluno extends Pessoa implements Serializable {
 	private String abc;
 	
 	private String urldocumentos;
+	@Column(columnDefinition="text")
+	private String imagemAluno;
 	
-
-	// TODO: FOTO
-	// private String Foto;
 
 	@JsonFilter("associationFilter")
 	@ManyToMany
@@ -179,6 +178,15 @@ public class Aluno extends Pessoa implements Serializable {
 	public void setUrldocumentos(String urldocumentos) {
 		this.urldocumentos = urldocumentos;
 	}
+
+	public String getImagemAluno() {
+		return imagemAluno;
+	}
+
+	public void setImagemAluno(String imagemAluno) {
+		this.imagemAluno = imagemAluno;
+	}
+	
 	
 
 	@Transient
